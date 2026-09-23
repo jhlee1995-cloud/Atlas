@@ -1,0 +1,785 @@
+{
+ "runs": [
+  "results/atlas_v1_resnet56_s1",
+  "results/atlas_v1_resnet56_s2"
+ ],
+ "tolerances": {
+  "scalar_rel_spread": 0.15,
+  "scalar_abs_floor": 0.05,
+  "adjacency_spearman": 0.7,
+  "merge_kendall": 0.6,
+  "decod_profile_spearman": 0.7,
+  "decod_mean_abs_delta": 0.1,
+  "commit_layer_slack": 1,
+  "min_runs": 2,
+  "id_profile_spearman": 0.9,
+  "cka_test_min": 0.8,
+  "scalar_abs_tol": {
+   "margin_typeb.auc_margin_typeb": 0.05,
+   "margin_typeb.auc_dist_typeb": 0.05,
+   "margin_typeb.auc_maxprob_typeb": 0.05,
+   "margin_typeb.auc_margin_wrong": 0.05
+  }
+ },
+ "checks": {
+  "synthetic_refusal": [
+   {
+    "name": "sources",
+    "status": "PASS",
+    "detail": "all runs real"
+   }
+  ],
+  "norm_consistency": [
+   {
+    "name": "input_norm",
+    "status": "PASS",
+    "detail": "{'atlas_v1_resnet56_s1': 'chenyaofo', 'atlas_v1_resnet56_s2': 'chenyaofo'}"
+   }
+  ],
+  "alias_layers": [
+   {
+    "name": "alias:layer3.8",
+    "status": "WARN",
+    "detail": "identical to penult in every run; counted once as penult"
+   }
+  ],
+  "holdout_hygiene": [
+   {
+    "name": "holdout:atlas_v1_resnet56_s1",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:atlas_v1_resnet56_s2",
+    "status": "PASS",
+    "detail": "declared"
+   }
+  ],
+  "probe_hygiene": [
+   {
+    "name": "probes:atlas_v1_resnet56_s1",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   },
+   {
+    "name": "probes:atlas_v1_resnet56_s2",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   }
+  ],
+  "scalar_stability": [
+   {
+    "name": "stem/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[6.213, 6.876] rel_spread=0.101"
+   },
+   {
+    "name": "stem/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[2.643, 2.74] rel_spread=0.036"
+   },
+   {
+    "name": "stem/pca_spectrum.dim95",
+    "status": "FAIL",
+    "detail": "values=[3.0, 4.0] rel_spread=0.286"
+   },
+   {
+    "name": "stem/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.156, 0.156] rel_spread=0.003"
+   },
+   {
+    "name": "stem/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[499.245, 213.957] rel_spread=0.800"
+   },
+   {
+    "name": "stem/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.662, 0.644] rel_spread=0.028"
+   },
+   {
+    "name": "stem/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.096, 0.165] rel_spread=0.523"
+   },
+   {
+    "name": "stem/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.235, 0.25] rel_spread=0.064"
+   },
+   {
+    "name": "layer1.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[7.423, 8.157] rel_spread=0.094"
+   },
+   {
+    "name": "layer1.0/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[2.623, 3.577] rel_spread=0.308"
+   },
+   {
+    "name": "layer1.0/pca_spectrum.dim95",
+    "status": "FAIL",
+    "detail": "values=[4.0, 5.0] rel_spread=0.222"
+   },
+   {
+    "name": "layer1.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.164, 0.175] rel_spread=0.062"
+   },
+   {
+    "name": "layer1.0/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[264.537, 133.13] rel_spread=0.661"
+   },
+   {
+    "name": "layer1.0/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.658, 0.6] rel_spread=0.092"
+   },
+   {
+    "name": "layer1.0/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.271, 0.388] rel_spread=0.358"
+   },
+   {
+    "name": "layer1.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.256, 0.266] rel_spread=0.038"
+   },
+   {
+    "name": "layer1.5/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[9.558, 10.001] rel_spread=0.045"
+   },
+   {
+    "name": "layer1.5/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[4.753, 5.67] rel_spread=0.176"
+   },
+   {
+    "name": "layer1.5/pca_spectrum.dim95",
+    "status": "FAIL",
+    "detail": "values=[7.0, 9.0] rel_spread=0.250"
+   },
+   {
+    "name": "layer1.5/class_centers.sep_ratio",
+    "status": "FAIL",
+    "detail": "values=[0.235, 0.297] rel_spread=0.234"
+   },
+   {
+    "name": "layer1.5/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[68.49, 86.672] rel_spread=0.234"
+   },
+   {
+    "name": "layer1.5/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.51, 0.473] rel_spread=0.075"
+   },
+   {
+    "name": "layer1.5/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.699, 0.777] rel_spread=0.106"
+   },
+   {
+    "name": "layer1.5/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.328, 0.366] rel_spread=0.110"
+   },
+   {
+    "name": "layer1.8/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[9.937, 10.628] rel_spread=0.067"
+   },
+   {
+    "name": "layer1.8/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[5.267, 5.481] rel_spread=0.040"
+   },
+   {
+    "name": "layer1.8/pca_spectrum.dim95",
+    "status": "FAIL",
+    "detail": "values=[8.0, 10.0] rel_spread=0.222"
+   },
+   {
+    "name": "layer1.8/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.31, 0.337] rel_spread=0.082"
+   },
+   {
+    "name": "layer1.8/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[52.914, 66.033] rel_spread=0.221"
+   },
+   {
+    "name": "layer1.8/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.459, 0.423] rel_spread=0.082"
+   },
+   {
+    "name": "layer1.8/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.801, 0.903] rel_spread=0.120"
+   },
+   {
+    "name": "layer1.8/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.366, 0.385] rel_spread=0.048"
+   },
+   {
+    "name": "layer2.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[10.925, 11.537] rel_spread=0.054"
+   },
+   {
+    "name": "layer2.0/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[5.854, 5.984] rel_spread=0.022"
+   },
+   {
+    "name": "layer2.0/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[10.0, 11.0] rel_spread=0.095"
+   },
+   {
+    "name": "layer2.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.319, 0.357] rel_spread=0.112"
+   },
+   {
+    "name": "layer2.0/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[30.982, 16.817] rel_spread=0.593"
+   },
+   {
+    "name": "layer2.0/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.498, 0.456] rel_spread=0.087"
+   },
+   {
+    "name": "layer2.0/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.835, 0.992] rel_spread=0.171"
+   },
+   {
+    "name": "layer2.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.398, 0.42] rel_spread=0.052"
+   },
+   {
+    "name": "layer2.5/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[12.958, 13.233] rel_spread=0.021"
+   },
+   {
+    "name": "layer2.5/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[7.595, 7.599] rel_spread=0.001"
+   },
+   {
+    "name": "layer2.5/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[15.0, 15.0] rel_spread=0.000"
+   },
+   {
+    "name": "layer2.5/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.376, 0.395] rel_spread=0.047"
+   },
+   {
+    "name": "layer2.5/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[12.951, 9.034] rel_spread=0.356"
+   },
+   {
+    "name": "layer2.5/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.42, 0.429] rel_spread=0.022"
+   },
+   {
+    "name": "layer2.5/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.157, 1.259] rel_spread=0.085"
+   },
+   {
+    "name": "layer2.5/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.47, 0.509] rel_spread=0.079"
+   },
+   {
+    "name": "layer2.8/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[13.949, 14.006] rel_spread=0.004"
+   },
+   {
+    "name": "layer2.8/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[8.762, 8.796] rel_spread=0.004"
+   },
+   {
+    "name": "layer2.8/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[18.0, 17.0] rel_spread=0.057"
+   },
+   {
+    "name": "layer2.8/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.418, 0.443] rel_spread=0.059"
+   },
+   {
+    "name": "layer2.8/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[7.266, 5.407] rel_spread=0.293"
+   },
+   {
+    "name": "layer2.8/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.397, 0.372] rel_spread=0.063"
+   },
+   {
+    "name": "layer2.8/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.641, 1.416] rel_spread=0.147"
+   },
+   {
+    "name": "layer2.8/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.538, 0.561] rel_spread=0.041"
+   },
+   {
+    "name": "layer3.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[15.481, 15.535] rel_spread=0.003"
+   },
+   {
+    "name": "layer3.0/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[9.492, 9.328] rel_spread=0.017"
+   },
+   {
+    "name": "layer3.0/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[25.0, 24.0] rel_spread=0.041"
+   },
+   {
+    "name": "layer3.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.524, 0.527] rel_spread=0.007"
+   },
+   {
+    "name": "layer3.0/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[3.49, 3.335] rel_spread=0.045"
+   },
+   {
+    "name": "layer3.0/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.357, 0.365] rel_spread=0.022"
+   },
+   {
+    "name": "layer3.0/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.327, 1.476] rel_spread=0.106"
+   },
+   {
+    "name": "layer3.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.603, 0.613] rel_spread=0.017"
+   },
+   {
+    "name": "layer3.5/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[19.632, 19.471] rel_spread=0.008"
+   },
+   {
+    "name": "layer3.5/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[15.661, 14.729] rel_spread=0.061"
+   },
+   {
+    "name": "layer3.5/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[44.0, 42.0] rel_spread=0.047"
+   },
+   {
+    "name": "layer3.5/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.861, 0.934] rel_spread=0.081"
+   },
+   {
+    "name": "layer3.5/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[0.676, 0.61] rel_spread=0.102"
+   },
+   {
+    "name": "layer3.5/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.216, 0.187] rel_spread=0.145"
+   },
+   {
+    "name": "layer3.5/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[2.042, 1.745] rel_spread=0.157"
+   },
+   {
+    "name": "layer3.5/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.824, 0.837] rel_spread=0.016"
+   },
+   {
+    "name": "penult/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[10.382, 10.459] rel_spread=0.007"
+   },
+   {
+    "name": "penult/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[8.949, 8.976] rel_spread=0.003"
+   },
+   {
+    "name": "penult/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[9.0, 9.0] rel_spread=0.000"
+   },
+   {
+    "name": "penult/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[5.114, 5.213] rel_spread=0.019"
+   },
+   {
+    "name": "penult/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[0.053, 0.05] rel_spread=0.052"
+   },
+   {
+    "name": "penult/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.057, 0.062] rel_spread=0.074"
+   },
+   {
+    "name": "penult/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.891, 0.855] rel_spread=0.042"
+   },
+   {
+    "name": "penult/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.945, 0.94] rel_spread=0.005"
+   }
+  ],
+  "id_profile_stability": [
+   {
+    "name": "id_profile[0,1]",
+    "status": "PASS",
+    "detail": "spearman=0.988 peak=layer3.5/layer3.5"
+   }
+  ],
+  "adjacency_stability": [
+   {
+    "name": "stem/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.975"
+   },
+   {
+    "name": "stem/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.990"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.988"
+   },
+   {
+    "name": "layer1.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.984"
+   },
+   {
+    "name": "layer1.5/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.983"
+   },
+   {
+    "name": "layer1.5/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.8/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.991"
+   },
+   {
+    "name": "layer1.8/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.969"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.978"
+   },
+   {
+    "name": "layer2.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.977"
+   },
+   {
+    "name": "layer2.5/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.991"
+   },
+   {
+    "name": "layer2.5/merge_kendall[0,1]",
+    "status": "FAIL",
+    "detail": "tau=0.508"
+   },
+   {
+    "name": "layer2.8/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.989"
+   },
+   {
+    "name": "layer2.8/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.922"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.979"
+   },
+   {
+    "name": "layer3.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.974"
+   },
+   {
+    "name": "layer3.5/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.955"
+   },
+   {
+    "name": "layer3.5/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.721"
+   },
+   {
+    "name": "penult/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.900"
+   },
+   {
+    "name": "penult/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.931"
+   }
+  ],
+  "decodability_stability": [
+   {
+    "name": "decod/luminance_mean[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.043"
+   },
+   {
+    "name": "decod/contrast_rms[0,1]",
+    "status": "FAIL",
+    "detail": "profile_spearman=0.41 mean_abs_delta=0.048"
+   },
+   {
+    "name": "decod/highfreq_ratio[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.033"
+   },
+   {
+    "name": "decod/spectral_slope[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.033"
+   },
+   {
+    "name": "decod/spectral_anisotropy[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/noise_sigma[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.024"
+   },
+   {
+    "name": "decod/saturation_mean[0,1]",
+    "status": "FAIL",
+    "detail": "profile_spearman=0.53 mean_abs_delta=0.082"
+   },
+   {
+    "name": "decod/hue_cos[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.90 mean_abs_delta=0.033"
+   },
+   {
+    "name": "decod/hue_sin[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.87 mean_abs_delta=0.020"
+   },
+   {
+    "name": "decod/colorfulness[0,1]",
+    "status": "FAIL",
+    "detail": "profile_spearman=0.61 mean_abs_delta=0.071"
+   },
+   {
+    "name": "decod/edge_density[0,1]",
+    "status": "FAIL",
+    "detail": "profile_spearman=0.65 mean_abs_delta=0.043"
+   },
+   {
+    "name": "decod/orientation_entropy[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.87 mean_abs_delta=0.030"
+   },
+   {
+    "name": "decod/blockiness[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/class[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.024"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.006"
+   },
+   {
+    "name": "decod/corruption_family[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/corruption_type[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.010"
+   },
+   {
+    "name": "decod/severity[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.016"
+   }
+  ],
+  "commit_agreement": [
+   {
+    "name": "commit/luminance_mean",
+    "status": "PASS",
+    "detail": "['stem', 'stem']"
+   },
+   {
+    "name": "commit/contrast_rms",
+    "status": "FAIL",
+    "detail": "['layer1.5', 'stem']"
+   },
+   {
+    "name": "commit/highfreq_ratio",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/spectral_slope",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/spectral_anisotropy",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/noise_sigma",
+    "status": "PASS",
+    "detail": "['layer1.5', 'layer1.0']"
+   },
+   {
+    "name": "commit/saturation_mean",
+    "status": "PASS",
+    "detail": "['layer1.0', 'stem']"
+   },
+   {
+    "name": "commit/hue_cos",
+    "status": "PASS",
+    "detail": "['stem', 'layer1.0']"
+   },
+   {
+    "name": "commit/hue_sin",
+    "status": "PASS",
+    "detail": "['stem', 'stem']"
+   },
+   {
+    "name": "commit/colorfulness",
+    "status": "PASS",
+    "detail": "['layer1.0', 'layer1.0']"
+   },
+   {
+    "name": "commit/edge_density",
+    "status": "FAIL",
+    "detail": "['layer1.5', 'stem']"
+   },
+   {
+    "name": "commit/orientation_entropy",
+    "status": "PASS",
+    "detail": "['layer2.5', 'layer2.0']"
+   },
+   {
+    "name": "commit/blockiness",
+    "status": "PASS",
+    "detail": "['layer3.0', 'layer3.0']"
+   },
+   {
+    "name": "commit/class",
+    "status": "PASS",
+    "detail": "['layer3.5', 'layer3.5']"
+   },
+   {
+    "name": "commit/coarse_animal_vehicle",
+    "status": "PASS",
+    "detail": "['layer3.5', 'layer3.0']"
+   },
+   {
+    "name": "commit/corruption_family",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/corruption_type",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer1.8']"
+   },
+   {
+    "name": "commit/severity",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0']"
+   }
+  ],
+  "panel_agreement": [
+   {
+    "name": "penult/cka_test[0,1]",
+    "status": "PASS",
+    "detail": "cka_test=0.922 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[0,1]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.946, \"relrep_row_corr_mean\": 0.974, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.947, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.749, \"error_consistency_test\": 0.566, \"cka_ood_c100\": 0.676, \"relrep_argmax_agree_ood_c100\": 0.606, \"relrep_argmax_chance_ood_c100\": 0.123, \"relrep_offmax_corr_ood_c100\": 0.738, \"landmark_procrustes_disparity\": 0.004}"
+   }
+  ]
+ },
+ "counts": {
+  "PASS": 119,
+  "FAIL": 25,
+  "WARN": 1,
+  "INFO": 1
+ },
+ "verdict": "PARTIAL"
+}

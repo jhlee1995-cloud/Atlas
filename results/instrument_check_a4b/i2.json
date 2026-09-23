@@ -1,0 +1,62 @@
+{
+ "status": "PASS",
+ "keys_compared": [
+  "layers",
+  "dims",
+  "splits",
+  "n_test",
+  "ref_indices",
+  "panel_indices",
+  "norm",
+  "norm_values",
+  "arch",
+  "dtype",
+  "pooling"
+ ],
+ "reference_git_commit": "d257d91",
+ "runs": {
+  "atlas_v1_resnet56_s1": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet56_s1_chenyaofo.pt sha256:73c9458c60b66949",
+   "seed_tag": "s1",
+   "git_commit": "d257d91",
+   "created": "2026-09-23 14:22:24",
+   "accuracy_test": 0.9438
+  },
+  "atlas_v1_resnet56_s2": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet56_s2_chenyaofo.pt sha256:14a651f000ca2d55",
+   "seed_tag": "s2",
+   "git_commit": "d257d91",
+   "created": "2026-09-23 14:25:08",
+   "accuracy_test": 0.9404
+  },
+  "atlas_v1_resnet56_s12m": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet56_s12m_chenyaofo.pt sha256:71db3bad0a2c41c2",
+   "seed_tag": "s12m",
+   "git_commit": "d257d91",
+   "created": "2026-09-23 14:16:23",
+   "accuracy_test": 0.9204
+  },
+  "atlas_v1_resnet56_s13m": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet56_s13m_chenyaofo.pt sha256:0df3f708ebfa3292",
+   "seed_tag": "s13m",
+   "git_commit": "d257d91",
+   "created": "2026-09-23 14:19:39",
+   "accuracy_test": 0.9242
+  }
+ },
+ "reference": "results/atlas_v1_resnet56_s0hub_st3",
+ "others": [
+  "results/atlas_v1_resnet56_e40_st3",
+  "results/atlas_v1_resnet56_e50",
+  "results/atlas_v1_resnet56_e60",
+  "results/atlas_v1_resnet56_e70"
+ ]
+}

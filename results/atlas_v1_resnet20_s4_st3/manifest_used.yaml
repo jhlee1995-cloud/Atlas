@@ -1,0 +1,122 @@
+exp_id: atlas_v1_resnet20_s4_st3
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s4_chenyaofo.pt
+  seed_tag: s4
+  norm: chenyaofo
+data:
+  reference:
+    dataset: cifar10_train
+    n: 10000
+    seed: 0
+  clean_test:
+    dataset: cifar10
+    n: 5000
+  panel:
+    dataset: cifar10_train
+    n: 64
+    seed: 123
+  cifar10c:
+    corruptions: all
+    severities:
+    - 1
+    - 3
+    - 5
+    n_per_set: 2000
+  ood:
+  - dataset: cifar100
+    n: 2000
+  - dataset: svhn
+    n: 2000
+hooks:
+  layers: blocks
+  block_stride: 1
+  pooling: gap
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+invariants:
+- pca_spectrum
+- twonn_id
+- class_centers
+- neural_collapse
+- hubness
+- class_adjacency
+- merge_order
+- knn_density
+- linear_probes
+- corruption_displacement
+cross_layer:
+- layer_cka
+- commit_layer
+invariant_cfg:
+  twonn_id:
+    n_ref: 5000
+    bootstrap: 3
+  hubness:
+    n_ref: 5000
+    k: 10
+  knn_density:
+    n_ref: 10000
+    k: 10
+    n_query: 3000
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors:
+    - luminance_mean
+    - contrast_rms
+    - highfreq_ratio
+    - spectral_slope
+    - spectral_anisotropy
+    - noise_sigma
+    - saturation_mean
+    - hue_cos
+    - hue_sin
+    - colorfulness
+    - edge_density
+    - orientation_entropy
+    - blockiness
+    - class
+    - coarse_animal_vehicle
+    - corruption_family
+    - corruption_type
+    - severity
+  commit_layer:
+    tau: 0.9
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions:
+  - gaussian_noise
+  - shot_noise
+  - defocus_blur
+  - motion_blur
+  - snow
+  - fog
+  - brightness
+  - contrast
+  - pixelate
+  - jpeg_compression
+  confirmation_corruptions:
+  - impulse_noise
+  - glass_blur
+  - zoom_blur
+  - frost
+  - elastic_transform
+  discovery_seeds:
+  - 0
+  confirmation_seeds:
+  - 3
+  - 4
+outputs:
+  root: results/atlas_v1_resnet20_s4_st3
+  plots: true
+notes: 'A4b rule-6 re-measure (band B20+, pair band P20). Predictions (G0c) are in
+  atlas_v1_resnet56_s1.yaml notes.
+
+  '

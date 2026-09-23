@@ -1,0 +1,26 @@
+{
+ "status": "PASS",
+ "bitwise_identical": true,
+ "rule": "floats |a-b| <= 0.001 + 0.001*|a|; all else exact; top-level ['built', 'dump', 'timing_s', 'exp_id'] not compared",
+ "n_leaves": 12371,
+ "n_exact": 12371,
+ "n_within_tol": 0,
+ "n_mismatch": 0,
+ "max_abs_dev": {
+  "meta": 0.0,
+  "margin_typeb": 0.0
+ },
+ "errors": [],
+ "skipped": {},
+ "mismatch_first50": [],
+ "dump": "results/atlas_v1_resnet20_s0hub/dump",
+ "committed": "results/margin_v1_resnet20_s0hub/atlas.json",
+ "manifest": "experiments/queue/margin_v1_resnet20_s0hub.yaml",
+ "git_commit": "d257d91",
+ "versions": {
+  "python": "3.12.3",
+  "numpy": "2.1.2",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1"
+ }
+}

@@ -1,0 +1,2109 @@
+{
+ "a": "results/atlas_v1_resnet20_s1_st2",
+ "b": "results/atlas_v1_resnet20_s1_st3",
+ "same_space": true,
+ "source_a": "real",
+ "source_b": "real",
+ "layers": [
+  [
+   "stem",
+   "stem"
+  ],
+  [
+   "layer1.0",
+   "layer1.0"
+  ],
+  [
+   "layer1.1",
+   "layer1.1"
+  ],
+  [
+   "layer1.2",
+   "layer1.2"
+  ],
+  [
+   "layer2.0",
+   "layer2.0"
+  ],
+  [
+   "layer2.1",
+   "layer2.1"
+  ],
+  [
+   "layer2.2",
+   "layer2.2"
+  ],
+  [
+   "layer3.0",
+   "layer3.0"
+  ],
+  [
+   "layer3.1",
+   "layer3.1"
+  ],
+  [
+   "layer3.2",
+   "layer3.2"
+  ],
+  [
+   "penult",
+   "penult"
+  ]
+ ],
+ "per_layer": {
+  "stem": {
+   "layer_b": "stem",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 6.728732617154564,
+     "b": 6.728732617154564,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 2.992780851470384,
+     "b": 2.992780851470384,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 4,
+     "b": 4,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.15608431340221057,
+     "b": 0.15608431340221057,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 261.0683730146053,
+     "b": 261.0683730146053,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.6336532882797015,
+     "b": 0.6336532882797015,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.17885569731946038,
+     "b": 0.17885569731946038,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.244,
+     "b": 0.244,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 2.938241454801276e-29,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.9968601565434778,
+     "b": 0.9968601565434778,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.6660753497403405,
+     "b": 0.6660753497403405,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.2874095558400828,
+     "b": 0.2874095558400828,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.19131262408939645,
+     "b": 0.19131262408939645,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.21155771175022525,
+     "b": 0.21155771175022525,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.6671900072351525,
+     "b": 0.6671900072351525,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.734712402656808,
+     "b": 0.734712402656808,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.7745763592704349,
+     "b": 0.7745763592704349,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7824224366268723,
+     "b": 0.7824224366268723,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.7876628013190115,
+     "b": 0.7876628013190115,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.7049966207928348,
+     "b": 0.7049966207928348,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.20714427424064924,
+     "b": 0.20714427424064924,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.007686143304938886,
+     "b": 0.007686143304938886,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.25349999999999995,
+     "b": 0.25349999999999995,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.25324999999999986,
+     "b": 0.25324999999999986,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.13099999999999995,
+     "b": 0.13099999999999995,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.16324999999999995,
+     "b": 0.16324999999999995,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.06792003572238595,
+     "b": 0.06792003572238595,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0000000000000007,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.120495,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0000000000000009,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.1218595,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer1.0": {
+   "layer_b": "layer1.0",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 8.577223833695955,
+     "b": 8.577223833695955,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 3.2879913151744096,
+     "b": 3.2879913151744096,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 5,
+     "b": 5,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.18340420396914375,
+     "b": 0.18340420396914375,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 164.62675415489338,
+     "b": 164.62675415489338,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.6348290977427852,
+     "b": 0.6348290977427852,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.5350162208257576,
+     "b": 0.5350162208257576,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.2804,
+     "b": 0.2804,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 2.0501252777581803e-29,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.989156252612759,
+     "b": 0.989156252612759,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.5885076521692459,
+     "b": 0.5885076521692459,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.5424267586403199,
+     "b": 0.5424267586403199,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.43914099480191143,
+     "b": 0.43914099480191143,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.28045904281699563,
+     "b": 0.28045904281699563,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9156815694471374,
+     "b": 0.9156815694471374,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.7800363368252751,
+     "b": 0.7800363368252751,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.8368331576574857,
+     "b": 0.8368331576574857,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7898600177004612,
+     "b": 0.7898600177004612,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.8616946761438429,
+     "b": 0.8616946761438429,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8064903398159393,
+     "b": 0.8064903398159393,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.30849849193043716,
+     "b": 0.30849849193043716,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.011340337460025385,
+     "b": 0.011340337460025385,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.27575,
+     "b": 0.27575,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.2460000000000001,
+     "b": 0.2460000000000001,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.22050000000000003,
+     "b": 0.22050000000000003,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.28025,
+     "b": 0.28025,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.0787488574943677,
+     "b": 0.0787488574943677,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0000000000000009,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.117712,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.1192515,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer1.1": {
+   "layer_b": "layer1.1",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 9.347780945966388,
+     "b": 9.347780945966388,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 4.069671450787488,
+     "b": 4.069671450787488,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 7,
+     "b": 7,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.20884432940594344,
+     "b": 0.20884432940594344,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 74.30737459012099,
+     "b": 74.30737459012099,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.5440403801582789,
+     "b": 0.5440403801582789,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.6439031697647359,
+     "b": 0.6439031697647359,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.3172,
+     "b": 0.3172,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 4.109874198462165e-30,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.9730405071231875,
+     "b": 0.9730405071231875,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.590859866113386,
+     "b": 0.590859866113386,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.5672534102001447,
+     "b": 0.5672534102001447,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.5068078059341425,
+     "b": 0.5068078059341425,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.2599823740189467,
+     "b": 0.2599823740189467,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9288495059943142,
+     "b": 0.9288495059943142,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.7053518079632609,
+     "b": 0.7053518079632609,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.8115921886402928,
+     "b": 0.8115921886402928,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.756681986050198,
+     "b": 0.756681986050198,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.8556897122236945,
+     "b": 0.8556897122236945,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8601252700840805,
+     "b": 0.8601252700840805,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.3216858493249079,
+     "b": 0.3216858493249079,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.03260191502067249,
+     "b": 0.03260191502067249,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.28325,
+     "b": 0.28325,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.24249999999999994,
+     "b": 0.24249999999999994,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.2945,
+     "b": 0.2945,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.37850000000000006,
+     "b": 0.37850000000000006,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.12149238054452585,
+     "b": 0.12149238054452585,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.114863,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 0.9999999999999998,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.120174,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer1.2": {
+   "layer_b": "layer1.2",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 9.519940427314632,
+     "b": 9.519940427314632,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 4.799617038048279,
+     "b": 4.799617038048279,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 8,
+     "b": 8,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.3032723598445949,
+     "b": 0.3032723598445949,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 49.245952937262345,
+     "b": 49.245952937262345,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.4281309071875518,
+     "b": 0.4281309071875518,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.7132635919872541,
+     "b": 0.7132635919872541,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.3526,
+     "b": 0.3526,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 4.7732602270789454e-30,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.968031807266312,
+     "b": 0.968031807266312,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.5536527985478721,
+     "b": 0.5536527985478721,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.5340249148427494,
+     "b": 0.5340249148427494,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.5462664940301838,
+     "b": 0.5462664940301838,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.3075892309091316,
+     "b": 0.3075892309091316,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9142255881506509,
+     "b": 0.9142255881506509,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.6293243319822652,
+     "b": 0.6293243319822652,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.8069377509761763,
+     "b": 0.8069377509761763,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7526300034172353,
+     "b": 0.7526300034172353,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.8133111650887489,
+     "b": 0.8133111650887489,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8378348540865475,
+     "b": 0.8378348540865475,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.39967130868348144,
+     "b": 0.39967130868348144,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.04371357141963446,
+     "b": 0.04371357141963446,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.3485,
+     "b": 0.3485,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.26975000000000016,
+     "b": 0.26975000000000016,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.34725000000000006,
+     "b": 0.34725000000000006,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.47,
+     "b": 0.47,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.14121032027032976,
+     "b": 0.14121032027032976,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0000000000000004,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1122535,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0000000000000007,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.1195375,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer2.0": {
+   "layer_b": "layer2.0",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 11.595432166342569,
+     "b": 11.595432166342569,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 6.066962141257379,
+     "b": 6.066962141257379,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 12,
+     "b": 12,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.34469092125771167,
+     "b": 0.34469092125771167,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 23.828881876913265,
+     "b": 23.828881876913265,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.5188728774970379,
+     "b": 0.5188728774970379,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.9240760983679243,
+     "b": 0.9240760983679243,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.4204,
+     "b": 0.4204,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 6.642996091317319e-29,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.9546380523401903,
+     "b": 0.9546380523401903,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.6731713490275254,
+     "b": 0.6731713490275254,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.6162721221011408,
+     "b": 0.6162721221011408,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.6390471591480797,
+     "b": 0.6390471591480797,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.33181995096169115,
+     "b": 0.33181995096169115,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9553960621145233,
+     "b": 0.9553960621145233,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.7211830480452244,
+     "b": 0.7211830480452244,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.826427194755125,
+     "b": 0.826427194755125,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7744051741956481,
+     "b": 0.7744051741956481,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.8143227596809712,
+     "b": 0.8143227596809712,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8940751676180689,
+     "b": 0.8940751676180689,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.48903693418259736,
+     "b": 0.48903693418259736,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.08852102020842156,
+     "b": 0.08852102020842156,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.4602499999999998,
+     "b": 0.4602499999999998,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.30300000000000016,
+     "b": 0.30300000000000016,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.40825,
+     "b": 0.40825,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.556,
+     "b": 0.556,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.27672460256524173,
+     "b": 0.27672460256524173,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1063955,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.113068,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer2.1": {
+   "layer_b": "layer2.1",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 12.593542951470335,
+     "b": 12.593542951470335,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 7.692361937033386,
+     "b": 7.692361937033386,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 14,
+     "b": 14,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.39410548205794327,
+     "b": 0.39410548205794327,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 17.042906910710116,
+     "b": 17.042906910710116,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.4008546184637548,
+     "b": 0.4008546184637548,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 1.2017834309778006,
+     "b": 1.2017834309778006,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.4762,
+     "b": 0.4762,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 8.837311993890917e-31,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.9305738618829371,
+     "b": 0.9305738618829371,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.6650079828061285,
+     "b": 0.6650079828061285,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.6163869038738559,
+     "b": 0.6163869038738559,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.6446104374797311,
+     "b": 0.6446104374797311,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.3153615422840658,
+     "b": 0.3153615422840658,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9367115391622123,
+     "b": 0.9367115391622123,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.6630205417588179,
+     "b": 0.6630205417588179,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.8108263703489914,
+     "b": 0.8108263703489914,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7542309889362582,
+     "b": 0.7542309889362582,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.7855984193166898,
+     "b": 0.7855984193166898,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8655570351575314,
+     "b": 0.8655570351575314,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.4547182648306264,
+     "b": 0.4547182648306264,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.08195216649635018,
+     "b": 0.08195216649635018,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.5085000000000001,
+     "b": 0.5085000000000001,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.30199999999999994,
+     "b": 0.30199999999999994,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.39349999999999996,
+     "b": 0.39349999999999996,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.55,
+     "b": 0.55,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.27061577406387344,
+     "b": 0.27061577406387344,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1057145,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.112567,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer2.2": {
+   "layer_b": "layer2.2",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 13.563750018509564,
+     "b": 13.563750018509564,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 8.577188009603983,
+     "b": 8.577188009603983,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 17,
+     "b": 17,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.41961419388760246,
+     "b": 0.41961419388760246,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 9.177210432406568,
+     "b": 9.177210432406568,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.3599805628143044,
+     "b": 0.3599805628143044,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 1.4267646548908544,
+     "b": 1.4267646548908544,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.5246,
+     "b": 0.5246,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 1.8345092497421825e-30,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.9051532595828075,
+     "b": 0.9051532595828075,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.6503895011947662,
+     "b": 0.6503895011947662,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.6153762965910173,
+     "b": 0.6153762965910173,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.6550727264319699,
+     "b": 0.6550727264319699,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.31731084837254037,
+     "b": 0.31731084837254037,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.9247696829019529,
+     "b": 0.9247696829019529,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.6222152378158243,
+     "b": 0.6222152378158243,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.8049852588111592,
+     "b": 0.8049852588111592,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7411189117229376,
+     "b": 0.7411189117229376,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.7617872914514059,
+     "b": 0.7617872914514059,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.8476179871318956,
+     "b": 0.8476179871318956,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.46291657140263054,
+     "b": 0.46291657140263054,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.08073271041477133,
+     "b": 0.08073271041477133,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.5665,
+     "b": 0.5665,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.33025000000000004,
+     "b": 0.33025000000000004,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.38025,
+     "b": 0.38025,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.548,
+     "b": 0.548,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.27352264676998017,
+     "b": 0.27352264676998017,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1045985,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.1132815,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer3.0": {
+   "layer_b": "layer3.0",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 18.01200590245446,
+     "b": 18.01200590245446,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 10.285529776852707,
+     "b": 10.285529776852707,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 38,
+     "b": 38,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.5664560854317939,
+     "b": 0.5664560854317939,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 2.390923312322768,
+     "b": 2.390923312322768,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.32870074417432565,
+     "b": 0.32870074417432565,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 1.6911557121992982,
+     "b": 1.6911557121992982,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.649,
+     "b": 0.649,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 8.793354170042748e-31,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.7560763249598272,
+     "b": 0.7560763249598272,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.612402166610337,
+     "b": 0.612402166610337,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.5882637931651601,
+     "b": 0.5882637931651601,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.6328914794508417,
+     "b": 0.6328914794508417,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.3135495021303629,
+     "b": 0.3135495021303629,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.8679857680278005,
+     "b": 0.8679857680278005,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.532125550373337,
+     "b": 0.532125550373337,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.7414993002801111,
+     "b": 0.7414993002801111,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.7049022850993886,
+     "b": 0.7049022850993886,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.6566602974273018,
+     "b": 0.6566602974273018,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.810996017898901,
+     "b": 0.810996017898901,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.45996224309950773,
+     "b": 0.45996224309950773,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.12125468611458559,
+     "b": 0.12125468611458559,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.6805,
+     "b": 0.6805,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.357,
+     "b": 0.357,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.37075,
+     "b": 0.37075,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.4920000000000001,
+     "b": 0.4920000000000001,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.32223316475549285,
+     "b": 0.32223316475549285,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 0.9999999999999998,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1026205,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 0.9999999999999998,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.112621,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer3.1": {
+   "layer_b": "layer3.1",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 19.445812240432986,
+     "b": 19.445812240432986,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 11.259307290343969,
+     "b": 11.259307290343969,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 41,
+     "b": 41,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 0.873107033191963,
+     "b": 0.873107033191963,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 0.7743866606065749,
+     "b": 0.7743866606065749,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.28865463966020655,
+     "b": 0.28865463966020655,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 1.8976254222303892,
+     "b": 1.8976254222303892,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.8132,
+     "b": 0.8132,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 1.5878179506889798e-30,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.5261762131146477,
+     "b": 0.5261762131146477,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.5222217112646529,
+     "b": 0.5222217112646529,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.5583741704327597,
+     "b": 0.5583741704327597,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.5932650740601829,
+     "b": 0.5932650740601829,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.3065363313782291,
+     "b": 0.3065363313782291,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.8038433492666348,
+     "b": 0.8038433492666348,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.38695426381170156,
+     "b": 0.38695426381170156,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.6680771884513357,
+     "b": 0.6680771884513357,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.6126641669748703,
+     "b": 0.6126641669748703,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.48049604555894626,
+     "b": 0.48049604555894626,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.7184413709098519,
+     "b": 0.7184413709098519,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.43414344653628356,
+     "b": 0.43414344653628356,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.07459739446995836,
+     "b": 0.07459739446995836,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.7742499999999999,
+     "b": 0.7742499999999999,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.374,
+     "b": 0.374,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.3182499999999999,
+     "b": 0.3182499999999999,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.41075000000000006,
+     "b": 0.41075000000000006,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.27688697811770047,
+     "b": 0.27688697811770047,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 0.9999999999999999,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1017755,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 0.9999999999999998,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.1442885,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "layer3.2": {
+   "layer_b": "layer3.2",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 9.75662635827708,
+     "b": 9.75662635827708,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 8.602073592054024,
+     "b": 8.602073592054024,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 9,
+     "b": 9,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 3.066641557437458,
+     "b": 3.066641557437458,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 0.1630172884843279,
+     "b": 0.1630172884843279,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.09750941332981586,
+     "b": 0.09750941332981586,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.832959697920781,
+     "b": 0.832959697920781,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.9218,
+     "b": 0.9218,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 8.240677515480902e-31,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.2605725859425568,
+     "b": 0.2605725859425568,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.3997405112358651,
+     "b": 0.3997405112358651,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.4431601498096752,
+     "b": 0.4431601498096752,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.49456314388613204,
+     "b": 0.49456314388613204,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.2693966853056149,
+     "b": 0.2693966853056149,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.6688332022219543,
+     "b": 0.6688332022219543,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.2423223593594507,
+     "b": 0.2423223593594507,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.55964747691323,
+     "b": 0.55964747691323,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.4924375847807571,
+     "b": 0.4924375847807571,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.29546787693076737,
+     "b": 0.29546787693076737,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.5742790919158043,
+     "b": 0.5742790919158043,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.38555556036515065,
+     "b": 0.38555556036515065,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.056860533679920056,
+     "b": 0.056860533679920056,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.8142499999999999,
+     "b": 0.8142499999999999,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.39025,
+     "b": 0.39025,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.23949999999999994,
+     "b": 0.23949999999999994,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.272,
+     "b": 0.272,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.23406965611627834,
+     "b": 0.23406965611627834,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1002855,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.126951,
+   "relrep_offmax_corr_ood_c100": 1.0
+  },
+  "penult": {
+   "layer_b": "penult",
+   "scalars": {
+    "twonn_id.id": {
+     "a": 9.75662635827708,
+     "b": 9.75662635827708,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.participation_ratio": {
+     "a": 8.602073592054024,
+     "b": 8.602073592054024,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "pca_spectrum.dim95": {
+     "a": 9,
+     "b": 9,
+     "delta": 0,
+     "rel": 0.0
+    },
+    "class_centers.sep_ratio": {
+     "a": 3.066641557437458,
+     "b": 3.066641557437458,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.nc1": {
+     "a": 0.1630172884843279,
+     "b": 0.1630172884843279,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "neural_collapse.etf_deviation": {
+     "a": 0.09750941332981586,
+     "b": 0.09750941332981586,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "hubness.k_occurrence_skew": {
+     "a": 0.832959697920781,
+     "b": 0.832959697920781,
+     "delta": 0.0,
+     "rel": 0.0
+    },
+    "class_centers.nearest_center_acc_test": {
+     "a": 0.9218,
+     "b": 0.9218,
+     "delta": 0.0,
+     "rel": 0.0
+    }
+   },
+   "landmark_procrustes_disparity": 8.240677515480902e-31,
+   "center_displacement_within_units": {
+    "mean": 0.0,
+    "max": 0.0,
+    "per_class": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "adjacency_spearman": 0.9999999999999999,
+   "merge_height_kendall": 1.0,
+   "first_merge_same": true,
+   "decodability": {
+    "luminance_mean": {
+     "a": 0.2605725859425568,
+     "b": 0.2605725859425568,
+     "delta": 0.0
+    },
+    "contrast_rms": {
+     "a": 0.3997405112358651,
+     "b": 0.3997405112358651,
+     "delta": 0.0
+    },
+    "highfreq_ratio": {
+     "a": 0.4431601498096752,
+     "b": 0.4431601498096752,
+     "delta": 0.0
+    },
+    "spectral_slope": {
+     "a": 0.49456314388613204,
+     "b": 0.49456314388613204,
+     "delta": 0.0
+    },
+    "spectral_anisotropy": {
+     "a": 0.2693966853056149,
+     "b": 0.2693966853056149,
+     "delta": 0.0
+    },
+    "noise_sigma": {
+     "a": 0.6688332022219543,
+     "b": 0.6688332022219543,
+     "delta": 0.0
+    },
+    "saturation_mean": {
+     "a": 0.2423223593594507,
+     "b": 0.2423223593594507,
+     "delta": 0.0
+    },
+    "hue_cos": {
+     "a": 0.55964747691323,
+     "b": 0.55964747691323,
+     "delta": 0.0
+    },
+    "hue_sin": {
+     "a": 0.4924375847807571,
+     "b": 0.4924375847807571,
+     "delta": 0.0
+    },
+    "colorfulness": {
+     "a": 0.29546787693076737,
+     "b": 0.29546787693076737,
+     "delta": 0.0
+    },
+    "edge_density": {
+     "a": 0.5742790919158043,
+     "b": 0.5742790919158043,
+     "delta": 0.0
+    },
+    "orientation_entropy": {
+     "a": 0.38555556036515065,
+     "b": 0.38555556036515065,
+     "delta": 0.0
+    },
+    "blockiness": {
+     "a": 0.056860533679920056,
+     "b": 0.056860533679920056,
+     "delta": 0.0
+    },
+    "class": {
+     "a": 0.8142499999999999,
+     "b": 0.8142499999999999,
+     "delta": 0.0
+    },
+    "coarse_animal_vehicle": {
+     "a": 0.39025,
+     "b": 0.39025,
+     "delta": 0.0
+    },
+    "corruption_family": {
+     "a": 0.23949999999999994,
+     "b": 0.23949999999999994,
+     "delta": 0.0
+    },
+    "corruption_type": {
+     "a": 0.272,
+     "b": 0.272,
+     "delta": 0.0
+    },
+    "severity": {
+     "a": 0.23406965611627834,
+     "b": 0.23406965611627834,
+     "delta": 0.0
+    }
+   },
+   "decodability_profile_spearman": 1.0,
+   "decodability_mean_abs_delta": 0.0,
+   "panel_cka": 1.0,
+   "relrep_row_corr_mean": 1.0,
+   "relrep_argmax_agree": 1.0,
+   "panel_mean_shift_within_units": 0.0,
+   "cka_test": 1.0,
+   "relrep_argmax_agree_test": 1.0,
+   "relrep_argmax_chance_test": 0.1002855,
+   "relrep_offmax_corr_test": 1.0,
+   "error_consistency_test": 1.0,
+   "cka_ood_c100": 1.0,
+   "relrep_argmax_agree_ood_c100": 1.0,
+   "relrep_argmax_chance_ood_c100": 0.126951,
+   "relrep_offmax_corr_ood_c100": 1.0
+  }
+ },
+ "commit_layer": {
+  "luminance_mean": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "contrast_rms": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "highfreq_ratio": {
+   "a": "layer1.1",
+   "b": "layer1.1"
+  },
+  "spectral_slope": {
+   "a": "layer2.0",
+   "b": "layer2.0"
+  },
+  "spectral_anisotropy": {
+   "a": "layer1.2",
+   "b": "layer1.2"
+  },
+  "noise_sigma": {
+   "a": "layer1.0",
+   "b": "layer1.0"
+  },
+  "saturation_mean": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "hue_cos": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "hue_sin": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "colorfulness": {
+   "a": "stem",
+   "b": "stem"
+  },
+  "edge_density": {
+   "a": "layer1.0",
+   "b": "layer1.0"
+  },
+  "orientation_entropy": {
+   "a": "layer2.0",
+   "b": "layer2.0"
+  },
+  "blockiness": {
+   "a": "layer3.0",
+   "b": "layer3.0"
+  },
+  "class": {
+   "a": "layer3.1",
+   "b": "layer3.1"
+  },
+  "coarse_animal_vehicle": {
+   "a": "layer3.0",
+   "b": "layer3.0"
+  },
+  "corruption_family": {
+   "a": "layer2.0",
+   "b": "layer2.0"
+  },
+  "corruption_type": {
+   "a": "layer2.0",
+   "b": "layer2.0"
+  },
+  "severity": {
+   "a": "layer3.0",
+   "b": "layer3.0"
+  }
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "target": 0.9259,
+ "window": 0.005,
+ "rule": "nearest in-window rung; tie -> longer E",
+ "rungs": [
+  {
+   "E": 40,
+   "acc": 0.9192,
+   "abs_delta": 0.0067,
+   "train_json": "results/train_resnet56_e40/train.json"
+  },
+  {
+   "E": 50,
+   "acc": 0.922,
+   "abs_delta": 0.0039,
+   "train_json": "results/train_resnet56_e50/train.json"
+  },
+  {
+   "E": 60,
+   "acc": 0.9256,
+   "abs_delta": 0.0003,
+   "train_json": "results/train_resnet56_e60/train.json"
+  },
+  {
+   "E": 70,
+   "acc": 0.9253,
+   "abs_delta": 0.0006,
+   "train_json": "results/train_resnet56_e70/train.json"
+  }
+ ],
+ "status": "matched",
+ "e_star": 60,
+ "in_window": [
+  50,
+  60,
+  70
+ ]
+}

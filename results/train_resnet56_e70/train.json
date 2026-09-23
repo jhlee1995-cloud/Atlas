@@ -1,0 +1,61 @@
+{
+ "out": "/workspace/models/resnet56_s11_e70_chenyaofo.pt",
+ "recipe": {
+  "volume": "/workspace",
+  "seed": 11,
+  "out": "/workspace/models/resnet56_s11_e70_chenyaofo.pt",
+  "train_json": "results/train_resnet56_e70/train.json",
+  "arch": "cifar10_resnet56",
+  "norm": "chenyaofo",
+  "epochs": 70,
+  "batch": 256,
+  "lr": 0.1,
+  "wd": 0.0005,
+  "drop_last": false,
+  "bn_recal": 100,
+  "workers": 8,
+  "download": false
+ },
+ "final_test_acc_10k": 0.9253,
+ "wall_s": 274.0,
+ "history": [
+  {
+   "epoch": 10,
+   "loss": 0.6079,
+   "test_acc_10k": 0.7646,
+   "elapsed_s": 47.7
+  },
+  {
+   "epoch": 20,
+   "loss": 0.2135,
+   "test_acc_10k": 0.7224,
+   "elapsed_s": 82.6
+  },
+  {
+   "epoch": 30,
+   "loss": 0.3861,
+   "test_acc_10k": 0.8158,
+   "elapsed_s": 117.4
+  },
+  {
+   "epoch": 40,
+   "loss": 0.1954,
+   "test_acc_10k": 0.8767,
+   "elapsed_s": 152.3
+  },
+  {
+   "epoch": 50,
+   "loss": 0.1522,
+   "test_acc_10k": 0.8986,
+   "elapsed_s": 189.1
+  },
+  {
+   "epoch": 60,
+   "loss": 0.1089,
+   "test_acc_10k": 0.9234,
+   "elapsed_s": 239.2
+  }
+ ],
+ "torch": "2.8.0+cu128",
+ "device": "NVIDIA GeForce RTX 4090"
+}
