@@ -47,7 +47,7 @@ git -C /workspace/Atlas fetch && git -C /workspace/Atlas reset --hard origin/mai
 ## Stage 0 on the pod
 
 ```bash
-cd /workspace && git clone https://github.com/<owner>/Atlas.git
+cd /workspace && git clone https://github.com/jhlee1995-cloud/Atlas.git
 mkdir -p /workspace/logs && setsid bash /workspace/Atlas/pod_atlas.sh /workspace < /dev/null > /workspace/logs/launch.log 2>&1 &
 # data (once per volume, incl. CIFAR-10-C from zenodo) -> GPU preflight -> smoke test -> Stage 0
 # -> results/atlas_v0_resnet20_cifar10/{atlas.json, ATLAS.md, plots/, manifest_used.yaml, provenance.json, dump/}

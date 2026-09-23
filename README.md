@@ -12,7 +12,7 @@ deforms under corruption and test-time adaptation).
 Quick start on a RunPod pod with network volume `kxfir1tryb` (EU-RO-1) mounted at `/workspace`:
 
 ```bash
-cd /workspace && git clone https://github.com/<owner>/Atlas.git
+cd /workspace && git clone https://github.com/jhlee1995-cloud/Atlas.git
 mkdir -p /workspace/logs && setsid bash /workspace/Atlas/pod_atlas.sh /workspace < /dev/null > /workspace/logs/launch.log 2>&1 &
 ```
 
