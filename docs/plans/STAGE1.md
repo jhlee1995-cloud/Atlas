@@ -59,4 +59,22 @@ row 8 stays ⬜/🟡 (S10 is exploratory).
 ## Pod
 
 `bash pod_atlas.sh /workspace --stage1` (see RUN_REQUEST in `results/atlas_v1_resnet20_s1/`).
-Estimated 35-60 min on one RTX 4090 (two 200-epoch trainings run concurrently).
+Estimated 35-60 min on one RTX 4090 (two 200-epoch trainings run concurrently); actual: 17 min.
+
+## Outcome (seeds 1, 2) and amendment for seeds 3, 4
+
+Outcome: **PARTIAL by gap closure** (`results/atlas_v1_resnet20_s1/SESSION.md`). All six core items
+passed and no KILL condition held, but non-core scalar spreads the pre-registration did not anticipate
+remained (participation ratio at layer1.1/3.0/3.1, hubness skew at layer1.1, nc1 at layer2.0/2.2), so
+PASS clause 2 failed, and the PARTIAL row (which needs a failing core item) did not apply literally
+either. No row was promoted to ✅.
+
+Amendment, committed after seeds 1-2 and before seeds 3-4 are touched; it applies only to seeds 3, 4:
+
+| outcome | condition | action |
+|---|---|---|
+| CORE-PASS | no KILL; every core item passes; ≥ 1 non-core FAIL is on no at-risk list and not twin-covered | proceed; a claim C<n> that held in s1, s2 **and** holds in s3, s4 becomes ✅; uncovered non-core families stay 🟡 and get a discovery sweep |
+
+"Twin-covered" is fixed as: the twin's relative spread ≥ 0.5 × `scalar_rel_spread` **or** its absolute
+spread ≥ 0.5 × `scalar_abs_floor` (scalars); twin MAD ≥ 0.05 or profile rho ≤ 0.85 (decod); twin shift
+≥ 1 (commit). The at-risk lists are not widened.

@@ -1,0 +1,24 @@
+{
+ "out": "/workspace/models/resnet20_rand99_chenyaofo.pt",
+ "recipe": {
+  "volume": "/workspace",
+  "seed": 99,
+  "out": "/workspace/models/resnet20_rand99_chenyaofo.pt",
+  "train_json": "results/train_resnet20_rand99/train.json",
+  "arch": "cifar10_resnet20",
+  "norm": "chenyaofo",
+  "epochs": 0,
+  "batch": 256,
+  "lr": 0.1,
+  "wd": 0.0005,
+  "drop_last": false,
+  "bn_recal": 100,
+  "workers": 6,
+  "download": false
+ },
+ "final_test_acc_10k": 0.1264,
+ "wall_s": 1.0,
+ "history": [],
+ "torch": "2.8.0+cu128",
+ "device": "NVIDIA GeForce RTX 4090"
+}
