@@ -1,0 +1,217 @@
+exp_id: atlas_v1_resnet20_s3
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s3_chenyaofo.pt
+  seed_tag: s3
+  norm: chenyaofo
+data:
+  reference:
+    dataset: cifar10_train
+    n: 10000
+    seed: 0
+  clean_test:
+    dataset: cifar10
+    n: 5000
+  panel:
+    dataset: cifar10_train
+    n: 64
+    seed: 123
+  cifar10c:
+    corruptions: all
+    severities:
+    - 1
+    - 3
+    - 5
+    n_per_set: 2000
+  ood:
+  - dataset: cifar100
+    n: 2000
+  - dataset: svhn
+    n: 2000
+hooks:
+  layers: blocks
+  block_stride: 1
+  pooling: gap
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+invariants:
+- pca_spectrum
+- twonn_id
+- class_centers
+- neural_collapse
+- hubness
+- class_adjacency
+- merge_order
+- knn_density
+- linear_probes
+- corruption_displacement
+cross_layer:
+- layer_cka
+- commit_layer
+invariant_cfg:
+  twonn_id:
+    n_ref: 5000
+    bootstrap: 3
+  hubness:
+    n_ref: 5000
+    k: 10
+  knn_density:
+    n_ref: 10000
+    k: 10
+    n_query: 3000
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors:
+    - luminance_mean
+    - contrast_rms
+    - highfreq_ratio
+    - spectral_slope
+    - spectral_anisotropy
+    - noise_sigma
+    - saturation_mean
+    - hue_cos
+    - hue_sin
+    - colorfulness
+    - edge_density
+    - orientation_entropy
+    - blockiness
+    - class
+    - coarse_animal_vehicle
+    - corruption_family
+    - corruption_type
+    - severity
+  commit_layer:
+    tau: 0.9
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions:
+  - gaussian_noise
+  - shot_noise
+  - defocus_blur
+  - motion_blur
+  - snow
+  - fog
+  - brightness
+  - contrast
+  - pixelate
+  - jpeg_compression
+  confirmation_corruptions:
+  - impulse_noise
+  - glass_blur
+  - zoom_blur
+  - frost
+  - elastic_transform
+  discovery_seeds:
+  - 0
+  confirmation_seeds:
+  - 3
+  - 4
+outputs:
+  root: results/atlas_v1_resnet20_s3
+  plots: true
+notes: "Stage 1b pre-registration (committed with docs/plans/STAGE1.md amendment 2,\
+  \ before seeds 3 and 4 exist).\nDecision rule: the STAGE1.md table + amendment 1\
+  \ (CORE-PASS row) + amendment 2 (pairs, instrument, coverage,\nINVALID, promotion,\
+  \ procedure). Decision pair = s3 vs s4 (identical recipe). Corroboration pairs =\
+  \ hub(v1) vs\ns3, hub(v1) vs s4. Twin = the Stage 1 twin (s1 vs s1_ref1) and null\
+  \ = atlas_v1_resnet20_rand; neither is\nre-run. Every S/C item and threshold is\
+  \ the Stage 1 one, verbatim, unless marked NEW. The lists that decide\nPASS vs CORE-PASS\
+  \ are not widened; what Stage 1 taught enters only as forecasts (F), which are scored\
+  \ but\nnever cover a FAIL or change the outcome. margin_typeb is not part of this\
+  \ instrument (A3 measures it on the\ns3/s4 dumps through separate Stage-B rebuilds,\
+  \ results/margin_v1_resnet20_s{3,4}; not part of this decision).\nPaths: critic\
+  \ results/critic_v1_resnet20_s3_s4/critic.json ([0,1] = s3,s4) and\nresults/critic_v1_resnet20_s0_s3_s4/critic.json\
+  \ ([0,1] = hub-s3, [0,2] = hub-s4); deformation\nresults/atlas_v1_resnet20_s4/compare_vs_atlas_v1_resnet20_s3/deformation.json\
+  \ and\nresults/atlas_v1_resnet20_s{3,4}/compare_vs_atlas_v1_resnet20_s0hub/deformation.json\
+  \ (commit tables, cka_test).\nresults/critic_v1_resnet20_s1_s2_s3_s4 is INFO only:\
+  \ its scalar and commit checks are ranges over four runs\nwith a tolerance calibrated\
+  \ on pairs.\n\nI  instrument (NEW; any failure makes the run INVALID; I0 and I1\
+  \ stop the Stage 1b block before training;\n   I2 runs after the s3/s4 atlases are\
+  \ built)\nI0 training environment: torch version and GPU name equal results/train_resnet20_s1/train.json\
+  \ (torch 2.8.0+cu128,\n   NVIDIA GeForce RTX 4090); the Stage A inputs (atlas/extract_acts.py,\
+  \ atlas/factors, atlas/config.py,\n   atlas/context.py, extract/, scripts/train_second_seed.py,\
+  \ requirements.txt) are unchanged since 6242a17;\n   the s3 and s4 manifests agree\
+  \ in every instrument key (scripts/check_rebuild.py manifests).\nI1 results/instrument_check_stage1b/check.json\
+  \ status PASS: Stage B rebuilt from the s1 dump with this\n   manifest reproduces\
+  \ results/atlas_v1_resnet20_s1/atlas.json (same keys; ints and strings exact; floats\n\
+  \   within 1e-3 + 1e-3*|x|); AND results/instrument_check_stage1b/replay.json status\
+  \ PASS: compare s1 -> s2 and\n   critic s1 s2 re-run with this commit's code reproduce\
+  \ the committed\n   results/atlas_v1_resnet20_s2/compare_vs_atlas_v1_resnet20_s1/deformation.json\
+  \ (same rule) and every item\n   (status and detail) and tolerance of results/critic_v1_resnet20_s1_s2/critic.json.\n\
+  I2 results/instrument_check_stage1b/i2.json status PASS: s3 and s4 meta.{layers,\
+  \ dims, splits, n_test,\n   ref_indices, panel_indices, norm, norm_values, arch,\
+  \ dtype, pooling} equal s1's; meta.weights names\n   resnet20_s3 / resnet20_s4 with\
+  \ a sha256 different from s1's and s2's; skipped = {} and no error key in\n   either\
+  \ atlas.\n\nR0 training (results/train_resnet20_s{3,4}/train.json final_test_acc_10k):\
+  \ both in [0.915, 0.930],\n   |s3 - s4| <= 0.005.\n\nS  seed stability, s3 vs s4.\
+  \ Core (STAGE1.md): S1, S3 penult sep_ratio, S5, S7 sharp-factor MAD, S8 class,\
+  \ S9.\nS1 (core) id_profile[0,1] PASS (spearman >= 0.90, peak shift <= 1); ID peak\
+  \ at layer3.0 or layer3.1 in both.\nS2 penult pca_spectrum.dim95 == 9 in both; any\
+  \ scalar FAIL on dim95 / participation_ratio is at stem or\n   layer1.0 only.\n\
+  S3 penult/class_centers.sep_ratio PASS (core); */class_centers.nearest_center_acc_test\
+  \ PASS at all 10 layers.\nS4 scalar_stability: <= 8 FAIL of 80; >= 1 FAIL among\
+  \ {stem, layer1.0} x {neural_collapse.nc1,\n   hubness.k_occurrence_skew}.\nS5 (core)\
+  \ penult/adjacency_spearman[0,1] PASS (rho >= 0.70).\nS6 (non-core) penult/merge_kendall[0,1]\
+  \ >= 0.60. first_merge_same is recorded, not evidence (the null also\n   merges\
+  \ [3,5] first).\nS7 decod/<f>[0,1] mean_abs_delta <= 0.10 for all 18 factors; <=\
+  \ 4 profile FAILs, all within the at-risk set\n   {spectral_anisotropy, hue_cos,\
+  \ blockiness, highfreq_ratio, noise_sigma, edge_density, contrast_rms}.\n   Core\
+  \ part: mean_abs_delta <= 0.10 for {luminance_mean, spectral_slope, saturation_mean,\
+  \ hue_sin,\n   colorfulness, orientation_entropy, class, corruption_family, corruption_type,\
+  \ severity}.\nS8 commit/class PASS (core); <= 5 commit FAILs, all within {contrast_rms,\
+  \ spectral_slope, spectral_anisotropy,\n   orientation_entropy, blockiness, severity,\
+  \ coarse_animal_vehicle, highfreq_ratio}.\nS9 (core) penult/cka_test[0,1] PASS (>=\
+  \ 0.80) and > 0.691 (v0 within-model layer3.1->layer3.2 test CKA).\nS10 (exploratory,\
+  \ INFO) penult relrep_argmax_agree_ood_c100 >= 3 x relrep_argmax_chance_ood_c100;\n\
+  \   error_consistency_test and relrep_offmax_corr_test are recorded, no threshold.\n\
+  S11 input_norm PASS; alias_layers WARN for layer3.2 only.\nT2 penult adjacency_spearman\
+  \ for hub-s3 and hub-s4 each within 0.10 of the s3-s4 value.\nD1 (NEW; rule 8; gates\
+  \ row 7) distance-only penult adjacency = Spearman over the 45 upper-triangle Euclidean\n\
+  \   distances between per_layer.penult.class_centers.centers (node scripts/d1_distance_only.js):\
+  \ s3-s4 >= 0.80\n   (Stage 1: s1-s2 0.950, null s1-rand 0.644). hub-s3, hub-s4 and\
+  \ all six seed pairs of s1..s4 (s1:s2, s1:s3,\n   s1:s4, s2:s3, s2:s4, s3:s4) are\
+  \ reported; `node scripts/d1_distance_only.js` prints exactly these pairs.\n\nC\
+  \  restated claims, per seed; each must hold in s3 AND s4 (ATLAS_STATUS rows in\
+  \ brackets)\nC1 [1] TwoNN ID peaks at layer3.0 or layer3.1 and penult ID is >= 30%\
+  \ below the peak.\nC2 [3] washout at tau 0.9 (cross_layer.commit_layer.per_factor.<f>.washout):\
+  \ luminance_mean > 0.30;\n   highfreq_ratio < 0.20; spectral_anisotropy < 0.20.\n\
+  C3 [4] cross_layer.commit_layer.per_factor.class.commit_layer in {layer3.0, layer3.1,\
+  \ layer3.2} at tau 0.9\n   (layer3.2 == penult).\nC4 [5] penult corruption_displacement\
+  \ coherence, same severity: defocus_blur s5, motion_blur s3 and\n   motion_blur\
+  \ s5 each below both gaussian_noise and shot_noise at that severity.\nC5a [6a] (pre-registered\
+  \ here) penult knn_density sparse_frac s5 > s1 for each of defocus_blur, motion_blur,\n\
+  \   snow, fog, brightness, contrast, pixelate, jpeg_compression. It is the second\
+  \ conjunct of Stage 1 C5,\n   verbatim; its s1/s2 8/8 result is post-hoc support,\
+  \ not confirmation. The noise clause (row 6b) failed in\n   Stage 1 and is not re-tested;\
+  \ gaussian/shot s1/s3/s5 values are recorded as INFO.\n\nF  forecasts from Stage\
+  \ 1 (scored; never cover a FAIL or change the outcome)\nF1 the outcome is CORE-PASS\
+  \ (not PASS), and U (amendment 2 item 9) contains >= 1 of the 49 scalar items that\n\
+  \   are neither twin-covered nor S4 cells.\nF2 S4 exceeds its budget again (s1-s2:\
+  \ 12 FAILs), and S2's \"stem or layer1.0 only\" clause fails again.\nF3 >= 2 of\
+  \ the 4 uncovered Stage 1 FAILs recur: layer1.0 participation_ratio, layer1.0 dim95,\n\
+  \   layer1.1 hubness.k_occurrence_skew, layer3.0 participation_ratio.\nF4 if a C\
+  \ claim fails in s3 or s4, it is C2 (s1 highfreq_ratio washout 0.173 vs < 0.20)\
+  \ or C5a (smallest\n   s5 - s1 margin 0.048, s1 brightness).\n\nFrozen coverage\
+  \ tables. Stage 1 twin atlases (s1 vs s1_ref1), atlas.json values, critic.py formulas,\n\
+  amendment-1 thresholds (scalar rel >= 0.075 or abs >= 0.025 | decod MAD >= 0.05\
+  \ or rho <= 0.85 |\ncommit shift >= 1).\nTwin-covered scalar items (31 of 80; 18\
+  \ of them only by the absolute arm, twin rel < 0.075):\n  stem, layer1.0: twonn_id.id,\
+  \ class_centers.sep_ratio, neural_collapse.nc1, hubness.k_occurrence_skew\n  layer1.1:\
+  \ pca_spectrum.participation_ratio, class_centers.sep_ratio, neural_collapse.nc1\n\
+  \  layer1.2: neural_collapse.nc1, hubness.k_occurrence_skew\n  layer2.0, layer2.2:\
+  \ twonn_id.id, pca_spectrum.participation_ratio, neural_collapse.nc1,\n    hubness.k_occurrence_skew\n\
+  \  layer2.1: twonn_id.id, neural_collapse.nc1\n  layer3.0: twonn_id.id, neural_collapse.nc1,\
+  \ hubness.k_occurrence_skew\n  layer3.1: twonn_id.id, pca_spectrum.participation_ratio,\
+  \ hubness.k_occurrence_skew\n  penult: pca_spectrum.participation_ratio, hubness.k_occurrence_skew\n\
+  Twin-covered decod factors: none (largest twin MAD 0.0295 highfreq_ratio; smallest\
+  \ twin rho 0.855\nspectral_anisotropy).\nTwin-covered commit factors: spectral_anisotropy\
+  \ (layer1.2 -> layer2.0).\nAt-risk lists: S4 cells (scalars), S7 set (decod profile\
+  \ FAILs with MAD <= 0.10), S8 set (commit). S2's list\ncovers no FAIL; a decod FAIL\
+  \ by MAD > 0.10 is covered by no list.\n"

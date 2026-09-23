@@ -1,0 +1,1832 @@
+{
+ "runs": [
+  "results/atlas_v1_resnet20_s1",
+  "results/atlas_v1_resnet20_s2",
+  "results/atlas_v1_resnet20_s3",
+  "results/atlas_v1_resnet20_s4"
+ ],
+ "tolerances": {
+  "scalar_rel_spread": 0.15,
+  "scalar_abs_floor": 0.05,
+  "adjacency_spearman": 0.7,
+  "merge_kendall": 0.6,
+  "decod_profile_spearman": 0.7,
+  "decod_mean_abs_delta": 0.1,
+  "commit_layer_slack": 1,
+  "min_runs": 2,
+  "id_profile_spearman": 0.9,
+  "cka_test_min": 0.8,
+  "scalar_abs_tol": {
+   "margin_typeb.auc_margin_typeb": 0.05,
+   "margin_typeb.auc_dist_typeb": 0.05,
+   "margin_typeb.auc_maxprob_typeb": 0.05,
+   "margin_typeb.auc_margin_wrong": 0.05
+  }
+ },
+ "checks": {
+  "synthetic_refusal": [
+   {
+    "name": "sources",
+    "status": "PASS",
+    "detail": "all runs real"
+   }
+  ],
+  "norm_consistency": [
+   {
+    "name": "input_norm",
+    "status": "PASS",
+    "detail": "{'atlas_v1_resnet20_s1': 'chenyaofo', 'atlas_v1_resnet20_s2': 'chenyaofo', 'atlas_v1_resnet20_s3': 'chenyaofo', 'atlas_v1_resnet20_s4': 'chenyaofo'}"
+   }
+  ],
+  "alias_layers": [
+   {
+    "name": "alias:layer3.2",
+    "status": "WARN",
+    "detail": "identical to penult in every run; counted once as penult"
+   }
+  ],
+  "holdout_hygiene": [
+   {
+    "name": "holdout:atlas_v1_resnet20_s1",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:atlas_v1_resnet20_s2",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:atlas_v1_resnet20_s3",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:atlas_v1_resnet20_s4",
+    "status": "PASS",
+    "detail": "declared"
+   }
+  ],
+  "probe_hygiene": [
+   {
+    "name": "probes:atlas_v1_resnet20_s1",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   },
+   {
+    "name": "probes:atlas_v1_resnet20_s2",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   },
+   {
+    "name": "probes:atlas_v1_resnet20_s3",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   },
+   {
+    "name": "probes:atlas_v1_resnet20_s4",
+    "status": "PASS",
+    "detail": "cv_folds=5 n_train=4000"
+   }
+  ],
+  "scalar_stability": [
+   {
+    "name": "stem/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[6.729, 6.979, 6.775, 6.843] rel_spread=0.037"
+   },
+   {
+    "name": "stem/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[2.993, 2.975, 2.644, 3.09] rel_spread=0.152"
+   },
+   {
+    "name": "stem/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[4.0, 4.0, 4.0, 4.0] rel_spread=0.000"
+   },
+   {
+    "name": "stem/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.156, 0.162, 0.152, 0.164] rel_spread=0.075"
+   },
+   {
+    "name": "stem/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[261.068, 152.924, 318.793, 159.182] rel_spread=0.744"
+   },
+   {
+    "name": "stem/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.634, 0.658, 0.647, 0.648] rel_spread=0.037"
+   },
+   {
+    "name": "stem/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.179, 0.209, 0.223, 0.202] rel_spread=0.219"
+   },
+   {
+    "name": "stem/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.244, 0.246, 0.246, 0.25] rel_spread=0.024"
+   },
+   {
+    "name": "layer1.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[8.577, 9.201, 8.83, 9.25] rel_spread=0.075"
+   },
+   {
+    "name": "layer1.0/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[3.288, 3.875, 4.303, 3.95] rel_spread=0.263"
+   },
+   {
+    "name": "layer1.0/pca_spectrum.dim95",
+    "status": "FAIL",
+    "detail": "values=[5.0, 7.0, 7.0, 7.0] rel_spread=0.308"
+   },
+   {
+    "name": "layer1.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.183, 0.185, 0.194, 0.197] rel_spread=0.069"
+   },
+   {
+    "name": "layer1.0/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[164.627, 136.168, 123.091, 93.88] rel_spread=0.547"
+   },
+   {
+    "name": "layer1.0/neural_collapse.etf_deviation",
+    "status": "FAIL",
+    "detail": "values=[0.635, 0.613, 0.561, 0.519] rel_spread=0.200"
+   },
+   {
+    "name": "layer1.0/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.535, 0.741, 0.642, 0.74] rel_spread=0.310"
+   },
+   {
+    "name": "layer1.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.28, 0.288, 0.29, 0.296] rel_spread=0.053"
+   },
+   {
+    "name": "layer1.1/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[9.348, 9.846, 9.596, 9.928] rel_spread=0.060"
+   },
+   {
+    "name": "layer1.1/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[4.07, 5.067, 4.944, 4.893] rel_spread=0.210"
+   },
+   {
+    "name": "layer1.1/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[7.0, 8.0, 8.0, 8.0] rel_spread=0.129"
+   },
+   {
+    "name": "layer1.1/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.209, 0.209, 0.227, 0.215] rel_spread=0.085"
+   },
+   {
+    "name": "layer1.1/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[74.307, 68.463, 69.758, 86.846] rel_spread=0.246"
+   },
+   {
+    "name": "layer1.1/neural_collapse.etf_deviation",
+    "status": "FAIL",
+    "detail": "values=[0.544, 0.575, 0.532, 0.46] rel_spread=0.219"
+   },
+   {
+    "name": "layer1.1/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.644, 0.77, 0.815, 0.8] rel_spread=0.226"
+   },
+   {
+    "name": "layer1.1/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.317, 0.324, 0.329, 0.323] rel_spread=0.035"
+   },
+   {
+    "name": "layer1.2/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[9.52, 10.055, 9.956, 10.263] rel_spread=0.075"
+   },
+   {
+    "name": "layer1.2/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[4.8, 4.499, 5.286, 5.102] rel_spread=0.160"
+   },
+   {
+    "name": "layer1.2/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[8.0, 9.0, 9.0, 9.0] rel_spread=0.114"
+   },
+   {
+    "name": "layer1.2/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.303, 0.298, 0.293, 0.293] rel_spread=0.036"
+   },
+   {
+    "name": "layer1.2/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[49.246, 47.77, 48.912, 48.318] rel_spread=0.030"
+   },
+   {
+    "name": "layer1.2/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.428, 0.452, 0.465, 0.432] rel_spread=0.083"
+   },
+   {
+    "name": "layer1.2/hubness.k_occurrence_skew",
+    "status": "FAIL",
+    "detail": "values=[0.713, 0.821, 0.767, 0.922] rel_spread=0.259"
+   },
+   {
+    "name": "layer1.2/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.353, 0.349, 0.351, 0.356] rel_spread=0.018"
+   },
+   {
+    "name": "layer2.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[11.595, 11.437, 11.712, 12.065] rel_spread=0.054"
+   },
+   {
+    "name": "layer2.0/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[6.067, 5.598, 5.852, 6.145] rel_spread=0.092"
+   },
+   {
+    "name": "layer2.0/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[12.0, 11.0, 12.0, 12.0] rel_spread=0.085"
+   },
+   {
+    "name": "layer2.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.345, 0.343, 0.336, 0.342] rel_spread=0.027"
+   },
+   {
+    "name": "layer2.0/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[23.829, 19.416, 24.574, 20.88] rel_spread=0.233"
+   },
+   {
+    "name": "layer2.0/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.519, 0.451, 0.471, 0.459] rel_spread=0.143"
+   },
+   {
+    "name": "layer2.0/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.924, 0.913, 0.975, 1.008] rel_spread=0.100"
+   },
+   {
+    "name": "layer2.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.42, 0.413, 0.406, 0.417] rel_spread=0.034"
+   },
+   {
+    "name": "layer2.1/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[12.594, 12.9, 12.972, 13.385] rel_spread=0.061"
+   },
+   {
+    "name": "layer2.1/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[7.692, 7.111, 6.981, 7.491] rel_spread=0.097"
+   },
+   {
+    "name": "layer2.1/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[14.0, 14.0, 15.0, 15.0] rel_spread=0.069"
+   },
+   {
+    "name": "layer2.1/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.394, 0.38, 0.368, 0.373] rel_spread=0.069"
+   },
+   {
+    "name": "layer2.1/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[17.043, 11.104, 15.979, 14.636] rel_spread=0.404"
+   },
+   {
+    "name": "layer2.1/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.401, 0.4, 0.447, 0.422] rel_spread=0.112"
+   },
+   {
+    "name": "layer2.1/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.202, 1.154, 1.21, 1.304] rel_spread=0.123"
+   },
+   {
+    "name": "layer2.1/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.476, 0.469, 0.457, 0.472] rel_spread=0.042"
+   },
+   {
+    "name": "layer2.2/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[13.564, 13.829, 14.05, 14.102] rel_spread=0.039"
+   },
+   {
+    "name": "layer2.2/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[8.577, 7.948, 8.558, 8.595] rel_spread=0.077"
+   },
+   {
+    "name": "layer2.2/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[17.0, 17.0, 17.0, 18.0] rel_spread=0.058"
+   },
+   {
+    "name": "layer2.2/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.42, 0.417, 0.411, 0.415] rel_spread=0.020"
+   },
+   {
+    "name": "layer2.2/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[9.177, 7.357, 8.82, 8.825] rel_spread=0.213"
+   },
+   {
+    "name": "layer2.2/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.36, 0.391, 0.389, 0.384] rel_spread=0.082"
+   },
+   {
+    "name": "layer2.2/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.427, 1.442, 1.419, 1.421] rel_spread=0.016"
+   },
+   {
+    "name": "layer2.2/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.525, 0.523, 0.518, 0.531] rel_spread=0.025"
+   },
+   {
+    "name": "layer3.0/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[18.012, 18.284, 17.981, 18.308] rel_spread=0.018"
+   },
+   {
+    "name": "layer3.0/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[10.286, 12.091, 11.533, 10.434] rel_spread=0.163"
+   },
+   {
+    "name": "layer3.0/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[38.0, 38.0, 37.0, 37.0] rel_spread=0.027"
+   },
+   {
+    "name": "layer3.0/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.566, 0.576, 0.549, 0.573] rel_spread=0.048"
+   },
+   {
+    "name": "layer3.0/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[2.391, 2.533, 2.741, 2.396] rel_spread=0.139"
+   },
+   {
+    "name": "layer3.0/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.329, 0.334, 0.355, 0.338] rel_spread=0.078"
+   },
+   {
+    "name": "layer3.0/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.691, 1.701, 1.87, 1.874] rel_spread=0.102"
+   },
+   {
+    "name": "layer3.0/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.649, 0.667, 0.641, 0.647] rel_spread=0.041"
+   },
+   {
+    "name": "layer3.1/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[19.446, 19.584, 19.79, 19.503] rel_spread=0.018"
+   },
+   {
+    "name": "layer3.1/pca_spectrum.participation_ratio",
+    "status": "FAIL",
+    "detail": "values=[11.259, 9.641, 12.61, 9.453] rel_spread=0.294"
+   },
+   {
+    "name": "layer3.1/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[41.0, 40.0, 42.0, 41.0] rel_spread=0.049"
+   },
+   {
+    "name": "layer3.1/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[0.873, 0.81, 0.82, 0.833] rel_spread=0.075"
+   },
+   {
+    "name": "layer3.1/neural_collapse.nc1",
+    "status": "FAIL",
+    "detail": "values=[0.774, 0.859, 0.923, 0.792] rel_spread=0.178"
+   },
+   {
+    "name": "layer3.1/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.289, 0.29, 0.277, 0.296] rel_spread=0.067"
+   },
+   {
+    "name": "layer3.1/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[1.898, 1.805, 1.755, 1.86] rel_spread=0.078"
+   },
+   {
+    "name": "layer3.1/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.813, 0.81, 0.796, 0.822] rel_spread=0.033"
+   },
+   {
+    "name": "penult/twonn_id.id",
+    "status": "PASS",
+    "detail": "values=[9.757, 10.036, 9.836, 9.901] rel_spread=0.028"
+   },
+   {
+    "name": "penult/pca_spectrum.participation_ratio",
+    "status": "PASS",
+    "detail": "values=[8.602, 8.465, 8.409, 8.536] rel_spread=0.023"
+   },
+   {
+    "name": "penult/pca_spectrum.dim95",
+    "status": "PASS",
+    "detail": "values=[9.0, 9.0, 9.0, 9.0] rel_spread=0.000"
+   },
+   {
+    "name": "penult/class_centers.sep_ratio",
+    "status": "PASS",
+    "detail": "values=[3.067, 3.021, 2.97, 3.024] rel_spread=0.032"
+   },
+   {
+    "name": "penult/neural_collapse.nc1",
+    "status": "PASS",
+    "detail": "values=[0.163, 0.17, 0.172, 0.167] rel_spread=0.053"
+   },
+   {
+    "name": "penult/neural_collapse.etf_deviation",
+    "status": "PASS",
+    "detail": "values=[0.098, 0.107, 0.109, 0.097] rel_spread=0.112"
+   },
+   {
+    "name": "penult/hubness.k_occurrence_skew",
+    "status": "PASS",
+    "detail": "values=[0.833, 0.767, 0.772, 0.804] rel_spread=0.084"
+   },
+   {
+    "name": "penult/class_centers.nearest_center_acc_test",
+    "status": "PASS",
+    "detail": "values=[0.922, 0.925, 0.923, 0.928] rel_spread=0.006"
+   }
+  ],
+  "id_profile_stability": [
+   {
+    "name": "id_profile[0,1]",
+    "status": "PASS",
+    "detail": "spearman=0.988 peak=layer3.1/layer3.1"
+   },
+   {
+    "name": "id_profile[0,2]",
+    "status": "PASS",
+    "detail": "spearman=0.988 peak=layer3.1/layer3.1"
+   },
+   {
+    "name": "id_profile[0,3]",
+    "status": "PASS",
+    "detail": "spearman=0.964 peak=layer3.1/layer3.1"
+   },
+   {
+    "name": "id_profile[1,2]",
+    "status": "PASS",
+    "detail": "spearman=1.000 peak=layer3.1/layer3.1"
+   },
+   {
+    "name": "id_profile[1,3]",
+    "status": "PASS",
+    "detail": "spearman=0.988 peak=layer3.1/layer3.1"
+   },
+   {
+    "name": "id_profile[2,3]",
+    "status": "PASS",
+    "detail": "spearman=0.988 peak=layer3.1/layer3.1"
+   }
+  ],
+  "adjacency_stability": [
+   {
+    "name": "stem/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.989"
+   },
+   {
+    "name": "stem/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.984"
+   },
+   {
+    "name": "stem/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.993"
+   },
+   {
+    "name": "stem/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.997"
+   },
+   {
+    "name": "stem/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.995"
+   },
+   {
+    "name": "stem/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.982"
+   },
+   {
+    "name": "stem/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.978"
+   },
+   {
+    "name": "stem/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.987"
+   },
+   {
+    "name": "stem/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.997"
+   },
+   {
+    "name": "stem/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.997"
+   },
+   {
+    "name": "stem/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.987"
+   },
+   {
+    "name": "stem/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.984"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.987"
+   },
+   {
+    "name": "layer1.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.984"
+   },
+   {
+    "name": "layer1.0/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.965"
+   },
+   {
+    "name": "layer1.0/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.984"
+   },
+   {
+    "name": "layer1.0/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=1.000"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.974"
+   },
+   {
+    "name": "layer1.0/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.0/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.988"
+   },
+   {
+    "name": "layer1.0/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.995"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.977"
+   },
+   {
+    "name": "layer1.1/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.734"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.983"
+   },
+   {
+    "name": "layer1.1/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.962"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.950"
+   },
+   {
+    "name": "layer1.1/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.962"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.949"
+   },
+   {
+    "name": "layer1.1/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.695"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.920"
+   },
+   {
+    "name": "layer1.1/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.695"
+   },
+   {
+    "name": "layer1.1/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.968"
+   },
+   {
+    "name": "layer1.1/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=1.000"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.980"
+   },
+   {
+    "name": "layer1.2/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.987"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.984"
+   },
+   {
+    "name": "layer1.2/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.981"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.990"
+   },
+   {
+    "name": "layer1.2/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.987"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.974"
+   },
+   {
+    "name": "layer1.2/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.989"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.989"
+   },
+   {
+    "name": "layer1.2/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=1.000"
+   },
+   {
+    "name": "layer1.2/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.988"
+   },
+   {
+    "name": "layer1.2/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.989"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.974"
+   },
+   {
+    "name": "layer2.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.915"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.980"
+   },
+   {
+    "name": "layer2.0/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.954"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.977"
+   },
+   {
+    "name": "layer2.0/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.964"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.987"
+   },
+   {
+    "name": "layer2.0/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.953"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.981"
+   },
+   {
+    "name": "layer2.0/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.925"
+   },
+   {
+    "name": "layer2.0/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.986"
+   },
+   {
+    "name": "layer2.0/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.964"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.986"
+   },
+   {
+    "name": "layer2.1/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.959"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.983"
+   },
+   {
+    "name": "layer2.1/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.980"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.987"
+   },
+   {
+    "name": "layer2.1/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.914"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.979"
+   },
+   {
+    "name": "layer2.1/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.979"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.990"
+   },
+   {
+    "name": "layer2.1/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.947"
+   },
+   {
+    "name": "layer2.1/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.987"
+   },
+   {
+    "name": "layer2.1/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.926"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.980"
+   },
+   {
+    "name": "layer2.2/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.997"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.984"
+   },
+   {
+    "name": "layer2.2/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=1.000"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.994"
+   },
+   {
+    "name": "layer2.2/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.991"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.977"
+   },
+   {
+    "name": "layer2.2/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.997"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.979"
+   },
+   {
+    "name": "layer2.2/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.994"
+   },
+   {
+    "name": "layer2.2/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.990"
+   },
+   {
+    "name": "layer2.2/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.991"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.967"
+   },
+   {
+    "name": "layer3.0/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.987"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.978"
+   },
+   {
+    "name": "layer3.0/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.962"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.971"
+   },
+   {
+    "name": "layer3.0/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.929"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.984"
+   },
+   {
+    "name": "layer3.0/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.974"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.986"
+   },
+   {
+    "name": "layer3.0/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.941"
+   },
+   {
+    "name": "layer3.0/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.985"
+   },
+   {
+    "name": "layer3.0/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.941"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.945"
+   },
+   {
+    "name": "layer3.1/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.930"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.875"
+   },
+   {
+    "name": "layer3.1/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.920"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.958"
+   },
+   {
+    "name": "layer3.1/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.767"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.880"
+   },
+   {
+    "name": "layer3.1/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.901"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.972"
+   },
+   {
+    "name": "layer3.1/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.713"
+   },
+   {
+    "name": "layer3.1/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.886"
+   },
+   {
+    "name": "layer3.1/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.808"
+   },
+   {
+    "name": "penult/adjacency_spearman[0,1]",
+    "status": "PASS",
+    "detail": "rho=0.973"
+   },
+   {
+    "name": "penult/merge_kendall[0,1]",
+    "status": "PASS",
+    "detail": "tau=0.838"
+   },
+   {
+    "name": "penult/adjacency_spearman[0,2]",
+    "status": "PASS",
+    "detail": "rho=0.965"
+   },
+   {
+    "name": "penult/merge_kendall[0,2]",
+    "status": "PASS",
+    "detail": "tau=0.771"
+   },
+   {
+    "name": "penult/adjacency_spearman[0,3]",
+    "status": "PASS",
+    "detail": "rho=0.975"
+   },
+   {
+    "name": "penult/merge_kendall[0,3]",
+    "status": "PASS",
+    "detail": "tau=0.855"
+   },
+   {
+    "name": "penult/adjacency_spearman[1,2]",
+    "status": "PASS",
+    "detail": "rho=0.971"
+   },
+   {
+    "name": "penult/merge_kendall[1,2]",
+    "status": "PASS",
+    "detail": "tau=0.939"
+   },
+   {
+    "name": "penult/adjacency_spearman[1,3]",
+    "status": "PASS",
+    "detail": "rho=0.967"
+   },
+   {
+    "name": "penult/merge_kendall[1,3]",
+    "status": "PASS",
+    "detail": "tau=0.934"
+   },
+   {
+    "name": "penult/adjacency_spearman[2,3]",
+    "status": "PASS",
+    "detail": "rho=0.965"
+   },
+   {
+    "name": "penult/merge_kendall[2,3]",
+    "status": "PASS",
+    "detail": "tau=0.871"
+   }
+  ],
+  "decodability_stability": [
+   {
+    "name": "decod/luminance_mean[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.028"
+   },
+   {
+    "name": "decod/luminance_mean[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.036"
+   },
+   {
+    "name": "decod/luminance_mean[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.037"
+   },
+   {
+    "name": "decod/luminance_mean[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.033"
+   },
+   {
+    "name": "decod/luminance_mean[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/luminance_mean[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.038"
+   },
+   {
+    "name": "decod/contrast_rms[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/contrast_rms[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.92 mean_abs_delta=0.025"
+   },
+   {
+    "name": "decod/contrast_rms[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.029"
+   },
+   {
+    "name": "decod/contrast_rms[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.89 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/contrast_rms[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.83 mean_abs_delta=0.029"
+   },
+   {
+    "name": "decod/contrast_rms[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.87 mean_abs_delta=0.038"
+   },
+   {
+    "name": "decod/highfreq_ratio[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.84 mean_abs_delta=0.029"
+   },
+   {
+    "name": "decod/highfreq_ratio[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.020"
+   },
+   {
+    "name": "decod/highfreq_ratio[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.019"
+   },
+   {
+    "name": "decod/highfreq_ratio[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.82 mean_abs_delta=0.036"
+   },
+   {
+    "name": "decod/highfreq_ratio[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.82 mean_abs_delta=0.026"
+   },
+   {
+    "name": "decod/highfreq_ratio[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.022"
+   },
+   {
+    "name": "decod/spectral_slope[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.025"
+   },
+   {
+    "name": "decod/spectral_slope[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.90 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/spectral_slope[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/spectral_slope[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/spectral_slope[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.019"
+   },
+   {
+    "name": "decod/spectral_slope[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/spectral_anisotropy[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.018"
+   },
+   {
+    "name": "decod/spectral_anisotropy[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.72 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/spectral_anisotropy[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.81 mean_abs_delta=0.016"
+   },
+   {
+    "name": "decod/spectral_anisotropy[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.79 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/spectral_anisotropy[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.83 mean_abs_delta=0.016"
+   },
+   {
+    "name": "decod/spectral_anisotropy[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.011"
+   },
+   {
+    "name": "decod/noise_sigma[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.81 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/noise_sigma[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.87 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/noise_sigma[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.012"
+   },
+   {
+    "name": "decod/noise_sigma[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.013"
+   },
+   {
+    "name": "decod/noise_sigma[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/noise_sigma[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.011"
+   },
+   {
+    "name": "decod/saturation_mean[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.037"
+   },
+   {
+    "name": "decod/saturation_mean[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.025"
+   },
+   {
+    "name": "decod/saturation_mean[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.92 mean_abs_delta=0.053"
+   },
+   {
+    "name": "decod/saturation_mean[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.029"
+   },
+   {
+    "name": "decod/saturation_mean[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.92 mean_abs_delta=0.038"
+   },
+   {
+    "name": "decod/saturation_mean[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.036"
+   },
+   {
+    "name": "decod/hue_cos[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.81 mean_abs_delta=0.049"
+   },
+   {
+    "name": "decod/hue_cos[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.87 mean_abs_delta=0.035"
+   },
+   {
+    "name": "decod/hue_cos[0,3]",
+    "status": "FAIL",
+    "detail": "profile_spearman=0.64 mean_abs_delta=0.045"
+   },
+   {
+    "name": "decod/hue_cos[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.71 mean_abs_delta=0.036"
+   },
+   {
+    "name": "decod/hue_cos[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.76 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/hue_cos[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.81 mean_abs_delta=0.025"
+   },
+   {
+    "name": "decod/hue_sin[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/hue_sin[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.92 mean_abs_delta=0.012"
+   },
+   {
+    "name": "decod/hue_sin[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.028"
+   },
+   {
+    "name": "decod/hue_sin[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.028"
+   },
+   {
+    "name": "decod/hue_sin[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/hue_sin[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.032"
+   },
+   {
+    "name": "decod/colorfulness[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.024"
+   },
+   {
+    "name": "decod/colorfulness[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.84 mean_abs_delta=0.026"
+   },
+   {
+    "name": "decod/colorfulness[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.85 mean_abs_delta=0.031"
+   },
+   {
+    "name": "decod/colorfulness[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.023"
+   },
+   {
+    "name": "decod/colorfulness[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.033"
+   },
+   {
+    "name": "decod/colorfulness[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/edge_density[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.73 mean_abs_delta=0.028"
+   },
+   {
+    "name": "decod/edge_density[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.84 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/edge_density[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.016"
+   },
+   {
+    "name": "decod/edge_density[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/edge_density[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.73 mean_abs_delta=0.022"
+   },
+   {
+    "name": "decod/edge_density[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.018"
+   },
+   {
+    "name": "decod/orientation_entropy[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.90 mean_abs_delta=0.031"
+   },
+   {
+    "name": "decod/orientation_entropy[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.83 mean_abs_delta=0.026"
+   },
+   {
+    "name": "decod/orientation_entropy[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.85 mean_abs_delta=0.025"
+   },
+   {
+    "name": "decod/orientation_entropy[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.023"
+   },
+   {
+    "name": "decod/orientation_entropy[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.041"
+   },
+   {
+    "name": "decod/orientation_entropy[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.90 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/blockiness[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.009"
+   },
+   {
+    "name": "decod/blockiness[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.89 mean_abs_delta=0.010"
+   },
+   {
+    "name": "decod/blockiness[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.88 mean_abs_delta=0.016"
+   },
+   {
+    "name": "decod/blockiness[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.93 mean_abs_delta=0.008"
+   },
+   {
+    "name": "decod/blockiness[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/blockiness[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.92 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/class[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/class[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.009"
+   },
+   {
+    "name": "decod/class[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.010"
+   },
+   {
+    "name": "decod/class[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.015"
+   },
+   {
+    "name": "decod/class[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.013"
+   },
+   {
+    "name": "decod/class[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.012"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.009"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.007"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.007"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.006"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.005"
+   },
+   {
+    "name": "decod/coarse_animal_vehicle[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.007"
+   },
+   {
+    "name": "decod/corruption_family[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.013"
+   },
+   {
+    "name": "decod/corruption_family[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.017"
+   },
+   {
+    "name": "decod/corruption_family[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/corruption_family[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.013"
+   },
+   {
+    "name": "decod/corruption_family[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.98 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/corruption_family[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.009"
+   },
+   {
+    "name": "decod/corruption_type[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.012"
+   },
+   {
+    "name": "decod/corruption_type[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.011"
+   },
+   {
+    "name": "decod/corruption_type[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.99 mean_abs_delta=0.010"
+   },
+   {
+    "name": "decod/corruption_type[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.96 mean_abs_delta=0.013"
+   },
+   {
+    "name": "decod/corruption_type[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.014"
+   },
+   {
+    "name": "decod/corruption_type[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.94 mean_abs_delta=0.011"
+   },
+   {
+    "name": "decod/severity[0,1]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.021"
+   },
+   {
+    "name": "decod/severity[0,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=1.00 mean_abs_delta=0.008"
+   },
+   {
+    "name": "decod/severity[0,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.82 mean_abs_delta=0.016"
+   },
+   {
+    "name": "decod/severity[1,2]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.95 mean_abs_delta=0.024"
+   },
+   {
+    "name": "decod/severity[1,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.79 mean_abs_delta=0.027"
+   },
+   {
+    "name": "decod/severity[2,3]",
+    "status": "PASS",
+    "detail": "profile_spearman=0.82 mean_abs_delta=0.020"
+   }
+  ],
+  "commit_agreement": [
+   {
+    "name": "commit/luminance_mean",
+    "status": "PASS",
+    "detail": "['stem', 'stem', 'stem', 'stem']"
+   },
+   {
+    "name": "commit/contrast_rms",
+    "status": "PASS",
+    "detail": "['stem', 'stem', 'stem', 'stem']"
+   },
+   {
+    "name": "commit/highfreq_ratio",
+    "status": "FAIL",
+    "detail": "['layer1.1', 'layer2.0', 'layer1.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/spectral_slope",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0', 'layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/spectral_anisotropy",
+    "status": "PASS",
+    "detail": "['layer1.2', 'layer2.0', 'layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/noise_sigma",
+    "status": "PASS",
+    "detail": "['layer1.0', 'layer1.0', 'layer1.0', 'layer1.0']"
+   },
+   {
+    "name": "commit/saturation_mean",
+    "status": "PASS",
+    "detail": "['stem', 'stem', 'stem', 'stem']"
+   },
+   {
+    "name": "commit/hue_cos",
+    "status": "PASS",
+    "detail": "['stem', 'stem', 'stem', 'stem']"
+   },
+   {
+    "name": "commit/hue_sin",
+    "status": "PASS",
+    "detail": "['stem', 'stem', 'stem', 'stem']"
+   },
+   {
+    "name": "commit/colorfulness",
+    "status": "PASS",
+    "detail": "['stem', 'layer1.0', 'layer1.0', 'stem']"
+   },
+   {
+    "name": "commit/edge_density",
+    "status": "PASS",
+    "detail": "['layer1.0', 'layer1.0', 'layer1.0', 'layer1.0']"
+   },
+   {
+    "name": "commit/orientation_entropy",
+    "status": "FAIL",
+    "detail": "['layer2.0', 'layer2.0', 'layer3.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/blockiness",
+    "status": "PASS",
+    "detail": "['layer3.0', 'layer3.0', 'layer3.0', 'layer3.0']"
+   },
+   {
+    "name": "commit/class",
+    "status": "PASS",
+    "detail": "['layer3.1', 'layer3.1', 'layer3.1', 'layer3.1']"
+   },
+   {
+    "name": "commit/coarse_animal_vehicle",
+    "status": "PASS",
+    "detail": "['layer3.0', 'layer3.0', 'layer3.0', 'layer3.0']"
+   },
+   {
+    "name": "commit/corruption_family",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer1.2', 'layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/corruption_type",
+    "status": "PASS",
+    "detail": "['layer2.0', 'layer2.0', 'layer2.0', 'layer2.0']"
+   },
+   {
+    "name": "commit/severity",
+    "status": "FAIL",
+    "detail": "['layer3.0', 'layer2.2', 'layer3.0', 'layer2.0']"
+   }
+  ],
+  "panel_agreement": [
+   {
+    "name": "penult/cka_test[0,1]",
+    "status": "PASS",
+    "detail": "cka_test=0.888 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[0,1]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.91, \"relrep_row_corr_mean\": 0.963, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.926, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.831, \"error_consistency_test\": 0.535, \"cka_ood_c100\": 0.694, \"relrep_argmax_agree_ood_c100\": 0.589, \"relrep_argmax_chance_ood_c100\": 0.126, \"relrep_offmax_corr_ood_c100\": 0.779, \"landmark_procrustes_disparity\": 0.002}"
+   },
+   {
+    "name": "penult/cka_test[0,2]",
+    "status": "PASS",
+    "detail": "cka_test=0.883 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[0,2]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.899, \"relrep_row_corr_mean\": 0.962, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.929, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.82, \"error_consistency_test\": 0.537, \"cka_ood_c100\": 0.693, \"relrep_argmax_agree_ood_c100\": 0.577, \"relrep_argmax_chance_ood_c100\": 0.126, \"relrep_offmax_corr_ood_c100\": 0.772, \"landmark_procrustes_disparity\": 0.004}"
+   },
+   {
+    "name": "penult/cka_test[0,3]",
+    "status": "PASS",
+    "detail": "cka_test=0.886 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[0,3]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.905, \"relrep_row_corr_mean\": 0.961, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.934, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.826, \"error_consistency_test\": 0.526, \"cka_ood_c100\": 0.695, \"relrep_argmax_agree_ood_c100\": 0.571, \"relrep_argmax_chance_ood_c100\": 0.125, \"relrep_offmax_corr_ood_c100\": 0.776, \"landmark_procrustes_disparity\": 0.001}"
+   },
+   {
+    "name": "penult/cka_test[1,2]",
+    "status": "PASS",
+    "detail": "cka_test=0.892 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[1,2]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.916, \"relrep_row_corr_mean\": 0.967, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.929, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.839, \"error_consistency_test\": 0.527, \"cka_ood_c100\": 0.7, \"relrep_argmax_agree_ood_c100\": 0.575, \"relrep_argmax_chance_ood_c100\": 0.125, \"relrep_offmax_corr_ood_c100\": 0.778, \"landmark_procrustes_disparity\": 0.003}"
+   },
+   {
+    "name": "penult/cka_test[1,3]",
+    "status": "PASS",
+    "detail": "cka_test=0.892 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[1,3]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.912, \"relrep_row_corr_mean\": 0.962, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.933, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.833, \"error_consistency_test\": 0.539, \"cka_ood_c100\": 0.699, \"relrep_argmax_agree_ood_c100\": 0.572, \"relrep_argmax_chance_ood_c100\": 0.124, \"relrep_offmax_corr_ood_c100\": 0.773, \"landmark_procrustes_disparity\": 0.002}"
+   },
+   {
+    "name": "penult/cka_test[2,3]",
+    "status": "PASS",
+    "detail": "cka_test=0.889 min=0.8"
+   },
+   {
+    "name": "penult/agreement_info[2,3]",
+    "status": "INFO",
+    "detail": "{\"panel_cka\": 0.895, \"relrep_row_corr_mean\": 0.961, \"relrep_argmax_agree\": 1.0, \"relrep_argmax_agree_test\": 0.938, \"relrep_argmax_chance_test\": 0.1, \"relrep_offmax_corr_test\": 0.831, \"error_consistency_test\": 0.581, \"cka_ood_c100\": 0.708, \"relrep_argmax_agree_ood_c100\": 0.581, \"relrep_argmax_chance_ood_c100\": 0.124, \"relrep_offmax_corr_ood_c100\": 0.781, \"landmark_procrustes_disparity\": 0.003}"
+   }
+  ]
+ },
+ "counts": {
+  "PASS": 325,
+  "FAIL": 23,
+  "WARN": 1,
+  "INFO": 6
+ },
+ "verdict": "PARTIAL"
+}

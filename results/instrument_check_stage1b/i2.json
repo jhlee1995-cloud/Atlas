@@ -1,0 +1,41 @@
+{
+ "status": "PASS",
+ "keys_compared": [
+  "layers",
+  "dims",
+  "splits",
+  "n_test",
+  "ref_indices",
+  "panel_indices",
+  "norm",
+  "norm_values",
+  "arch",
+  "dtype",
+  "pooling"
+ ],
+ "reference_git_commit": "6242a17",
+ "runs": {
+  "atlas_v1_resnet20_s3": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet20_s3_chenyaofo.pt sha256:9b06806321d39155",
+   "seed_tag": "s3",
+   "git_commit": "664bd25",
+   "created": "2026-09-23 05:44:19",
+   "accuracy_test": 0.9222
+  },
+  "atlas_v1_resnet20_s4": {
+   "status": "PASS",
+   "problems": [],
+   "weights": "file:/workspace/models/resnet20_s4_chenyaofo.pt sha256:a67852e591b4618e",
+   "seed_tag": "s4",
+   "git_commit": "664bd25",
+   "created": "2026-09-23 05:45:41",
+   "accuracy_test": 0.9286
+  }
+ },
+ "reference": "results/atlas_v1_resnet20_s1",
+ "others": [
+  "results/atlas_v1_resnet20_s2"
+ ]
+}

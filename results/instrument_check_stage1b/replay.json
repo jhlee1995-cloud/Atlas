@@ -1,0 +1,49 @@
+{
+ "status": "PASS",
+ "compare": {
+  "status": "PASS",
+  "bitwise_identical": true,
+  "rule": "floats |a-b| <= 0.001 + 0.001*|a|; all else exact; top-level ['built', 'dump', 'timing_s', 'exp_id'] not compared",
+  "n_leaves": 1218,
+  "n_exact": 1218,
+  "n_within_tol": 0,
+  "n_mismatch": 0,
+  "max_abs_dev": {
+   "adjacency_spearman": 0.0,
+   "cka_ood_c100": 0.0,
+   "cka_test": 0.0,
+   "decodability": 0.0,
+   "decodability_mean_abs_delta": 0.0,
+   "decodability_profile_spearman": 0.0,
+   "error_consistency_test": 0.0,
+   "landmark_procrustes_disparity": 0.0,
+   "merge_height_kendall": 0.0,
+   "panel_cka": 0.0,
+   "relrep_argmax_agree": 0.0,
+   "relrep_argmax_agree_ood_c100": 0.0,
+   "relrep_argmax_agree_test": 0.0,
+   "relrep_argmax_chance_ood_c100": 0.0,
+   "relrep_argmax_chance_test": 0.0,
+   "relrep_offmax_corr_ood_c100": 0.0,
+   "relrep_offmax_corr_test": 0.0,
+   "relrep_row_corr_mean": 0.0,
+   "scalars": 0.0
+  },
+  "errors": [],
+  "skipped": null,
+  "mismatch_first50": []
+ },
+ "n_critic_items": 146,
+ "n_critic_mismatch": 0,
+ "critic_mismatch_first50": [],
+ "critic_new_items_INFO": [],
+ "deformation": [
+  "results/atlas_v1_resnet20_s2/compare_vs_atlas_v1_resnet20_s1/deformation.json",
+  "/workspace/scratch/stage1b_replay/compare_s1_s2/deformation.json"
+ ],
+ "critic": [
+  "results/critic_v1_resnet20_s1_s2/critic.json",
+  "/workspace/scratch/stage1b_replay/critic_s1_s2/critic.json"
+ ],
+ "git_commit": "664bd25"
+}

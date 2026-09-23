@@ -166,3 +166,9 @@ stricter (D1 >= 0.80 as well). Predictions: `experiments/queue/atlas_v1_resnet20
      time converted to UTC.
 
 Pod: `pod_atlas.sh --stage1b`, in one session with `--stage2 --a3` (`results/atlas_v1_resnet20_s3/RUN_REQUEST.md`).
+
+## Outcome (seeds 3, 4)
+
+**CORE-PASS** (`results/atlas_v1_resnet20_s3/SESSION.md`): gates I0-I2 PASS (the s1 rebuild was bitwise
+identical), no KILL, all six core items PASS, U = {stem participation ratio, layer3.1 nc1}. Promoted to ✅:
+rows 1, 3, 4, 5, 6a and 7 (penult adjacency; D1 s3-s4 0.919). Rows 2, 8 and row-7 merge order stay 🟡.
