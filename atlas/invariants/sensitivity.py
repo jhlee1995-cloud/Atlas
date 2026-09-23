@@ -31,8 +31,10 @@ def corruption_displacement(ctx, cfg):
     _, w, V = pca_frame(subsample(ctx.ref, int(cfg.get("n_ref", 10000)), ctx.rng))
     Vk = V[:, : int(cfg.get("top_k", 5))]
     M = (C[counts > 0] - mu)
-    # orthonormal basis of the class-mean subspace
-    Q, _ = np.linalg.qr(M.T)
+    # orthonormal basis of the class-mean subspace. The centered means have rank K-1, so a QR of
+    # M.T would add one arbitrary column; keep only the numerically non-zero singular directions.
+    U, sv, _ = np.linalg.svd(M.T, full_matrices=False)
+    Q = U[:, : int((sv > sv[0] * 1e-8).sum())]
     out = {"within_radius": within, "splits": {}}
     for s, Xc in ctx.corrupt.items():
         n = min(len(Xc), len(ctx.test))

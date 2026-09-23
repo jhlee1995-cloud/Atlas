@@ -13,7 +13,8 @@ import yaml
 DEFAULTS = {
     "exp_id": None,
     "stage": "atlas",
-    "backbone": {"arch": "cifar10_resnet20", "weights": "hub", "seed_tag": "s0"},
+    "backbone": {"arch": "cifar10_resnet20", "weights": "hub", "seed_tag": "s0",
+                 "norm": "cifar_true"},   # input normalization key in atlas.extract_acts.NORMS
     "data": {
         "reference": {"dataset": "cifar10_train", "n": 10000, "seed": 0},
         "clean_test": {"dataset": "cifar10", "n": 5000},

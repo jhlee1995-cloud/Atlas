@@ -162,6 +162,37 @@ def compare(res_a, res_b, same_space=False):
                 r["panel_mean_shift_within_units"] = float(
                     np.linalg.norm(XB[:n] - XA[:n], axis=1).mean() /
                     (float(np.mean(_g(pa, "class_centers", "radius") or [1.0])) + 1e-12))
+        # cross-model agreement on larger identical-input splits (panel n=64 is small-n biased and
+        # made of TRAIN images). test rows are CIFAR-10 test[:n] and ood__cifar100 rows are
+        # CIFAR-100 test[:n] in every dump, so rows pair by index.
+        for split, sfx in (("test", "test"), ("ood__cifar100", "ood_c100")):
+            if dA is None or dB is None or not (dA.has(la, split) and dB.has(lb, split)):
+                continue
+            XA, XB = dA.acts(la, split), dB.acts(lb, split)
+            n = min(len(XA), len(XB), 2000)
+            XA, XB = XA[:n].astype(np.float64), XB[:n].astype(np.float64)
+            r[f"cka_{sfx}"] = linear_cka(XA, XB)
+            if CA is not None and CB is not None:
+                RA, RB = rel_rep(XA, CA), rel_rep(XB, CB)
+                aA, aB = RA.argmax(1), RB.argmax(1)
+                K = RA.shape[1]
+                r[f"relrep_argmax_agree_{sfx}"] = float((aA == aB).mean())
+                r[f"relrep_argmax_chance_{sfx}"] = float(np.bincount(aA, minlength=K) @ np.bincount(aB, minlength=K)) / n ** 2
+                # row correlation over the K-1 cosines left after dropping A's argmax: the top-1
+                # entry dominates the plain row correlation, which then mostly restates accuracy
+                keep = np.ones_like(RA, dtype=bool)
+                keep[np.arange(n), aA] = False
+                ra, rb = RA[keep].reshape(n, K - 1), RB[keep].reshape(n, K - 1)
+                r[f"relrep_offmax_corr_{sfx}"] = float(np.nanmean([np.corrcoef(ra[i], rb[i])[0, 1] for i in range(n)]))
+            if split == "test":
+                pA, pB = dA.preds(split), dB.preds(split)
+                if pA is not None and pB is not None:
+                    y = dA.labels(split)[:n]
+                    cA, cB = np.asarray(pA["argmax"])[:n] == y, np.asarray(pB["argmax"])[:n] == y
+                    obs, qa, qb = float((cA == cB).mean()), float(cA.mean()), float(cB.mean())
+                    exp = qa * qb + (1 - qa) * (1 - qb)
+                    # Geirhos et al. 2020 error consistency: agreement on right/wrong beyond accuracy
+                    r["error_consistency_test"] = (obs - exp) / (1 - exp) if exp < 1 else None
         out["per_layer"][la] = r
     # cross-layer: commit layers
     ca, cb = _g(A, "cross_layer", "commit_layer", "per_factor"), _g(B, "cross_layer", "commit_layer", "per_factor")
@@ -185,6 +216,14 @@ def write_md(res, path):
                                     f(r.get("first_merge_same")), f(r.get("decodability_profile_spearman")),
                                     f(r.get("decodability_mean_abs_delta")), f(r.get("panel_cka")),
                                     f(r.get("relrep_row_corr_mean")), f(r.get("relrep_argmax_agree"))]) + " |")
+    XK = ["cka_test", "relrep_argmax_agree_test", "relrep_argmax_chance_test", "relrep_offmax_corr_test",
+          "error_consistency_test", "cka_ood_c100", "relrep_argmax_agree_ood_c100", "relrep_argmax_chance_ood_c100",
+          "relrep_offmax_corr_ood_c100"]
+    if any(k in r for r in res["per_layer"].values() for k in XK):
+        L += ["", "## cross-model agreement on identical inputs (test[:2000], CIFAR-100 test[:2000])",
+              "| layer | " + " | ".join(XK) + " |", "|---|" + "---|" * len(XK)]
+        for la, r in res["per_layer"].items():
+            L.append(f"| {la} | " + " | ".join(f(r.get(k)) for k in XK) + " |")
     L += ["", "## scalar deltas (B − A)", "| layer | " + " | ".join(k for k, _ in SCALARS) + " |",
           "|---|" + "---|" * len(SCALARS)]
     for la, r in res["per_layer"].items():

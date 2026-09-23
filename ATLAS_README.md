@@ -30,7 +30,7 @@ a pod stop:
 /workspace/
 ├── Atlas/                      git clone of this repo; results/<exp>/ (dump/ and dump_step*/ are gitignored)
 ├── datasets/                   cifar10/ cifar10_train/ cifar100/ svhn/ cifar10c/ (flat .npy) + manifest.json
-├── models/                     resnet20_seed1.pt
+├── models/                     resnet20_s{1,2}_chenyaofo.pt, resnet20_rand99_chenyaofo.pt
 ├── .cache/                     torch hub, pip
 └── logs/                       launch.log (latest launch) + pod_atlas_<timestamp>.log (per run)
 ```
@@ -38,7 +38,7 @@ a pod stop:
 The pod only pulls code. Results come back to Windows over SSH (`tar` without dumps; the command is
 printed at the end of `pod_atlas.sh`) and are committed there. Update the code on the pod only after
 its results are committed on Windows; a plain `git pull` aborts once the pod has rewritten a committed
-result file (ATLAS_REBUILD=1, or a `--seed1` re-run of compare/critic):
+result file (ATLAS_REBUILD=1, or a `--stage1` re-run of compare/critic):
 
 ```bash
 git -C /workspace/Atlas fetch && git -C /workspace/Atlas reset --hard origin/main   # gitignored dumps are kept
@@ -57,20 +57,16 @@ tail -F /workspace/logs/launch.log      # everything, including guard errors
 `bash /workspace/Atlas/pod_atlas.sh /workspace --data-only` populates datasets without a GPU. CIFAR-10-C
 must sit flat in `datasets/cifar10c/` (`<corruption>.npy`, `labels.npy`); `scripts/check_data.py` is the gate.
 
-Stage 1 (seed stability, the kill switch): the same `setsid` launch with `--seed1` appended, or by hand
-from the repo root (`train_second_seed.py` saves only after the last epoch, so keep it under setsid/tmux):
+Stage 1 (seed stability, the kill switch; design and decision rule in `docs/plans/STAGE1.md`): the
+same `setsid` launch with `--stage1` appended. It records hub accuracy under both normalizations
+(`scripts/check_norm.py`), trains seeds 1 and 2 concurrently with the hub recipe
+(`train_second_seed.py --norm chenyaofo`, ~200 epochs each), builds the v1 atlases (hub, s1, s2, a
+reference-resample twin, a random-init null), and runs every compare and critic on the pod, since
+those need the dumps. Input normalization is a manifest field (`backbone.norm`: `cifar_true` for v0,
+`chenyaofo` for v1) and is saved in local checkpoints; `load_model` refuses a mismatch.
 
-```bash
-cd /workspace/Atlas
-python scripts/train_second_seed.py --volume /workspace --seed 1 --out /workspace/models/resnet20_seed1.pt
-python -m atlas.run --manifest experiments/queue/atlas_v0_resnet20_seed1.yaml --volume /workspace \
-       --weights /workspace/models/resnet20_seed1.pt
-python -m atlas.compare --a results/atlas_v0_resnet20_cifar10 --b results/atlas_v0_resnet20_seed1
-python -m atlas.critic  --results results/atlas_v0_resnet20_cifar10 results/atlas_v0_resnet20_seed1 \
-       --tol experiments/tolerances_default.yaml --out results/critic_resnet20_s0_s1
-```
-
-Stage 2 (scale): `experiments/queue/atlas_v0_resnet56_cifar10.yaml`, then `compare --a resnet20 --b resnet56`.
+Stage 2 (scale): resnet56 from the hub with `norm: chenyaofo` (its training log uses the same std),
+then `compare --a resnet20 --b resnet56`.
 
 ## What is measured (v0)
 

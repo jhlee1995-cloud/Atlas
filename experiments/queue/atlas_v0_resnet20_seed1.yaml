@@ -1,3 +1,5 @@
+# SUPERSEDED by atlas_v1_resnet20_{s0hub,s1,s2} (docs/plans/STAGE1.md): this twin confounded seed with
+# training recipe and input normalization. Kept for provenance; do not run.
 # Seed-stability twin of atlas_v0. Train the weights first:
 #   python scripts/train_second_seed.py --volume /workspace --seed 1 --out /workspace/models/resnet20_seed1.pt
 # then:

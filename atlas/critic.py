@@ -10,6 +10,10 @@ Checks (each is a function; add more in CHECKS):
   commit_agreement    commit layer identical (or within +/-1 position) across runs
   holdout_hygiene     manifest_used.yaml declares discovery/confirmation splits (warn if not)
   probe_hygiene       linear_probes used cross-validation with >= 3 folds (warn if not)
+  norm_consistency    every run was extracted under the same input normalization
+  alias_layers        consecutive layers identical in every run (penult == GAP(last block)) are counted once
+  id_profile_stability TwoNN ID profile Spearman >= tol and peak position within commit_layer_slack
+  panel_agreement     top-layer cka_test from the pod-computed compare_vs_*/deformation.json (+ INFO metrics)
 
 Output: CRITIC.md + critic.json with PASS / FAIL / WARN per item and an overall verdict.
 The verdict is advisory: the agent reads it, a human promotes entries to ATLAS_STATUS.md.
@@ -38,6 +42,8 @@ DEFAULT_TOL = {
     "decod_mean_abs_delta": 0.10,
     "commit_layer_slack": 1,         # positions
     "min_runs": 2,
+    "id_profile_spearman": 0.90,     # TwoNN ID profile shape across runs (+ peak within commit_layer_slack)
+    "cka_test_min": 0.80,            # top-layer linear CKA on test[:2000] (from pod-computed deformation.json)
 }
 
 
@@ -51,9 +57,33 @@ def _load_all(dirs):
     return runs
 
 
-def common_layers(runs):
+_SIG = [("twonn_id", "id"), ("pca_spectrum", "participation_ratio"), ("class_centers", "sep_ratio"),
+        ("neural_collapse", "nc1"), ("hubness", "k_occurrence_skew")]
+
+
+def _sig(run, layer):
+    vals = [_g(run["atlas"]["per_layer"][layer], inv, key) for inv, key in _SIG]
+    return tuple(None if v is None else float(f"{v:.6g}") for v in vals)
+
+
+def _aliases(runs):
+    """Collapse exact aliases between consecutive common layers (under pooling 'gap', penult is the
+    GAP of the last block's output). The LATER name is kept, so 'penult' survives."""
     sets = [list(r["atlas"]["layers"]) for r in runs]
-    return [l for l in sets[0] if all(l in s for s in sets[1:])]
+    names = [l for l in sets[0] if all(l in s for s in sets[1:])]
+    alias = {}
+    for a, b in zip(names, names[1:]):
+        sa = [_sig(r, a) for r in runs]
+        if all(s == _sig(r, b) and any(v is not None for v in s) for r, s in zip(runs, sa)):
+            alias[a] = b
+    for a in list(alias):                     # resolve chains a -> b -> c
+        while alias[a] in alias:
+            alias[a] = alias[alias[a]]
+    return [l for l in names if l not in alias], alias
+
+
+def common_layers(runs):
+    return _aliases(runs)[0]
 
 
 # ---- checks ------------------------------------------------------------------
@@ -139,13 +169,14 @@ def decodability_stability(runs, tol):
 
 def commit_agreement(runs, tol):
     items = []
-    layers = common_layers(runs)
+    layers, alias = _aliases(runs)
     pos = {l: i for i, l in enumerate(layers)}
     cls = [_g(r["atlas"], "cross_layer", "commit_layer", "per_factor") for r in runs]
     if not all(cls):
         return [{"name": "commit_layer", "status": "WARN", "detail": "commit_layer missing in some run"}]
     for f in cls[0]:
         cl = [c.get(f, {}).get("commit_layer") for c in cls]
+        cl = [alias.get(c, c) for c in cl]
         if any(c is None or c not in pos for c in cl):
             items.append({"name": f"commit/{f}", "status": "WARN", "detail": f"{cl}"})
             continue
@@ -185,8 +216,70 @@ def probe_hygiene(runs, tol):
     return items
 
 
-CHECKS = [synthetic_refusal, holdout_hygiene, probe_hygiene, scalar_stability,
-          adjacency_stability, decodability_stability, commit_agreement]
+def alias_layers(runs, tol):
+    alias = _aliases(runs)[1]
+    return [{"name": f"alias:{a}", "status": "WARN", "detail": f"identical to {b} in every run; counted once as {b}"}
+            for a, b in alias.items()] or [{"name": "aliases", "status": "PASS", "detail": "none"}]
+
+
+def norm_consistency(runs, tol):
+    norms = {os.path.basename(os.path.normpath(r["dir"])): (r["atlas"].get("meta") or {}).get("norm", "cifar_true")
+             for r in runs}
+    return [{"name": "input_norm", "status": "PASS" if len(set(norms.values())) == 1 else "FAIL",
+             "detail": str(norms)}]
+
+
+def id_profile_stability(runs, tol):
+    layers, items = common_layers(runs), []
+    profs = [np.array([_g(r["atlas"]["per_layer"][l], "twonn_id", "id") for l in layers], dtype=float) for r in runs]
+    for (i, pa), (j, pb) in itertools.combinations(enumerate(profs), 2):
+        ok = np.isfinite(pa) & np.isfinite(pb)
+        if ok.sum() < 4:
+            continue
+        rho = float(spearmanr(pa[ok], pb[ok]).correlation)
+        ia, ib = int(np.nanargmax(pa)), int(np.nanargmax(pb))
+        good = rho >= tol["id_profile_spearman"] and abs(ia - ib) <= tol["commit_layer_slack"]
+        items.append({"name": f"id_profile[{i},{j}]", "status": "PASS" if good else "FAIL",
+                      "detail": f"spearman={rho:.3f} peak={layers[ia]}/{layers[ib]}"})
+    return items
+
+
+# Read from the pod-computed deformation.json (needs both dumps). cka_test is judged; the rest are
+# INFO: the panel is 64 train images (agrees trivially) and relrep argmax largely restates accuracy.
+PANEL_JUDGED = [("cka_test", "cka_test_min")]
+PANEL_INFO = ["panel_cka", "relrep_row_corr_mean", "relrep_argmax_agree", "relrep_argmax_agree_test",
+              "relrep_argmax_chance_test", "relrep_offmax_corr_test", "error_consistency_test",
+              "cka_ood_c100", "relrep_argmax_agree_ood_c100", "relrep_argmax_chance_ood_c100",
+              "relrep_offmax_corr_ood_c100", "landmark_procrustes_disparity"]
+
+
+def panel_agreement(runs, tol):
+    items = []
+    for (i, ra), (j, rb) in itertools.combinations(enumerate(runs), 2):
+        dfm = None
+        for x, y in ((ra, rb), (rb, ra)):
+            p = os.path.join(y["dir"], f"compare_vs_{os.path.basename(os.path.normpath(x['dir']))}", "deformation.json")
+            if os.path.exists(p):
+                dfm = json.load(open(p))
+                break
+        if dfm is None or not dfm.get("per_layer"):
+            items.append({"name": f"panel[{i},{j}]", "status": "WARN", "detail": "no compare_vs_* deformation.json"})
+            continue
+        top = list(dfm["per_layer"])[-1]
+        r = dfm["per_layer"][top]
+        for k, tk in PANEL_JUDGED:
+            if r.get(k) is None:
+                items.append({"name": f"{top}/{k}[{i},{j}]", "status": "WARN", "detail": "not computed (dump missing?)"})
+            else:
+                items.append({"name": f"{top}/{k}[{i},{j}]", "status": "PASS" if r[k] >= tol[tk] else "FAIL",
+                              "detail": f"{k}={r[k]:.3f} min={tol[tk]}"})
+        info = {k: round(r[k], 3) for k in PANEL_INFO if isinstance(r.get(k), (int, float))}
+        items.append({"name": f"{top}/agreement_info[{i},{j}]", "status": "INFO", "detail": json.dumps(info)})
+    return items
+
+
+CHECKS = [synthetic_refusal, norm_consistency, alias_layers, holdout_hygiene, probe_hygiene, scalar_stability,
+          id_profile_stability, adjacency_stability, decodability_stability, commit_agreement, panel_agreement]
 
 
 def run_critic(dirs, tol=None):

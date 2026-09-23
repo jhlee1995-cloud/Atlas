@@ -32,10 +32,16 @@ from atlas.critic import run_critic  # noqa: E402
 _TMP = tempfile.mkdtemp(prefix="atlas_test_")
 
 
+_RUNS = {}
+
+
 def _run(seed):
-    root = os.path.join(_TMP, f"r{seed}")
-    make_synth_dump(os.path.join(root, "dump"), n_ref=2000, n_test=800, n_corr=400, seed=seed)
-    return root, build_atlas(os.path.join(root, "dump"), root, {}, verbose=False)
+    """Synthetic dump + atlas, built once per seed (tests only read the result or deep-copy it)."""
+    if seed not in _RUNS:
+        root = os.path.join(_TMP, f"r{seed}")
+        make_synth_dump(os.path.join(root, "dump"), n_ref=2000, n_test=800, n_corr=400, seed=seed)
+        _RUNS[seed] = (root, build_atlas(os.path.join(root, "dump"), root, {}, verbose=False))
+    return _RUNS[seed]
 
 
 def test_registry():
@@ -93,6 +99,37 @@ def test_compare_and_critic():
     rep = run_critic([r0, r1])
     assert rep["verdict"] == "PIPELINE_CHECK_ONLY"      # synthetic: never promotable
     assert rep["counts"]["PASS"] == 0
+
+
+def test_compare_cross_model_known_answers():
+    r0, _ = _run(0)
+    res = compare(r0, r0)["per_layer"]["penult"]         # a model against itself
+    assert abs(res["cka_test"] - 1.0) < 1e-6
+    assert res["relrep_argmax_agree_test"] == 1.0
+    assert res["relrep_offmax_corr_test"] > 0.999
+    assert res["error_consistency_test"] is None or abs(res["error_consistency_test"] - 1.0) < 1e-9
+    assert res["adjacency_spearman"] > 0.999
+
+
+def test_critic_alias_and_id_profile():
+    import copy
+    from atlas.critic import DEFAULT_TOL, _aliases, id_profile_stability
+    runs = []
+    for seed in (0, 1):
+        d, a = _run(seed)
+        a = copy.deepcopy(a)
+        a["per_layer"]["layer3.1"] = copy.deepcopy(a["per_layer"]["penult"])   # the gap-pooling alias
+        runs.append({"dir": d, "atlas": a, "manifest": {}})
+    kept, alias = _aliases(runs)
+    assert alias == {"layer3.1": "penult"} and "penult" in kept and "layer3.1" not in kept
+
+    def mk(ids):
+        names = [f"l{i}" for i in range(len(ids))]
+        return {"dir": "x", "manifest": {},
+                "atlas": {"layers": names, "per_layer": {n: {"twonn_id": {"id": v}} for n, v in zip(names, ids)}}}
+    prof = [3.0, 5.0, 8.0, 12.0, 9.0, 6.0]
+    assert id_profile_stability([mk(prof), mk(prof)], DEFAULT_TOL)[0]["status"] == "PASS"
+    assert id_profile_stability([mk(prof), mk(prof[::-1])], DEFAULT_TOL)[0]["status"] == "FAIL"
 
 
 

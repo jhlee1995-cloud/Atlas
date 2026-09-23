@@ -31,7 +31,9 @@ def build_atlas(dump_root, out_root, cfg=None, only=None, verbose=True):
     wanted_cross = select(CROSS_LAYER, cfg.get("cross_layer", "all")) if not only else {
         k: v for k, v in CROSS_LAYER.items() if k in only.split(",")}
     inv_cfg = cfg.get("invariant_cfg", {})
-    seed = int(cfg.get("seed", 0))
+    # estimator draws (subsamples, probe rows, CV folds) follow the reference draw unless a build seed
+    # is given, so a reference-resample twin also resamples the probes (0 for every seed-0 manifest)
+    seed = int(cfg.get("seed", ((cfg.get("data") or {}).get("reference") or {}).get("seed", 0)))
 
     # order: cheap -> medium -> expensive (kill-switch sequencing; cheap failures stop early)
     cost_rank = {"cheap": 0, "medium": 1, "expensive": 2}

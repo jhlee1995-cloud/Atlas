@@ -1,0 +1,95 @@
+# Stage 1 (v1) kill-switch pair, seed 1: local training with the hub recipe, reproduced from the hub
+# checkpoint's own training log (chenyaofo/pytorch-cifar-models@logs logs/cifar10/resnet20/default.log):
+# 200 ep, batch 256, SGD nesterov lr 0.1 wd 5e-4, cosine T_max 200, std (0.2023, 0.1994, 0.2010),
+# LAST epoch (no test-set selection). Trained by `pod_atlas.sh --stage1`.
+exp_id: atlas_v1_resnet20_s1
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: all
+cross_layer: all
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes: {n_train: 4000, cv_folds: 5, factors: all}
+  commit_layer:  {tau: 0.9}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0]
+  confirmation_seeds: [1, 2]      # touched once, with invariants + tolerances frozen; seeds 3, 4 reserved
+outputs: {root: results/atlas_v1_resnet20_s1, plots: true}
+notes: |
+  Stage 1 pre-registration (committed before the run; decision rule: docs/plans/STAGE1.md).
+  Kill-switch pair = s1 vs s2 (identical recipe). Corroboration pairs = hub(v1) vs s1, hub(v1) vs s2.
+  Sampling-noise twin = s1 vs s1_ref1 (new 10k reference draw). Null = rand (random init + BN recal).
+  Discovery = s0 (atlas_v0_resnet20_cifar10, std 0.247) whose claims are restated below and frozen here.
+  After the critic's alias collapse, layer3.2 (== penult under gap pooling) is counted once as penult,
+  so there are 10 distinct layers. Paths: critic results/critic_v1_resnet20_s1_s2/critic.json;
+  deformation results/atlas_v1_resnet20_s2/compare_vs_atlas_v1_resnet20_s1/deformation.json.
+
+  N  normalization (results/norm_check_resnet20/norm_check.json; hub checkpoint, full 10k test)
+  N1 acc_10k(chenyaofo) in [0.9250, 0.9265]; acc_10k(cifar_true) in [0.917, 0.924];
+     delta_acc_pt >= +0.3 with McNemar p < 0.05 (favours = chenyaofo).
+  N2 atlas_v1_resnet20_s0hub meta.accuracy.test > 0.9184 (v0 value, test[:5000]).
+  N3 same-space v0 -> v1 hub (results/atlas_v1_resnet20_s0hub/compare_vs_atlas_v0_resnet20_cifar10):
+     penult adjacency_spearman >= 0.90 and |delta class_centers.sep_ratio| <= 0.29 (10% of 2.941).
+
+  R0 training (results/train_resnet20_s{1,2}/train.json final_test_acc_10k): both in [0.915, 0.930],
+     |s1 - s2| <= 0.005.
+
+  S  seed stability, s1 vs s2 (critic item names in brackets)
+  S1 id_profile[0,1] PASS (spearman >= 0.90, peak shift <= 1); ID peak at layer3.0 or layer3.1 in both.
+  S2 penult pca_spectrum.dim95 == 9 in both; any scalar FAIL on dim95 / participation_ratio is at
+     stem or layer1.0 only (integer dim95 4 and 6 there: a +-1 change exceeds the 0.15 spread).
+  S3 penult/class_centers.sep_ratio PASS; */class_centers.nearest_center_acc_test PASS at all 10 layers.
+  S4 scalar_stability: <= 8 FAIL of 80; >= 1 FAIL among {stem, layer1.0} x {neural_collapse.nc1,
+     hubness.k_occurrence_skew}.
+  S5 penult/adjacency_spearman[0,1] PASS (rho >= 0.70; expected 0.70-0.90).
+  S6 (reported, non-core: near-tied merge heights 2.822/2.834 in v0) penult/merge_kendall[0,1] >= 0.60;
+     deformation per_layer.penult.merge_height_kendall; per_layer.penult.first_merge_same true.
+  S7 decod/<f>[0,1] mean_abs_delta <= 0.10 for all 18 factors; <= 4 profile FAILs, all within the
+     at-risk set {spectral_anisotropy, hue_cos, blockiness, highfreq_ratio, noise_sigma, edge_density,
+     contrast_rms}.
+  S8 commit/class PASS; <= 5 commit FAILs, all within {contrast_rms, spectral_slope, spectral_anisotropy,
+     orientation_entropy, blockiness, severity, coarse_animal_vehicle, highfreq_ratio}.
+  S9 penult/cka_test[0,1] PASS (>= 0.80) and > 0.691 (v0 within-model layer3.1->layer3.2 test CKA).
+  S10 (exploratory, INFO) penult relrep_argmax_agree_ood_c100 >= 3 x relrep_argmax_chance_ood_c100;
+     error_consistency_test and relrep_offmax_corr_test are recorded, no threshold.
+  S11 input_norm PASS; alias_layers WARNs for layer3.2 only.
+
+  C  restated claims from s0, confirmed per seed on s1 AND s2 (ATLAS_STATUS rows in brackets)
+  C1 [1] TwoNN ID peaks at layer3.0 or layer3.1 and penult ID is >= 30% below the peak.
+  C2 [3] washout at tau 0.9 (cross_layer.commit_layer.per_factor.<f>.washout): luminance_mean > 0.30;
+     highfreq_ratio < 0.20; spectral_anisotropy < 0.20 (the row-6 factors stay decodable at penult).
+  C3 [4] commit_layer of class (atlas.json cross_layer.commit_layer.per_factor.class.commit_layer) in
+     {layer3.0, layer3.1, layer3.2} at tau 0.9 (layer3.2 == penult; atlas.json lists layer3.2 first, the
+     critic shows it as penult).
+  C4 [5] penult corruption_displacement coherence, same severity: defocus_blur s5, motion_blur s3 and
+     motion_blur s5 each below both gaussian_noise and shot_noise at that severity (weak: coherence
+     ~ mean-shift size by construction).
+  C5 [6] penult knn_density sparse_frac: gaussian_noise and shot_noise have s5 < s3 (non-monotone);
+     every other discovery corruption has s5 > s1.
+
+  T  controls
+  T1 twin s1 vs s1_ref1 (results/critic_v1_resnet20_s1_noise; the build seed follows reference.seed, so
+     probe rows and CV folds are resampled too): penult adjacency_spearman >= 0.95;
+     id_profile spearman >= 0.95; decod mean_abs_delta <= 0.03 for every factor; cka_test = 1.000
+     (same weights, same test inputs: plumbing check). Panel metrics in this pair are invalid.
+  T2 hub vs seeds (results/critic_v1_resnet20_s0_s1_s2): penult adjacency rho for hub-s1 and hub-s2
+     each within 0.10 of the s1-s2 value.
+  T3 null rand vs s1 (results/critic_v1_resnet20_s1_null): penult cka_test <= 0.50; rand stem
+     luminance_mean R2 >= 0.90 (a GAP artifact: row 3 must not cite the stem R2 as learned structure).

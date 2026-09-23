@@ -17,6 +17,7 @@ Pairing contract: clean test = torchvision CIFAR-10 test indices 0..n_test-1 in 
 corrupt__X__sN = CIFAR-10-C rows 0..n_per_set-1 of severity N. Labels are asserted equal.
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -119,10 +120,26 @@ def _resolve(volume, name):
         return os.path.join(volume, "datasets", name)
 
 
-def cifar_transform():
+NORMS = {
+    # true CIFAR-10 pixel std; used by Upgraded-Mod and by every atlas_v0_* dump
+    "cifar_true": ((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261)),
+    # what the chenyaofo hub resnet20/56 were trained with (their training logs, conf/cifar10.conf)
+    "chenyaofo": ((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+}
+
+
+def cifar_transform(norm="cifar_true"):
     import torchvision.transforms as T
-    return T.Compose([T.ToTensor(),
-                      T.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))])
+    mean, std = NORMS[norm]
+    return T.Compose([T.ToTensor(), T.Normalize(mean, std)])
+
+
+def file_sha256(path, n=16):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for blk in iter(lambda: f.read(1 << 20), b""):
+            h.update(blk)
+    return h.hexdigest()[:n]
 
 
 def load_split_arrays(volume, dataset, cfg, download=False):
@@ -193,11 +210,15 @@ def load_model(cfg, weights=None, device="cuda"):
     if weights in (None, "hub"):
         return load_backbone(arch, device)
     model = torch.hub.load("chenyaofo/pytorch-cifar-models", arch, pretrained=False)
-    sd = torch.load(weights, map_location="cpu")
-    sd = sd.get("state_dict", sd) if isinstance(sd, dict) else sd
+    ck = torch.load(weights, map_location="cpu")
+    ck_norm = ck.get("norm") if isinstance(ck, dict) else None      # train_second_seed.py records it
+    want = cfg["backbone"].get("norm", "cifar_true")
+    if ck_norm is not None and ck_norm != want:
+        raise SystemExit(f"[extract] {weights} was trained with norm={ck_norm}; manifest backbone.norm={want}")
+    sd = ck.get("state_dict", ck) if isinstance(ck, dict) else ck
     model.load_state_dict(sd)
     model.eval().to(device)
-    return model, f"file:{weights}"
+    return model, f"file:{weights} sha256:{file_sha256(weights)}"
 
 
 def extract(cfg, volume, weights=None, device=None, download=False, dump=None,
@@ -221,10 +242,12 @@ def extract(cfg, volume, weights=None, device=None, download=False, dump=None,
     dump = dump or os.path.join(cfg["outputs"]["root"], "dump")
     os.makedirs(dump, exist_ok=True)
     batch = int(cfg["extract"]["batch"])
+    norm = cfg["backbone"].get("norm", "cifar_true")
+    tf = cifar_transform(norm)
     splits, dims = [], {}
 
     def do(split, imgs, labels):
-        feats, am, mp = run_backbone(hooks, imgs, device, batch)
+        feats, am, mp = run_backbone(hooks, imgs, device, batch, transform=tf)
         write_split(dump, split, feats, labels, am, mp, imgs)
         for k, v in feats.items():
             dims[k] = int(v.shape[1])
@@ -286,6 +309,7 @@ def extract(cfg, volume, weights=None, device=None, download=False, dump=None,
         "layers": hooks.layer_names, "dims": dims, "splits": splits,
         "n_classes": int(cfg.get("n_classes", 10)),
         "dtype": cfg["extract"]["dtype"], "pooling": cfg["hooks"]["pooling"],
+        "norm": norm, "norm_values": [list(v) for v in NORMS[norm]],
         "pairing": "corrupt splits are paired with test[:n] by row index",
         "ref_indices": ref_idx.tolist(), "panel_indices": panel_idx.tolist(), "n_test": n_test,
         "accuracy": {"ref": ref_acc, "test": test_acc, **corr_accs},

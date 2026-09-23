@@ -22,7 +22,9 @@ def knn_density(ctx, cfg):
     k = int(cfg.get("k", 10))
     n_query = int(cfg.get("n_query", 3000))
     Xr = subsample(ctx.ref, n, ctx.rng)
-    r_ref = knn_radii(Xr, subsample(ctx.ref, n_query, ctx.rng), k=k, exclude_self=False)
+    # self-queries come from the fit set, so drop each point's zero distance to itself; otherwise the
+    # reference radius is the (k-1)-th neighbour and every held-out split looks too sparse
+    r_ref = knn_radii(Xr, subsample(Xr, n_query, ctx.rng), k=k, exclude_self=True)
     lr = np.log(r_ref + 1e-12)
     q = np.quantile(lr, [0.05, 0.25, 0.5, 0.75, 0.95, 0.99])
     thresh95 = np.exp(q[4])

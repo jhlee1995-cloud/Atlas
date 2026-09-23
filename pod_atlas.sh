@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# RunPod: datasets (idempotent) + Stage 0 (+ optional Stage 1) of the atlas.
+# RunPod: datasets (idempotent) + Stage 0 (+ optional Stage 1, docs/plans/STAGE1.md) of the atlas.
 #
 # The repo MUST be a git clone ON the network volume (e.g. /workspace/Atlas): results/ is written
 # relative to the repo, and only the volume survives a pod stop. Create the pod with
 #   --network-volume-id kxfir1tryb --data-center-ids EU-RO-1   (mounted at /workspace)
 #
 #   bash /workspace/Atlas/pod_atlas.sh /workspace              # data + Stage 0
-#   bash /workspace/Atlas/pod_atlas.sh /workspace --seed1      # + train seed 1, dump it, compare, critic
+#   bash /workspace/Atlas/pod_atlas.sh /workspace --stage1     # + norm check, train s1/s2, v1 atlases, compare, critic
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --data-only  # datasets only (no GPU needed)
 #
 # Run it detached so an SSH drop does not kill it; the full log goes to <volume>/logs/:
@@ -15,7 +15,7 @@
 # A stage whose results/<exp>/provenance.json (written last by atlas.run) exists is skipped
 # (ATLAS_REBUILD=1 forces it).
 set -euo pipefail
-VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--seed1|--data-only]}")"
+VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--stage1|--data-only]}")"
 MODE="${2:-}"
 cd "$(dirname "$(readlink -f "$0")")"                        # repo root, whatever the caller's cwd
 
@@ -32,7 +32,7 @@ case "$(pwd -P)/" in
      exit 1;;
 esac
 # ignore results/ while untracked on the pod: `git pull` overwrites ignored files. Once Windows commits a
-# result it is tracked, and if this script rewrites it (ATLAS_REBUILD=1, a --seed1 re-run of compare/critic)
+# result it is tracked, and if this script rewrites it (ATLAS_REBUILD=1, a --stage1 re-run of compare/critic)
 # a plain `git pull` aborts. Update the pod only after its results are committed on Windows:
 #   git -C /workspace/Atlas fetch && git -C /workspace/Atlas reset --hard origin/main   (dumps are untracked; kept)
 grep -qxF '/results/' .git/info/exclude 2>/dev/null || echo '/results/' >> .git/info/exclude
@@ -99,16 +99,56 @@ run_stage() {
 echo "=== Stage 0: atlas v0 (resnet20 hub weights) ==="
 run_stage atlas_v0_resnet20_cifar10
 
-if [[ "$MODE" == "--seed1" ]]; then
-  echo "=== Stage 1: second seed ==="
-  mkdir -p "$VOLUME/models"
-  if [[ ! -f "$VOLUME/models/resnet20_seed1.pt" ]]; then
-    python scripts/train_second_seed.py --volume "$VOLUME" --seed 1 --out "$VOLUME/models/resnet20_seed1.pt"
-  fi
-  run_stage atlas_v0_resnet20_seed1 --weights "$VOLUME/models/resnet20_seed1.pt"
-  python -m atlas.compare --a results/atlas_v0_resnet20_cifar10 --b results/atlas_v0_resnet20_seed1
-  python -m atlas.critic  --results results/atlas_v0_resnet20_cifar10 results/atlas_v0_resnet20_seed1 \
-         --tol experiments/tolerances_default.yaml --out results/critic_resnet20_s0_s1
+if [[ "$MODE" == "--stage1" ]]; then                          # docs/plans/STAGE1.md
+  M="$VOLUME/models"; mkdir -p "$M" results/norm_check_resnet20
+  echo "=== Stage 1: hub accuracy under both normalizations (evidence, not a gate) ==="
+  python scripts/check_norm.py --volume "$VOLUME" --out results/norm_check_resnet20/norm_check.json
+
+  echo "=== Stage 1: training preflight (1 epoch, container disk) ==="
+  python scripts/train_second_seed.py --volume "$VOLUME" --seed 0 --norm chenyaofo --epochs 1 --out /root/preflight.pt
+  rm -f /root/preflight.pt
+
+  echo "=== Stage 1: train s1, s2 concurrently (hub recipe; logs in $VOLUME/logs/train_resnet20_s*.log) ==="
+  CPUS=$(nproc)                                                # nproc can report host cores; prefer the cgroup quota
+  if [[ -r /sys/fs/cgroup/cpu.max ]]; then read -r q p < /sys/fs/cgroup/cpu.max; [[ "$q" != max ]] && CPUS=$(( q / p )); fi
+  W=$(( (CPUS - 2) / 2 )); (( W < 2 )) && W=2; (( W > 8 )) && W=8
+  echo "[stage1] $CPUS CPUs -> $W data workers per training process"
+  pids=()
+  for s in 1 2; do
+    ck="$M/resnet20_s${s}_chenyaofo.pt"
+    if [[ ! -f "$ck" ]]; then
+      python scripts/train_second_seed.py --volume "$VOLUME" --seed "$s" --norm chenyaofo --workers "$W" \
+             --out "$ck" --train-json "results/train_resnet20_s${s}/train.json" \
+             > "$VOLUME/logs/train_resnet20_s${s}.log" 2>&1 &
+      pids+=($!); sleep 30                                     # stagger torch.hub cache reads
+    else
+      echo "[skip] $ck exists"
+    fi
+  done
+  for p in "${pids[@]}"; do wait "$p"; done                   # set -e: a failed training stops here
+  grep -h "saved" "$VOLUME"/logs/train_resnet20_s[12].log || true
+  ck="$M/resnet20_rand99_chenyaofo.pt"                         # null: random init + BN recal (~1 min)
+  [[ -f "$ck" ]] || python scripts/train_second_seed.py --volume "$VOLUME" --seed 99 --norm chenyaofo --epochs 0 \
+                      --out "$ck" --train-json results/train_resnet20_rand99/train.json
+
+  echo "=== Stage 1: atlases ==="
+  for e in s0hub s1 s2 s1_ref1 rand; do run_stage "atlas_v1_resnet20_$e"; done
+
+  echo "=== Stage 1: compare (needs the dumps, so it runs here) ==="
+  R=results/atlas_v1_resnet20
+  python -m atlas.compare --a ${R}_s1    --b ${R}_s2
+  python -m atlas.compare --a ${R}_s0hub --b ${R}_s1
+  python -m atlas.compare --a ${R}_s0hub --b ${R}_s2
+  python -m atlas.compare --a ${R}_s1    --b ${R}_s1_ref1
+  python -m atlas.compare --a ${R}_s1    --b ${R}_rand
+  python -m atlas.compare --a results/atlas_v0_resnet20_cifar10 --b ${R}_s0hub --same-space
+
+  echo "=== Stage 1: critic ==="
+  T=experiments/tolerances_default.yaml
+  python -m atlas.critic --results ${R}_s1 ${R}_s2 --tol $T --out results/critic_v1_resnet20_s1_s2
+  python -m atlas.critic --results ${R}_s0hub ${R}_s1 ${R}_s2 --tol $T --out results/critic_v1_resnet20_s0_s1_s2
+  python -m atlas.critic --results ${R}_s1 ${R}_s1_ref1 --tol $T --out results/critic_v1_resnet20_s1_noise
+  python -m atlas.critic --results ${R}_s1 ${R}_rand --tol $T --out results/critic_v1_resnet20_s1_null
 fi
 
 echo "=== done. results (dumps stay on the volume, gitignored): $(pwd -P)/results ==="

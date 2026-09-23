@@ -83,10 +83,12 @@ AUC 1.00) and confirm it would have flagged both. If it would not, add the check
 ## The first three loops (already planned)
 
 1. **Stage 0** `atlas_v0_resnet20_cifar10` — predictions P1..P5 are in the manifest notes.
-2. **Stage 1** `atlas_v0_resnet20_seed1` — the kill switch. Evaluator reads DEFORMATION.md
-   (panel CKA, adjacency rho, decodability rho, relrep agreement). Critic verdict decides
-   whether the instrument is trusted.
-3. **Stage 2** `atlas_v0_resnet56_cifar10` — scale transfer via `compare.match_layers`.
+2. **Stage 1** `atlas_v1_resnet20_{s0hub,s1,s2}` — the kill switch (docs/plans/STAGE1.md).
+   Two locally trained seeds with the hub recipe and the hub's training normalization, plus a
+   reference-resample twin and a random-init null. The Evaluator applies the pre-registered
+   KILL / PASS / PARTIAL rule in STAGE1.md; the critic's count-based verdict word is advisory.
+   (`atlas_v0_resnet20_seed1` is superseded: it confounded seed with recipe and normalization.)
+3. **Stage 2** resnet56 (hub, `norm: chenyaofo`) — scale transfer via `compare.match_layers`.
 
 After these, the deformation ladder starts: `scripts/tta_deform.py` (rung 1, TENT, two
 manifests: standard dose and collapse positive control) writes `dump_step<k>/` checkpoints,

@@ -90,10 +90,13 @@ def set_bn_mode(model, train):
 # ---------------------------------------------------------------------------
 # streams and evaluation
 # ---------------------------------------------------------------------------
+NORM = {"name": "cifar_true"}      # set from the manifest's backbone.norm in main()
+
+
 def to_tensor(imgs, device):
     import torch
     from PIL import Image
-    tf = cifar_transform()
+    tf = cifar_transform(NORM["name"])
     return torch.stack([tf(Image.fromarray(im)) for im in imgs]).to(device)
 
 
@@ -154,6 +157,7 @@ def main():
     from extract.data_loaders import CIFAR10C
 
     cfg = load_manifest(args.manifest)
+    NORM["name"] = cfg["backbone"].get("norm", "cifar_true")
     tta = {**TTA_DEFAULTS, **(cfg.get("tta") or {})}
     root = cfg["outputs"]["root"]
     os.makedirs(root, exist_ok=True)
