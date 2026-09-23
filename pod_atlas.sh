@@ -110,8 +110,14 @@ if [[ "$MODE" == "--stage1" ]]; then                          # docs/plans/STAGE
 
   echo "=== Stage 1: train s1, s2 concurrently (hub recipe; logs in $VOLUME/logs/train_resnet20_s*.log) ==="
   CPUS=$(nproc)                                                # nproc can report host cores; prefer the cgroup quota
-  if [[ -r /sys/fs/cgroup/cpu.max ]]; then read -r q p < /sys/fs/cgroup/cpu.max; [[ "$q" != max ]] && CPUS=$(( q / p )); fi
-  W=$(( (CPUS - 2) / 2 )); (( W < 2 )) && W=2; (( W > 8 )) && W=8
+  if [[ -r /sys/fs/cgroup/cpu.max ]]; then                     # cgroup v2: "<quota> <period>" or "max <period>"
+    read -r q p < /sys/fs/cgroup/cpu.max
+    if [[ "$q" != max ]]; then CPUS=$(( q / p )); fi
+  elif [[ -r /sys/fs/cgroup/cpu/cpu.cfs_quota_us ]]; then      # cgroup v1 (RunPod 4090 hosts): -1 = unlimited
+    q=$(cat /sys/fs/cgroup/cpu/cpu.cfs_quota_us); p=$(cat /sys/fs/cgroup/cpu/cpu.cfs_period_us)
+    if (( q > 0 )); then CPUS=$(( q / p )); fi
+  fi
+  W=$(( (CPUS - 2) / 2 )); if (( W < 2 )); then W=2; fi; if (( W > 8 )); then W=8; fi
   echo "[stage1] $CPUS CPUs -> $W data workers per training process"
   pids=()
   for s in 1 2; do
