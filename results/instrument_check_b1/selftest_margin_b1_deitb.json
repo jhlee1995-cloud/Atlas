@@ -1,0 +1,98 @@
+{
+ "status": "PASS",
+ "exp_id": "margin_b1_deitb",
+ "arch": "timm_deit_base_patch16_224",
+ "weights": "timm timm_deit_base_patch16_224 fb_in1k file:/workspace/.cache/huggingface/hub/models--timm--deit_base_patch16_224.fb_in1k/snapshots/b78cc5532a69df6bcad9c3a8d76653fd20b31ac6/model.safetensors sha256:cd2da27b74ed7f68b599f16c77af3e1e80f01c75f9ad96029d22ce747a247e8e",
+ "weights_url": "https://huggingface.co/timm/deit_base_patch16_224.fb_in1k/resolve/b78cc5532a69df6bcad9c3a8d76653fd20b31ac6/model.safetensors",
+ "hf_repo": "timm/deit_base_patch16_224.fb_in1k",
+ "hf_revision": "b78cc5532a69df6bcad9c3a8d76653fd20b31ac6",
+ "weights_acc1_published": 81.98,
+ "timm_data_config": {
+  "input_size": [
+   3,
+   224,
+   224
+  ],
+  "interpolation": "bicubic",
+  "mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "crop_pct": 0.9,
+  "crop_mode": "center"
+ },
+ "weights_sha256": "cd2da27b74ed7f68b599f16c77af3e1e80f01c75f9ad96029d22ce747a247e8e",
+ "input": "torch.randn(4, 3, 224, 224), generator seed 0; no ImageNet image",
+ "taps": [
+  "block.0",
+  "block.1",
+  "block.2",
+  "block.3",
+  "block.4",
+  "block.5",
+  "block.6",
+  "block.7",
+  "block.8",
+  "block.9",
+  "block.10",
+  "block.11",
+  "penult_mean",
+  "penult"
+ ],
+ "dims": {
+  "block.0": 768,
+  "block.1": 768,
+  "block.2": 768,
+  "block.3": 768,
+  "block.4": 768,
+  "block.5": 768,
+  "block.6": 768,
+  "block.7": 768,
+  "block.8": 768,
+  "block.9": 768,
+  "block.10": 768,
+  "block.11": 768,
+  "penult_mean": 768,
+  "penult": 768
+ },
+ "checks": {
+  "taps_fired_in_order": true,
+  "penult_last": true,
+  "finite": true,
+  "head_check": true,
+  "logits_equal_model": true,
+  "tap_names": true,
+  "penult_is_final_norm_cls": true,
+  "n_taps_14": true
+ },
+ "values": {
+  "head_check_max_abs": 0.0,
+  "logits_vs_model_max_abs": 0.0,
+  "penult_vs_final_norm_cls_max_abs": 0.0
+ },
+ "device": "cuda",
+ "tf32": {
+  "matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "float32_matmul_precision": "highest"
+ },
+ "versions": {
+  "python": "3.12.3",
+  "numpy": "2.1.2",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "timm": "1.0.29",
+  "pyarrow": "25.0.1",
+  "PIL": "11.0.0",
+  "huggingface_hub": "1.32.0",
+  "safetensors": "0.8.0"
+ },
+ "git_commit": "d257d91",
+ "created": "2026-09-23 14:31:13"
+}

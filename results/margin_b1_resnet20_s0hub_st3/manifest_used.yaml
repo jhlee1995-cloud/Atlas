@@ -1,0 +1,118 @@
+exp_id: margin_b1_resnet20_s0hub_st3
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: hub
+  seed_tag: s0
+  norm: chenyaofo
+data:
+  reference:
+    dataset: cifar10_train
+    n: 10000
+    seed: 0
+  clean_test:
+    dataset: cifar10
+    n: 5000
+  panel:
+    dataset: cifar10_train
+    n: 64
+    seed: 123
+  cifar10c:
+    corruptions: all
+    severities:
+    - 1
+    - 3
+    - 5
+    n_per_set: 2000
+  ood:
+  - dataset: cifar100
+    n: 2000
+  - dataset: svhn
+    n: 2000
+hooks:
+  layers: blocks
+  block_stride: 1
+  pooling: gap
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+invariants:
+- margin_typeb
+cross_layer:
+- -layer_cka
+- -commit_layer
+invariant_cfg:
+  margin_typeb:
+    cut: 0.7
+    cuts:
+    - 0.0
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+    - 0.95
+    - 0.99
+    min_n: 10
+    b1: true
+    strat_bins: 10
+    strat_min: 5
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: all
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions:
+  - gaussian_noise
+  - shot_noise
+  - defocus_blur
+  - motion_blur
+  - snow
+  - fog
+  - brightness
+  - contrast
+  - pixelate
+  - jpeg_compression
+  confirmation_corruptions:
+  - impulse_noise
+  - glass_blur
+  - zoom_blur
+  - frost
+  - elastic_transform
+  discovery_seeds:
+  - 0
+  confirmation_seeds:
+  - 1
+  - 2
+outputs:
+  root: results/margin_b1_resnet20_s0hub_st3
+  plots: false
+notes: 'B1 E9 (CIFAR context, rule 6; INFO: nothing here enters a B1 verdict).
+
+  Run: the same-session resnet20 hub (discovery s0).
+
+  Records the paired DeLong test margin - maxprob (pm.margin_minus_maxprob_confmatched,
+  its _se and _p; also _typeb
+
+  and _wrong, and every sweep row) on the dump A4b built in this session. Every A3
+  key must equal
+
+  results/margin_v1_resnet20_s0hub_st3/atlas.json exactly (same dump; the b1 keys
+  only add keys);
+
+  block_b1 checks it into <check dir>/e9_identity.json. CIFAR dumps store no logits
+  and no ReaL labels, so no
+
+  logit-gap or realwrong keys.
+
+  For resnet56_s1 / s2 this is read beside A4b M56-c (margin_v1_resnet56_s1.yaml notes).
+  No direction is predicted
+
+  (hubs, unpaired: -0.0013 resnet20, +0.0196 resnet56).
+
+  '

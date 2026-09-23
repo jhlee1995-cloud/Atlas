@@ -1,0 +1,77 @@
+{
+ "status": "PASS",
+ "exp_id": "margin_b1_vitb16",
+ "arch": "tv_vit_b_16",
+ "weights": "torchvision tv_vit_b_16 IMAGENET1K_V1 file:/workspace/.cache/torch/hub/checkpoints/vit_b_16-c867db91.pth sha256:c867db91d3e12c6cbadabb610d73c24a546bf82d8c03a9fea34f43a712ddb0e9",
+ "weights_url": "https://download.pytorch.org/models/vit_b_16-c867db91.pth",
+ "weights_enum": "ViT_B_16_Weights.IMAGENET1K_V1",
+ "weights_acc1_published": 81.072,
+ "weights_sha256": "c867db91d3e12c6cbadabb610d73c24a546bf82d8c03a9fea34f43a712ddb0e9",
+ "input": "torch.randn(4, 3, 224, 224), generator seed 0; no ImageNet image",
+ "taps": [
+  "block.0",
+  "block.1",
+  "block.2",
+  "block.3",
+  "block.4",
+  "block.5",
+  "block.6",
+  "block.7",
+  "block.8",
+  "block.9",
+  "block.10",
+  "block.11",
+  "penult_mean",
+  "penult"
+ ],
+ "dims": {
+  "block.0": 768,
+  "block.1": 768,
+  "block.2": 768,
+  "block.3": 768,
+  "block.4": 768,
+  "block.5": 768,
+  "block.6": 768,
+  "block.7": 768,
+  "block.8": 768,
+  "block.9": 768,
+  "block.10": 768,
+  "block.11": 768,
+  "penult_mean": 768,
+  "penult": 768
+ },
+ "checks": {
+  "taps_fired_in_order": true,
+  "penult_last": true,
+  "finite": true,
+  "head_check": true,
+  "logits_equal_model": true,
+  "tap_names": true,
+  "penult_is_final_norm_cls": true,
+  "n_taps_14": true
+ },
+ "values": {
+  "head_check_max_abs": 0.0,
+  "logits_vs_model_max_abs": 0.0,
+  "penult_vs_final_norm_cls_max_abs": 0.0
+ },
+ "device": "cuda",
+ "tf32": {
+  "matmul_allow_tf32": false,
+  "cudnn_allow_tf32": true,
+  "float32_matmul_precision": "highest"
+ },
+ "versions": {
+  "python": "3.12.3",
+  "numpy": "2.1.2",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "timm": "1.0.29",
+  "pyarrow": "25.0.1",
+  "PIL": "11.0.0",
+  "huggingface_hub": "1.32.0",
+  "safetensors": "0.8.0"
+ },
+ "git_commit": "68244f7",
+ "created": "2026-09-23 15:34:19"
+}

@@ -1,0 +1,93 @@
+{
+ "gate": {
+  "G0": false,
+  "G1": true,
+  "G2": true,
+  "G3": true
+ },
+ "open": false,
+ "plumbing_failures": [],
+ "check_dir": "results/instrument_check_b1_r2",
+ "G0_detail": {
+  "n_legacy": 10048,
+  "acc": 0.7710987261146497,
+  "valley_sep_legacy": 1.2681329391888185,
+  "n_cw": 122,
+  "n_classes_centered": 999,
+  "legacy_decode_failures": 0,
+  "selftests": {
+   "margin_b1_vitb16": "PASS",
+   "margin_b1_deitb": "PASS"
+  },
+  "data_status": "PASS",
+  "real": {
+   "ok": true,
+   "sha256": "d83e9bff374c631aae8439eb064c7019acc56e1b3bc3f56b8380c2a710b0220b",
+   "n_nonempty": 46837,
+   "label_in_real_frac": 0.9002284518649786
+  }
+ },
+ "G3_detail": {
+  "0.7": {
+   "n_typeb": 38,
+   "evaluable": false
+  },
+  "0.5": {
+   "n_typeb": 356,
+   "d": 0.028890509586302793,
+   "p": 0.048006675799008816,
+   "pass": true
+  }
+ },
+ "legacy_imagenet": {
+  "cut": 0.5,
+  "min_class_n": 3,
+  "draws": 200,
+  "seed": 0,
+  "n": 10048,
+  "acc": 0.7710987261146497,
+  "n_correct": 7748,
+  "n_wrong": 2300,
+  "n_cw": 122,
+  "n_classes_centered": 999,
+  "valley_sep_legacy": 1.2681329391888185,
+  "raw_auc_margin_full": 0.21000660138629113,
+  "dir_auc_margin_full": 0.7899933986137089,
+  "dir_auc_margin_sub_mean": 0.7907333378124161,
+  "dir_auc_margin_sub_sd": 0.020270571421410515,
+  "dir_auc_margin_sub_q025": 0.7514478634775598,
+  "dir_auc_margin_sub_q975": 0.82533593120129,
+  "raw_auc_cluster_full": 0.6441736418494037,
+  "dir_auc_cluster_full": 0.6441736418494037,
+  "dir_auc_cluster_sub_mean": 0.6443022708949208,
+  "dir_auc_cluster_sub_sd": 0.022963063583251463,
+  "dir_auc_cluster_sub_q025": 0.5943076457941414,
+  "dir_auc_cluster_sub_q975": 0.6850141091104541,
+  "raw_auc_energy_full": 0.6331840263378387,
+  "dir_auc_energy_full": 0.6331840263378387,
+  "dir_auc_energy_sub_mean": 0.6314357699543134,
+  "dir_auc_energy_sub_sd": 0.026157034975130347,
+  "dir_auc_energy_sub_q025": 0.5776437785541522,
+  "dir_auc_energy_sub_q975": 0.6806016527815104
+ },
+ "band_halfwidth": {
+  "G1": 0.05729807426723913,
+  "G2": 0.06424470404478878
+ },
+ "b1_acc_info": {
+  "mirror_minus_published": {
+   "resnet50": -0.033339999999999925
+  },
+  "official_minus_legacy_rows_0_L": 0.00835987261146498,
+  "legacy_cache": {
+   "path": "/workspace/cache/imagenet/penult_10000.npz",
+   "rows": 10048,
+   "dump_rows": 10048,
+   "max_abs_dF": 0.0
+  }
+ },
+ "sources": {
+  "margin_b1_resnet50_legacy10k": "4e3972a78909d0643a2558597401775772ef6fd0eda3e263b38a77533e265c39",
+  "margin_b1_resnet50": "61951ccf8ca806ad7fea083c5bc748e68266bddd1594e8cf23c9b95e59e8d0d6"
+ }
+}

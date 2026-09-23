@@ -1,0 +1,22 @@
+{
+ "resnet20_s0hub_st3": {
+  "n_leaves": 2156,
+  "n_exact": 2156,
+  "mismatch_first20": []
+ },
+ "resnet56_s0hub_st3": {
+  "n_leaves": 2156,
+  "n_exact": 2156,
+  "mismatch_first20": []
+ },
+ "resnet56_s1": {
+  "n_leaves": 2156,
+  "n_exact": 2156,
+  "mismatch_first20": []
+ },
+ "resnet56_s2": {
+  "n_leaves": 2156,
+  "n_exact": 2156,
+  "mismatch_first20": []
+ }
+}
