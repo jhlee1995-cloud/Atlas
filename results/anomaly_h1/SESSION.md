@@ -1,6 +1,6 @@
 # SESSION: ANOMALY_H1 — mechanism predictions (AH) and missing-axis probes (AX), decided before B1
 
-This is the Evaluator pass on the pre-registered ANOMALY_H1 items. AH-4 depends on B1, so it is **DEFERRED** to an append after B1's own verdicts exist. Every other item is decided here.
+This is the Evaluator pass on the pre-registered ANOMALY_H1 items. AH-4 depends on B1; it was appended after B1's own verdict (NOT_EVALUABLE: B1 is INVALID-PLUMBING; the B1b reading is INFO only, see "AH-4"). Every other item was decided before B1 and reproduced exactly by the official run.
 
 - **Pre-registration.**
   - `docs/plans/ANOMALY_H1.md` holds the predictions, labels and promotion rules. The decision rule is frozen as `scripts/anomaly_eval.js`. The CPU probe is `scripts/anomaly_probe.py`, and its known-answer tests are in `tests/test_anomaly_probe.py`.
@@ -27,7 +27,7 @@ This is the Evaluator pass on the pre-registered ANOMALY_H1 items. AH-4 depends 
 | AH-1 | **SUPPORTED** | no exceptions |
 | AH-2 | **SUPPORTED** | no exceptions; reading (d): the energy HOLD rule fails again, as predicted |
 | AH-3 | **REFUTED** | (d) the penult SE ratio in s1 is 1.109, against ≥ 1.25 |
-| AH-4 | **DEFERRED** | not evaluated; it waits for B1's `verdicts.json` (see "AH-4") |
+| AH-4 | **NOT_EVALUABLE** | B1 is INVALID-PLUMBING (gate G0); INFO read with B1b in "AH-4" |
 | AH-5 | **REFUTED** | (c) in s1 and s2 (penult enrichment 0.789 / 0.777, against ≥ 0.80); (d) in s1 (penult excess 0.102, against ≤ 0.10); (a) in secondaries e50 and e60 (stem PC1 0.47-0.57, against ≤ 0.35) |
 | AH-6 | **REFUTED** | (b) in s1 (1.156, against ≥ 1.25); (d.c4) in s1 (0.1125, against ≥ 0.15); (d.order) (0.1125 is not > 0.1355, s13m) |
 | AH-7 | **REFUTED** | (b) Spearman(E, c) = 0.667, against ≥ 0.8; (c) e70 CV_all = 0.0524, against ≥ 0.056. (a) reads PREDICTED |
@@ -190,9 +190,9 @@ Verdict: **REFUTED**. The failed clause is (d), the "saturation signature" sub-c
 
 `ev` `.M56.c_confidence.tie_call` is [NO-LEAD, TIES-EXCLUDED]. No seed is TIE-ARTIFACT-POSSIBLE, so no float32-saturation reading attaches to (d).
 
-### AH-4. The collapse regime decides margin vs distance in every architecture — **DEFERRED**
+### AH-4. The collapse regime decides margin vs distance in every architecture — **NOT_EVALUABLE**
 
-Not evaluated. It is recorded as DEFERRED to the evaluation after B1; see the "AH-4" section.
+B1's verdict is INVALID-PLUMBING, so AH-4 is NOT_EVALUABLE; the B1b values are INFO (see the "AH-4" section).
 
 ### AH-5. Brightness takes a learned, class-neutral path and is absorbed — **REFUTED**
 
@@ -450,11 +450,27 @@ The text wins. **No gap changes any outcome.**
 
 ## AH-4
 
-**DEFERRED to after B1.** AH-4 reads only B1's `b1_verdicts.js` output (`results/margin_b1_vitb16/verdicts.json`) and the runs named in its `info.runs_used`, after B1's own decision.
-- B1 is being relaunched (`RELAUNCH_r2.md`), so AH-4 is not evaluated here.
-- The preliminary evaluator line "AH-4: NOT_EVALUABLE (B1 verdicts unreadable)" is a consequence of the scratch `--b1` path. It is **not** AH-4's label.
-- Its label (SUPPORTED / REFUTED / NOT_EVALUABLE, with the per-ViT readings (d)) will be appended to this file from the section 9 run once B1 is decided.
-- AH-4's two CIFAR points (the E9 rebuilds of s1 and s2) are guarded by the A4b guard and i2. Both hold now.
+**NOT_EVALUABLE (official).** The section 9 command was run once after B1 was decided:
+`node scripts/anomaly_eval.js --p d257d91 --p-run d257d91 --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --b1 results/margin_b1_vitb16/verdicts.json --cache results/anomaly_h1/idgauss_cache.json --json results/anomaly_h1/eval.json`
+- AH-4 reads B1's own verdict, which is INVALID-PLUMBING (gate G0: the legacy valley-separation band;
+  `results/margin_b1_vitb16/verdicts.json`). By the frozen rule an INVALID-PLUMBING B1 makes AH-4 NOT_EVALUABLE
+  (`results/anomaly_h1/eval.json`).
+- Every other item reproduces this file exactly (AH-1..AH-3, AH-5..AH-8d, AX-1..AX-4: labels identical to the
+  preliminary run; the ID_gauss cache was seeded from the scratch cache that the independent port matched bit for bit).
+
+**INFO only: AH-4 read with the B1b verdict** (docs/plans/B1B_AMENDMENT.md; outcome A, c\* 0.5). This is a deviation
+from the pre-registered input (B1's verdict), so it carries no label; its provenance check fails by construction
+(the B1b runs are at 68244f7 / 98ef723, not d257d91). Values (`scratchpad` run of the same evaluator with
+`--b1 results/margin_b1_vitb16/verdicts_b1b.json`):
+- (a) premise, ImageNet sep_ratio_ref <= 2.0: resnet50 0.747, vitb16 0.930, deitb 0.871 (PASS; not evidence).
+- (b) lead (margin - dist) at c\* 0.5 >= +0.03: vitb16 +0.119, deitb +0.119 (PASS); resnet50 +0.029 (FAIL by 0.001).
+  Swap replicates: resnet50 +0.045, vitb16 +0.114, deitb +0.118.
+- (c) Spearman(sep, lead) over the five fresh primaries (resnet50, vitb16, deitb, E9 s1, E9 s2) = -0.70 (<= -0.6).
+  Context: resnet20 hub sep 3.00 / lead +0.071, resnet56 hub sep 5.33 / lead -0.001.
+- (d) both ViTs: V1 PASS at sep < 2.0 (the "shallow-valley regime": margin leads distance).
+- Reading: the direction AH-4 predicted (the less collapsed the penult, the larger margin's lead over distance)
+  holds across CIFAR ResNets and ImageNet CNN/ViT in this INFO read, with the ResNet50 lead 0.001 short of the bar.
+  A label needs a new pre-registration that names B1b's verdict as its input.
 
 ## What ANOMALY_H1 does not license
 
@@ -482,7 +498,7 @@ The text wins. **No gap changes any outcome.**
 
 ## Next actions
 
-1. **After B1 is decided** (relaunch r2 and `scripts/b1_verdicts.js`), run the section 9 command once:
+1. **Done (after B1 was decided):** the section 9 command was run once:
    `node scripts/anomaly_eval.js --p d257d91 --p-run d257d91 --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --b1 results/margin_b1_vitb16/verdicts.json --cache results/anomaly_h1/idgauss_cache.json --json results/anomaly_h1/eval.json`
    - Check that AH-1..AH-8d and AX-1..AX-4 reproduce this file exactly.
    - Append AH-4 (clauses (a)-(c), the (d) readings per ViT, and the gate-G / c\* branch) to this file.
