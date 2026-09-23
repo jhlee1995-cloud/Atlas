@@ -21,6 +21,8 @@
 #                                                              #   + DeiT-B margin test, CIFAR E9 (docs/plans/B1_VIT_MARGIN.md)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --anomaly    # + ANOMALY_H1 CPU probes AX-1..AX-4 on CIFAR dumps (numpy only;
 #                                                              #   last, after B1; docs/plans/ANOMALY_H1.md)
+#   bash /workspace/Atlas/pod_atlas.sh /workspace --b1b        # B1b: ViT runs after the gate-anchor correction
+#                                                              #   (docs/plans/B1B_AMENDMENT.md; reuses B1's ResNet50 runs)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --data-only  # datasets only (no GPU needed)
 # Flags combine (e.g. --a4b --b1); blocks always run in this order: stage1, stage1b, stage2, a3, a4b, b1, anomaly; --a4b or
 # --b1 adds the margin preflight (after the smoke tests). --stage1b, --stage2 and --a3 ran on 2026-09-23 and are
@@ -35,10 +37,10 @@
 # A stage whose results/<exp>/provenance.json (written last by atlas.run) exists is skipped
 # (ATLAS_REBUILD=1 forces it).
 set -euo pipefail
-VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 | --anomaly ...]}")"
+VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 | --anomaly | --b1b ...]}")"
 shift
 for m in "$@"; do                                              # a typo must not silently skip a block
-  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1|--anomaly) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
+  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1|--anomaly|--b1b) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
 done
 MODES=" $* "
 has_mode() { [[ "$MODES" == *" $1 "* ]]; }
@@ -774,6 +776,43 @@ EOF
   echo "      node scripts/b1_verdicts.js --p <P> --p-run <P_run> --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --json results/margin_b1_vitb16/verdicts.json"
 }
 
+# --- B1b: the ViT margin test after the B1 gate-anchor correction (docs/plans/B1B_AMENDMENT.md) -------------------------
+# Reuses B1's committed ResNet50 atlases and check dir (read only), recomputes gate G with the corrected G0 anchor into
+# results/b1b_gate (scripts/b1b_gate.py), and only if it is OPEN builds the four ViT runs (their first ImageNet touch).
+block_b1b() {
+  local T=experiments/tolerances_default.yaml I0="${ATLAS_B1B_SRC_CHECK_DIR:-results/instrument_check_b1_r2}" \
+        I="${ATLAS_B1B_CHECK_DIR:-results/instrument_check_b1b}" e v d c
+  [[ ! -e "$I" ]] || { echo "ERROR: $I exists (committed B1b record); relaunch with ATLAS_B1B_CHECK_DIR=${I}_r2" >&2; return 1; }
+  [[ "${ATLAS_REBUILD:-0}" != 1 ]] || { echo "ERROR: ATLAS_REBUILD=1 would rewrite committed results" >&2; return 1; }
+  for e in margin_b1_resnet50_legacy10k margin_b1_resnet50 margin_b1_resnet50_swap; do
+    [[ -f "results/$e/atlas.json" ]] || { echo "ERROR: results/$e/atlas.json missing (B1b reuses B1's ResNet50 runs)" >&2; return 1; }
+  done
+  [[ -f "$I0/data.json" && -f "$I0/selftest_margin_b1_vitb16.json" && -f "$I0/selftest_margin_b1_deitb.json" ]] \
+    || { echo "ERROR: $I0 lacks data.json or the ViT self-tests" >&2; return 1; }
+  if command -v pgrep >/dev/null && pgrep -f scripts/train_second_seed.py >/dev/null; then
+    echo "ERROR: a training is still running; B1b never shares the GPU" >&2; return 1
+  fi
+  mkdir -p "$I"
+  export HF_HUB_DOWNLOAD_TIMEOUT="${HF_HUB_DOWNLOAD_TIMEOUT:-60}"
+  python -c "import pyarrow, huggingface_hub, timm, safetensors; print('[b1b]', pyarrow.__version__, huggingface_hub.__version__, timm.__version__, safetensors.__version__)"
+  python scripts/b1_data.py verify "$VOLUME" --out "$I/data.json"
+  export ATLAS_EXTRACT_WORKERS; ATLAS_EXTRACT_WORKERS=$(b1_workers 256)
+  echo "=== B1b: gate G with the corrected G0 anchor (scripts/b1b_gate.py; B1's results/b1_gate stays CLOSED) ==="
+  if python scripts/b1b_gate.py --out results/b1b_gate --check-dir "$I0" --volume "$VOLUME"; then
+    for e in margin_b1_vitb16 margin_b1_vitb16_swap margin_b1_deitb margin_b1_deitb_swap; do soft b1_stage "$e"; done
+    v=$(b1_dir margin_b1_vitb16); d=$(b1_dir margin_b1_deitb); c=results/critic_b1_vit_pair
+    if [[ "$v$d" == *_r2* ]]; then c="${c}_r2"; fi
+    soft critic_once "$c" --results "$v" "$d" --tol $T
+    for e in vitb16 deitb; do
+      soft critic_once "results/critic_b1_${e}_swap" --results "results/margin_b1_$e" "results/margin_b1_${e}_swap" --tol $T
+    done
+  else
+    echo "[B1b] gate G CLOSED or not evaluable (results/b1b_gate/gate.json): no ViT run, no A/B label"
+  fi
+  echo "[b1b] labels are computed on Windows after the pull (commit the results first):"
+  echo "      node scripts/b1b_verdicts.js --p f1c3c43 --p-run d257d91,68244f7 --p-b <P_B> --p-b-run <P_B_run> --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --json results/margin_b1_vitb16/verdicts_b1b.json"
+}
+
 # --- ANOMALY_H1: CPU Stage-B probes AX-1..AX-4 (docs/plans/ANOMALY_H1.md; scripts/anomaly_probe.py) ---------------------
 # anomaly_probe_one <run> [<fallback run>]: one CIFAR dump -> results/anomaly_probe_<tag>/probe.json (a NEW dir; the probe
 # refuses to write into an existing non-empty one). The fallback is the same weights measured in an earlier session (used
@@ -846,6 +885,7 @@ if has_mode --stage2;  then run_block block_stage2;  fi       # then the resnet5
 if has_mode --a3;      then run_block block_a3;      fi       # reads the s3, s4 and resnet56 dumps
 if has_mode --a4b;     then run_block block_a4b;     fi       # before B1: its _st3 dumps are B1's same-session CIFAR anchor
 if has_mode --b1;      then run_block block_b1;      fi       # last GPU block: never shares the GPU with a training
+if has_mode --b1b;     then run_block block_b1b;     fi       # B1b: ViTs after the gate-anchor correction
 if has_mode --anomaly; then run_block block_anomaly; fi       # CPU only, after B1; reads A4b's dumps, never a B1 dump
 
 echo "=== done. results (dumps stay on the volume, gitignored): $(pwd -P)/results ==="
