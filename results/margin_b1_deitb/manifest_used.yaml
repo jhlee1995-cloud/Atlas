@@ -1,0 +1,110 @@
+exp_id: margin_b1_deitb
+stage: atlas
+backbone:
+  arch: timm_deit_base_patch16_224
+  weights: fb_in1k
+  seed_tag: fb
+  norm: imagenet
+  hf_revision: b78cc5532a69df6bcad9c3a8d76653fd20b31ac6
+  weights_sha256: cd2da27b74ed7f68b599f16c77af3e1e80f01c75f9ad96029d22ce747a247e8e
+  transform: official
+data:
+  reference:
+    dataset: imagenet_val
+    n: 25000
+    seed: 0
+    part: A
+    split_seed: 0
+    per_class: 25
+  clean_test:
+    dataset: imagenet_val
+    n: 25000
+    part: B
+    split_seed: 0
+    per_class: 25
+  panel: null
+  cifar10c: null
+  ood: []
+  imagenet_val:
+    repo: benjamin-paine/imagenet-1k-256x256
+    revision: 1bd0400450249a7fe90c0aece37d0d03e7ea956a
+    files:
+    - path: data/validation-00000-of-00002.parquet
+      sha256: 399ae54c309fa71f99b6f3c121ad4507ae3103f0205923e6695b6a6bac52c6eb
+    - path: data/validation-00001-of-00002.parquet
+      sha256: 3c665d47c5057e237be8c15348570466478e4a73b8d4ff913ed319cd8e3f16f7
+hooks:
+  layers: vit_blocks
+  block_stride: 1
+  pooling: cls
+  extra:
+  - penult_mean
+extract:
+  batch: 256
+  dtype: float32
+  num_workers: 8
+  store_logits: true
+invariants:
+- margin_typeb
+cross_layer:
+- -layer_cka
+- -commit_layer
+invariant_cfg:
+  margin_typeb:
+    cut: 0.7
+    cuts:
+    - 0.0
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+    - 0.95
+    - 0.99
+    min_n: 10
+    b1: true
+    strat_bins: 10
+    strat_min: 5
+    legacy_imagenet:
+      cut: 0.5
+      min_class_n: 3
+      draws: 200
+      seed: 0
+      layers:
+      - penult
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: all
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions: null
+  confirmation_corruptions: null
+  discovery_seeds:
+  - resnet50_tv2
+  - resnet20_hub
+  - resnet56_hub
+  confirmation_seeds:
+  - vit_b_16_tv1
+  - deit_base_patch16_224_fb
+  reserve_confirmation:
+  - vit_base_patch16_224.augreg_in1k
+outputs:
+  root: results/margin_b1_deitb
+  plots: false
+notes: 'Pre-registration: experiments/queue/margin_b1_vitb16.yaml notes (same commit
+  P); docs/plans/B1_VIT_MARGIN.md.
+
+  Role: V4 replication (V1, V2, V3 states equal to vitb16''s), second ViT for outcomes
+  A and B, critic_b1_vit_pair
+
+  (promotion input, with verdicts.json info.vit_pair_at_cstar). Confirmation: first
+  and only margin touch, after
+
+  gate G.
+
+  '
+n_classes: 1000

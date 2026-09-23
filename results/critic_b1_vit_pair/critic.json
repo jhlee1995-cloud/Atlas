@@ -1,0 +1,453 @@
+{
+ "runs": [
+  "results/margin_b1_vitb16",
+  "results/margin_b1_deitb"
+ ],
+ "tolerances": {
+  "scalar_rel_spread": 0.15,
+  "scalar_abs_floor": 0.05,
+  "adjacency_spearman": 0.7,
+  "merge_kendall": 0.6,
+  "decod_profile_spearman": 0.7,
+  "decod_mean_abs_delta": 0.1,
+  "commit_layer_slack": 1,
+  "min_runs": 2,
+  "id_profile_spearman": 0.9,
+  "cka_test_min": 0.8,
+  "scalar_abs_tol": {
+   "margin_typeb.auc_margin_typeb": 0.05,
+   "margin_typeb.auc_dist_typeb": 0.05,
+   "margin_typeb.auc_maxprob_typeb": 0.05,
+   "margin_typeb.auc_margin_wrong": 0.05
+  }
+ },
+ "checks": {
+  "synthetic_refusal": [
+   {
+    "name": "sources",
+    "status": "PASS",
+    "detail": "all runs real"
+   }
+  ],
+  "norm_consistency": [
+   {
+    "name": "input_norm",
+    "status": "PASS",
+    "detail": "{'margin_b1_vitb16': 'imagenet', 'margin_b1_deitb': 'imagenet'}"
+   }
+  ],
+  "alias_layers": [
+   {
+    "name": "aliases",
+    "status": "PASS",
+    "detail": "none"
+   }
+  ],
+  "holdout_hygiene": [
+   {
+    "name": "holdout:margin_b1_vitb16",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:margin_b1_deitb",
+    "status": "PASS",
+    "detail": "declared"
+   }
+  ],
+  "probe_hygiene": [
+   {
+    "name": "probes:margin_b1_vitb16",
+    "status": "WARN",
+    "detail": "no probes"
+   },
+   {
+    "name": "probes:margin_b1_deitb",
+    "status": "WARN",
+    "detail": "no probes"
+   }
+  ],
+  "scalar_stability": [
+   {
+    "name": "block.0/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.494, 0.5] abs_spread=0.006 abs_tol=0.05"
+   },
+   {
+    "name": "block.0/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.517, 0.501] abs_spread=0.016 abs_tol=0.05"
+   },
+   {
+    "name": "block.0/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.0/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.501, 0.509] abs_spread=0.009 abs_tol=0.05"
+   },
+   {
+    "name": "block.0/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.047, 0.989] rel_spread=0.057"
+   },
+   {
+    "name": "block.1/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.501, 0.5] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "block.1/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.511, 0.507] abs_spread=0.004 abs_tol=0.05"
+   },
+   {
+    "name": "block.1/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.1/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.514, 0.509] abs_spread=0.005 abs_tol=0.05"
+   },
+   {
+    "name": "block.1/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.95, 0.969] rel_spread=0.019"
+   },
+   {
+    "name": "block.2/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.491, 0.512] abs_spread=0.020 abs_tol=0.05"
+   },
+   {
+    "name": "block.2/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.513, 0.511] abs_spread=0.002 abs_tol=0.05"
+   },
+   {
+    "name": "block.2/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.2/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.506, 0.52] abs_spread=0.014 abs_tol=0.05"
+   },
+   {
+    "name": "block.2/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.046, 0.948] rel_spread=0.098"
+   },
+   {
+    "name": "block.3/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.498, 0.499] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "block.3/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.519, 0.51] abs_spread=0.009 abs_tol=0.05"
+   },
+   {
+    "name": "block.3/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.3/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.515, 0.519] abs_spread=0.004 abs_tol=0.05"
+   },
+   {
+    "name": "block.3/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.008, 0.992] rel_spread=0.017"
+   },
+   {
+    "name": "block.4/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.5, 0.499] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "block.4/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.518, 0.512] abs_spread=0.006 abs_tol=0.05"
+   },
+   {
+    "name": "block.4/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.4/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.523, 0.515] abs_spread=0.009 abs_tol=0.05"
+   },
+   {
+    "name": "block.4/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.012, 1.019] rel_spread=0.007"
+   },
+   {
+    "name": "block.5/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.499, 0.511] abs_spread=0.011 abs_tol=0.05"
+   },
+   {
+    "name": "block.5/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.517, 0.52] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "block.5/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.5/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.527, 0.521] abs_spread=0.005 abs_tol=0.05"
+   },
+   {
+    "name": "block.5/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.028, 0.973] rel_spread=0.055"
+   },
+   {
+    "name": "block.6/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.526, 0.531] abs_spread=0.005 abs_tol=0.05"
+   },
+   {
+    "name": "block.6/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.527, 0.528] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "block.6/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.6/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.553, 0.539] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.6/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.907, 0.896] rel_spread=0.012"
+   },
+   {
+    "name": "block.7/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.586, 0.563] abs_spread=0.024 abs_tol=0.05"
+   },
+   {
+    "name": "block.7/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.536, 0.54] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "block.7/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.7/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.614, 0.569] abs_spread=0.045 abs_tol=0.05"
+   },
+   {
+    "name": "block.7/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.696, 0.792] rel_spread=0.129"
+   },
+   {
+    "name": "block.8/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.614, 0.585] abs_spread=0.029 abs_tol=0.05"
+   },
+   {
+    "name": "block.8/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.534, 0.543] abs_spread=0.009 abs_tol=0.05"
+   },
+   {
+    "name": "block.8/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.8/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.657, 0.61] abs_spread=0.047 abs_tol=0.05"
+   },
+   {
+    "name": "block.8/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.586, 0.7] rel_spread=0.177"
+   },
+   {
+    "name": "block.9/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.644, 0.634] abs_spread=0.011 abs_tol=0.05"
+   },
+   {
+    "name": "block.9/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.54, 0.54] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "block.9/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.9/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.739, 0.702] abs_spread=0.038 abs_tol=0.05"
+   },
+   {
+    "name": "block.9/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.47, 0.558] rel_spread=0.171"
+   },
+   {
+    "name": "block.10/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.685, 0.71] abs_spread=0.025 abs_tol=0.05"
+   },
+   {
+    "name": "block.10/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.558, 0.542] abs_spread=0.016 abs_tol=0.05"
+   },
+   {
+    "name": "block.10/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.10/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.819, 0.823] abs_spread=0.004 abs_tol=0.05"
+   },
+   {
+    "name": "block.10/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.435, 0.36] rel_spread=0.188"
+   },
+   {
+    "name": "block.11/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.701, 0.711] abs_spread=0.010 abs_tol=0.05"
+   },
+   {
+    "name": "block.11/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.544, 0.571] abs_spread=0.026 abs_tol=0.05"
+   },
+   {
+    "name": "block.11/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "block.11/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.828, 0.819] abs_spread=0.009 abs_tol=0.05"
+   },
+   {
+    "name": "block.11/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.431, 0.371] rel_spread=0.150"
+   },
+   {
+    "name": "penult_mean/margin_typeb.auc_margin_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.561, 0.736] abs_spread=0.175 abs_tol=0.05"
+   },
+   {
+    "name": "penult_mean/margin_typeb.auc_dist_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.505, 0.65] abs_spread=0.145 abs_tol=0.05"
+   },
+   {
+    "name": "penult_mean/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "penult_mean/margin_typeb.auc_margin_wrong",
+    "status": "FAIL",
+    "detail": "values=[0.615, 0.848] abs_spread=0.233 abs_tol=0.05"
+   },
+   {
+    "name": "penult_mean/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.785, 0.395] rel_spread=0.659"
+   },
+   {
+    "name": "penult/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.712, 0.739] abs_spread=0.027 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.624, 0.645] abs_spread=0.021 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.599, 0.586] abs_spread=0.013 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.861, 0.866] abs_spread=0.005 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.504, 0.432] rel_spread=0.155"
+   }
+  ],
+  "id_profile_stability": [],
+  "adjacency_stability": [],
+  "decodability_stability": [
+   {
+    "name": "decodability",
+    "status": "WARN",
+    "detail": "linear_probes not present"
+   }
+  ],
+  "commit_agreement": [
+   {
+    "name": "commit_layer",
+    "status": "WARN",
+    "detail": "commit_layer missing in some run"
+   }
+  ],
+  "panel_agreement": [
+   {
+    "name": "panel[0,1]",
+    "status": "WARN",
+    "detail": "no compare_vs_* deformation.json"
+   }
+  ]
+ },
+ "counts": {
+  "PASS": 66,
+  "FAIL": 9,
+  "WARN": 5,
+  "INFO": 0
+ },
+ "verdict": "PARTIAL"
+}
