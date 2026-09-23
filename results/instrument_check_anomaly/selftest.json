@@ -1,0 +1,178 @@
+{
+ "status": "PASS",
+ "failed": [],
+ "checks": [
+  {
+   "name": "auc separated",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "auc reversed",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "auc all ties",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "auc half tie",
+   "pass": true,
+   "detail": "0.875"
+  },
+  {
+   "name": "rank ties averaged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "knn k=1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "knn k=3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "knn exclude_self",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "class span rank 9",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "e_perp hand value 16/25",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "batch_idx deterministic, no replacement",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "refuses a B1 path before reading",
+   "pass": true,
+   "detail": "B1 / ImageNet / ViT path: never read by this probe"
+  },
+  {
+   "name": "refuses a synthetic dump without the self-test flag",
+   "pass": true,
+   "detail": "source synthetic"
+  },
+  {
+   "name": "discovery role never reads a confirmation corruption",
+   "pass": true,
+   "detail": "None"
+  },
+  {
+   "name": "confirmation role reads the holdout",
+   "pass": true,
+   "detail": "None"
+  },
+  {
+   "name": "AX-1 complement shift detected (AUC >= 0.97)",
+   "pass": true,
+   "detail": "0.996984"
+  },
+  {
+   "name": "AX-1 in-span shift invisible to T_perp (0.35..0.65)",
+   "pass": true,
+   "detail": "0.453124"
+  },
+  {
+   "name": "AX-1 pre-only shift: AUC pre - penult >= 0.3",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "AX-1 single-class FPR of T_perp small (<= 0.30)",
+   "pass": true,
+   "detail": "0.041999999999999996"
+  },
+  {
+   "name": "AX-1 single-class FPR of penult T_full large (>= 0.90)",
+   "pass": true,
+   "detail": "1.0"
+  },
+  {
+   "name": "AX-1 T_par separates single-class batches (>= 0.95), T_perp does not (<= 0.70)",
+   "pass": true,
+   "detail": "{'perp_pre': 0.492588, 'par_pre': 1.0, 'full_penult': 1.0}"
+  },
+  {
+   "name": "AX-1 holdout glass_blur s3 detected (AUC >= 0.97)",
+   "pass": true,
+   "detail": "0.9984"
+  },
+  {
+   "name": "AX-2 stem-only shift peaks at stem",
+   "pass": true,
+   "detail": "{'stem': 0.786112, 'l10': 0.508952, 's1end': 0.508952, 's2end': 0.508952, 'pre': 0.508952, 'penult': 0.508952}"
+  },
+  {
+   "name": "AX-2 pre-only shift peaks at pre",
+   "pass": true,
+   "detail": "{'stem': 0.513352, 'l10': 0.513352, 's1end': 0.513352, 's2end': 0.513352, 'pre': 0.824024, 'penult': 0.513352}"
+  },
+  {
+   "name": "AX-2 router families (>= 0.99)",
+   "pass": true,
+   "detail": "{'N': 1.0, 'B': 0.99875, 'L': 1.0, 'P': 1.0}"
+  },
+  {
+   "name": "AX-2 holdout routing (impulse -> N, zoom -> B)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "AX-3 identity split: loss 0 everywhere, |median h| < 0.15",
+   "pass": true,
+   "detail": "median h 0.009"
+  },
+  {
+   "name": "AX-3 heavy noise: median h > 1 and mean loss > 10",
+   "pass": true,
+   "detail": "median h 4.60, loss 54.6"
+  },
+  {
+   "name": "AX-4 off-simplex shift: AUROC(e_perp) >= 0.90",
+   "pass": true,
+   "detail": "{'e_perp': 0.9297716666666667, 'd1': 0.9825516666666667, 'd1_over_r': 0.9826006666666667, 'dens2': 0.47713066666666665, 'n_pos': 2000, 'n_neg': 1500}"
+  },
+  {
+   "name": "AX-4 identity split: AUROC(e_perp) near 0.5",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "deterministic (two runs identical)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "refuses to overwrite results/anomaly_probe_<tag>",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "code_sha256": "5054e8b61375e57d1273b04aaee19b13290121d3444cbb88610436b0c00fa5e7",
+ "env": {
+  "python": "3.12.3",
+  "numpy": "2.1.2",
+  "platform": "Linux-6.8.0-90-generic-x86_64-with-glibc2.39",
+  "threads": {
+   "OMP_NUM_THREADS": null,
+   "OPENBLAS_NUM_THREADS": null,
+   "MKL_NUM_THREADS": null
+  }
+ },
+ "created_utc": "2026-09-23T15:12:36Z"
+}

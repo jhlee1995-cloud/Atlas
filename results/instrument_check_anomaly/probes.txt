@@ -1,0 +1,11 @@
+results/anomaly_probe_resnet20_rand/probe.json
+results/anomaly_probe_resnet20_s0hub_st3/probe.json
+results/anomaly_probe_resnet20_s1_st3/probe.json
+results/anomaly_probe_resnet20_s2_st3/probe.json
+results/anomaly_probe_resnet20_s3_st3/probe.json
+results/anomaly_probe_resnet20_s4_st3/probe.json
+results/anomaly_probe_resnet56_e40_st3/probe.json
+results/anomaly_probe_resnet56_rand/probe.json
+results/anomaly_probe_resnet56_s0hub_st3/probe.json
+results/anomaly_probe_resnet56_s1/probe.json
+results/anomaly_probe_resnet56_s2/probe.json
