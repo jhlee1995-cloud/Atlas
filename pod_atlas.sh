@@ -671,7 +671,8 @@ b1_stage() {
   if [[ -f "results/$exp/atlas.json" ]]; then echo "[skip] results/$exp/atlas.json exists (never rebuilt)"; return 0; fi
   n=$(cpu_quota)                                  # BLAS threads = cgroup quota, only for ImageNet runs (D19)
   OMP_NUM_THREADS=$n OPENBLAS_NUM_THREADS=$n MKL_NUM_THREADS=$n \
-    timeout 1800 python -m atlas.run_imagenet --manifest "experiments/queue/$exp.yaml" --volume "$VOLUME"
+    timeout 7200 python -m atlas.run_imagenet --manifest "experiments/queue/$exp.yaml" --volume "$VOLUME"   # r2: 1800 s killed the
+    # resnet50 Stage B at its 18th tap (margin_typeb ~65-118 s per tap at n = 25,000); results/margin_b1_vitb16/RELAUNCH_r2.md
 }
 b1_cifar() {   # E9: Stage B only (b1: true) on a dump A4b built in this session, through a dump symlink
   local exp="$1" src="$2"
