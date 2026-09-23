@@ -1,0 +1,16 @@
+# Scale-transfer twin (Stage 2). block_stride 3 keeps 9 block taps + stem + penult, matching
+# resnet20's depth positions for compare.match_layers.
+exp_id: atlas_v0_resnet56_cifar10
+backbone: {arch: cifar10_resnet56, weights: hub, seed_tag: s0}
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c: {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood: [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 3, pooling: gap}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+outputs: {root: results/atlas_v0_resnet56_cifar10, plots: true}

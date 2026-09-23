@@ -1,0 +1,102 @@
+# AGENT_LOOP — turning atlas-building into a surveying loop
+
+The loop has six roles. Four are already code in this package; two are judgment and stay
+with a model (Claude) reading and writing repo files. Every role communicates through files
+in the repo, never through chat state, so any session (or any agent) can pick up mid-loop.
+
+```
+            ATLAS_STATUS.md  (promoted entries, ✅ 🟡 ⬜)          <- Recorder
+                 ^                          |
+                 |                          v
+   CRITIC.md <- Critic (atlas.critic)     Planner  -> picks the next cell / question
+                 ^                          |
+                 |                          v
+   atlas.json, DEFORMATION.md          Proposer -> new invariant module + manifest w/ predictions
+                 ^                          |
+                 |                          v
+   Evaluator (atlas.compare + session log)  <-  Runner (atlas.run on the pod, commits results/)
+```
+
+## Roles and their artifacts
+
+| role | who | reads | writes | tool |
+|---|---|---|---|---|
+| Planner | Claude | ATLAS_STATUS.md, CRITIC.md, open predictions in session logs | `experiments/queue/<next>.yaml` (chosen) | reasoning |
+| Proposer | Claude | registry (`python -m atlas.build --list`), ATLAS.md gaps | `atlas/invariants/<new>.py`, manifest `notes:` with P1..Pn pre-registered | code |
+| Runner | pod (human now; Actions later) | manifest | `results/<exp>/` (atlas.json, ATLAS.md, provenance.json) | `atlas.run` |
+| Evaluator | Claude | atlas.json, DEFORMATION.md, manifest notes | `results/<exp>/SESSION.md`: prediction vs outcome, one line each | `atlas.compare` |
+| Critic | code + Claude | ≥2 results dirs, manifest holdout, methodology rules | `CRITIC.md` verdict + methodology flags | `atlas.critic` |
+| Recorder | Claude | CRITIC.md, SESSION.md | `ATLAS_STATUS.md` (promote / demote entries) | edit |
+
+The unit of work is one manifest. The unit of knowledge is one ATLAS_STATUS entry:
+`(layer, invariant or factor, claim, status, evidence dirs)`.
+
+## Promotion rule (what ✅ means)
+
+An entry becomes ✅ only when all four hold:
+1. source = real (critic `synthetic_refusal` PASS)
+2. replicates across ≥2 independent seeds within `experiments/tolerances_default.yaml`
+3. the manifest declared discovery/confirmation splits BEFORE the run (critic `holdout_hygiene`)
+4. the prediction it answers was written in `notes:` before the run (Evaluator quotes it)
+
+🟡 = measured once on real data, not yet replicated. ⬜ = proposed, not measured.
+A tolerance may be changed only with a SESSION.md line saying why, and never to flip a
+specific entry from FAIL to PASS.
+
+## Automation levels (raise one level at a time)
+
+- **L0 (now):** human runs `pod_atlas.sh` on the pod (repo cloned onto the network volume),
+  pulls `results/` (no dumps) back to Windows over SSH and commits there; the pod never pushes.
+  Claude does Planner / Proposer / Evaluator / Recorder in chat, reading `raw.githubusercontent.com`.
+- **L1:** Claude Code session in the repo runs everything CPU-side itself (`critic`,
+  report edits, reading the pod-computed `compare_vs_*/DEFORMATION.md`, new invariant modules with tests) and opens a PR; human
+  still runs GPU jobs. `CLAUDE.md` is the session brief for this level.
+- **L2:** GitHub Actions on push to `experiments/queue/` launches the RunPod job
+  (`pod_atlas.sh`), which commits `results/<exp>/` (no `dump/`); the workflow must ignore
+  commits to `results/` to avoid re-triggering. Claude Code reviews the result PR.
+- **L3:** Proposer generates manifests without a human, but only from an allowlist
+  (existing invariants x existing backbones x declared holdouts); anything new in
+  `atlas/invariants/` still goes through PR review. A human approves promotion to ✅.
+
+Do not skip a level. The Critic must be **backtested** before L2: replay it on the two
+historical failures already in MASTER_SUMMARY (the stream-builder bug that produced
+alternating instead of sustained blocks; the batch-averaging ceiling that made every type-b
+AUC 1.00) and confirm it would have flagged both. If it would not, add the check first.
+
+## Guardrails encoded in the tools
+
+- **Synthetic refusal:** `critic` never lets a synthetic-source run PASS anything.
+- **Multiple comparisons:** manifests declare `holdout.discovery_*` / `confirmation_*`;
+  the critic WARNs when absent. Rule of use: search (new invariants, tolerances, layer
+  choices) on discovery seeds/corruptions only; run the confirmation set once, after the
+  definition is frozen in a commit.
+- **Cheap before expensive:** `build` orders invariants by declared `cost`; Planner should
+  order manifests the same way (Stage 0 -> seed -> scale -> ViT -> CLIP).
+- **Per-sample honesty:** probes are per-sample CV scores; `probe_hygiene` fails if
+  `cv_folds < 3`. Batch-averaged numbers do not enter the atlas.
+- **Instrument validation:** `tests/test_atlas_smoke.py` has known-answer checks (TwoNN on
+  a 3-d manifold, CKA identity, monotone displacement). Add one for every new invariant
+  before it runs on real data.
+- **Provenance:** every result dir carries `manifest_used.yaml` and `provenance.json`
+  (git commit, weights source, dump meta). No number without a path.
+
+## The first three loops (already planned)
+
+1. **Stage 0** `atlas_v0_resnet20_cifar10` — predictions P1..P5 are in the manifest notes.
+2. **Stage 1** `atlas_v0_resnet20_seed1` — the kill switch. Evaluator reads DEFORMATION.md
+   (panel CKA, adjacency rho, decodability rho, relrep agreement). Critic verdict decides
+   whether the instrument is trusted.
+3. **Stage 2** `atlas_v0_resnet56_cifar10` — scale transfer via `compare.match_layers`.
+
+After these, the deformation ladder starts: `scripts/tta_deform.py` (rung 1, TENT, two
+manifests: standard dose and collapse positive control) writes `dump_step<k>/` checkpoints,
+`python -m atlas.ladder` turns them into LADDER.md with the onset-vs-histogram-collapse bar.
+Rungs 2+ (held-out EATA/CoTTA, partial and full fine-tuning) add adapter loops only;
+`compare --same-space` and `ladder` are unchanged.
+
+## What the loop is NOT
+
+It does not decide what the map is for. Planner picks cells by gap size in ATLAS_STATUS,
+not by application. The three applications (immune / merge / compute) read the finished
+entries; they do not steer which invariants get measured. That separation is what keeps
+the atlas reusable.

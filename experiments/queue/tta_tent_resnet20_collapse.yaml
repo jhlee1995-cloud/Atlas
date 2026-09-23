@@ -1,0 +1,40 @@
+# Deformation ladder, positive control: collapse-inducing TENT (small batch, high lr, shuffle order).
+# The atlas must see the deformation BEFORE pred_entropy collapses (LADDER.md onset table).
+exp_id: tta_tent_resnet20_collapse
+stage: deform
+backbone: {arch: cifar10_resnet20, weights: hub, seed_tag: s0}
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 2000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: [fog, contrast], severities: [3], n_per_set: 2000}
+  ood: []
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+invariants: [pca_spectrum, twonn_id, class_centers, neural_collapse, hubness, class_adjacency, merge_order, knn_density, corruption_displacement, linear_probes]
+invariant_cfg:
+  linear_probes: {n_train: 3000, cv_folds: 5, factors: [class, luminance_mean, contrast_rms, highfreq_ratio, spectral_anisotropy, corruption_type]}
+tta:
+  method: tent
+  corruption: fog
+  severity: 3
+  order: block
+  steps: 200
+  batch: 16                  # collapse inducer
+  lr: 0.01                   # collapse inducer
+  optimizer: adam
+  checkpoints: [0, 2, 5, 10, 20, 40, 80, 120, 200]
+  heldout_corruption: contrast
+  dump_mode: affine
+  n_eval_batches: 32
+holdout:
+  discovery_corruptions: [fog]
+  confirmation_corruptions: [contrast]
+outputs: {root: results/tta_tent_resnet20_collapse, plots: true}
+notes: >
+  Pre-registered: C1 pred_entropy collapses (< 0.8 of step 0) somewhere in steps 10..80;
+  C2 merge_tau / adjacency_rho drop and d_nc1 rises at an EARLIER checkpoint than C1
+  (class merging precedes histogram collapse); C3 panel_cka_min_layer is a mid-stage layer,
+  not penult (deformation starts where BN affine has the most leverage).
+  This is a synthetic-ceiling cousin (induced collapse): it validates the instrument, it does
+  not by itself say the atlas catches realistic slow drift. That is rung 2+ (EATA/CoTTA held-out,
+  then partial and full fine-tuning).

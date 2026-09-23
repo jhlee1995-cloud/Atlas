@@ -1,0 +1,10 @@
+# Critic tolerances. Loosen or tighten per invariant family after the first seed pair;
+# record the reason in the session log when you change one.
+scalar_rel_spread: 0.15
+scalar_abs_floor: 0.05
+adjacency_spearman: 0.70
+merge_kendall: 0.60
+decod_profile_spearman: 0.70
+decod_mean_abs_delta: 0.10
+commit_layer_slack: 1
+min_runs: 2

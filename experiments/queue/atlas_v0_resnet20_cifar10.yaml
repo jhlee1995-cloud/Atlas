@@ -1,0 +1,64 @@
+# Atlas v0 -- reference map of cifar10_resnet20 (chenyaofo hub weights) on CIFAR-10.
+# Stage 0 of the map-first plan. Everything downstream (seed stability, scale, TTA
+# deformation, two-robot merge) compares against this dump.
+exp_id: atlas_v0_resnet20_cifar10
+stage: atlas
+
+backbone:
+  arch: cifar10_resnet20
+  weights: hub           # chenyaofo/pytorch-cifar-models pretrained
+  seed_tag: s0
+
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}    # the distribution the map is OF
+  clean_test: {dataset: cifar10, n: 5000}                     # indices 0..4999, pairing contract
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}      # self-antigen panel (disjoint from ref)
+  cifar10c:
+    corruptions: all       # 15
+    severities: [1, 3, 5]
+    n_per_set: 2000        # rows 0..1999 of each severity block, paired with clean_test[:2000]
+  ood:
+    - {dataset: cifar100, n: 2000}
+    - {dataset: svhn, n: 2000}
+
+hooks:
+  layers: blocks         # stem + every residual block (9 for resnet20) + penult = 11 taps
+  block_stride: 1
+  pooling: gap           # gap_std doubles D (mean + spatial std per channel); try later
+
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+
+invariants: all          # or a list; "-twonn_id" style exclusions allowed
+cross_layer: all
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes: {n_train: 4000, cv_folds: 5, factors: all}
+  commit_layer:  {tau: 0.9}
+
+# Pre-registered holdout so the critic can enforce discovery vs confirmation.
+# Discovery: 10 corruptions (2 per family + jpeg); confirmation: the other 5.
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0]
+  confirmation_seeds: [1]
+
+outputs:
+  root: results/atlas_v0_resnet20_cifar10
+  plots: true
+
+notes: >
+  Pre-registered predictions (write outcomes in the session log, not here):
+  P1 TwoNN ID profile is hunchback-shaped (peaks in layer2, falls to penult).
+  P2 class commit layer is layer2.x or later; luminance/highfreq/anisotropy commit at stem/layer1
+     and wash out at penult (washout > 0.3) -> row-6 gap is tap placement, not a missing axis.
+  P3 corruption_displacement at penult: brightness/defocus/motion have LOWER coherence than
+     noise/contrast at matched magnitude (non-directional spread), and lower class_sub_frac.
+  P4 sep_ratio at penult reproduces the earlier ~2.9 figure within 15%.
+  P5 knn_density sparse_frac rises monotonically with severity for every corruption.

@@ -1,0 +1,26 @@
+# Data lives on the RunPod network volume (kxfir1tryb, mounted at /workspace), never in git.
+# No trailing slash on the dump patterns: atlas/ladder.py makes results/<exp>/step<k>/dump a symlink.
+results/**/dump
+results/**/dump_step*
+results/_synth/
+results/**/*.npy
+results/**/*.npz
+
+# datasets / weights / archives (anywhere except test fixtures)
+datasets/
+*.pt
+*.pth
+*.ckpt
+*.tar
+*.tar.gz
+*.mat
+*.parquet
+!tests/fixtures/**
+
+# logs / python
+logs/
+*.log
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

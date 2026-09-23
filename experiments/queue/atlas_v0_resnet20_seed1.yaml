@@ -1,0 +1,27 @@
+# Seed-stability twin of atlas_v0. Train the weights first:
+#   python scripts/train_second_seed.py --volume /workspace --seed 1 --out /workspace/models/resnet20_seed1.pt
+# then:
+#   python -m atlas.run --manifest experiments/queue/atlas_v0_resnet20_seed1.yaml --volume /workspace \
+#          --weights /workspace/models/resnet20_seed1.pt
+#   python -m atlas.compare --a results/atlas_v0_resnet20_cifar10 --b results/atlas_v0_resnet20_seed1
+#   python -m atlas.critic  --results results/atlas_v0_resnet20_cifar10 results/atlas_v0_resnet20_seed1
+exp_id: atlas_v0_resnet20_seed1
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_seed1.pt
+  seed_tag: s1
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}     # SAME reference images as seed0
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}       # SAME panel images
+  cifar10c: {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood: [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0]
+  confirmation_seeds: [1]
+outputs: {root: results/atlas_v0_resnet20_seed1, plots: true}
+notes: "Stage 1 kill switch: if ID profile / adjacency / decodability do not replicate, fix the instrument before scaling."

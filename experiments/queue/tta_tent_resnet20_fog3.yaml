@@ -1,0 +1,42 @@
+# Deformation ladder, rung 1: TENT on fog s3, block stream (sustained corruption), standard dose.
+# Run:   python scripts/tta_deform.py --manifest experiments/queue/tta_tent_resnet20_fog3.yaml --volume /workspace
+# Then:  python -m atlas.ladder --exp results/tta_tent_resnet20_fog3
+exp_id: tta_tent_resnet20_fog3
+stage: deform
+backbone: {arch: cifar10_resnet20, weights: hub, seed_tag: s0}
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 2000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: [fog, contrast], severities: [3], n_per_set: 2000}   # overwritten from tta:
+  ood: []
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+invariants: [pca_spectrum, twonn_id, class_centers, neural_collapse, hubness, class_adjacency, merge_order, knn_density, corruption_displacement, linear_probes]
+invariant_cfg:
+  linear_probes: {n_train: 3000, cv_folds: 5, factors: [class, luminance_mean, contrast_rms, highfreq_ratio, spectral_anisotropy, corruption_type]}
+tta:
+  method: tent
+  corruption: fog
+  severity: 3
+  order: block               # sustained; use shuffle for the 50/50 mixed control
+  steps: 300
+  batch: 128
+  lr: 0.001
+  optimizer: adam
+  checkpoints: [0, 5, 10, 25, 50, 100, 200, 300]
+  heldout_corruption: contrast
+  dump_mode: affine          # eval-mode BN with original running stats + adapted affine
+  n_eval_batches: 16
+holdout:
+  discovery_corruptions: [fog]
+  confirmation_corruptions: [contrast]
+outputs: {root: results/tta_tent_resnet20_fog3, plots: true}
+notes: >
+  Pre-registered: D1 acc_stream_heldout rises over the first ~50 steps (benign adaptation);
+  D2 during that window adjacency_rho and merge_tau stay > 0.9 while panel_shift grows
+  smoothly (benign = new position, same topology); D3 acc_clean drift (forgetting) shows up
+  in decod_abs_delta(luminance/contrast) before it shows up in adjacency; D4 with these
+  settings no collapse occurs (pred_entropy stays > 0.8 of step 0).
+  Stream note (set before the run): the adapt pool is 5952 fog-s3 images (8000 unpaired rows minus
+  2048 held out), so 300 steps x 128 cycle it ~6.45 times with a fresh shuffle per pass; the exact
+  figure is recorded as tta.adapt_epochs in each dump meta.
