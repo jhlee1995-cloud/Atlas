@@ -15,14 +15,23 @@ Checks (each is a function; add more in CHECKS):
   id_profile_stability TwoNN ID profile Spearman >= tol and peak position within commit_layer_slack
   panel_agreement     top-layer cka_test from the pod-computed compare_vs_*/deformation.json (+ INFO metrics)
 
+Scalars listed in tolerances scalar_abs_tol ({"<inv>.<key>": max spread}, e.g. the A3 margin AUCs) are judged by
+absolute spread only; every other scalar keeps the relative-spread / absolute-floor rule.
+--align position (scale transfer, docs/plans/STAGE2.md): every run whose layer list differs from the first run's
+is relabelled onto the first run's names by index, exactly as compare.match_layers pairs two equal-length lists
+that share < 60% of their names (resnet56 block_stride 5 vs resnet20: 11 taps each). Unequal tap counts, name
+pairs and pairs across stages are refused. The default (name) leaves every run as it is.
+
 Output: CRITIC.md + critic.json with PASS / FAIL / WARN per item and an overall verdict.
 The verdict is advisory: the agent reads it, a human promotes entries to ATLAS_STATUS.md.
 
 Usage:
   python -m atlas.critic --results results/atlas_v0_resnet20_cifar10 results/atlas_v0_resnet20_seed1
   python -m atlas.critic --results ... --tol tolerances.yaml
+  python -m atlas.critic --results <resnet20 dir> <resnet56 dir> --tol ... --align position --out ...
 """
 import argparse
+import copy
 import itertools
 import json
 import os
@@ -31,7 +40,7 @@ import numpy as np
 import yaml
 from scipy.stats import kendalltau, spearmanr
 
-from .compare import SCALARS, _g, upper
+from .compare import SCALARS, _g, match_layers, upper
 
 DEFAULT_TOL = {
     "scalar_rel_spread": 0.15,       # (max-min)/|mean| across runs
@@ -44,6 +53,7 @@ DEFAULT_TOL = {
     "min_runs": 2,
     "id_profile_spearman": 0.90,     # TwoNN ID profile shape across runs (+ peak within commit_layer_slack)
     "cka_test_min": 0.80,            # top-layer linear CKA on test[:2000] (from pod-computed deformation.json)
+    "scalar_abs_tol": {},            # {"<inv>.<key>": max abs spread}: replaces the rel/abs-floor rule for listed scalars
 }
 
 
@@ -57,8 +67,44 @@ def _load_all(dirs):
     return runs
 
 
+def align_runs(runs, mode="name"):
+    """--align position (scale transfer): relabel every run whose layer list differs from run 0's onto
+    run 0's names, pairing by index exactly as compare.match_layers does for two equal-length lists that
+    share < 60% of their names (resnet56 block_stride 5 vs resnet20: 11 taps each). Refuses unequal tap
+    counts, name-based pairs and pairs across stages. Mutates runs (the atlas is deep-copied first);
+    returns {run dir name: [[run-0 layer, own layer], ...]} for every relabelled run."""
+    if mode != "position":
+        return {}
+    ref = list(runs[0]["atlas"]["layers"])
+    stage = lambda l: l.split(".")[0]
+    out = {}
+    for r in runs[1:]:
+        lb = list(r["atlas"]["layers"])
+        if lb == ref:
+            continue
+        pairs = [tuple(p) for p in match_layers(ref, lb)]
+        if len(lb) != len(ref) or pairs != list(zip(ref, lb)) or any(stage(a) != stage(b) for a, b in pairs):
+            raise SystemExit(f"[critic] --align position: {r['dir']} does not map 1:1 by position and stage "
+                             f"onto {runs[0]['dir']}: {pairs}")
+        m = {b: a for a, b in pairs}
+        a = copy.deepcopy(r["atlas"])
+        a["layers"] = [m[b] for b in lb]
+        a["per_layer"] = {m[b]: a["per_layer"][b] for b in lb}
+        for v in (_g(a, "cross_layer", "commit_layer", "per_factor") or {}).values():
+            if not isinstance(v, dict):
+                continue
+            for k in ("commit_layer", "peak_layer"):
+                if v.get(k) in m:
+                    v[k] = m[v[k]]
+        r["atlas"] = a
+        out[os.path.basename(os.path.normpath(r["dir"]))] = [list(p) for p in pairs]
+    return out
+
+
+# per-layer signature for alias detection; margin_typeb lets margin-only atlases (A3 rebuilds) collapse
+# layer3.2 == penult too. Atlases without it get one more None, so their aliases are unchanged.
 _SIG = [("twonn_id", "id"), ("pca_spectrum", "participation_ratio"), ("class_centers", "sep_ratio"),
-        ("neural_collapse", "nc1"), ("hubness", "k_occurrence_skew")]
+        ("neural_collapse", "nc1"), ("hubness", "k_occurrence_skew"), ("margin_typeb", "median_margin_correct")]
 
 
 def _sig(run, layer):
@@ -98,6 +144,7 @@ def synthetic_refusal(runs, tol):
 
 def scalar_stability(runs, tol):
     items = []
+    abs_tol = tol.get("scalar_abs_tol") or {}
     for l in common_layers(runs):
         for inv, key in SCALARS:
             vals = [_g(r["atlas"]["per_layer"][l], inv, key) for r in runs]
@@ -107,9 +154,14 @@ def scalar_stability(runs, tol):
             vals = np.array(vals, dtype=float)
             spread = float(vals.max() - vals.min())
             rel = spread / (abs(vals.mean()) + 1e-9)
-            ok = (rel <= tol["scalar_rel_spread"]) or (spread <= tol["scalar_abs_floor"])
-            items.append({"name": f"{l}/{inv}.{key}", "status": "PASS" if ok else "FAIL",
-                          "detail": f"values={np.round(vals, 3).tolist()} rel_spread={rel:.3f}"})
+            at = abs_tol.get(f"{inv}.{key}")
+            if at is None:                  # the Stage 0/1 rule, unchanged
+                ok = (rel <= tol["scalar_rel_spread"]) or (spread <= tol["scalar_abs_floor"])
+                detail = f"values={np.round(vals, 3).tolist()} rel_spread={rel:.3f}"
+            else:                           # AUC-like scalars: the relative rule would pass a 0.13 spread at 0.9
+                ok = spread <= float(at)
+                detail = f"values={np.round(vals, 3).tolist()} abs_spread={spread:.3f} abs_tol={at}"
+            items.append({"name": f"{l}/{inv}.{key}", "status": "PASS" if ok else "FAIL", "detail": detail})
     return items
 
 
@@ -282,10 +334,13 @@ CHECKS = [synthetic_refusal, norm_consistency, alias_layers, holdout_hygiene, pr
           id_profile_stability, adjacency_stability, decodability_stability, commit_agreement, panel_agreement]
 
 
-def run_critic(dirs, tol=None):
+def run_critic(dirs, tol=None, align="name"):
     tol = {**DEFAULT_TOL, **(tol or {})}
     runs = _load_all(dirs)
     report = {"runs": dirs, "tolerances": tol, "checks": {}}
+    if align != "name":                         # name (default): runs and report exactly as before
+        report["align"] = align
+        report["alignment"] = align_runs(runs, align)
     any_synth = any(r["atlas"]["source"] != "real" for r in runs)
     for chk in CHECKS:
         try:
@@ -310,6 +365,8 @@ def run_critic(dirs, tol=None):
 def write_md(report, path):
     L = [f"# CRITIC  verdict: **{report['verdict']}**", f"runs: {report['runs']}",
          f"counts: {report['counts']}", ""]
+    if report.get("align"):
+        L.insert(3, f"layer alignment: {report['align']} {json.dumps(report.get('alignment') or {})}")
     for name, items in report["checks"].items():
         L.append(f"## {name}")
         fails = [it for it in items if it["status"] == "FAIL"]
@@ -327,9 +384,11 @@ def main():
     ap.add_argument("--results", nargs="+", required=True)
     ap.add_argument("--tol", help="yaml with tolerance overrides")
     ap.add_argument("--out", help="output dir (default: first result dir)")
+    ap.add_argument("--align", choices=["name", "position"], default="name",
+                    help="position: relabel runs onto the first run's layer names by index (scale transfer)")
     args = ap.parse_args()
     tol = yaml.safe_load(open(args.tol)) if args.tol else None
-    rep = run_critic(args.results, tol)
+    rep = run_critic(args.results, tol, args.align)
     out = args.out or args.results[0]
     os.makedirs(out, exist_ok=True)
     json.dump(rep, open(os.path.join(out, "critic.json"), "w"), indent=1)

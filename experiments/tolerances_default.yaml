@@ -11,3 +11,12 @@ min_runs: 2
 # Stage 1 additions (new keys, committed before the Stage 1 run; no existing tolerance changed)
 id_profile_spearman: 0.90
 cka_test_min: 0.80
+# A3 additions (new keys, committed before the first margin_typeb run; no existing tolerance changed).
+# AUC-like scalars are judged by absolute spread (atlas/critic.py scalar_stability): the relative rule would
+# pass a 0.13 spread at AUC 0.9. 0.05 = 2.7 SD of a two-seed difference at ~255 type-b on test[:5000]
+# (Hanley-McNeil SE ~0.013 at AUC 0.9; docs/plans/A3_MARGIN.md).
+scalar_abs_tol:
+  margin_typeb.auc_margin_typeb: 0.05
+  margin_typeb.auc_dist_typeb: 0.05
+  margin_typeb.auc_maxprob_typeb: 0.05
+  margin_typeb.auc_margin_wrong: 0.05

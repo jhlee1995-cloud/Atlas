@@ -1,3 +1,8 @@
+# SUPERSEDED by atlas_v1_resnet56_s0hub (docs/plans/STAGE2.md); kept for provenance, do not run. Two defects:
+# no backbone.norm (defaults to cifar_true, atlas/config.py:16-17; the hub resnet56 log trains with std
+# 0.2023/0.1994/0.201), and block_stride 3 keeps blocks {0,3,6,8} per stage = 14 taps, not 11
+# (atlas/extract_acts.py:72), so match_layers would pair resnet20 layer1.1 -> layer1.6 but layer2.1 -> layer2.3.
+#
 # Scale-transfer twin (Stage 2). block_stride 3 keeps 9 block taps + stem + penult, matching
 # resnet20's depth positions for compare.match_layers.
 exp_id: atlas_v0_resnet56_cifar10

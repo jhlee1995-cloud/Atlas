@@ -3,7 +3,8 @@ compare.py -- deformation between two atlases (A = reference, B = current).
 
 Three uses share this one tool:
   seed stability   A = seed0 atlas, B = seed1 atlas          (different weights, same task)
-  scale transfer   A = resnet20,    B = resnet56              (layers matched by name/position)
+  scale transfer   A = resnet20,    B = resnet56              (layers matched by name/position; a name
+                                                              match across archs with unequal tap counts is refused)
   immune / TTA     A = before,      B = after adaptation      (same model, --same-space)
 
 Per common layer:
@@ -38,6 +39,10 @@ SCALARS = [
     ("twonn_id", "id"), ("pca_spectrum", "participation_ratio"), ("pca_spectrum", "dim95"),
     ("class_centers", "sep_ratio"), ("neural_collapse", "nc1"), ("neural_collapse", "etf_deviation"),
     ("hubness", "k_occurrence_skew"), ("class_centers", "nearest_center_acc_test"),
+    # A3 type-b margin (atlas/invariants/margin.py); AUC spreads are judged by tolerances scalar_abs_tol.
+    # Atlases without margin_typeb return None here and are skipped, so no earlier verdict changes.
+    ("margin_typeb", "auc_margin_typeb"), ("margin_typeb", "auc_dist_typeb"), ("margin_typeb", "auc_maxprob_typeb"),
+    ("margin_typeb", "auc_margin_wrong"), ("margin_typeb", "median_margin_ratio_typeb"),
 ]
 
 
@@ -98,6 +103,12 @@ def compare(res_a, res_b, same_space=False):
     A, dA = _load(res_a)
     B, dB = _load(res_b)
     pairs = match_layers(A["layers"], B["layers"])
+    arch_a, arch_b = (A.get("meta") or {}).get("arch"), (B.get("meta") or {}).get("arch")
+    if arch_a != arch_b and len(A["layers"]) != len(B["layers"]) and all(a == b for a, b in pairs):
+        # two depths that share block names (resnet20 vs resnet56 at block_stride 1 or 2) would pair resnet20
+        # layer3.2 with resnet56 block 21 of 27; same-arch pairs with different strides stay allowed
+        raise SystemExit(f"[compare] {arch_a} vs {arch_b}: name match across depths ({len(A['layers'])} vs "
+                         f"{len(B['layers'])} taps); use equal tap counts (resnet56 block_stride 5, docs/plans/STAGE2.md)")
     out = {"a": res_a, "b": res_b, "same_space": same_space,
            "source_a": A["source"], "source_b": B["source"], "layers": pairs, "per_layer": {}}
     for la, lb in pairs:

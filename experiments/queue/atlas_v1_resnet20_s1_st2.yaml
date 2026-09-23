@@ -1,0 +1,36 @@
+# Stage 2 (A4, rule 6): the Stage 1 s1 atlas re-measured (extraction and build) in the Stage 2 session at the
+# Stage 2 commit; same weights, inputs, norm, taps and invariant_cfg as atlas_v1_resnet20_s1. With the other two
+# _st2 runs it is the resnet20 band B20 of docs/plans/STAGE2.md. Every resnet20 <-> resnet56 item uses the _st2
+# directories (with their own dump/) as A, never the Stage 1 ones.
+exp_id: atlas_v1_resnet20_s1_st2
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: ["-margin_typeb"]      # everything registered except the A3 margin (measured in margin_* rebuilds)
+cross_layer: all
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes: {n_train: 4000, cv_folds: 5, factors: all}
+  commit_layer:  {tau: 0.9}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0]
+  confirmation_seeds: [1, 2]      # spent in Stage 1; this is a same-session re-measure for Stage 2, not a new touch
+outputs: {root: results/atlas_v1_resnet20_s1_st2, plots: true}
+notes: >
+  Stage 2 (A4) rule-6 re-measure (band B20). Predictions in atlas_v1_resnet56_s0hub.yaml notes.

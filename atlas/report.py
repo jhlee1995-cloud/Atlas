@@ -129,6 +129,39 @@ def flow_section(atlas):
     return "\n".join(rows)
 
 
+def margin_section(atlas):
+    """A3 margin_typeb: per-layer oriented AUCs, the cut sweep and the legacy block at the last layer."""
+    rows = ["| layer | n_typeb | AUC margin | AUC dist | AUC maxprob | AUC energy | AUC margin (all wrong) | "
+            "AUC margin (conf-matched) | median ratio type-b/correct |", "|---|---|---|---|---|---|---|---|---|"]
+    seen = False
+    for l in atlas["layers"]:
+        m = _g(atlas["per_layer"][l], "margin_typeb")
+        if not isinstance(m, dict) or "error" in m:
+            continue
+        seen = True
+        rows.append("| " + " | ".join([l, _f(m.get("n_typeb")), _f(m.get("auc_margin_typeb")), _f(m.get("auc_dist_typeb")),
+                                       _f(m.get("auc_maxprob_typeb")), _f(m.get("auc_energy_typeb")),
+                                       _f(m.get("auc_margin_wrong")), _f(m.get("auc_margin_confmatched")),
+                                       _f(m.get("median_margin_ratio_typeb"))]) + " |")
+    if not seen:
+        return "_margin_typeb not run_"
+    last = _g(atlas["per_layer"][atlas["layers"][-1]], "margin_typeb")
+    if not isinstance(last, dict) or "error" in last:
+        return "\n".join(rows)
+    rows += ["", f"cut sweep at `{atlas['layers'][-1]}` (type-b = wrong and maxprob > cut; oriented AUCs vs all correct)", "",
+             "| cut | n_typeb | margin | dist | maxprob | energy | margin (conf-matched) |", "|---|---|---|---|---|---|---|"]
+    for r in last.get("sweep") or []:
+        rows.append("| " + " | ".join([_f(r.get("cut"), 2), _f(r.get("n_typeb")), _f(r.get("auc_margin_typeb")),
+                                       _f(r.get("auc_dist_typeb")), _f(r.get("auc_maxprob_typeb")),
+                                       _f(r.get("auc_energy_typeb")), _f(r.get("auc_margin_confmatched"))]) + " |")
+    lg = last.get("legacy") or {}
+    if lg:
+        rows += ["", f"legacy (test-split centers, direction-free AUC, conf-wrong n={lg.get('n_cw')}): margin "
+                     f"{_f(lg.get('dir_auc_margin'))}, cluster_subnet {_f(lg.get('dir_auc_cluster_subnet'))}, "
+                     f"energy {_f(lg.get('dir_auc_energy'))}"]
+    return "\n".join(rows)
+
+
 def write_report(atlas, out_root, plots=True):
     md = [f"# ATLAS — {atlas.get('exp_id') or 'unnamed'}",
           f"built {atlas['built']} · source **{atlas['source']}** · arch `{atlas['meta'].get('arch')}` · "
@@ -139,7 +172,8 @@ def write_report(atlas, out_root, plots=True):
           "## 3. Layer flow (CKA)", flow_section(atlas), "",
           "## 4. Sensitivity field (paired corruption displacement)", sensitivity_table(atlas), "",
           "## 5. Density per split", density_table(atlas), "",
-          "## 6. Adjacency", adjacency_section(atlas), ""]
+          "## 6. Adjacency", adjacency_section(atlas), "",
+          "## 7. Type-b margin (margin_typeb)", margin_section(atlas), ""]
     if atlas.get("skipped"):
         md += ["## Skipped", "```", json.dumps(atlas["skipped"], indent=1), "```", ""]
     errs = {f"{l}/{k}": v["error"] for l, p in atlas["per_layer"].items() for k, v in p.items()

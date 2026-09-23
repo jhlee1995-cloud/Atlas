@@ -30,7 +30,7 @@ a pod stop:
 /workspace/
 ├── Atlas/                      git clone of this repo; results/<exp>/ (dump/ and dump_step*/ are gitignored)
 ├── datasets/                   cifar10/ cifar10_train/ cifar100/ svhn/ cifar10c/ (flat .npy) + manifest.json
-├── models/                     resnet20_s{1,2}_chenyaofo.pt, resnet20_rand99_chenyaofo.pt
+├── models/                     resnet20_s{1,2,3,4}_chenyaofo.pt, resnet20_rand99_*, resnet56_s11_e{10,20,40}_*, resnet56_rand99_*
 ├── .cache/                     torch hub, pip
 └── logs/                       launch.log (latest launch) + pod_atlas_<timestamp>.log (per run)
 ```
@@ -65,8 +65,11 @@ reference-resample twin, a random-init null), and runs every compare and critic 
 those need the dumps. Input normalization is a manifest field (`backbone.norm`: `cifar_true` for v0,
 `chenyaofo` for v1) and is saved in local checkpoints; `load_model` refuses a mismatch.
 
-Stage 2 (scale): resnet56 from the hub with `norm: chenyaofo` (its training log uses the same std),
-then `compare --a resnet20 --b resnet56`.
+Stage 1b (seeds 3, 4; `docs/plans/STAGE1.md` amendment 2), Stage 2 (scale, `docs/plans/STAGE2.md`) and A3
+(margin/type-b, `docs/plans/A3_MARGIN.md`) run in one session: `--stage1b --stage2 --a3` (exact command in
+`results/atlas_v1_resnet20_s3/RUN_REQUEST.md`; never re-run `--stage1`). Stage 2 maps the hub resnet56 with
+`norm: chenyaofo` (its training log uses the same std) at `block_stride: 5`, so its 11 taps pair with resnet20 by
+position in `compare --a <resnet20 _st2> --b <resnet56>`; the critic needs `--align position` (resnet20 first).
 
 ## What is measured (v0)
 
@@ -82,6 +85,7 @@ then `compare --a resnet20 --b resnet56`.
 | density | `knn_density` | ref, all splits | sparse fraction per split, log-radius shift |
 | decodability | `linear_probes` | test, corrupt, factors | CV probe score per factor (18 factors) |
 | sensitivity | `corruption_displacement` | test, corrupt | magnitude, coherence, class-subspace frac, PCA direction |
+| margin | `margin_typeb` | ref, test, preds | type-b (wrong, maxprob > 0.7) vs correct: top-2 center margin, nearest-center distance, maxprob, energy; oriented AUCs, cut sweep, legacy block (A3) |
 | flow (cross) | `layer_cka` | test | consecutive CKA, biggest reorganization |
 | flow (cross) | `commit_layer` | probes | first layer at tau·best, peak, washout per factor |
 

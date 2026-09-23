@@ -88,7 +88,12 @@ AUC 1.00) and confirm it would have flagged both. If it would not, add the check
    reference-resample twin and a random-init null. The Evaluator applies the pre-registered
    KILL / PASS / PARTIAL rule in STAGE1.md; the critic's count-based verdict word is advisory.
    (`atlas_v0_resnet20_seed1` is superseded: it confounded seed with recipe and normalization.)
-3. **Stage 2** resnet56 (hub, `norm: chenyaofo`) — scale transfer via `compare.match_layers`.
+3. **Stage 2** resnet56 (hub, `norm: chenyaofo`, `block_stride: 5`) — scale transfer (docs/plans/STAGE2.md):
+   `compare` pairs the 11 taps by position (and refuses a cross-depth name match), the critic runs with
+   `--align position`, resnet20 is re-measured in the same session (`atlas_v1_resnet20_*_st2`), and an accuracy
+   ladder decides whether a difference is attributable to depth. It shares one pod session with Stage 1b (seeds 3,
+   4; STAGE1.md amendment 2) and A3 (margin/type-b, row 9; docs/plans/A3_MARGIN.md):
+   `results/atlas_v1_resnet20_s3/RUN_REQUEST.md`.
 
 After these, the deformation ladder starts: `scripts/tta_deform.py` (rung 1, TENT, two
 manifests: standard dose and collapse positive control) writes `dump_step<k>/` checkpoints,

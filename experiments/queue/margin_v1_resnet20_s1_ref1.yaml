@@ -1,0 +1,35 @@
+# A3 margin/type-b: Stage B only (margin_typeb) on the existing atlas_v1_resnet20_s1_ref1 dump. pod_atlas.sh --a3
+# symlinks results/margin_v1_resnet20_s1_ref1/dump -> ../atlas_v1_resnet20_s1_ref1/dump and runs atlas.run --skip-extract
+# ONLY after the M1 gate on v0 passes.
+# data / hooks / extract are copied from the source manifest.
+# Pre-registration: experiments/queue/margin_v1_resnet20_s1.yaml (same commit).
+exp_id: margin_v1_resnet20_s1_ref1
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 1}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 1, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: [margin_typeb]
+cross_layer: ["-layer_cka", "-commit_layer"]     # selects none (an empty list would mean "all")
+invariant_cfg:
+  margin_typeb: {cut: 0.7, cuts: [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99], min_n: 10}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0]              # Upgraded-Mod numbers + atlas_v0 (hub, std 0.247) + v1 hub
+  confirmation_seeds: [1, 2, 3, 4]  # first and only margin touch on each; s3, s4 only if Stage 1b built them
+outputs: {root: results/margin_v1_resnet20_s1_ref1, plots: false}
+notes: |
+  A3 Stage-B rebuild (margin_typeb) of results/atlas_v1_resnet20_s1_ref1/dump;
+  pre-registration in margin_v1_resnet20_s1.yaml (same commit).
+  Role: twin (s1 weights, reference draw seed 1; only the centers change): M4 |s1 - s1_ref1| <= 0.01.
