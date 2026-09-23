@@ -1,0 +1,353 @@
+{
+ "runs": [
+  "results/margin_v1_resnet20_s1",
+  "results/margin_v1_resnet20_s2"
+ ],
+ "tolerances": {
+  "scalar_rel_spread": 0.15,
+  "scalar_abs_floor": 0.05,
+  "adjacency_spearman": 0.7,
+  "merge_kendall": 0.6,
+  "decod_profile_spearman": 0.7,
+  "decod_mean_abs_delta": 0.1,
+  "commit_layer_slack": 1,
+  "min_runs": 2,
+  "id_profile_spearman": 0.9,
+  "cka_test_min": 0.8,
+  "scalar_abs_tol": {
+   "margin_typeb.auc_margin_typeb": 0.05,
+   "margin_typeb.auc_dist_typeb": 0.05,
+   "margin_typeb.auc_maxprob_typeb": 0.05,
+   "margin_typeb.auc_margin_wrong": 0.05
+  }
+ },
+ "checks": {
+  "synthetic_refusal": [
+   {
+    "name": "sources",
+    "status": "PASS",
+    "detail": "all runs real"
+   }
+  ],
+  "norm_consistency": [
+   {
+    "name": "input_norm",
+    "status": "PASS",
+    "detail": "{'margin_v1_resnet20_s1': 'chenyaofo', 'margin_v1_resnet20_s2': 'chenyaofo'}"
+   }
+  ],
+  "alias_layers": [
+   {
+    "name": "alias:layer3.2",
+    "status": "WARN",
+    "detail": "identical to penult in every run; counted once as penult"
+   }
+  ],
+  "holdout_hygiene": [
+   {
+    "name": "holdout:margin_v1_resnet20_s1",
+    "status": "PASS",
+    "detail": "declared"
+   },
+   {
+    "name": "holdout:margin_v1_resnet20_s2",
+    "status": "PASS",
+    "detail": "declared"
+   }
+  ],
+  "probe_hygiene": [
+   {
+    "name": "probes:margin_v1_resnet20_s1",
+    "status": "WARN",
+    "detail": "no probes"
+   },
+   {
+    "name": "probes:margin_v1_resnet20_s2",
+    "status": "WARN",
+    "detail": "no probes"
+   }
+  ],
+  "scalar_stability": [
+   {
+    "name": "stem/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.476, 0.505] abs_spread=0.030 abs_tol=0.05"
+   },
+   {
+    "name": "stem/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.49, 0.491] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "stem/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "stem/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.478, 0.487] abs_spread=0.008 abs_tol=0.05"
+   },
+   {
+    "name": "stem/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.072, 0.951] rel_spread=0.120"
+   },
+   {
+    "name": "layer1.0/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.497, 0.498] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.0/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.485, 0.497] abs_spread=0.012 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.0/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.0/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.496, 0.496] abs_spread=0.000 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.0/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[1.065, 0.963] rel_spread=0.100"
+   },
+   {
+    "name": "layer1.1/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.514, 0.538] abs_spread=0.024 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.1/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.486, 0.502] abs_spread=0.016 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.1/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.1/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.501, 0.543] abs_spread=0.042 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.1/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.926, 0.853] rel_spread=0.083"
+   },
+   {
+    "name": "layer1.2/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.502, 0.547] abs_spread=0.045 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.2/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.501, 0.504] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.2/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.2/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.519, 0.534] abs_spread=0.014 abs_tol=0.05"
+   },
+   {
+    "name": "layer1.2/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.946, 0.73] rel_spread=0.258"
+   },
+   {
+    "name": "layer2.0/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.514, 0.525] abs_spread=0.011 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.0/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.54, 0.516] abs_spread=0.023 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.0/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.0/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.528, 0.527] abs_spread=0.001 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.0/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.935, 0.867] rel_spread=0.075"
+   },
+   {
+    "name": "layer2.1/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.536, 0.545] abs_spread=0.008 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.1/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.541, 0.512] abs_spread=0.028 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.1/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.1/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.542, 0.542] abs_spread=0.000 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.1/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.849, 0.807] rel_spread=0.050"
+   },
+   {
+    "name": "layer2.2/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.556, 0.581] abs_spread=0.025 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.2/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.544, 0.516] abs_spread=0.028 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.2/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.2/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.568, 0.577] abs_spread=0.008 abs_tol=0.05"
+   },
+   {
+    "name": "layer2.2/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.842, 0.701] rel_spread=0.183"
+   },
+   {
+    "name": "layer3.0/margin_typeb.auc_margin_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.634, 0.684] abs_spread=0.050 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.0/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.551, 0.543] abs_spread=0.008 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.0/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.0/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.649, 0.669] abs_spread=0.020 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.0/margin_typeb.median_margin_ratio_typeb",
+    "status": "FAIL",
+    "detail": "values=[0.638, 0.452] rel_spread=0.340"
+   },
+   {
+    "name": "layer3.1/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.752, 0.75] abs_spread=0.002 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.1/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.528, 0.526] abs_spread=0.002 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.1/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.1/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.766, 0.765] abs_spread=0.002 abs_tol=0.05"
+   },
+   {
+    "name": "layer3.1/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.391, 0.393] rel_spread=0.005"
+   },
+   {
+    "name": "penult/margin_typeb.auc_margin_typeb",
+    "status": "PASS",
+    "detail": "values=[0.882, 0.884] abs_spread=0.002 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_dist_typeb",
+    "status": "PASS",
+    "detail": "values=[0.837, 0.822] abs_spread=0.015 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_maxprob_typeb",
+    "status": "PASS",
+    "detail": "values=[0.88, 0.883] abs_spread=0.003 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.auc_margin_wrong",
+    "status": "PASS",
+    "detail": "values=[0.912, 0.919] abs_spread=0.007 abs_tol=0.05"
+   },
+   {
+    "name": "penult/margin_typeb.median_margin_ratio_typeb",
+    "status": "PASS",
+    "detail": "values=[0.28, 0.284] rel_spread=0.016"
+   }
+  ],
+  "id_profile_stability": [],
+  "adjacency_stability": [],
+  "decodability_stability": [
+   {
+    "name": "decodability",
+    "status": "WARN",
+    "detail": "linear_probes not present"
+   }
+  ],
+  "commit_agreement": [
+   {
+    "name": "commit_layer",
+    "status": "WARN",
+    "detail": "commit_layer missing in some run"
+   }
+  ],
+  "panel_agreement": [
+   {
+    "name": "panel[0,1]",
+    "status": "WARN",
+    "detail": "no compare_vs_* deformation.json"
+   }
+  ]
+ },
+ "counts": {
+  "PASS": 50,
+  "FAIL": 4,
+  "WARN": 6,
+  "INFO": 0
+ },
+ "verdict": "PARTIAL"
+}

@@ -1,0 +1,161 @@
+exp_id: margin_v1_resnet20_s1
+stage: atlas
+backbone:
+  arch: cifar10_resnet20
+  weights: /workspace/models/resnet20_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:
+    dataset: cifar10_train
+    n: 10000
+    seed: 0
+  clean_test:
+    dataset: cifar10
+    n: 5000
+  panel:
+    dataset: cifar10_train
+    n: 64
+    seed: 123
+  cifar10c:
+    corruptions: all
+    severities:
+    - 1
+    - 3
+    - 5
+    n_per_set: 2000
+  ood:
+  - dataset: cifar100
+    n: 2000
+  - dataset: svhn
+    n: 2000
+hooks:
+  layers: blocks
+  block_stride: 1
+  pooling: gap
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+invariants:
+- margin_typeb
+cross_layer:
+- -layer_cka
+- -commit_layer
+invariant_cfg:
+  margin_typeb:
+    cut: 0.7
+    cuts:
+    - 0.0
+    - 0.5
+    - 0.6
+    - 0.7
+    - 0.8
+    - 0.9
+    - 0.95
+    - 0.99
+    min_n: 10
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: all
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions:
+  - gaussian_noise
+  - shot_noise
+  - defocus_blur
+  - motion_blur
+  - snow
+  - fog
+  - brightness
+  - contrast
+  - pixelate
+  - jpeg_compression
+  confirmation_corruptions:
+  - impulse_noise
+  - glass_blur
+  - zoom_blur
+  - frost
+  - elastic_transform
+  discovery_seeds:
+  - 0
+  confirmation_seeds:
+  - 1
+  - 2
+  - 3
+  - 4
+outputs:
+  root: results/margin_v1_resnet20_s1
+  plots: false
+notes: "A3 pre-registration (committed before any margin_typeb value exists on a real\
+  \ dump). Design and archaeology:\ndocs/plans/A3_MARGIN.md. Every margin_* manifest\
+  \ is a Stage-B-only rebuild of an existing dump (pod_atlas.sh\n--a3: results/margin_<x>/dump\
+  \ -> ../atlas_<x>/dump, atlas.run --skip-extract); provenance.json records the\n\
+  Stage B commit (stage_b_git_commit) and the dump it read (dump_realpath).\nFrozen\
+  \ definition (atlas/invariants/margin.py at this commit): type-b = argmax != label\
+  \ AND maxprob > 0.7\n(strict); negatives = all correct test samples (secondary:\
+  \ confidence-matched = correct with maxprob > 0.7);\ncenters = class means of the\
+  \ 10k train reference (true labels); full pooled layer, Euclidean, unnormalized;\n\
+  margin = d2 - d1 (second-nearest minus nearest center distance); dist = d1; layer\
+  \ = penult (layer3.2 is its\nalias); split = clean test[:5000]; AUC oriented (errors\
+  \ positive; -margin, +dist, -maxprob, -energy) with\nDeLong SEs and a paired DeLong\
+  \ test of margin minus dist; no ctx.rng draws. The cut is swept (0, 0.5, 0.6,\n\
+  0.7, 0.8, 0.9, 0.95, 0.99); changing the cut is discovery-only (v0) and needs a\
+  \ new pre-registration. The\nlegacy block (test-split in-sample centers, direction-free\
+  \ AUC max(a, 1 - a), 4-group subnet cluster\ndistance, mean squared activation \"\
+  energy\") serves M1 only. Not measured this session: corrupt-split margins\n(no\
+  \ corrupt predictions reach invariants) and the exact 10k reproduction of the legacy\
+  \ numbers (M1x).\nHoldout: discovery = the Upgraded-Mod numbers + v0 and the v1\
+  \ hub (s0). Confirmation = s1, s2 (+ s3, s4 from\nStage 1b in this session). Seeds\
+  \ 1, 2 are spent for the Stage 1 families\n(results/atlas_v1_resnet20_s1/SESSION.md:112-113).\
+  \ No margin, maxprob or type-b statistic of them exists in\nany committed result\
+  \ (only accuracy and error_consistency_test), so this is their first and only margin\n\
+  touch. The margin_typeb critic\nitems are not part of the Stage 1b (s3, s4) decision;\
+  \ the Stage 1b and Stage 2 atlases exclude margin_typeb.\nGate (rules 4, 7): pod_atlas.sh\
+  \ --a3 rebuilds v0, v1 hub and rand (and the resnet56 hub for E5) first, and\nrebuilds\
+  \ the confirmation dumps (s1, s2, s1_ref1, s3, s4) only if the M1 margin clause\
+  \ passes on v0. M1\nmargin FAIL: the confirmation seeds stay untouched and row 9\
+  \ gets no verdict.\nPaths: results/margin_<x>/atlas.json per_layer.penult.margin_typeb.<key>;\
+  \ critics\nresults/critic_margin_v1_s1_s2, _s0_s1_s2, _s1_noise (s1 vs s1_ref1),\
+  \ _s1_s4 (only if s3, s4 ran). Only\npenult is judged; other critic families WARN\
+  \ on margin-only dirs by construction. Never mix v0 and v1 in one\ncritic (input_norm\
+  \ FAIL); M5 and E5 are read from the atlas.json files.\n\nM1 (reproduction; v0 =\
+  \ results/margin_v0_resnet20_cifar10, penult, legacy block): dir_auc_margin in\n\
+  \   [0.865, 0.925] (legacy 0.895) and raw_auc_margin < 0.5 [the margin clause: core,\
+  \ gates everything below];\n   dir_auc_cluster_subnet in [0.723, 0.803] (0.763);\
+  \ dir_auc_energy in [0.717, 0.797] (0.757);\n   n_wrong == 408 (plumbing); n_cw\
+  \ in [245, 300].\nM2 (penult, primary): margin_minus_dist_typeb > 0 and margin_minus_dist_typeb_p\
+  \ < 0.05 in each of v0, s0hub,\n   s1, s2 (s3, s4 if run); in v0's legacy block\
+  \ dir_auc_margin > dir_auc_cluster_subnet.\nM3 (penult): median_margin_typeb < median_margin_correct,\
+  \ median_margin_ratio_typeb <= 0.5 and\n   median_margin_ratio_wrong <= 0.5 in each\
+  \ of v0, s0hub, s1, s2 (s3, s4 if run).\nM4 (penult auc_margin_typeb): |s1 - s2|\
+  \ <= 0.05 (critic_margin_v1_s1_s2 item penult/margin_typeb.auc_margin_typeb\n  \
+  \ PASS); range over s1..s4 <= 0.05 (critic_margin_v1_s1_s4) if s3 and s4 ran; twin\
+  \ |s1 - s1_ref1| <= 0.01;\n   s0hub within 0.05 of mean(s1, s2).\nM5 (v1 hub vs\
+  \ v0: same weights, std 0.2023 vs 0.247; penult): |delta auc_margin_typeb| <= 0.03\
+  \ and\n   |delta median_margin_ratio_typeb| <= 0.10; n_typeb and typeb_frac_of_wrong\
+  \ are recorded for both, no\n   direction predicted.\nN  (null, results/margin_v1_resnet20_rand):\
+  \ penult auc_margin_wrong in [0.40, 0.65].\nE  exploratory, never promoted:\nE1\
+  \ (rule 8: margin may restate confidence) penult spearman_margin_maxprob >= 0.7\
+  \ and\n   |auc_margin_confmatched - auc_maxprob_confmatched| <= 0.05 in s1 and s2\
+  \ (confidence-matched AUCs, so the\n   maxprob > 0.7 selection of type-b cannot\
+  \ favour maxprob).\nE2 penult auc_margin_typeb >= max over stem .. layer2.2 of auc_margin_typeb\
+  \ + 0.10.\nE4 penult auc_energy_typeb > 0.5 (type-b has the lower mean squared activation).\n\
+  E5 (scale, rule 6: results/margin_v1_resnet56_s0hub vs results/margin_v1_resnet20_s0hub,\
+  \ both built in this\n   session with this code; resnet56 penult alias = layer3.8):\
+  \ resnet56 hub penult auc_margin_typeb >= 0.80 and\n   |auc_56 - auc_20| <= 0.05\
+  \ (oriented: errors positive, correct samples have the larger margin). Legacy\n\
+  \   0.895 -> 0.905 (std 0.247, test-set centers, full 10k) is INFO only, not a target.\
+  \ One depth-56 instance\n   and no accuracy control for margin: \"improves with\
+  \ scale\" is not claimable. NOT_EVALUABLE if M1 fails.\n(E3, corrupt-split margins,\
+  \ is not measured this session.)\nRow 9 decision (results/margin_v1_resnet20_s1/SESSION.md),\
+  \ every outcome assigned:\n   no verdict (row stays proposed) if the M1 margin clause\
+  \ fails;\n   PROMOTE (replicated) if the M1 margin clause passes, M2 and M3 hold\
+  \ in every confirmation seed that ran\n     (s1, s2; s3, s4 if run) and M4 holds;\n\
+  \   REJECT (x) if M2 fails in s1 and in s2;\n   YELLOW (measured, not promoted)\
+  \ for any other outcome; SESSION.md names the failing clause.\n   If E1 holds, row\
+  \ 9 states \"margin ~ maxprob (not an independent detector)\".\n"
