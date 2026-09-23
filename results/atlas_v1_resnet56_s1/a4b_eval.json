@@ -1,0 +1,5490 @@
+{
+ "dry_run": false,
+ "root": "results",
+ "check_dir": "instrument_check_a4b",
+ "G0c": {
+  "replay": [
+   {
+    "old": "atlas_v1_resnet20_s0hub_st2",
+    "new": "atlas_v1_resnet20_s0hub_st3",
+    "leaves": 38058,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet20_s1_st2",
+    "new": "atlas_v1_resnet20_s1_st3",
+    "leaves": 38075,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet20_s2_st2",
+    "new": "atlas_v1_resnet20_s2_st3",
+    "leaves": 38064,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet20_s3",
+    "new": "atlas_v1_resnet20_s3_st3",
+    "leaves": 38050,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet20_s4",
+    "new": "atlas_v1_resnet20_s4_st3",
+    "leaves": 38067,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet56_s0hub",
+    "new": "atlas_v1_resnet56_s0hub_st3",
+    "leaves": 38073,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "atlas_v1_resnet56_e40",
+    "new": "atlas_v1_resnet56_e40_st3",
+    "leaves": 38066,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet20_s0hub",
+    "new": "margin_v1_resnet20_s0hub_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet20_s1",
+    "new": "margin_v1_resnet20_s1_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet20_s2",
+    "new": "margin_v1_resnet20_s2_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet20_s3",
+    "new": "margin_v1_resnet20_s3_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet20_s4",
+    "new": "margin_v1_resnet20_s4_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   },
+   {
+    "old": "margin_v1_resnet56_s0hub",
+    "new": "margin_v1_resnet56_s0hub_st3",
+    "leaves": 12368,
+    "mismatches": 0,
+    "first": [],
+    "status": "IDENTICAL"
+   }
+  ],
+  "same_space_cka": [
+   {
+    "old": "atlas_v1_resnet20_s0hub_st2",
+    "new": "atlas_v1_resnet20_s0hub_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet20_s1_st2",
+    "new": "atlas_v1_resnet20_s1_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet20_s2_st2",
+    "new": "atlas_v1_resnet20_s2_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet20_s3",
+    "new": "atlas_v1_resnet20_s3_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet20_s4",
+    "new": "atlas_v1_resnet20_s4_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet56_s0hub",
+    "new": "atlas_v1_resnet56_s0hub_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   },
+   {
+    "old": "atlas_v1_resnet56_e40",
+    "new": "atlas_v1_resnet56_e40_st3",
+    "cka_test": 1,
+    "ge_0999": true
+   }
+  ],
+  "check_json": "PASS",
+  "check_bitwise": true,
+  "code_diff": [
+   "HEAD d257d91",
+   " atlas/invariants/margin.py | 225 ++++++++++++++++++++++++++++++++++++++++++++-",
+   " requirements.txt           |   7 ++",
+   " 2 files changed, 228 insertions(+), 4 deletions(-)"
+  ],
+  "versions": {
+   "python": "3.12.3",
+   "numpy": "2.1.2",
+   "scipy": "1.18.1",
+   "sklearn": "1.9.1",
+   "torch": "2.8.0+cu128",
+   "torchvision": "0.23.0+cu128",
+   "device": "NVIDIA GeForce RTX 4090"
+  },
+  "status": "IDENTICAL"
+ },
+ "G0b": {
+  "atlases": {
+   "atlas_v1_resnet20_s0hub_st3": "PASS",
+   "atlas_v1_resnet20_s1_st3": "PASS",
+   "atlas_v1_resnet20_s2_st3": "PASS",
+   "atlas_v1_resnet20_s3_st3": "PASS",
+   "atlas_v1_resnet20_s4_st3": "PASS",
+   "atlas_v1_resnet56_s0hub_st3": "PASS",
+   "atlas_v1_resnet56_s0hub_ref1": "PASS",
+   "atlas_v1_resnet56_e40_st3": "PASS",
+   "atlas_v1_resnet56_e50": "PASS",
+   "atlas_v1_resnet56_e60": "PASS",
+   "atlas_v1_resnet56_e70": "PASS",
+   "atlas_v1_resnet56_s12m": "PASS",
+   "atlas_v1_resnet56_s13m": "PASS",
+   "atlas_v1_resnet56_s1": "PASS",
+   "atlas_v1_resnet56_s2": "PASS",
+   "margin_v1_resnet20_s0hub_st3": "PASS",
+   "margin_v1_resnet20_s1_st3": "PASS",
+   "margin_v1_resnet20_s2_st3": "PASS",
+   "margin_v1_resnet20_s3_st3": "PASS",
+   "margin_v1_resnet20_s4_st3": "PASS",
+   "margin_v1_resnet56_s0hub_st3": "PASS",
+   "margin_v1_resnet56_s1": "PASS",
+   "margin_v1_resnet56_s2": "PASS",
+   "margin_v1_resnet56_e50": "PASS",
+   "margin_v1_resnet56_e60": "PASS",
+   "margin_v1_resnet56_e70": "PASS",
+   "margin_v1_resnet56_s12m": "PASS",
+   "margin_v1_resnet56_s13m": "PASS"
+  },
+  "critic_input_norm": {
+   "critic_v1_resnet56_s1_s2": "PASS",
+   "critic_v1_resnet56_s0_s1_s2": "PASS",
+   "critic_v1_resnet56_hub_noise": "PASS",
+   "critic_v1_resnet20_st3_band": "PASS",
+   "critic_v1_scale3_r20_r56seeds": "PASS",
+   "critic_v1_scale3_r20_r56matched": "PASS",
+   "critic_margin_v1_resnet56_s1_s2": "PASS"
+  },
+  "i2_status": "PASS"
+ },
+ "G0e": {
+  "p": "f1c3c43",
+  "p_run": "d257d91",
+  "frozen": [
+   "experiments/queue/atlas_v1_resnet20_s0hub_st3.yaml",
+   "experiments/queue/margin_v1_resnet20_s0hub_st3.yaml",
+   "experiments/queue/atlas_v1_resnet20_s1_st3.yaml",
+   "experiments/queue/margin_v1_resnet20_s1_st3.yaml",
+   "experiments/queue/atlas_v1_resnet20_s2_st3.yaml",
+   "experiments/queue/margin_v1_resnet20_s2_st3.yaml",
+   "experiments/queue/atlas_v1_resnet20_s3_st3.yaml",
+   "experiments/queue/margin_v1_resnet20_s3_st3.yaml",
+   "experiments/queue/atlas_v1_resnet20_s4_st3.yaml",
+   "experiments/queue/margin_v1_resnet20_s4_st3.yaml",
+   "experiments/queue/atlas_v1_resnet56_s0hub_st3.yaml",
+   "experiments/queue/atlas_v1_resnet56_s0hub_ref1.yaml",
+   "experiments/queue/atlas_v1_resnet56_e40_st3.yaml",
+   "experiments/queue/atlas_v1_resnet56_e50.yaml",
+   "experiments/queue/atlas_v1_resnet56_e60.yaml",
+   "experiments/queue/atlas_v1_resnet56_e70.yaml",
+   "experiments/queue/atlas_v1_resnet56_e90.yaml",
+   "experiments/queue/atlas_v1_resnet56_s12m.yaml",
+   "experiments/queue/atlas_v1_resnet56_s13m.yaml",
+   "experiments/queue/atlas_v1_resnet56_s1.yaml",
+   "experiments/queue/atlas_v1_resnet56_s2.yaml",
+   "experiments/queue/margin_v1_resnet56_s0hub_st3.yaml",
+   "experiments/queue/margin_v1_resnet56_s1.yaml",
+   "experiments/queue/margin_v1_resnet56_s2.yaml",
+   "experiments/queue/margin_v1_resnet56_e50.yaml",
+   "experiments/queue/margin_v1_resnet56_e60.yaml",
+   "experiments/queue/margin_v1_resnet56_e70.yaml",
+   "experiments/queue/margin_v1_resnet56_e90.yaml",
+   "experiments/queue/margin_v1_resnet56_s12m.yaml",
+   "experiments/queue/margin_v1_resnet56_s13m.yaml",
+   "experiments/queue/margin_b1_*.yaml",
+   "docs/plans/STAGE2B.md",
+   "docs/plans/STAGE2.md",
+   "docs/plans/B1_VIT_MARGIN.md",
+   "scripts/a4b_eval.js",
+   "scripts/b1_verdicts.js",
+   "scripts/b1_gate.py",
+   "experiments/tolerances_default.yaml",
+   "ATLAS_STATUS.md"
+  ],
+  "runs": {
+   "atlas_v1_resnet20_s0hub_st3": "PASS",
+   "atlas_v1_resnet20_s1_st3": "PASS",
+   "atlas_v1_resnet20_s2_st3": "PASS",
+   "atlas_v1_resnet20_s3_st3": "PASS",
+   "atlas_v1_resnet20_s4_st3": "PASS",
+   "atlas_v1_resnet56_s0hub_st3": "PASS",
+   "atlas_v1_resnet56_s0hub_ref1": "PASS",
+   "atlas_v1_resnet56_e40_st3": "PASS",
+   "atlas_v1_resnet56_e50": "PASS",
+   "atlas_v1_resnet56_e60": "PASS",
+   "atlas_v1_resnet56_e70": "PASS",
+   "atlas_v1_resnet56_s12m": "PASS",
+   "atlas_v1_resnet56_s13m": "PASS",
+   "atlas_v1_resnet56_s1": "PASS",
+   "atlas_v1_resnet56_s2": "PASS",
+   "margin_v1_resnet20_s0hub_st3": "PASS",
+   "margin_v1_resnet20_s1_st3": "PASS",
+   "margin_v1_resnet20_s2_st3": "PASS",
+   "margin_v1_resnet20_s3_st3": "PASS",
+   "margin_v1_resnet20_s4_st3": "PASS",
+   "margin_v1_resnet56_s0hub_st3": "PASS",
+   "margin_v1_resnet56_s1": "PASS",
+   "margin_v1_resnet56_s2": "PASS",
+   "margin_v1_resnet56_e50": "PASS",
+   "margin_v1_resnet56_e60": "PASS",
+   "margin_v1_resnet56_e70": "PASS",
+   "margin_v1_resnet56_s12m": "PASS",
+   "margin_v1_resnet56_s13m": "PASS"
+  },
+  "p_full": "f1c3c43c9c80afbb13c50bbdae2b9e4c9b1afda0",
+  "p_run_full": "d257d9126322d458b7beb8718d19f42d8bfc2606",
+  "p_time_utc": "2026-09-23T13:02:21.000Z",
+  "status": "PASS",
+  "problems": []
+ },
+ "instrument_gate": {
+  "check_json": "PASS",
+  "check_bitwise": true,
+  "r20_claims_hold": {
+   "atlas_v1_resnet20_s0hub_st3": true,
+   "atlas_v1_resnet20_s1_st3": true,
+   "atlas_v1_resnet20_s2_st3": true,
+   "atlas_v1_resnet20_s3_st3": true,
+   "atlas_v1_resnet20_s4_st3": true
+  },
+  "ok": true
+ },
+ "target": 0.9259,
+ "band": {
+  "id": {
+   "vals": [
+    9.914951193316613,
+    9.75662635827708,
+    10.035521054840993,
+    9.836163242529258,
+    9.901310513819816
+   ],
+   "min": 9.75662635827708,
+   "max": 10.035521054840993,
+   "w": 0.2788946965639134,
+   "lo": 9.477731661713166,
+   "hi": 10.314415751404907
+  },
+  "sep_ratio": {
+   "vals": [
+    2.9962351990768523,
+    3.066641557437458,
+    3.0212336262389647,
+    2.970031344304589,
+    3.0242276870205154
+   ],
+   "min": 2.970031344304589,
+   "max": 3.066641557437458,
+   "w": 0.09661021313286922,
+   "lo": 2.8734211311717197,
+   "hi": 3.1632517705703274
+  },
+  "bridge": {
+   "vals": [
+    3.3916237111812095,
+    3.424274778743699,
+    3.387958220607529,
+    3.3577238553096205,
+    3.3952010536414328
+   ],
+   "min": 3.3577238553096205,
+   "max": 3.424274778743699,
+   "w": 0.06655092343407842,
+   "lo": 3.291172931875542,
+   "hi": 3.4908257021777773
+  },
+  "nc1": {
+   "vals": [
+    0.16994402609546508,
+    0.1630172884843279,
+    0.16962042949013018,
+    0.17195123411379304,
+    0.16744636821286418
+   ],
+   "min": 0.1630172884843279,
+   "max": 0.17195123411379304,
+   "w": 0.008933945629465145,
+   "lo": 0.15408334285486275,
+   "hi": 0.18088517974325818
+  },
+  "class_excess": {
+   "vals": [
+    0.816,
+    0.8142499999999999,
+    0.81725,
+    0.816,
+    0.8207499999999999
+   ],
+   "min": 0.8142499999999999,
+   "max": 0.8207499999999999,
+   "w": 0.00649999999999995,
+   "lo": 0.80775,
+   "hi": 0.8272499999999998
+  },
+  "nc_acc_test": {
+   "vals": [
+    0.9232,
+    0.9218,
+    0.9248,
+    0.9234,
+    0.9278
+   ],
+   "min": 0.9218,
+   "max": 0.9278,
+   "w": 0.006000000000000005,
+   "lo": 0.9158,
+   "hi": 0.9338
+  },
+  "acc_test": {
+   "vals": [
+    0.9256,
+    0.9226,
+    0.925,
+    0.9222,
+    0.9286
+   ],
+   "min": 0.9222,
+   "max": 0.9286,
+   "w": 0.006399999999999961,
+   "lo": 0.9158000000000001,
+   "hi": 0.9349999999999999
+  },
+  "ref_fit": {
+   "vals": [
+    0.9996,
+    0.9994,
+    0.9997,
+    0.9995,
+    0.9996
+   ],
+   "min": 0.9994,
+   "max": 0.9997,
+   "w": 0.000300000000000078,
+   "lo": 0.9990999999999999,
+   "hi": 1
+  },
+  "cv": {
+   "vals": [
+    0.07334908929628049,
+    0.06849628479116733,
+    0.08082086083050452,
+    0.07909147467828329,
+    0.07421282632241541
+   ],
+   "min": 0.06849628479116733,
+   "max": 0.08082086083050452,
+   "w": 0.01232457603933719,
+   "lo": 0.05617170875183014,
+   "hi": 0.09314543686984171
+  }
+ },
+ "band3": {
+  "id": {
+   "vals": [
+    9.914951193316613,
+    9.75662635827708,
+    10.035521054840993
+   ],
+   "min": 9.75662635827708,
+   "max": 10.035521054840993,
+   "w": 0.2788946965639134,
+   "lo": 9.477731661713166,
+   "hi": 10.314415751404907
+  },
+  "sep_ratio": {
+   "vals": [
+    2.9962351990768523,
+    3.066641557437458,
+    3.0212336262389647
+   ],
+   "min": 2.9962351990768523,
+   "max": 3.066641557437458,
+   "w": 0.07040635836060583,
+   "lo": 2.9258288407162465,
+   "hi": 3.137047915798064
+  },
+  "bridge": {
+   "vals": [
+    3.3916237111812095,
+    3.424274778743699,
+    3.387958220607529
+   ],
+   "min": 3.387958220607529,
+   "max": 3.424274778743699,
+   "w": 0.03631655813616996,
+   "lo": 3.351641662471359,
+   "hi": 3.460591336879869
+  },
+  "nc1": {
+   "vals": [
+    0.16994402609546508,
+    0.1630172884843279,
+    0.16962042949013018
+   ],
+   "min": 0.1630172884843279,
+   "max": 0.16994402609546508,
+   "w": 0.006926737611137185,
+   "lo": 0.1560905508731907,
+   "hi": 0.17687076370660226
+  },
+  "class_excess": {
+   "vals": [
+    0.816,
+    0.8142499999999999,
+    0.81725
+   ],
+   "min": 0.8142499999999999,
+   "max": 0.81725,
+   "w": 0.0030000000000001137,
+   "lo": 0.8112499999999998,
+   "hi": 0.8202500000000001
+  },
+  "nc_acc_test": {
+   "vals": [
+    0.9232,
+    0.9218,
+    0.9248
+   ],
+   "min": 0.9218,
+   "max": 0.9248,
+   "w": 0.0030000000000000027,
+   "lo": 0.9188,
+   "hi": 0.9278
+  },
+  "acc_test": {
+   "vals": [
+    0.9256,
+    0.9226,
+    0.925
+   ],
+   "min": 0.9226,
+   "max": 0.9256,
+   "w": 0.0030000000000000027,
+   "lo": 0.9196,
+   "hi": 0.9286
+  },
+  "ref_fit": {
+   "vals": [
+    0.9996,
+    0.9994,
+    0.9997
+   ],
+   "min": 0.9994,
+   "max": 0.9997,
+   "w": 0.000300000000000078,
+   "lo": 0.9990999999999999,
+   "hi": 1
+  },
+  "cv": {
+   "vals": [
+    0.07334908929628049,
+    0.06849628479116733,
+    0.08082086083050452
+   ],
+   "min": 0.06849628479116733,
+   "max": 0.08082086083050452,
+   "w": 0.01232457603933719,
+   "lo": 0.05617170875183014,
+   "hi": 0.09314543686984171
+  }
+ },
+ "ladder": {
+  "rungs": [
+   {
+    "E": 40,
+    "acc": 0.9192,
+    "seed": 11,
+    "atlas": "atlas_v1_resnet56_e40_st3",
+    "delta": 0.0067,
+    "inWindow": false,
+    "hasAtlas": true
+   },
+   {
+    "E": 50,
+    "acc": 0.922,
+    "seed": 11,
+    "atlas": "atlas_v1_resnet56_e50",
+    "delta": 0.0039,
+    "inWindow": true,
+    "hasAtlas": true
+   },
+   {
+    "E": 60,
+    "acc": 0.9256,
+    "seed": 11,
+    "atlas": "atlas_v1_resnet56_e60",
+    "delta": 0.0003,
+    "inWindow": true,
+    "hasAtlas": true
+   },
+   {
+    "E": 70,
+    "acc": 0.9253,
+    "seed": 11,
+    "atlas": "atlas_v1_resnet56_e70",
+    "delta": 0.0006,
+    "inWindow": true,
+    "hasAtlas": true
+   }
+  ],
+  "status": "matched",
+  "status_reason": null,
+  "M11": 60,
+  "pod_e_star": 60,
+  "in_window": [
+   60,
+   70,
+   50
+  ],
+  "in_window_without_atlas": [],
+  "interp": null,
+  "Mc": [
+   {
+    "name": "M12",
+    "trained": true,
+    "E": 60,
+    "acc": 0.9249,
+    "evaluable": true,
+    "why": []
+   },
+   {
+    "name": "M13",
+    "trained": true,
+    "E": 60,
+    "acc": 0.9277,
+    "evaluable": true,
+    "why": []
+   }
+  ]
+ },
+ "seed_acc": [
+  0.9442,
+  0.9404
+ ],
+ "R0_56": true,
+ "guard": [],
+ "promotion_blocked_by": [],
+ "D": [
+  {
+   "field": "id",
+   "side": "HIGH",
+   "mstar": 10.766299041448065,
+   "m11_side": "HIGH",
+   "mc": [
+    {
+     "name": "M12",
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "name": "M13",
+     "E": 60,
+     "side": "HIGH"
+    }
+   ],
+   "seeds": [
+    "HIGH",
+    "HIGH"
+   ],
+   "window": [
+    {
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "E": 70,
+     "side": "HIGH"
+    },
+    {
+     "E": 50,
+     "side": "HIGH"
+    }
+   ],
+   "outcome": "CONFIRMED",
+   "not_evaluable_because": [],
+   "info": {
+    "mstar_beyond_edge": 0.45188329004315797,
+    "t56_abs_delta": 0.11273447835571204
+   },
+   "b20_3": {
+    "mstar_side": "HIGH",
+    "seeds": [
+     "HIGH",
+     "HIGH"
+    ]
+   }
+  },
+  {
+   "field": "sep_ratio",
+   "side": "HIGH",
+   "mstar": 3.3677885295901397,
+   "m11_side": "HIGH",
+   "mc": [
+    {
+     "name": "M12",
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "name": "M13",
+     "E": 60,
+     "side": "HIGH"
+    }
+   ],
+   "seeds": [
+    "HIGH",
+    "HIGH"
+   ],
+   "window": [
+    {
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "E": 70,
+     "side": "HIGH"
+    },
+    {
+     "E": 50,
+     "side": "IN"
+    }
+   ],
+   "outcome": "FIT-SENSITIVE",
+   "not_evaluable_because": [],
+   "info": {
+    "mstar_beyond_edge": 0.2045367590198124,
+    "t56_abs_delta": 0.05078705028795305
+   },
+   "b20_3": {
+    "mstar_side": "HIGH",
+    "seeds": [
+     "HIGH",
+     "HIGH"
+    ]
+   }
+  },
+  {
+   "field": "bridge",
+   "side": "HIGH",
+   "mstar": 3.644303603700945,
+   "m11_side": "HIGH",
+   "mc": [
+    {
+     "name": "M12",
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "name": "M13",
+     "E": 60,
+     "side": "HIGH"
+    }
+   ],
+   "seeds": [
+    "HIGH",
+    "HIGH"
+   ],
+   "window": [
+    {
+     "E": 60,
+     "side": "HIGH"
+    },
+    {
+     "E": 70,
+     "side": "HIGH"
+    },
+    {
+     "E": 50,
+     "side": "IN"
+    }
+   ],
+   "outcome": "FIT-SENSITIVE",
+   "not_evaluable_because": [],
+   "info": {
+    "mstar_beyond_edge": 0.15347790152316776,
+    "t56_abs_delta": 0.0662173049699657
+   },
+   "b20_3": {
+    "mstar_side": "HIGH",
+    "seeds": [
+     "HIGH",
+     "HIGH"
+    ]
+   }
+  },
+  {
+   "field": "nc1",
+   "side": "LOW",
+   "mstar": 0.12860598686137398,
+   "m11_side": "LOW",
+   "mc": [
+    {
+     "name": "M12",
+     "E": 60,
+     "side": "LOW"
+    },
+    {
+     "name": "M13",
+     "E": 60,
+     "side": "LOW"
+    }
+   ],
+   "seeds": [
+    "LOW",
+    "LOW"
+   ],
+   "window": [
+    {
+     "E": 60,
+     "side": "LOW"
+    },
+    {
+     "E": 70,
+     "side": "LOW"
+    },
+    {
+     "E": 50,
+     "side": "LOW"
+    }
+   ],
+   "outcome": "CONFIRMED",
+   "not_evaluable_because": [],
+   "info": {
+    "mstar_beyond_edge": 0.02547735599348877,
+    "t56_abs_delta": 0.0014307035779523233
+   },
+   "b20_3": {
+    "mstar_side": "LOW",
+    "seeds": [
+     "LOW",
+     "LOW"
+    ]
+   }
+  }
+ ],
+ "D_ID": "CONFIRMED",
+ "D_COLL": "FIT-SENSITIVE",
+ "row11": {
+  "D-ID": "✅",
+  "D-COLL": "🟡"
+ },
+ "acc_fields": {
+  "class_excess": {
+   "mstar": 0.81675,
+   "seeds": [
+    0.839,
+    0.833
+   ],
+   "labels": [
+    "NOT-DEPTH",
+    "NOT-DEPTH"
+   ]
+  },
+  "nc_acc_test": {
+   "mstar": 0.9256,
+   "seeds": [
+    0.9446,
+    0.9398
+   ],
+   "labels": [
+    "NOT-DEPTH",
+    "NOT-DEPTH"
+   ]
+  },
+  "acc_test": {
+   "mstar": 0.9244,
+   "seeds": [
+    0.9438,
+    0.9404
+   ],
+   "labels": [
+    "NOT-DEPTH",
+    "NOT-DEPTH"
+   ]
+  }
+ },
+ "ref_fit": {
+  "m11": 0.9986,
+  "mc": [
+   0.9983,
+   0.9989
+  ],
+  "window": [
+   0.9986,
+   0.9991,
+   0.9981
+  ],
+  "seeds": [
+   1,
+   1
+  ]
+ },
+ "LEVEL": {
+  "D1": {
+   "e20": 0.8670619235836627,
+   "w20_n": 10,
+   "w20_max": 0.9638998682476944,
+   "x_median": 0.786627140974967,
+   "x_min": 0.7072463768115942,
+   "x_n": 10,
+   "all_x_below": true,
+   "w56": 0.6922266139657444,
+   "label": "DEPTH-56-UNSTABLE (COLLAPSE)",
+   "xm_median": 0.8872200263504612,
+   "xm_n": 15,
+   "matched": "NOT-DEPTH at matched accuracy"
+  },
+  "adj": {
+   "e20": 0.9330698287220026,
+   "w20_n": 10,
+   "w20_max": 0.9745718050065876,
+   "x_median": 0.9040843214756258,
+   "x_min": 0.8193675889328064,
+   "x_n": 10,
+   "all_x_below": true,
+   "w56": 0.8997364953886693,
+   "label": "DEPTH-56-UNSTABLE",
+   "xm_median": 0.9230566534914361,
+   "xm_n": 15,
+   "matched": "gap persists at matched accuracy"
+  },
+  "cka": {
+   "e20": 0.8832265826352514,
+   "w20_n": 10,
+   "w20_max": 0.8919131131680462,
+   "x_median": 0.8699763053348226,
+   "x_min": 0.8644896713754242,
+   "x_n": 10,
+   "all_x_below": true,
+   "w56": 0.9218495731027487,
+   "label": "DEPTH-GAP",
+   "xm_median": 0.8766347374985659,
+   "xm_n": 15,
+   "matched": "gap persists at matched accuracy"
+  },
+  "l31": {
+   "e20": 0.8749670619235836,
+   "w20_n": 10,
+   "w20_max": 0.972463768115942,
+   "x_median": 0.8103425559947299,
+   "x_min": 0.7924901185770751,
+   "x_n": 10,
+   "all_x_below": false,
+   "w56": 0.9553359683794467,
+   "label": "DEPTH-GAP",
+   "xm_median": 0.8449275362318841,
+   "xm_n": 15,
+   "matched": "gap persists at matched accuracy"
+  }
+ },
+ "seed_cv": [
+  0.04275600135888161,
+  0.03657329216848224
+ ],
+ "cv_band": {
+  "vals": [
+   0.07334908929628049,
+   0.06849628479116733,
+   0.08082086083050452,
+   0.07909147467828329,
+   0.07421282632241541
+  ],
+  "min": 0.06849628479116733,
+  "max": 0.08082086083050452,
+  "w": 0.01232457603933719,
+  "lo": 0.05617170875183014,
+  "hi": 0.09314543686984171
+ },
+ "claims": {
+  "atlas_v1_resnet56_s1": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.47116550781461275,
+   "C2": true,
+   "C2_vals": [
+    0.6082443961378721,
+    0.17291392137390615,
+    0.1007836920971033
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.1124668521726116,
+   "C5a": 8,
+   "C5a_min": 0.0945
+  },
+  "atlas_v1_resnet56_s2": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.46282297095961966,
+   "C2": true,
+   "C2_vals": [
+    0.6687535462005514,
+    0.1533156677354962,
+    0.09054599870216906
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.18675478698509973,
+   "C5a": 8,
+   "C5a_min": 0.07500000000000001
+  },
+  "atlas_v1_resnet56_e60": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.4458926344606068,
+   "C2": true,
+   "C2_vals": [
+    0.6933837927608312,
+    0.09261787356682072,
+    0.06719973621540393
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.08419920154245475,
+   "C5a": 8,
+   "C5a_min": 0.0645
+  },
+  "atlas_v1_resnet56_s12m": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.43291413582534155,
+   "C2": true,
+   "C2_vals": [
+    0.7068779638864157,
+    0.1726868925361421,
+    0.050434100076001354
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.06317904046514844,
+   "C5a": 8,
+   "C5a_min": 0.05499999999999999
+  },
+  "atlas_v1_resnet56_s13m": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.4534903661434393,
+   "C2": true,
+   "C2_vals": [
+    0.5565548653722598,
+    0.1286488157347414,
+    0.08014223800128706
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.1355328374864716,
+   "C5a": 8,
+   "C5a_min": 0.06699999999999998
+  },
+  "atlas_v1_resnet56_e70": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.4296248391682014,
+   "C2": true,
+   "C2_vals": [
+    0.6533032761289929,
+    0.12668371733064748,
+    0.07370571635979661
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.07188832587311289,
+   "C5a": 8,
+   "C5a_min": 0.07849999999999999
+  },
+  "atlas_v1_resnet56_e50": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.42029912656564494,
+   "C2": true,
+   "C2_vals": [
+    0.49781880695182734,
+    0.14366705901250942,
+    0.04831344437036611
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.09912522283276637,
+   "C5a": 8,
+   "C5a_min": 0.06649999999999998
+  },
+  "atlas_v1_resnet56_s0hub_st3": {
+   "C1": true,
+   "C1_peak": "layer3.5",
+   "C1_drop": 0.44985354433566294,
+   "C2": true,
+   "C2_vals": [
+    0.7566585498043337,
+    0.1495236742712464,
+    0.07593533272068798
+   ],
+   "C3": true,
+   "C3_layer": "layer3.5",
+   "C4": 6,
+   "C4_min": 0.19192512988589577,
+   "C5a": 8,
+   "C5a_min": 0.08499999999999999
+  },
+  "atlas_v1_resnet20_s0hub_st3": {
+   "C1": true,
+   "C1_peak": "layer3.1",
+   "C1_drop": 0.48769718667071293,
+   "C2": true,
+   "C2_vals": [
+    0.5297699431115517,
+    0.15172484782365964,
+    0.05460873063664273
+   ],
+   "C3": true,
+   "C3_layer": "layer3.1",
+   "C4": 6,
+   "C4_min": 0.11284536703139902,
+   "C5a": 8,
+   "C5a_min": 0.05849999999999998
+  },
+  "atlas_v1_resnet20_s1_st3": {
+   "C1": true,
+   "C1_peak": "layer3.1",
+   "C1_drop": 0.4982659383087905,
+   "C2": true,
+   "C2_vals": [
+    0.7362875706009211,
+    0.17322675406418064,
+    0.062423265656076254
+   ],
+   "C3": true,
+   "C3_layer": "layer3.1",
+   "C4": 6,
+   "C4_min": 0.13189275303203524,
+   "C5a": 8,
+   "C5a_min": 0.048
+  },
+  "atlas_v1_resnet20_s2_st3": {
+   "C1": true,
+   "C1_peak": "layer3.1",
+   "C1_drop": 0.487557184809851,
+   "C2": true,
+   "C2_vals": [
+    0.682326777135421,
+    0.11866365658444,
+    0.050016429246071525
+   ],
+   "C3": true,
+   "C3_layer": "layer3.1",
+   "C4": 6,
+   "C4_min": 0.11477428443460025,
+   "C5a": 8,
+   "C5a_min": 0.05250000000000002
+  },
+  "atlas_v1_resnet20_s3_st3": {
+   "C1": true,
+   "C1_peak": "layer3.1",
+   "C1_drop": 0.5029792082475029,
+   "C2": true,
+   "C2_vals": [
+    0.5492353325629917,
+    0.13328645772483516,
+    0.08628893837165563
+   ],
+   "C3": true,
+   "C3_layer": "layer3.1",
+   "C4": 6,
+   "C4_min": 0.10483918640294404,
+   "C5a": 8,
+   "C5a_min": 0.051500000000000004
+  },
+  "atlas_v1_resnet20_s4_st3": {
+   "C1": true,
+   "C1_peak": "layer3.1",
+   "C1_drop": 0.4923076229443887,
+   "C2": true,
+   "C2_vals": [
+    0.6441999409153703,
+    0.16088402533851676,
+    0.06899118524714554
+   ],
+   "C3": true,
+   "C3_layer": "layer3.1",
+   "C4": 6,
+   "C4_min": 0.1169461868473034,
+   "C5a": 8,
+   "C5a_min": 0.03950000000000001
+  }
+ },
+ "core_s1_s2": {
+  "S1": true,
+  "S3": true,
+  "S5": true,
+  "S7": true,
+  "S8": true,
+  "S9": true,
+  "S7_max_mad": 0.082
+ },
+ "core_source": "critic critic_v1_resnet56_s1_s2",
+ "core_recomputed": {
+  "S1": true,
+  "S3": true,
+  "S5": true,
+  "S7": true,
+  "S8": true,
+  "S9": true,
+  "S7_max_mad": 0.08167979117070823
+ },
+ "critic_pair": {
+  "dir": "critic_v1_resnet56_s1_s2",
+  "S1": true,
+  "S3": true,
+  "S5": true,
+  "S7": true,
+  "S7_max_mad": 0.082,
+  "S8": true,
+  "S9": true,
+  "auc_margin_typeb": null,
+  "synthetic_refusal": true,
+  "holdout_hygiene": true,
+  "input_norm": "PASS",
+  "verdict": "PARTIAL"
+ },
+ "core_mismatch": [],
+ "KILL56": false,
+ "T56": {
+  "core": {
+   "S1": true,
+   "S3": true,
+   "S5": true,
+   "S7": true,
+   "S8": true,
+   "S9": true,
+   "S7_max_mad": 0.026
+  },
+  "core_source": "critic critic_v1_resnet56_hub_noise",
+  "recomputed_mismatch": [],
+  "fail": false,
+  "forecast": {
+   "adj": 0.9931488801054018,
+   "adj_ge_095": true,
+   "id_rho": 1,
+   "id_rho_ge_095": true,
+   "decod_max_mad": 0.034623733947994555,
+   "cka": 1,
+   "D1": 0.9957839262187088,
+   "abs_delta_penult_id": 0.11273447835571204
+  }
+ },
+ "SHAPE": {
+  "1": "SCALE-ROBUST",
+  "3": "SCALE-ROBUST",
+  "4": "SCALE-ROBUST",
+  "5": "SCALE-ROBUST",
+  "7": "COLLAPSE-ARTIFACT (diagnosis, not SCALE-ROBUST)",
+  "8": "SCALE-ROBUST",
+  "6a": "SCALE-ROBUST",
+  "cka (S9, INFO in row 8)": "SCALE-ROBUST"
+ },
+ "PROMO": {
+  "1": "d56 PROMOTE (s1, s2)",
+  "3": "d56 PROMOTE (s1, s2)",
+  "4": "d56 PROMOTE (s1, s2)",
+  "5": "d56 PROMOTE (s1, s2)",
+  "7": "d56 ONE-PAIR (S5 FAIL or D1 s1-s2 < 0.80; a hub pair >= 0.80)",
+  "6a": "d56 PROMOTE (s1, s2)"
+ },
+ "row8_info": "S9 penult cka_test s1-s2 PASS (INFO in row 8's evidence; no cka row)",
+ "M56": {
+  "a_auc": {
+   "seeds": [
+    0.9075550617606692,
+    0.9039338458595153
+   ],
+   "matched": [
+    0.8866121480559512,
+    0.8869747235772755,
+    0.895329950790355
+   ],
+   "r20_median": 0.8847927219385208,
+   "all_ge_080": true,
+   "scale_robust": true,
+   "improves_with_scale_at_matched_acc": false,
+   "auc_band": [
+    0.8654618673887109,
+    0.9165036265020965
+   ]
+  },
+  "b_row9_d56": {
+   "M2": [
+    true,
+    false
+   ],
+   "M3": [
+    true,
+    true
+   ],
+   "M4": true,
+   "M4_recomputed": true,
+   "M4_critic": true,
+   "gap": [
+    0.00814068401154211,
+    0.0005460837068310687
+   ],
+   "gap_p": [
+    0.004324947962149441,
+    0.898774140685473
+   ],
+   "gap_band": [
+    0.020640350714185796,
+    0.09569483116823196
+   ],
+   "grammar": "d56 YELLOW",
+   "tag": "d56 YELLOW",
+   "clauses": "M2, M3, M4 (row 9's d56 tag names them; M56-c beside it)",
+   "promotable": false,
+   "promotion_blocked_by": [],
+   "m2_failure_attribution": "NOT-DEPTH",
+   "m2_failure_attribution_reason": "M2 at atlas_v1_resnet56_e60, atlas_v1_resnet56_s12m, atlas_v1_resnet56_s13m",
+   "matched_M2": [
+    true,
+    true,
+    true
+   ]
+  },
+  "c_confidence": {
+   "E1": [
+    true,
+    true
+   ],
+   "gap_cm": [
+    0.006038790157553597,
+    0.012096361177751924
+   ],
+   "r20_gap_cm": [
+    -0.001266249389652807,
+    0.0017124725560069276,
+    0.0003200265716312156,
+    -0.0018034796548634935,
+    -0.0004911514773524583
+   ],
+   "tie_call": [
+    "NO-LEAD",
+    "TIES-EXCLUDED"
+   ],
+   "note": "no paired test of margin - maxprob in margin_typeb; the lead is descriptive",
+   "b1_e9_info": [
+    null,
+    null
+   ]
+  }
+ },
+ "rule8": {
+  "adj_gt_max": false,
+  "cka_gt_max": true,
+  "D1_gt_max": false
+ },
+ "pairs": {
+  "W20": [
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet20_s1_st3",
+    "D1": 0.9552042160737813,
+    "adj": 0.9389986824769433,
+    "l31": 0.9656126482213438,
+    "cka": 0.8833296276621144,
+    "relrep": 4.604979702514358,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.02322539651988047,
+    "sep_abs_spread": 0.07040635836060583,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.051024756063231716,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9030303030303031,
+      "mad": 0.024014714645920598,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02078419056668064,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9272727272727272,
+      "mad": 0.030971429613885416,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.012515499013656894,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7696969696969697,
+      "mad": 0.02028332277214785,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9636363636363636,
+      "mad": 0.03838458275100792,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.9757575757575757,
+      "mad": 0.0138215866742482,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.8303030303030303,
+      "mad": 0.025529680096220565,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02813033086423109,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7454545454545455,
+      "mad": 0.019383362336958653,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.02509259914083693,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.00978074677015103,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.01374999999999998,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.008924999999999983,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 1,
+      "mad": 0.014449999999999985,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.013149999999999995,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9878787878787879,
+      "mad": 0.019927491416147643,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet20_s2_st3",
+    "D1": 0.9631093544137023,
+    "adj": 0.9546772068511199,
+    "l31": 0.9636363636363636,
+    "cka": 0.8901535281338503,
+    "relrep": 4.662580598882575,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.008308618752437134,
+    "sep_abs_spread": 0.024998427162112424,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.028822493522711556,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03010239048876286,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.793939393939394,
+      "mad": 0.029288410776348445,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9272727272727272,
+      "mad": 0.03297917156723473,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8424242424242424,
+      "mad": 0.016039076023121865,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.793939393939394,
+      "mad": 0.01841763673923963,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9151515151515152,
+      "mad": 0.02875679399856227,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03536972922453833,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9151515151515152,
+      "mad": 0.02531154765133021,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.030298221036204637,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9515151515151515,
+      "mad": 0.023732479029711796,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9636363636363636,
+      "mad": 0.020218484965645142,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.010124819145951269,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.011324999999999991,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.004575000000000018,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.014400000000000013,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.01395,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9393939393939394,
+      "mad": 0.019947306131454935,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet20_s3_st3",
+    "D1": 0.92266139657444,
+    "adj": 0.9732542819499341,
+    "l31": 0.8899868247694335,
+    "cka": 0.8872485832343433,
+    "relrep": 4.679401275584875,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.008784004060741172,
+    "sep_abs_spread": 0.02620385477226339,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.01838193660269265,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7575757575757576,
+      "mad": 0.04635042319471943,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02270975614424446,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.026185145987164832,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8787878787878788,
+      "mad": 0.015536646368976753,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.806060606060606,
+      "mad": 0.018644743892284175,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03894252365152297,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.793939393939394,
+      "mad": 0.024928162494560785,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.021449361122884387,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8424242424242424,
+      "mad": 0.04039354883550845,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8424242424242424,
+      "mad": 0.024450218139851432,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9151515151515152,
+      "mad": 0.023824901271056347,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.011514661770682954,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.012274999999999998,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.006625000000000003,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.018274999999999996,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.014425000000000018,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9878787878787879,
+      "mad": 0.018396907294094923,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet20_s4_st3",
+    "D1": 0.9579710144927536,
+    "adj": 0.9330698287220026,
+    "l31": 0.9686429512516469,
+    "cka": 0.8877680971078533,
+    "relrep": 4.635324382408242,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.009299114859857082,
+    "sep_abs_spread": 0.027992487943663047,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.033933436973752215,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8666666666666667,
+      "mad": 0.01891631395898476,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9878787878787879,
+      "mad": 0.016669185969592097,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02275166705343951,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.009319282015273994,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7575757575757576,
+      "mad": 0.017946283543701546,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8545454545454545,
+      "mad": 0.04350000221023766,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.6121212121212121,
+      "mad": 0.03248596680557195,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.9151515151515152,
+      "mad": 0.018589723309749083,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.806060606060606,
+      "mad": 0.05178901545716889,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.6848484848484848,
+      "mad": 0.027612336583898823,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02694525278430817,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.013389293237026529,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.010899999999999955,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.005475000000000008,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9878787878787879,
+      "mad": 0.012175000000000009,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 1,
+      "mad": 0.010174999999999993,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8545454545454545,
+      "mad": 0.025116174954761976,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet20_s2_st3",
+    "D1": 0.9495388669301713,
+    "adj": 0.9725955204216074,
+    "l31": 0.9446640316205533,
+    "cka": 0.88842791633517,
+    "relrep": 4.673805660145292,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.014917497428412087,
+    "sep_abs_spread": 0.0454079311984934,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.028227220764683696,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9515151515151515,
+      "mad": 0.0171278896327225,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.029134538290546564,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.024699929939340833,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8787878787878788,
+      "mad": 0.01816639516922278,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.806060606060606,
+      "mad": 0.02108708633512748,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03734191506025305,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.049191315898786524,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.027150353414559764,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.024341388675426318,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7333333333333333,
+      "mad": 0.027889634707310595,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9030303030303031,
+      "mad": 0.03077273981255072,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8787878787878788,
+      "mad": 0.008936401925408103,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.014224999999999998,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.008949999999999991,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.013449999999999985,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.012299999999999983,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02072725941606032,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet20_s3_st3",
+    "D1": 0.8670619235836627,
+    "adj": 0.964558629776021,
+    "l31": 0.8749670619235836,
+    "cka": 0.8832265826352514,
+    "relrep": 4.585734154579773,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.032007768088607114,
+    "sep_abs_spread": 0.09661021313286922,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.03564976236094855,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9151515151515152,
+      "mad": 0.02455307866898429,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8787878787878788,
+      "mad": 0.019630240265732908,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.016641126339674454,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7212121212121212,
+      "mad": 0.013783677532767064,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8666666666666667,
+      "mad": 0.01742346708590865,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9636363636363636,
+      "mad": 0.025470850800086774,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8666666666666667,
+      "mad": 0.034719059940989866,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9151515151515152,
+      "mad": 0.012418339511793414,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8424242424242424,
+      "mad": 0.025708592637323086,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8424242424242424,
+      "mad": 0.02124369772407898,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8303030303030303,
+      "mad": 0.02568863720438752,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8909090909090909,
+      "mad": 0.00974940766930459,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.009225000000000016,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.00724999999999999,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.01652499999999999,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.010674999999999971,
+      "pass": true
+     },
+     "severity": {
+      "rho": 1,
+      "mad": 0.008230664590398179,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet20_s4_st3",
+    "D1": 0.9578392621870883,
+    "adj": 0.9745718050065876,
+    "l31": 0.9583662714097497,
+    "cka": 0.8855892164137267,
+    "relrep": 4.573237940640093,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.013927033634988888,
+    "sep_abs_spread": 0.04241387041694278,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.03722109649074189,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9393939393939394,
+      "mad": 0.02883643443295249,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9393939393939394,
+      "mad": 0.01946325977320502,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.014544962250397062,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.806060606060606,
+      "mad": 0.01599520909039623,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9393939393939394,
+      "mad": 0.011640774967930655,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9151515151515152,
+      "mad": 0.05303797357820637,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.6363636363636364,
+      "mad": 0.04487343796348025,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.9272727272727272,
+      "mad": 0.028115201440882042,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8545454545454545,
+      "mad": 0.031198722008955758,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9757575757575757,
+      "mad": 0.016350437135319085,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.0247355793432577,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8787878787878788,
+      "mad": 0.015759527472616303,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.009549999999999998,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9515151515151515,
+      "mad": 0.006899999999999995,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9878787878787879,
+      "mad": 0.013874999999999988,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.009525000000000014,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8181818181818182,
+      "mad": 0.01550262487491148,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet20_s3_st3",
+    "D1": 0.9108036890645587,
+    "adj": 0.9707509881422924,
+    "l31": 0.8801054018445322,
+    "cka": 0.8919131131680462,
+    "relrep": 4.59636886859381,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.01709231095139847,
+    "sep_abs_spread": 0.051202281934375815,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.03306236268455365,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8909090909090909,
+      "mad": 0.026748579870451438,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8181818181818182,
+      "mad": 0.03563030533684066,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9272727272727272,
+      "mad": 0.027312425803900482,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.793939393939394,
+      "mad": 0.017477794368644946,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9878787878787879,
+      "mad": 0.012876717975835361,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9272727272727272,
+      "mad": 0.029467501076189388,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7090909090909091,
+      "mad": 0.036252694710021655,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.027955485366286614,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.022603043581114302,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9393939393939394,
+      "mad": 0.013831308905676609,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8787878787878788,
+      "mad": 0.02317960117900367,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.008470767202009852,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.01475000000000004,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.005799999999999949,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.012525000000000008,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9636363636363636,
+      "mad": 0.012975000000000006,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9515151515151515,
+      "mad": 0.023573832733683804,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet20_s4_st3",
+    "D1": 0.9638998682476944,
+    "adj": 0.9665349143610014,
+    "l31": 0.972463768115942,
+    "cka": 0.8917660712880929,
+    "relrep": 4.624852818004151,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.0009905152399151953,
+    "sep_abs_spread": 0.0029940607815506226,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.015318139752214726,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8303030303030303,
+      "mad": 0.028651100588348022,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8181818181818182,
+      "mad": 0.025659682080588476,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.01897043168049819,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8303030303030303,
+      "mad": 0.016476487976740388,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9272727272727272,
+      "mad": 0.015146303855547516,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9151515151515152,
+      "mad": 0.0378292813986791,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7575757575757576,
+      "mad": 0.026705121647278444,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.016832702198334763,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.032840294208007055,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7333333333333333,
+      "mad": 0.02206869295416891,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.040892947183665686,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.020891292726303856,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.012524999999999958,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.005299999999999994,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.014175000000000043,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.013924999999999962,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.793939393939394,
+      "mad": 0.0265424599342777,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet20_s4_st3",
+    "D1": 0.9194993412384717,
+    "adj": 0.9650856389986825,
+    "l31": 0.885638998682477,
+    "cka": 0.8892633802593585,
+    "relrep": 4.696411957445087,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.01808274965519656,
+    "sep_abs_spread": 0.05419634271592644,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.03774965261261207,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8666666666666667,
+      "mad": 0.0375613740834676,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9272727272727272,
+      "mad": 0.021722155949353776,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02051983897382566,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8787878787878788,
+      "mad": 0.011204246286108666,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9636363636363636,
+      "mad": 0.01111402510327868,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03649609611252273,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.024563395356288896,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9636363636363636,
+      "mad": 0.031976845211355916,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9636363636363636,
+      "mad": 0.021082292339989712,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8787878787878788,
+      "mad": 0.018495498406995315,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9030303030303031,
+      "mad": 0.02687578682748874,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.021045641513888623,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.012475000000000009,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.006949999999999979,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9878787878787879,
+      "mad": 0.009400000000000002,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.010700000000000005,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8181818181818182,
+      "mad": 0.020293827962346595,
+      "pass": true
+     }
+    }
+   }
+  ],
+  "X": [
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.7662714097496707,
+    "adj": 0.8193675889328064,
+    "l31": 0.8101449275362319,
+    "cka": 0.8681637969859943,
+    "relrep": 4.572657658106211,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.522269654830286,
+    "sep_abs_spread": 2.1179002357598637,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.045594869973072716,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7090909090909091,
+      "mad": 0.03318969300410811,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.7454545454545455,
+      "mad": 0.04289220600604768,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9272727272727272,
+      "mad": 0.04071565816520827,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8909090909090909,
+      "mad": 0.026683566312155675,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.6242424242424243,
+      "mad": 0.037612270928056656,
+      "pass": false
+     },
+     "saturation_mean": {
+      "rho": 0.47878787878787876,
+      "mad": 0.07408388706787246,
+      "pass": false
+     },
+     "hue_cos": {
+      "rho": 0.9393939393939394,
+      "mad": 0.01790734220534701,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9515151515151515,
+      "mad": 0.024976226318776346,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.7575757575757576,
+      "mad": 0.06050258403382093,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.696969696969697,
+      "mad": 0.03578387038279306,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.8909090909090909,
+      "mad": 0.04083418527275846,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.009133952685324631,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.019024999999999966,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.007124999999999981,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9393939393939394,
+      "mad": 0.025250000000000005,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03192499999999999,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9757575757575757,
+      "mad": 0.019229567448201756,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.841897233201581,
+    "adj": 0.8953886693017128,
+    "l31": 0.8089591567852438,
+    "cka": 0.8704511175444007,
+    "relrep": 4.6772175993908744,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5399857097723121,
+    "sep_abs_spread": 2.2163128148094833,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.02838528933736732,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.45454545454545453,
+      "mad": 0.045940641305044966,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8303030303030303,
+      "mad": 0.023580588248535504,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8666666666666667,
+      "mad": 0.024942491310992205,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9151515151515152,
+      "mad": 0.01965325666486474,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7212121212121212,
+      "mad": 0.02581710348921119,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.024500214457245068,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.9878787878787879,
+      "mad": 0.016236338928358508,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9151515151515152,
+      "mad": 0.03544401132455415,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.04297106897327652,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9636363636363636,
+      "mad": 0.024695199950969714,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9393939393939394,
+      "mad": 0.029371594401712775,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.009165200659753495,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.024525000000000054,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.006850000000000045,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 1,
+      "mad": 0.022725000000000016,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03032499999999999,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.02322675308523701,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.7072463768115942,
+    "adj": 0.9168642951251647,
+    "l31": 0.810540184453228,
+    "cka": 0.8700768638598966,
+    "relrep": 4.647741730279898,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5005622031581808,
+    "sep_abs_spread": 2.047493877399258,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.05370212858344505,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8303030303030303,
+      "mad": 0.02922082136600877,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8303030303030303,
+      "mad": 0.04360683115460143,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.04769371159206539,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7090909090909091,
+      "mad": 0.027010179587871948,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7090909090909091,
+      "mad": 0.03657865961869654,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.6606060606060606,
+      "mad": 0.07264801465074658,
+      "pass": false
+     },
+     "hue_cos": {
+      "rho": 0.9636363636363636,
+      "mad": 0.01956016174419565,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.8181818181818182,
+      "mad": 0.01738070365944126,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.7454545454545455,
+      "mad": 0.07034242053089672,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9636363636363636,
+      "mad": 0.034601596383218323,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.793939393939394,
+      "mad": 0.04233747943955588,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8787878787878788,
+      "mad": 0.012187926833467148,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.017874999999999964,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.009649999999999959,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9393939393939394,
+      "mad": 0.021649999999999968,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02957499999999998,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.01465228455965151,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.8623188405797102,
+    "adj": 0.902239789196311,
+    "l31": 0.8023715415019763,
+    "cka": 0.8710312466683503,
+    "relrep": 4.69358215876674,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5183856313380102,
+    "sep_abs_spread": 2.1459064564488775,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.04008526368393698,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.5878787878787879,
+      "mad": 0.046411691401258406,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8303030303030303,
+      "mad": 0.024778308296042186,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9151515151515152,
+      "mad": 0.022248652920878735,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7696969696969697,
+      "mad": 0.020208271129331483,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8303030303030303,
+      "mad": 0.024030012133799385,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9757575757575757,
+      "mad": 0.0367502925234658,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.9393939393939394,
+      "mad": 0.027758248484155434,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.0174815098015442,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.04559223358134959,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7575757575757576,
+      "mad": 0.035763835321847036,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.026380353995034828,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8424242424242424,
+      "mad": 0.007671720445251924,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.028675000000000055,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.010324999999999983,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 1,
+      "mad": 0.01292500000000001,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.029774999999999968,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9393939393939394,
+      "mad": 0.010204343180845933,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.7093544137022398,
+    "adj": 0.8880105401844532,
+    "l31": 0.833201581027668,
+    "cka": 0.8691753732442755,
+    "relrep": 4.755366799694183,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5145192044479964,
+    "sep_abs_spread": 2.0929018085977513,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.0543277986209099,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6606060606060606,
+      "mad": 0.03666478337527055,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.9393939393939394,
+      "mad": 0.034743797093828466,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03617372166795536,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7696969696969697,
+      "mad": 0.02227145576309435,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8909090909090909,
+      "mad": 0.03050150938919295,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.6727272727272727,
+      "mad": 0.07623399631801542,
+      "pass": false
+     },
+     "hue_cos": {
+      "rho": 0.7333333333333333,
+      "mad": 0.05115735522712619,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03825287055093048,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8909090909090909,
+      "mad": 0.04843546390856363,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.6242424242424243,
+      "mad": 0.048064074655206034,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9030303030303031,
+      "mad": 0.0321742662529183,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.016156686559684157,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.016449999999999985,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.006849999999999956,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9030303030303031,
+      "mad": 0.024499999999999987,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.025275000000000002,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.029020842780771883,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.8046113306982873,
+    "adj": 0.9089591567852437,
+    "l31": 0.8233201581027668,
+    "cka": 0.87024916873654,
+    "relrep": 4.82493923326741,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.532274107675759,
+    "sep_abs_spread": 2.191314387647371,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.017412138635924952,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6848484848484848,
+      "mad": 0.04004591591259088,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.9393939393939394,
+      "mad": 0.01950163104140598,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8666666666666667,
+      "mad": 0.029492612192343292,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.806060606060606,
+      "mad": 0.01810724593553466,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9272727272727272,
+      "mad": 0.017158490312528852,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9272727272727272,
+      "mad": 0.02537463352089196,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8787878787878788,
+      "mad": 0.034506726264646105,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 1,
+      "mad": 0.03110429133872924,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.0368379360727641,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9757575757575757,
+      "mad": 0.027762084992299273,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.02287304838205562,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.0065503410064275515,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.02155000000000002,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.00462499999999999,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.018625000000000023,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.025774999999999985,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.0223254896699008,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.8272727272727273,
+    "adj": 0.8778656126482214,
+    "l31": 0.9144927536231884,
+    "cka": 0.8680373405248385,
+    "relrep": 4.6703258222594854,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.530445288700457,
+    "sep_abs_spread": 2.144104090532127,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.03456574833553474,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7818181818181819,
+      "mad": 0.03394735140052875,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.7575757575757576,
+      "mad": 0.05104420720756386,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9636363636363636,
+      "mad": 0.05115707084649894,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9878787878787879,
+      "mad": 0.018773894578972307,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8787878787878788,
+      "mad": 0.03226467609285143,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8181818181818182,
+      "mad": 0.05782340038742615,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.03552978405757901,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9272727272727272,
+      "mad": 0.015555679434590885,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.05436934014149264,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7090909090909091,
+      "mad": 0.040718254435368785,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03364792440185248,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.017140953886346014,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.02160000000000002,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.007149999999999912,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9393939393939394,
+      "mad": 0.025674999999999983,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.034600000000000006,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.013538902979515637,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.7565217391304347,
+    "adj": 0.9179183135704875,
+    "l31": 0.9137022397891963,
+    "cka": 0.8644896713754242,
+    "relrep": 4.764892820274072,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5481197484108584,
+    "sep_abs_spread": 2.2425166695817467,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.032035394125606735,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.5636363636363636,
+      "mad": 0.052580842894402,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8787878787878788,
+      "mad": 0.023020227082026144,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.029793131784913336,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9757575757575757,
+      "mad": 0.010953617790799073,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9393939393939394,
+      "mad": 0.012062930947632467,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8909090909090909,
+      "mad": 0.043057836749903544,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7696969696969697,
+      "mad": 0.022981169166026456,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.021104617845771667,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.7090909090909091,
+      "mad": 0.04733738028055543,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9151515151515152,
+      "mad": 0.03305524867667079,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8787878787878788,
+      "mad": 0.021715761361208213,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.004970991599304668,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.032600000000000046,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.009274999999999955,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.025400000000000023,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.03534999999999998,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9393939393939394,
+      "mad": 0.015361404708470736,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s4_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.7696969696969697,
+    "adj": 0.9250329380764163,
+    "l31": 0.803425559947299,
+    "cka": 0.8717370882437722,
+    "relrep": 4.79234517815725,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.513594126121831,
+    "sep_abs_spread": 2.0899077478162007,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.059164795152176985,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8909090909090909,
+      "mad": 0.022867569829108102,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.7818181818181819,
+      "mad": 0.04462519352049786,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9272727272727272,
+      "mad": 0.044474905452314,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.025196764797620053,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7818181818181819,
+      "mad": 0.0319982734969693,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.7575757575757576,
+      "mad": 0.0808077102542986,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.5393939393939394,
+      "mad": 0.04409365239257913,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.8181818181818182,
+      "mad": 0.0413831348835073,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.07232839203564707,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9030303030303031,
+      "mad": 0.035300674519984976,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9636363636363636,
+      "mad": 0.05376969508298888,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8909090909090909,
+      "mad": 0.00790738252113935,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.01487500000000001,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.006349999999999989,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9272727272727272,
+      "mad": 0.029474999999999946,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.033599999999999984,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.020803836939219354,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s4_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.8035573122529645,
+    "adj": 0.9059288537549407,
+    "l31": 0.7924901185770751,
+    "cka": 0.8698757468097487,
+    "relrep": 4.777180403777722,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.5313536282467644,
+    "sep_abs_spread": 2.1883203268658202,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.023134513456513427,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.5515151515151515,
+      "mad": 0.038763432310619864,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8666666666666667,
+      "mad": 0.020482548303180827,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8909090909090909,
+      "mad": 0.024234145419577077,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8424242424242424,
+      "mad": 0.02146041526118505,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8787878787878788,
+      "mad": 0.020002152671203356,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8303030303030303,
+      "mad": 0.05355703210739273,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.6,
+      "mad": 0.026619604425965775,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.036840988258403255,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.696969696969697,
+      "mad": 0.04525228039564732,
+      "pass": false
+     },
+     "edge_density": {
+      "rho": 0.7333333333333333,
+      "mad": 0.03137864449703352,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9030303030303031,
+      "mad": 0.03705982672952931,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9030303030303031,
+      "mad": 0.018508201085647786,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.024575000000000048,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.004525000000000001,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9878787878787879,
+      "mad": 0.023699999999999992,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03434999999999997,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9393939393939394,
+      "mad": 0.010596979093975254,
+      "pass": true
+     }
+    }
+   }
+  ],
+  "XM": [
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet56_e60",
+    "D1": 0.896969696969697,
+    "adj": 0.883399209486166,
+    "l31": 0.8750988142292491,
+    "cka": 0.8755686858145455,
+    "relrep": 4.382997323497537,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.11676679608833355,
+    "sep_abs_spread": 0.3715533305132874,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.04863397681564248,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7333333333333333,
+      "mad": 0.02890474128892629,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.03481738805482727,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03895823350440327,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8303030303030303,
+      "mad": 0.03293631994496517,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.5272727272727272,
+      "mad": 0.04129773449483047,
+      "pass": false
+     },
+     "saturation_mean": {
+      "rho": 0.9757575757575757,
+      "mad": 0.03722021043981161,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7696969696969697,
+      "mad": 0.029008582374034576,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.018290813764215607,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03371168952883557,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.6606060606060606,
+      "mad": 0.04022043832327611,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03554368253134014,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.0073727826922061965,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.018549999999999983,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.01150000000000001,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.019950000000000006,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03442499999999998,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9878787878787879,
+      "mad": 0.021994986797675246,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet56_s12m",
+    "D1": 0.9131752305665349,
+    "adj": 0.9079051383399209,
+    "l31": 0.7718050065876153,
+    "cka": 0.8750392591048802,
+    "relrep": 4.742189215789944,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.11655702022825215,
+    "sep_abs_spread": 0.37084451237246885,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.043413719246713486,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8181818181818182,
+      "mad": 0.042658132743194056,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.037168692685880994,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.05127892236889613,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9151515151515152,
+      "mad": 0.02290976466192273,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.6121212121212121,
+      "mad": 0.03210788650601802,
+      "pass": false
+     },
+     "saturation_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.06900146612024598,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7333333333333333,
+      "mad": 0.022358374768748156,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9393939393939394,
+      "mad": 0.027461029372513206,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.08559310706522154,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.6363636363636364,
+      "mad": 0.054021013338625426,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9636363636363636,
+      "mad": 0.025080745060444325,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.00968230771500197,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.01169999999999997,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.006525000000000003,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.019499999999999997,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.033975,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02753607563612308,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s0hub_st3",
+    "b": "atlas_v1_resnet56_s13m",
+    "D1": 0.9258234519104084,
+    "adj": 0.9172595520421607,
+    "l31": 0.8233201581027668,
+    "cka": 0.8771737223292514,
+    "relrep": 4.533314661251763,
+    "rho": 0.9272727272727272,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.1006688584513351,
+    "sep_abs_spread": 0.3176145228649663,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9757575757575757,
+      "mad": 0.03766606937634096,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.5515151515151515,
+      "mad": 0.05708202804311888,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.03304098187844789,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8303030303030303,
+      "mad": 0.0501338070415116,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8909090909090909,
+      "mad": 0.043023385692594944,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.5393939393939394,
+      "mad": 0.041262513127478286,
+      "pass": false
+     },
+     "saturation_mean": {
+      "rho": 0.9030303030303031,
+      "mad": 0.05102589783647256,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8666666666666667,
+      "mad": 0.034123820131638796,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9393939393939394,
+      "mad": 0.02550505554093701,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.07263861809508103,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.6727272727272727,
+      "mad": 0.04910293634546094,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.04352119113253199,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.008939652071708826,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.027275000000000015,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.01849999999999994,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.016900000000000005,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9272727272727272,
+      "mad": 0.03435,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.02549934393442472,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet56_e60",
+    "D1": 0.9198945981554677,
+    "adj": 0.9409749670619236,
+    "l31": 0.9005270092226614,
+    "cka": 0.8753174540865,
+    "relrep": 4.536753674173535,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.09360486261551634,
+    "sep_abs_spread": 0.3011469721526816,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.04245508620794124,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7575757575757576,
+      "mad": 0.02808252432048202,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8303030303030303,
+      "mad": 0.04101515226664092,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.04406967750454428,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.6363636363636364,
+      "mad": 0.033799459276508424,
+      "pass": false
+     },
+     "noise_sigma": {
+      "rho": 0.8181818181818182,
+      "mad": 0.039360858092686954,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9393939393939394,
+      "mad": 0.0490376175050641,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.036528471515470194,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9151515151515152,
+      "mad": 0.022588692004677578,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.03571155493228067,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03162050765147273,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.041178887386700336,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8787878787878788,
+      "mad": 0.011239888686756995,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.02574999999999996,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.01467499999999996,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03052499999999997,
+      "pass": true
+     },
+     "severity": {
+      "rho": 1,
+      "mad": 0.013738866549322553,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet56_s12m",
+    "D1": 0.8826086956521739,
+    "adj": 0.933201581027668,
+    "l31": 0.8051383399209486,
+    "cka": 0.8763965096326142,
+    "relrep": 4.767396843221155,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.09339483059820139,
+    "sep_abs_spread": 0.300438154011863,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.031688205500870974,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9636363636363636,
+      "mad": 0.022812853723667904,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8909090909090909,
+      "mad": 0.03869567147401016,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.04494492960166015,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.696969696969697,
+      "mad": 0.028312371981341976,
+      "pass": false
+     },
+     "noise_sigma": {
+      "rho": 0.8545454545454545,
+      "mad": 0.03196068805696195,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9757575757575757,
+      "mad": 0.051862077876860924,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.6848484848484848,
+      "mad": 0.028319532783030475,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03171897771300572,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.059934875948421305,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7454545454545455,
+      "mad": 0.040965399810956295,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8424242424242424,
+      "mad": 0.03290088424113863,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.014633507162523266,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.01374999999999994,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9151515151515152,
+      "mad": 0.011649999999999983,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.023450000000000006,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.027425000000000012,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.016517910628167865,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s1_st3",
+    "b": "atlas_v1_resnet56_s13m",
+    "D1": 0.9316205533596837,
+    "adj": 0.9533596837944665,
+    "l31": 0.8449275362318841,
+    "cka": 0.8800984892152615,
+    "relrep": 4.536640252806971,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.07748875554561059,
+    "sep_abs_spread": 0.24720816450436045,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.060150110718171376,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6848484848484848,
+      "mad": 0.03889628415523238,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8909090909090909,
+      "mad": 0.03599859308890435,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.03661741790566287,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.6848484848484848,
+      "mad": 0.04075090201555558,
+      "pass": false
+     },
+     "noise_sigma": {
+      "rho": 0.6,
+      "mad": 0.04978868290837405,
+      "pass": false
+     },
+     "saturation_mean": {
+      "rho": 0.9151515151515152,
+      "mad": 0.05806008414601045,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.045011267391019086,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9393939393939394,
+      "mad": 0.02586974592427103,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.06883609413137162,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7818181818181819,
+      "mad": 0.03706712917404659,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.04260170438510368,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.8424242424242424,
+      "mad": 0.014338754137154866,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.029975,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9393939393939394,
+      "mad": 0.018474999999999908,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.024550000000000027,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03040000000000001,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9515151515151515,
+      "mad": 0.021730349708311815,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet56_e60",
+    "D1": 0.8848484848484849,
+    "adj": 0.9314888010540184,
+    "l31": 0.8828722002635047,
+    "cka": 0.8790025310331167,
+    "relrep": 4.6142754145638065,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.10848448945665067,
+    "sep_abs_spread": 0.346554903351175,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.021268518373084345,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8303030303030303,
+      "mad": 0.02796563738974366,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9636363636363636,
+      "mad": 0.023084491779920058,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9030303030303031,
+      "mad": 0.03311499376430148,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7696969696969697,
+      "mad": 0.03137574201408258,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.793939393939394,
+      "mad": 0.02986594481111283,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8787878787878788,
+      "mad": 0.034603497836937114,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8787878787878788,
+      "mad": 0.032873753931885054,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9757575757575757,
+      "mad": 0.019246696568050243,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02293706376853403,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.7454545454545455,
+      "mad": 0.027261143417960255,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9878787878787879,
+      "mad": 0.03065242006179522,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 1,
+      "mad": 0.013653985843791572,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.016774999999999984,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.008624999999999983,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.020800000000000003,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.022725000000000026,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9515151515151515,
+      "mad": 0.025616023568627612,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet56_s12m",
+    "D1": 0.8872200263504612,
+    "adj": 0.9173913043478261,
+    "l31": 0.8115942028985508,
+    "cka": 0.8803463185032587,
+    "relrep": 4.832838834001162,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.10827461551393043,
+    "sep_abs_spread": 0.3458460852103564,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.01588201637610336,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9515151515151515,
+      "mad": 0.022652902895793876,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9757575757575757,
+      "mad": 0.022181320548471824,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.031162706914798343,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8424242424242424,
+      "mad": 0.014248301415196656,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8181818181818182,
+      "mad": 0.023086039617654097,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.9272727272727272,
+      "mad": 0.05795991443854542,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.9636363636363636,
+      "mad": 0.03470280591607803,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.02994676917080995,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9636363636363636,
+      "mad": 0.05668351423686574,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.806060606060606,
+      "mad": 0.03376493721604483,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9636363636363636,
+      "mad": 0.01728981005338901,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9878787878787879,
+      "mad": 0.017545568565906527,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.010475000000000012,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.005149999999999965,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.8909090909090909,
+      "mad": 0.02659999999999999,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9515151515151515,
+      "mad": 0.022875000000000038,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.022970034832829167,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s2_st3",
+    "b": "atlas_v1_resnet56_s13m",
+    "D1": 0.9034255599472991,
+    "adj": 0.9453227931488801,
+    "l31": 0.8204216073781291,
+    "cka": 0.8791876242207677,
+    "relrep": 4.617304241771534,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.09237955670682158,
+    "sep_abs_spread": 0.29261609570285385,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.057299096814816285,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6363636363636364,
+      "mad": 0.034712837762569705,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.9757575757575757,
+      "mad": 0.015824747090013313,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8787878787878788,
+      "mad": 0.02748143409509885,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.7696969696969697,
+      "mad": 0.03193081931428175,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.806060606060606,
+      "mad": 0.031228210348920527,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8909090909090909,
+      "mad": 0.04090857605239558,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 1,
+      "mad": 0.023743211897682238,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.025928168017808208,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9636363636363636,
+      "mad": 0.05378128157691338,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8181818181818182,
+      "mad": 0.032622713868779664,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8909090909090909,
+      "mad": 0.045694381989994946,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9757575757575757,
+      "mad": 0.013007456944792536,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.019800000000000022,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.016324999999999902,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9272727272727272,
+      "mad": 0.02685000000000002,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02485000000000004,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.025233779940091284,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet56_e60",
+    "D1": 0.7837944664031621,
+    "adj": 0.916205533596838,
+    "l31": 0.913965744400527,
+    "cka": 0.8710839795061508,
+    "relrep": 4.472801156911079,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.12551861466555703,
+    "sep_abs_spread": 0.3977571852855508,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.05316374307148086,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.793939393939394,
+      "mad": 0.028959131060457534,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8545454545454545,
+      "mad": 0.04397054789101694,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.04852894701735558,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.022158203331411358,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8424242424242424,
+      "mad": 0.032919796834090485,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8303030303030303,
+      "mad": 0.04598404545281471,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.010831624918762777,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 1,
+      "mad": 0.01621125977048337,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9030303030303031,
+      "mad": 0.036648819709773114,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8909090909090909,
+      "mad": 0.01964867045693456,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.8909090909090909,
+      "mad": 0.027773218926114018,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.014638253170453428,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.02697499999999998,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.012424999999999931,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.021925,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.024950000000000017,
+      "pass": true
+     },
+     "severity": {
+      "rho": 1,
+      "mad": 0.009492383525395375,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet56_s12m",
+    "D1": 0.8268774703557312,
+    "adj": 0.9193675889328063,
+    "l31": 0.9127799736495389,
+    "cka": 0.8742976594839081,
+    "relrep": 4.743331476004743,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.12530895029343822,
+    "sep_abs_spread": 0.39704836714473224,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.04653773739297644,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.9272727272727272,
+      "mad": 0.021128516479967392,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.04362420554718639,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9757575757575757,
+      "mad": 0.04763012715537047,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.8545454545454545,
+      "mad": 0.01965289948279668,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8666666666666667,
+      "mad": 0.02661412078656298,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8909090909090909,
+      "mad": 0.06865762927905991,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.6848484848484848,
+      "mad": 0.031381675544513224,
+      "pass": false
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.021387348316111977,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8545454545454545,
+      "mad": 0.058253354372666676,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9151515151515152,
+      "mad": 0.03269218612123537,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9151515151515152,
+      "mad": 0.022243778514863533,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.018440467466130993,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.014825000000000043,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.00655,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.019674999999999963,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.025400000000000016,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9636363636363636,
+      "mad": 0.020339345362015378,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s3_st3",
+    "b": "atlas_v1_resnet56_s13m",
+    "D1": 0.8155467720685112,
+    "adj": 0.9230566534914361,
+    "l31": 0.9251646903820817,
+    "cka": 0.8726692117836211,
+    "relrep": 4.502702626643537,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.10942867123441755,
+    "sep_abs_spread": 0.34381837763722967,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.030410324002806143,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8666666666666667,
+      "mad": 0.02555695485787567,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8424242424242424,
+      "mad": 0.041154489462004465,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8787878787878788,
+      "mad": 0.042459702717237605,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9515151515151515,
+      "mad": 0.03091534648991908,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8181818181818182,
+      "mad": 0.0379084942076468,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8424242424242424,
+      "mad": 0.04893101620419664,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7090909090909091,
+      "mad": 0.02750761506402913,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.02283118229013259,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.055398505421811295,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9030303030303031,
+      "mad": 0.03185038305489074,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9878787878787879,
+      "mad": 0.030933527213187033,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9515151515151515,
+      "mad": 0.014029385216310095,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.031400000000000025,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.01722499999999988,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9757575757575757,
+      "mad": 0.02527499999999998,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.027525,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.9515151515151515,
+      "mad": 0.020653659621427314,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s4_st3",
+    "b": "atlas_v1_resnet56_e60",
+    "D1": 0.8906455862977603,
+    "adj": 0.9281949934123848,
+    "l31": 0.8853754940711462,
+    "cka": 0.8791343872559095,
+    "relrep": 4.495638016087095,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.10749686200007683,
+    "sep_abs_spread": 0.3435608425696244,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.018854737322838693,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6484848484848484,
+      "mad": 0.022796338741366905,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8787878787878788,
+      "mad": 0.03813755810374082,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.041308628643809464,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9030303030303031,
+      "mad": 0.026084359018028285,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9030303030303031,
+      "mad": 0.032776405757856175,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.7575757575757576,
+      "mad": 0.059006755491246364,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.806060606060606,
+      "mad": 0.02191610086488413,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9636363636363636,
+      "mad": 0.021267254006317272,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.050505394919304905,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9878787878787879,
+      "mad": 0.02095764082710644,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9757575757575757,
+      "mad": 0.04723370025093202,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.009191569367397314,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.023099999999999947,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.009524999999999973,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9636363636363636,
+      "mad": 0.024024999999999953,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03359999999999997,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8181818181818182,
+      "mad": 0.01952489716939681,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s4_st3",
+    "b": "atlas_v1_resnet56_s12m",
+    "D1": 0.861923583662714,
+    "adj": 0.9154150197628459,
+    "l31": 0.7963109354413702,
+    "cka": 0.8773418930974207,
+    "relrep": 4.736262265374833,
+    "rho": 0.9636363636363636,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.10728697684323214,
+    "sep_abs_spread": 0.3428520244288058,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.018568978715716528,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.8303030303030303,
+      "mad": 0.045166470029813326,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.8666666666666667,
+      "mad": 0.03146952027147147,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 1,
+      "mad": 0.03686965619266284,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9393939393939394,
+      "mad": 0.02203780236046624,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.9272727272727272,
+      "mad": 0.026039494315890276,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8303030303030303,
+      "mad": 0.08649127097978586,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8545454545454545,
+      "mad": 0.03666839737931503,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.029746109819252214,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8666666666666667,
+      "mad": 0.053192035322985734,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8424242424242424,
+      "mad": 0.0335661387548136,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9878787878787879,
+      "mad": 0.04206648292525149,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9272727272727272,
+      "mad": 0.010400910999294456,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.015299999999999975,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9757575757575757,
+      "mad": 0.006650000000000022,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9393939393939394,
+      "mad": 0.020824999999999955,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9757575757575757,
+      "mad": 0.031699999999999985,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.020275935255519333,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet20_s4_st3",
+    "b": "atlas_v1_resnet56_s13m",
+    "D1": 0.8761528326745718,
+    "adj": 0.9364953886693017,
+    "l31": 0.810540184453228,
+    "cka": 0.8766347374985659,
+    "relrep": 4.54833825529474,
+    "rho": 0.9272727272727272,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.09139113211579407,
+    "sep_abs_spread": 0.28962203492130323,
+    "decod": {
+     "luminance_mean": {
+      "rho": 0.9878787878787879,
+      "mad": 0.06198638674287471,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.6606060606060606,
+      "mad": 0.04434230428029563,
+      "pass": false
+     },
+     "highfreq_ratio": {
+      "rho": 0.8666666666666667,
+      "mad": 0.028687968032691347,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.8787878787878788,
+      "mad": 0.03885825738342414,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9151515151515152,
+      "mad": 0.035533278296648194,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.7575757575757576,
+      "mad": 0.04116780117753679,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8303030303030303,
+      "mad": 0.04476478421948819,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.7575757575757576,
+      "mad": 0.030176860832134517,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.028600367492095276,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.8545454545454545,
+      "mad": 0.04511936055017084,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.8545454545454545,
+      "mad": 0.03751067781774777,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.053273310380923464,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9030303030303031,
+      "mad": 0.01335403604688934,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.028024999999999977,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 0.9878787878787879,
+      "mad": 0.014724999999999922,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02572499999999998,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9272727272727272,
+      "mad": 0.034375,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.7696969696969697,
+      "mad": 0.0296023299651552,
+      "pass": true
+     }
+    }
+   }
+  ],
+  "W56": {
+   "a": "atlas_v1_resnet56_s1",
+   "b": "atlas_v1_resnet56_s2",
+   "D1": 0.6922266139657444,
+   "adj": 0.8997364953886693,
+   "l31": 0.9553359683794467,
+   "cka": 0.9218495731027487,
+   "relrep": 4.9095759009497115,
+   "rho": 0.9878787878787879,
+   "shift": 0,
+   "commit_shift": 0,
+   "sep_rel_spread": 0.019059861675490546,
+   "sep_abs_spread": 0.09841257904961953,
+   "decod": {
+    "luminance_mean": {
+     "rho": 1,
+     "mad": 0.043267462014576624,
+     "pass": true
+    },
+    "contrast_rms": {
+     "rho": 0.40606060606060607,
+     "mad": 0.04836415912024035,
+     "pass": false
+    },
+    "highfreq_ratio": {
+     "rho": 0.9393939393939394,
+     "mad": 0.032566762324293085,
+     "pass": true
+    },
+    "spectral_slope": {
+     "rho": 0.9636363636363636,
+     "mad": 0.03251451097984705,
+     "pass": true
+    },
+    "spectral_anisotropy": {
+     "rho": 0.9878787878787879,
+     "mad": 0.014901002333454077,
+     "pass": true
+    },
+    "noise_sigma": {
+     "rho": 0.9515151515151515,
+     "mad": 0.02420016083744586,
+     "pass": true
+    },
+    "saturation_mean": {
+     "rho": 0.5272727272727272,
+     "mad": 0.08167979117070823,
+     "pass": false
+    },
+    "hue_cos": {
+     "rho": 0.9030303030303031,
+     "mad": 0.033337083051382985,
+     "pass": true
+    },
+    "hue_sin": {
+     "rho": 0.8666666666666667,
+     "mad": 0.02033628162835068,
+     "pass": true
+    },
+    "colorfulness": {
+     "rho": 0.6121212121212121,
+     "mad": 0.07125811935234419,
+     "pass": false
+    },
+    "edge_density": {
+     "rho": 0.6484848484848484,
+     "mad": 0.042528422389765966,
+     "pass": false
+    },
+    "orientation_entropy": {
+     "rho": 0.8666666666666667,
+     "mad": 0.029841474935860673,
+     "pass": true
+    },
+    "blockiness": {
+     "rho": 0.9757575757575757,
+     "mad": 0.014673508502005045,
+     "pass": true
+    },
+    "class": {
+     "rho": 1,
+     "mad": 0.023700000000000006,
+     "pass": true
+    },
+    "coarse_animal_vehicle": {
+     "rho": 1,
+     "mad": 0.005874999999999964,
+     "pass": true
+    },
+    "corruption_family": {
+     "rho": 0.9393939393939394,
+     "mad": 0.017025000000000002,
+     "pass": true
+    },
+    "corruption_type": {
+     "rho": 0.9636363636363636,
+     "mad": 0.010099999999999987,
+     "pass": true
+    },
+    "severity": {
+     "rho": 0.9757575757575757,
+     "mad": 0.015922715104230867,
+     "pass": true
+    }
+   }
+  },
+  "HUBP": [
+   {
+    "a": "atlas_v1_resnet56_s0hub_st3",
+    "b": "atlas_v1_resnet56_s1",
+    "D1": 0.8401844532279314,
+    "adj": 0.8859025032938076,
+    "l31": 0.9444005270092226,
+    "cka": 0.9263261861728063,
+    "relrep": 5.038684090761329,
+    "rho": 1,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.041776287019858825,
+    "sep_abs_spread": 0.21820754019879018,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.05804134169036497,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7575757575757576,
+      "mad": 0.027427589522238994,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9757575757575757,
+      "mad": 0.022022325357710797,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9515151515151515,
+      "mad": 0.02719642002468714,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9757575757575757,
+      "mad": 0.020123487289699298,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8545454545454545,
+      "mad": 0.027800220580948075,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.7575757575757576,
+      "mad": 0.03356865600006649,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8666666666666667,
+      "mad": 0.027688838967926566,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.8787878787878788,
+      "mad": 0.0190053471769702,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.7454545454545455,
+      "mad": 0.0327543337221607,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.5757575757575758,
+      "mad": 0.04852175882841856,
+      "pass": false
+     },
+     "orientation_entropy": {
+      "rho": 0.9393939393939394,
+      "mad": 0.02905427539102315,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.0044688835712392155,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.010524999999999961,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.0044999999999999485,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.015625000000000017,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.012800000000000006,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8909090909090909,
+      "mad": 0.019534095489563082,
+      "pass": true
+     }
+    }
+   },
+   {
+    "a": "atlas_v1_resnet56_s0hub_st3",
+    "b": "atlas_v1_resnet56_s2",
+    "D1": 0.7604743083003953,
+    "adj": 0.9051383399209486,
+    "l31": 0.9303030303030303,
+    "cka": 0.9259725868644908,
+    "relrep": 5.161506180546629,
+    "rho": 0.9878787878787879,
+    "shift": 0,
+    "commit_shift": 0,
+    "sep_rel_spread": 0.022720948234557146,
+    "sep_abs_spread": 0.11979496114917065,
+    "decod": {
+     "luminance_mean": {
+      "rho": 1,
+      "mad": 0.016858015917815362,
+      "pass": true
+     },
+     "contrast_rms": {
+      "rho": 0.7696969696969697,
+      "mad": 0.041834362510771696,
+      "pass": true
+     },
+     "highfreq_ratio": {
+      "rho": 0.9393939393939394,
+      "mad": 0.03059523242163545,
+      "pass": true
+     },
+     "spectral_slope": {
+      "rho": 0.9151515151515152,
+      "mad": 0.03645706071492474,
+      "pass": true
+     },
+     "spectral_anisotropy": {
+      "rho": 0.9636363636363636,
+      "mad": 0.014968497623581833,
+      "pass": true
+     },
+     "noise_sigma": {
+      "rho": 0.8909090909090909,
+      "mad": 0.010625434787308352,
+      "pass": true
+     },
+     "saturation_mean": {
+      "rho": 0.8666666666666667,
+      "mad": 0.05734897986954961,
+      "pass": true
+     },
+     "hue_cos": {
+      "rho": 0.8545454545454545,
+      "mad": 0.01586927136583317,
+      "pass": true
+     },
+     "hue_sin": {
+      "rho": 0.9878787878787879,
+      "mad": 0.018661702804307633,
+      "pass": true
+     },
+     "colorfulness": {
+      "rho": 0.9151515151515152,
+      "mad": 0.04861442220606692,
+      "pass": true
+     },
+     "edge_density": {
+      "rho": 0.9030303030303031,
+      "mad": 0.028354359298851252,
+      "pass": true
+     },
+     "orientation_entropy": {
+      "rho": 0.9272727272727272,
+      "mad": 0.01893009538803083,
+      "pass": true
+     },
+     "blockiness": {
+      "rho": 0.9393939393939394,
+      "mad": 0.011179512854311676,
+      "pass": true
+     },
+     "class": {
+      "rho": 1,
+      "mad": 0.013175000000000043,
+      "pass": true
+     },
+     "coarse_animal_vehicle": {
+      "rho": 1,
+      "mad": 0.0041249999999999785,
+      "pass": true
+     },
+     "corruption_family": {
+      "rho": 0.9515151515151515,
+      "mad": 0.021500000000000012,
+      "pass": true
+     },
+     "corruption_type": {
+      "rho": 0.9878787878787879,
+      "mad": 0.018849999999999995,
+      "pass": true
+     },
+     "severity": {
+      "rho": 0.8787878787878788,
+      "mad": 0.025456040632255327,
+      "pass": true
+     }
+    }
+   }
+  ],
+  "TWIN": {
+   "a": "atlas_v1_resnet56_s0hub_st3",
+   "b": "atlas_v1_resnet56_s0hub_ref1",
+   "D1": 0.9957839262187088,
+   "adj": 0.9931488801054018,
+   "l31": 0.99433465085639,
+   "cka": 1,
+   "relrep": 8.154242908019157,
+   "rho": 1,
+   "shift": 0,
+   "commit_shift": 0,
+   "sep_rel_spread": 0.009479198965132328,
+   "sep_abs_spread": 0.05078705028795305,
+   "decod": {
+    "luminance_mean": {
+     "rho": 1,
+     "mad": 0.0032077280134358843,
+     "pass": true
+    },
+    "contrast_rms": {
+     "rho": 0.8787878787878788,
+     "mad": 0.010556145416739415,
+     "pass": true
+    },
+    "highfreq_ratio": {
+     "rho": 1,
+     "mad": 0.034623733947994555,
+     "pass": true
+    },
+    "spectral_slope": {
+     "rho": 1,
+     "mad": 0.02648066714871027,
+     "pass": true
+    },
+    "spectral_anisotropy": {
+     "rho": 0.9878787878787879,
+     "mad": 0.007594753164027179,
+     "pass": true
+    },
+    "noise_sigma": {
+     "rho": 0.9636363636363636,
+     "mad": 0.005486042702295413,
+     "pass": true
+    },
+    "saturation_mean": {
+     "rho": 0.9878787878787879,
+     "mad": 0.011250975822870869,
+     "pass": true
+    },
+    "hue_cos": {
+     "rho": 0.9878787878787879,
+     "mad": 0.004353926999991509,
+     "pass": true
+    },
+    "hue_sin": {
+     "rho": 1,
+     "mad": 0.0031654678904088963,
+     "pass": true
+    },
+    "colorfulness": {
+     "rho": 0.9878787878787879,
+     "mad": 0.014393631460593215,
+     "pass": true
+    },
+    "edge_density": {
+     "rho": 0.9757575757575757,
+     "mad": 0.003471882907695856,
+     "pass": true
+    },
+    "orientation_entropy": {
+     "rho": 0.9878787878787879,
+     "mad": 0.01120966945491183,
+     "pass": true
+    },
+    "blockiness": {
+     "rho": 0.9515151515151515,
+     "mad": 0.006425878552371753,
+     "pass": true
+    },
+    "class": {
+     "rho": 1,
+     "mad": 0.004549999999999982,
+     "pass": true
+    },
+    "coarse_animal_vehicle": {
+     "rho": 0.9878787878787879,
+     "mad": 0.006825000000000003,
+     "pass": true
+    },
+    "corruption_family": {
+     "rho": 0.9878787878787879,
+     "mad": 0.009674999999999944,
+     "pass": true
+    },
+    "corruption_type": {
+     "rho": 0.9757575757575757,
+     "mad": 0.010050000000000028,
+     "pass": true
+    },
+    "severity": {
+     "rho": 0.9636363636363636,
+     "mad": 0.008013989839004755,
+     "pass": true
+    }
+   }
+  }
+ }
+}
