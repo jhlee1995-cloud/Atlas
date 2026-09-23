@@ -1,0 +1,191 @@
+{
+ "args": {
+  "root": "results",
+  "check_dir": "instrument_check_b1_r2",
+  "p": "f1c3c43",
+  "p_run": "d257d91,68244f7",
+  "a4b": "results/atlas_v1_resnet56_s1/a4b_eval.json"
+ },
+ "plumbing_pre": [],
+ "plumbing_post": [],
+ "gate": {
+  "G0": false,
+  "G0_detail": {
+   "n_legacy": 10048,
+   "acc": 0.7710987261146497,
+   "valley_sep_legacy": 1.2681329391888185,
+   "n_cw": 122,
+   "n_classes_centered": 999,
+   "legacy_decode_failures": 0,
+   "selftests": {
+    "margin_b1_vitb16": "PASS",
+    "margin_b1_deitb": "PASS"
+   },
+   "data_status": "PASS",
+   "real": {
+    "ok": true,
+    "label_in_real_frac": 0.9002284518649786
+   }
+  },
+  "G1": true,
+  "G1_detail": {
+   "dir_auc_margin_full": 0.7899933986137089,
+   "raw": 0.21000660138629113,
+   "band_halfwidth": 0.05729807426723913,
+   "sub_mean": 0.7907333378124161,
+   "sub_q025": 0.7514478634775598,
+   "sub_q975": 0.82533593120129
+  },
+  "G2": true,
+  "G2_detail": {
+   "cluster": 0.6441736418494037,
+   "energy": 0.6331840263378387,
+   "band_halfwidth": 0.06424470404478878
+  },
+  "G3": true,
+  "G3_detail": {
+   "0.7": {
+    "n_typeb": 38,
+    "evaluable": false
+   },
+   "0.5": {
+    "n_typeb": 356,
+    "d": 0.028890509586302793,
+    "p": 0.048006675799008816,
+    "pass": true
+   }
+  },
+  "open": false,
+  "pod_record": {
+   "gate": {
+    "G0": false,
+    "G1": true,
+    "G2": true,
+    "G3": true
+   },
+   "open": false,
+   "check_dir": "results/instrument_check_b1_r2"
+  },
+  "pod_record_agrees": true
+ },
+ "cstar": null,
+ "models": {},
+ "labels": {
+  "outcome": "INVALID-PLUMBING (gate G0)",
+  "accuracy_control": "ACC-CONFOUNDED (level comparisons only; V1-V3 are within-model)"
+ },
+ "info": {
+  "runs_used": {
+   "resnet50": "margin_b1_resnet50",
+   "resnet50_swap": "margin_b1_resnet50_swap"
+  },
+  "critic_vit_pair": "MISSING critic_b1_vit_pair",
+  "critic_resnet50_swap": [
+   "PASS penult/margin_typeb.auc_margin_typeb",
+   "FAIL penult/margin_typeb.auc_dist_typeb",
+   "PASS penult/margin_typeb.auc_maxprob_typeb",
+   "PASS penult/margin_typeb.auc_margin_wrong",
+   "FAIL penult/margin_typeb.median_margin_ratio_typeb"
+  ],
+  "critic_vitb16_swap": "MISSING",
+  "critic_deitb_swap": "MISSING",
+  "b1_acc": {
+   "mirror_minus_published": {
+    "resnet50": -0.033339999999999925,
+    "vitb16": null,
+    "deitb": null
+   },
+   "pod": {
+    "mirror_minus_published": {
+     "resnet50": -0.033339999999999925
+    },
+    "official_minus_legacy_rows_0_L": 0.00835987261146498,
+    "legacy_cache": {
+     "path": "/workspace/cache/imagenet/penult_10000.npz",
+     "rows": 10048,
+     "dump_rows": 10048,
+     "max_abs_dF": 0
+    }
+   }
+  },
+  "E9": {
+   "resnet20_s0hub_st3": {
+    "margin_minus_maxprob_confmatched": -0.001266249389652807,
+    "se": 0.0016919361585480334,
+    "p": 0.454217365597102,
+    "margin_minus_maxprob_typeb": 0.000366296266963273
+   },
+   "resnet56_s0hub_st3": {
+    "margin_minus_maxprob_confmatched": 0.019615882068004575,
+    "se": 0.005543548729556812,
+    "p": 0.0004023976889239843,
+    "margin_minus_maxprob_typeb": 0.01948357616611429
+   },
+   "resnet56_s1": {
+    "margin_minus_maxprob_confmatched": 0.006038790157553597,
+    "se": 0.002725581505138031,
+    "p": 0.02671911572946793,
+    "margin_minus_maxprob_typeb": 0.006226568673467603
+   },
+   "resnet56_s2": {
+    "margin_minus_maxprob_confmatched": 0.012096361177751924,
+    "se": 0.0038490063401531915,
+    "p": 0.0016738409504066364,
+    "margin_minus_maxprob_typeb": 0.012102533716954023
+   }
+  },
+  "E9_identity": {
+   "resnet20_s0hub_st3": {
+    "n_leaves": 2156,
+    "n_exact": 2156,
+    "mismatch_first20": []
+   },
+   "resnet56_s0hub_st3": {
+    "n_leaves": 2156,
+    "n_exact": 2156,
+    "mismatch_first20": []
+   },
+   "resnet56_s1": {
+    "n_leaves": 2156,
+    "n_exact": 2156,
+    "mismatch_first20": []
+   },
+   "resnet56_s2": {
+    "n_leaves": 2156,
+    "n_exact": 2156,
+    "mismatch_first20": []
+   }
+  }
+ },
+ "exploratory": {},
+ "provenance": {
+  "p": "f1c3c43",
+  "p_run": "d257d91,68244f7",
+  "runs": {
+   "margin_b1_resnet50_legacy10k": "PASS",
+   "margin_b1_resnet50": "PASS",
+   "margin_b1_resnet50_swap": "PASS",
+   "margin_b1_resnet20_s0hub_st3": "PASS",
+   "margin_b1_resnet56_s0hub_st3": "PASS",
+   "margin_b1_resnet56_s1": "PASS",
+   "margin_b1_resnet56_s2": "PASS"
+  },
+  "p_time_utc": "2026-09-23T13:02:21.000Z",
+  "status": "PASS",
+  "problems": []
+ },
+ "row10": {
+  "status": "⬜",
+  "why": "INVALID-PLUMBING (gate G0): row 10 stays proposed",
+  "promotion_blocked_by": []
+ },
+ "joint_reading": {
+  "m56_tag": "d56 YELLOW",
+  "m56": "YELLOW",
+  "m2_failure_attribution": "NOT-DEPTH",
+  "reason": "M2 at atlas_v1_resnet56_e60, atlas_v1_resnet56_s12m, atlas_v1_resnet56_s13m",
+  "b1_outcome": "INVALID-PLUMBING (gate G0)",
+  "row": 1,
+  "reading": "no A/B label"
+ }
+}
