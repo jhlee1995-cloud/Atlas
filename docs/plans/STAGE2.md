@@ -145,3 +145,21 @@ distances. The attribution interpolation as above.
 - Estimator noise at depth 56 (no reference-resample twin at resnet56); an `atlas_v1_resnet56_s0hub_ref1` would
   cost ~1.6 min.
 - A full-recipe depth-56 replicate (resnet56 s1, 200 epochs, +5-14 min).
+
+## Outcome
+
+Stage 2 is **VALID and promotes nothing** (`results/atlas_v1_resnet56_s0hub/SESSION.md`). Of 31 entries, 28 PASS, 2 FAIL
+(R56-1c, R56-9c) and 1 is recorded (F3). R56-8 was scored from A3 E5 after `a30729f`.
+- **Transfers to depth 56:** C1-C5a, the class commit (stage 3), cross-model agreement (penult cka_test 0.863) and
+  the margin AUC (0.907).
+- **Depth-specific at matched accuracy (DEPTH):**
+  - Penult ID is higher: the hub and every rung sit above the band.
+  - Penult collapse is stronger (sep_ratio, bridge ratio, nc1). This label rests on interpolating between e40 and the
+    test-selected hub, because e40 alone lies on the other side of the band.
+- **Ladder miss:** no rung landed within 0.005 of 0.9259 (e40 −0.0067).
+- **Row 7** is SCALE-ROBUST against the hub reference only. Against the s2 reference, D1 is 0.771, which makes the
+  row UNDECIDED.
+- **Deviation:** Stage 2 scratch computations overlapped the Stage 1b commit by about 2.5 minutes (amendment 2 item 7).
+  This is disclosed in the SESSION.md.
+- **Firming up the DEPTH labels** needs a new pre-registration first: a rung within 0.005, the full-recipe depth-56
+  seeds 1-2, and the `_ref1` twin.

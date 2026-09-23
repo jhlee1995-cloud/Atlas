@@ -1,0 +1,184 @@
+exp_id: atlas_v1_resnet56_s0hub
+stage: atlas
+backbone:
+  arch: cifar10_resnet56
+  weights: hub
+  seed_tag: s0
+  norm: chenyaofo
+data:
+  reference:
+    dataset: cifar10_train
+    n: 10000
+    seed: 0
+  clean_test:
+    dataset: cifar10
+    n: 5000
+  panel:
+    dataset: cifar10_train
+    n: 64
+    seed: 123
+  cifar10c:
+    corruptions: all
+    severities:
+    - 1
+    - 3
+    - 5
+    n_per_set: 2000
+  ood:
+  - dataset: cifar100
+    n: 2000
+  - dataset: svhn
+    n: 2000
+hooks:
+  layers: blocks
+  block_stride: 5
+  pooling: gap
+extract:
+  batch: 256
+  dtype: float16
+  num_workers: 4
+invariants:
+- -margin_typeb
+cross_layer: all
+invariant_cfg:
+  twonn_id:
+    n_ref: 5000
+    bootstrap: 3
+  hubness:
+    n_ref: 5000
+    k: 10
+  knn_density:
+    n_ref: 10000
+    k: 10
+    n_query: 3000
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: all
+  commit_layer:
+    tau: 0.9
+probes:
+  n_train: 4000
+  cv_folds: 5
+  factors: all
+holdout:
+  discovery_corruptions:
+  - gaussian_noise
+  - shot_noise
+  - defocus_blur
+  - motion_blur
+  - snow
+  - fog
+  - brightness
+  - contrast
+  - pixelate
+  - jpeg_compression
+  confirmation_corruptions:
+  - impulse_noise
+  - glass_blur
+  - zoom_blur
+  - frost
+  - elastic_transform
+  discovery_seeds:
+  - 0
+  confirmation_seeds:
+  - 1
+  - 2
+outputs:
+  root: results/atlas_v1_resnet56_s0hub
+  plots: true
+notes: "Stage 2 (A4) pre-registration, committed and pushed before the run. Design,\
+  \ attribution rule and per-row\nscale labels: docs/plans/STAGE2.md. A = resnet20\
+  \ re-measured in this session at this commit (rule 6):\natlas_v1_resnet20_{s0hub,s1,s2}_st2\
+  \ = the band B20, exactly these three (s3 and s4 never enter A4).\nB = this run.\
+  \ Control = accuracy ladder atlas_v1_resnet56_e{10,20,40} (hub recipe, seed 11,\
+  \ full cosine over\nE epochs, last epoch; E are guesses meant to bracket 0.9259).\
+  \ Null = atlas_v1_resnet56_rand. Fine profile =\natlas_v1_resnet56_s0hub_b1 (never\
+  \ compared with resnet20). Aligned names = resnet56 taps renamed to resnet20\nnames\
+  \ by position (compare pairs by position; critic --align position); layer3.8 ==\
+  \ penult is counted once.\nBand sides: over B20 (atlas.json values) min, max and\
+  \ w = max - min; \"outside on the high side\" = above\nmax + w, \"outside on the\
+  \ low side\" = below min - w, \"inside\" = within [min - w, max + w]. Stage 1 values\
+  \ in\nparentheses are expected values, not thresholds (rule 6: thresholds come from\
+  \ the same-session band).\n[ACC] = expected to move with accuracy: the r20-r56 difference\
+  \ is labelled DEPTH / NOT-DEPTH / UNRESOLVED by\nthe STAGE2 attribution rule and\
+  \ never read as a depth effect by itself.\nOrdering: A4 results are evaluated only\
+  \ after the Stage 1b decision is committed (docs/plans/STAGE1.md\namendment 2 item\
+  \ 7); under a Stage 1b KILL or INVALID every A4 result is INFO and nothing is promoted.\n\
+  Holdout: only the seed/depth axis is a clean holdout for R56-4 (decod pools include\
+  \ the confirmation\ncorruptions, atlas/invariants/decodability.py:30); confirmation-corruption\
+  \ values seen here seed no new claims.\nPaths: results/atlas_v1_resnet56_s0hub/compare_vs_atlas_v1_resnet20_s0hub_st2/deformation.json;\n\
+  results/critic_v1_scale_r20hub_r56hub/critic.json; band pairs results/critic_v1_resnet20_st2_band/critic.json;\n\
+  accuracies results/norm_check_resnet56/norm_check.json chenyaofo.acc_10k (hub) and\n\
+  results/train_resnet56_e{10,20,40}/train.json final_test_acc_10k (rungs).\n\nR56-0\
+  \ gates (any failure = INVALID, no verdicts)\na  in atlas_v1_resnet56_{s0hub,e10,e20,e40,rand}\
+  \ (not _b1): atlas.json layers == [stem, layer1.0, layer1.5,\n   layer1.8, layer2.0,\
+  \ layer2.5, layer2.8, layer3.0, layer3.5, layer3.8, penult], and every r20 -> r56\n\
+  \   deformation.json \"layers\" pairs them index by index with resnet20's 11 taps.\n\
+  b  skipped == {} and no error key for the invariants that R56-1..7 and R56-9 read,\
+  \ in every Stage 2 atlas;\n   input_norm PASS in every Stage 2 critic; cka_test\
+  \ present at penult in every Stage 2 deformation.json.\nc  (recorded, not a gate)\
+  \ rule-6 reproducibility,\n   results/atlas_v1_resnet20_s0hub_st2/compare_vs_atlas_v1_resnet20_s0hub\
+  \ (--same-space): penult cka_test\n   >= 0.999; |delta meta.accuracy.test| <= 0.0006;\
+  \ |delta penult class_centers.sep_ratio| <= 0.01;\n   |delta twonn_id.id| <= 0.01\
+  \ at every layer; |delta hubness.k_occurrence_skew| <= 0.01 at penult (the last\n\
+  \   two catch an estimator-draw shift). If R56-0c fails, no Stage-1 value is quoted\
+  \ beside a Stage-2 value;\n   verdicts are unaffected.\n\nR56-N normalization (results/norm_check_resnet56/norm_check.json;\
+  \ evidence, not a gate)\n   chenyaofo.acc_10k in [0.9414, 0.9444]: [0.9430, 0.9444]\
+  \ => the best-epoch (ep 198, 94.37) checkpoint, i.e.\n   selected on the test set;\
+  \ [0.9414, 0.9428] => the last epoch (94.21). \"favours\" is not cifar_true.\n \
+  \  [ACC] atlas_v1_resnet56_s0hub meta.accuracy.test outside B20 on the high side\
+  \ (r20 v1 hub 0.9256): the\n   confound the control addresses.\n\nR56-1 ID profile\
+  \ (per_layer.<L>.twonn_id.id)\na  C1 at depth 56: peak at layer3.0 or layer3.5;\
+  \ penult >= 30% below the peak.\nb  critic id_profile[0,1] (critic_v1_scale_r20hub_r56hub,\
+  \ aligned) PASS: spearman >= 0.90, peak shift <= 1.\nc  [ACC] penult ID outside\
+  \ B20 on the low side (Stage 1: hub 9.91, s1 9.76, s2 10.04).\nd  null: atlas_v1_resnet56_rand\
+  \ penult ID <= 10% below its own peak (r20 rand: 2%).\n\nR56-2 [ACC] penult, each\
+  \ outside B20 on the stated side: class_centers.sep_ratio high (Stage 1 2.996 /\
+  \ 3.067 /\n   3.021); bridge ratio = mean off-diagonal distance between class_centers.centers\
+  \ / mean class_centers.radius\n   (derived) high (3.392 / 3.424 / 3.388); neural_collapse.nc1\
+  \ low (0.170 / 0.163 / 0.170). INFO only: the\n   r56/r20 ratio beside the legacy\
+  \ 4.12 / 2.87 (test split, std 0.247, mean-L2 radius: a different quantity,\n  \
+  \ not a replication target).\n\nR56-3 adjacency, r20 s0hub_st2 -> r56 hub\na  penult\
+  \ adjacency_spearman >= 0.70 (critic penult/adjacency_spearman[0,1] PASS); expected\
+  \ 0.80-0.95.\nb  distance-only rho (Spearman of the 45 penult class-center distances;\
+  \ node scripts/d1_distance_only.js\n   atlas_v1_resnet20_s0hub_st2:atlas_v1_resnet56_s0hub)\
+  \ >= 0.80 (Stage 1 seed pairs 0.950-0.963, null 0.644).\nc  aligned layer3.1 (r20\
+  \ layer3.1 vs r56 layer3.5) adjacency_spearman >= 0.70 (Stage 1 seed pairs\n   0.945-0.966,\
+  \ null 0.600): the pre-collapse check behind R56-3a (rule 8).\nd  s1_st2 -> r56\
+  \ and s2_st2 -> r56 penult adjacency (critic_v1_scale_r20s1_r56hub, _r20s2_r56hub)\
+  \ each within\n   0.10 of R56-3a.\ne  (non-core, reported) penult merge_kendall[0,1]\
+  \ >= 0.60.\n\nR56-4 decodability (cross_layer.commit_layer.per_factor.<f>)\na  C2\
+  \ at depth 56: washout luminance_mean > 0.30, highfreq_ratio < 0.20, spectral_anisotropy\
+  \ < 0.20.\nb  critic decod/<f>[0,1] (aligned) PASS for >= 9 of the 10 sharp non-at-risk\
+  \ factors (docs/plans/STAGE1.md).\nc  [ACC] penult class probe excess outside B20\
+  \ on the high side (Stage 1 0.814-0.817); penult\n   class_centers.nearest_center_acc_test\
+  \ outside B20 on the high side (0.922-0.925).\n\nR56-5 class commit\na  C3 at depth\
+  \ 56: commit_layer(class) in {layer3.0, layer3.5, layer3.8} at tau 0.9.\nb  commit_layer(class)\
+  \ == layer3.5 (24/27 = 8/9 of the blocks, as r20 layer3.1); critic commit/class\
+  \ PASS.\nc  (evaluated on atlas_v1_resnet56_s0hub_b1, stride 1) cross_layer.layer_cka.biggest_reorganization\
+  \ is one of\n   layer3.3->layer3.4, layer3.4->layer3.5, layer3.5->layer3.6, layer3.6->layer3.7,\
+  \ layer3.7->layer3.8. At\n   stride 5 the taps span 5, 3 or 1 blocks, so the stride-5\
+  \ value is INFO only.\n\nR56-6 cross-model agreement at penult (deformation, r20\
+  \ s0hub_st2 -> r56 hub)\n   cka_test >= 0.80 (critic panel_agreement PASS; Stage\
+  \ 1 seed pairs 0.883-0.890); null floor\n   r20 s0hub_st2 -> r56 rand cka_test <=\
+  \ 0.50 (Stage 1 r20 null 0.073); error_consistency_test > 0.30\n   (Stage 1 seed\
+  \ pairs 0.528-0.552); relrep_argmax_agree_ood_c100 >= 3 x relrep_argmax_chance_ood_c100\
+  \ (INFO,\n   row 8).\n\nR56-7 corruption claims at depth 56 (penult, within-model)\n\
+  \   C4: defocus_blur s5, motion_blur s3, motion_blur s5 coherence below gaussian_noise\
+  \ and shot_noise at the\n   same severity (6/6). C5a: sparse_frac s5 > s1 for the\
+  \ 8 non-noise discovery corruptions (8/8).\n\nR56-8 margin: carried by A3 item E5\
+  \ (experiments/queue/margin_v1_resnet20_s1.yaml notes; exploratory;\n   results/margin_v1_resnet56_s0hub\
+  \ vs results/margin_v1_resnet20_s0hub, same session). The Stage 2 atlases\n   exclude\
+  \ margin_typeb. NOT_EVALUABLE unless A3's M1 margin clause passes.\n\nR56-9 accuracy\
+  \ control (results/train_resnet56_e{10,20,40}/train.json final_test_acc_10k)\na\
+  \  acc(e10) < acc(e20) < acc(e40) < r56 hub chenyaofo.acc_10k.\nb  0.9259 (results/norm_check_resnet20/norm_check.json\
+  \ chenyaofo.acc_10k) lies within [min, max] of\n   {e10, e20, e40, hub}, or some\
+  \ rung is within 0.005 of it (docs/plans/STAGE2.md matched-value step 1);\n   otherwise\
+  \ every attribution is NOT_EVALUABLE.\nc  R56-1c and R56-2 are labelled NOT-DEPTH;\
+  \ the shape claims R56-1a, R56-3a/b, R56-4a and R56-5a also hold in\n   the matched\
+  \ rung.\n\nRule 8: if penult adjacency or cka_test r20-r56 exceed the maxima over\
+  \ the st2 pairs\n(results/critic_v1_resnet20_st2_band/critic.json penult/adjacency_spearman[*],\
+  \ penult/cka_test[*]), write the\nartifact hypothesis first: train-reference collapse\
+  \ makes converged nets agree (Stage 1 r20 penult\ncenter-distance CV 0.068-0.081\
+  \ vs 0.228-0.298 at layer3.1, derived); compare with R56-3c and the null.\n"

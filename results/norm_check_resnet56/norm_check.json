@@ -1,0 +1,31 @@
+{
+ "arch": "cifar10_resnet56",
+ "weights": "chenyaofo cifar10_resnet56",
+ "n": 10000,
+ "cifar_true": {
+  "std": [
+   0.247,
+   0.243,
+   0.261
+  ],
+  "acc_10k": 0.9425,
+  "acc_first5k": 0.944
+ },
+ "chenyaofo": {
+  "std": [
+   0.2023,
+   0.1994,
+   0.201
+  ],
+  "acc_10k": 0.9438,
+  "acc_first5k": 0.9446
+ },
+ "argmax_agree_10k": 0.98,
+ "delta_acc_pt": 0.12999999999999678,
+ "mcnemar": {
+  "only_chenyaofo_correct": 95,
+  "only_cifar_true_correct": 82,
+  "p_two_sided": 0.3671138447980253
+ },
+ "favours": "neither (not significant)"
+}
