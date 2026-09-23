@@ -1,0 +1,1 @@
+{"source":"real","meta":{"source":"real","n_classes":10},"layers":["penult"],"per_layer":{"penult":{"margin_typeb":{"margin_minus_maxprob_confmatched":0.004,"margin_minus_maxprob_confmatched_se":0.003,"margin_minus_maxprob_confmatched_p":0.18,"margin_minus_maxprob_typeb":0.001}}}}

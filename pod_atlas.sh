@@ -14,9 +14,16 @@
 #                                                              #   resnet20 re-runs, atlases, compare, critic (STAGE2.md)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --a3         # + margin_typeb Stage-B rebuilds, M1 gate, critic
 #                                                              #   (docs/plans/A3_MARGIN.md)
+#   bash /workspace/Atlas/pod_atlas.sh /workspace --a4b        # + depth-56 seeds s1/s2, matched rungs e50/e60/e70 (+e90),
+#                                                              #   seed-12/13 replicates, _st3 band, twin, compare, critic,
+#                                                              #   M56 margin rebuilds (docs/plans/STAGE2B.md)
+#   bash /workspace/Atlas/pod_atlas.sh /workspace --b1         # + ImageNet val (pinned HF revision), ResNet50 gate, ViT-B/16
+#                                                              #   + DeiT-B margin test, CIFAR E9 (docs/plans/B1_VIT_MARGIN.md)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --data-only  # datasets only (no GPU needed)
-# Flags combine (e.g. --stage1b --stage2 --a3); blocks always run in this order: stage1, stage1b, stage2, a3.
-# stage1b / stage2 / a3 each run isolated (run_block): a failing block is logged and later blocks still run;
+# Flags combine (e.g. --a4b --b1); blocks always run in this order: stage1, stage1b, stage2, a3, a4b, b1; --a4b or
+# --b1 adds the margin preflight (after the smoke tests). --stage1b, --stage2 and --a3 ran on 2026-09-23 and are
+# committed: never add them again.
+# stage1b / stage2 / a3 / a4b / b1 each run isolated (run_block): a failing block is logged and later blocks still run;
 # steps wrapped in soft() log a failure and let their block go on. The script exits 1 at the end if any block
 # or soft step failed (soft failures are listed in <volume>/logs/soft_failures_<timestamp>.log).
 #
@@ -26,14 +33,19 @@
 # A stage whose results/<exp>/provenance.json (written last by atlas.run) exists is skipped
 # (ATLAS_REBUILD=1 forces it).
 set -euo pipefail
-VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 ...]}")"
+VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 ...]}")"
 shift
 for m in "$@"; do                                              # a typo must not silently skip a block
-  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
+  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
 done
 MODES=" $* "
 has_mode() { [[ "$MODES" == *" $1 "* ]]; }
 cd "$(dirname "$(readlink -f "$0")")"                        # repo root, whatever the caller's cwd
+# --b1 needs the B1 code (scripts/b1_data.py and block_b1, docs/plans/B1_VIT_MARGIN.md); at a commit without it the
+# flag would reach the dispatch only after every other block. Refuse it here instead.
+if has_mode --b1 && ! { [[ -f scripts/b1_data.py ]] && grep -q '^block_b1() *{' pod_atlas.sh; }; then
+  echo "ERROR: --b1: B1 is not in this checkout (scripts/b1_data.py or block_b1 missing)" >&2; exit 1
+fi
 if has_mode --stage1 && [[ -f results/critic_v1_resnet20_s1_s2/critic.json && "${ATLAS_ALLOW_STAGE1_RERUN:-0}" != 1 ]]; then
   echo "ERROR: --stage1 already ran and is committed; its compare/critic steps would overwrite committed results." >&2
   echo "       Use --stage1b / --stage2 / --a3 (ATLAS_ALLOW_STAGE1_RERUN=1 overrides)." >&2; exit 1
@@ -94,6 +106,12 @@ if ! python scripts/check_data.py "$VOLUME"; then
   python -m extract.populate_data --volume "$VOLUME"          # re-scan so manifest.json records cifar10c
   python scripts/check_data.py "$VOLUME"                      # hard gate
 fi
+# B1 data (integration D11): ImageNet val at the pinned HF revision + ReaL labels. Inline soft form: soft() is
+# defined further down. `--data-only --b1` provisions it without a GPU.
+if has_mode --b1; then   # scripts/b1_data.py; a failure stops only block_b1, which re-verifies (hard)
+  HF_HUB_DOWNLOAD_TIMEOUT=60 timeout 1200 python scripts/b1_data.py provision "$VOLUME" \
+    || echo "[soft] FAILED (exit $?): B1 data provisioning" | tee -a "$SOFT_LOG"
+fi
 echo "volume usage: $(du -sh "$VOLUME" 2>/dev/null | cut -f1) of the 50 GB quota (df shows the whole cluster, not the quota)"
 has_mode --data-only && { echo "=== data only: done ==="; exit 0; }
 
@@ -107,6 +125,21 @@ EOF
 
 echo "=== tests (CPU) ==="
 python -m pytest -q tests/test_atlas_smoke.py
+
+# --- A4b/B1 preflight (hard; integration D6): B1 changes atlas/invariants/margin.py and A4b's M56 rebuilds run it too;
+# with the B1 keys off it must reproduce the committed A3 atlases (check_rebuild leaf rule, scripts/check_rebuild.py:
+# 20-22; bitwise recorded) before any block uses it. A relaunch records into scratch (the committed record stays).
+if has_mode --a4b || has_mode --b1; then
+  P0="${ATLAS_P0_CHECK_DIR:-results/instrument_check_a4b_b1}"
+  if [[ -e "$P0" ]]; then P0="$VOLUME/scratch/instrument_check_a4b_b1_$STAMP"; echo "[preflight] relaunch: record in $P0"; fi
+  echo "=== preflight: margin_typeb (flags off) reproduces the committed A3 atlases -> $P0 ==="
+  for x in resnet20 resnet56; do
+    [[ -f results/atlas_v1_${x}_s0hub/dump/meta.json ]] || { echo "ERROR: results/atlas_v1_${x}_s0hub/dump missing" >&2; exit 1; }
+    python scripts/check_rebuild.py rebuild --dump results/atlas_v1_${x}_s0hub/dump \
+           --committed results/margin_v1_${x}_s0hub/atlas.json --manifest experiments/queue/margin_v1_${x}_s0hub.yaml \
+           --work "$VOLUME/scratch/p0_${x}_$STAMP" --out "$P0/margin_${x}_s0hub"
+  done
+fi
 
 # run_stage <exp_id> [atlas.run args...]: skip when the atlas is already built (keeps committed results stable)
 run_stage() {
@@ -180,10 +213,12 @@ if has_mode --stage1; then                                     # docs/plans/STAG
 fi
 
 # ======================================================================================================
-# Blocks for --stage1b, --stage2, --a3. Every output directory below is new (never a committed Stage 0/1
+# Blocks for --stage1b, --stage2, --a3, --a4b, --b1. Every output directory below is new (never a committed Stage 0/1
 # result dir): compare always writes into its --b run, critics and checks into their own --out.
 # Relaunch (append-only): compares and critics whose output already exists are skipped (once), atlases are
-# skipped by run_stage, and the Stage 1b instrument checks refuse an existing check dir (ATLAS_STAGE1B_CHECK_DIR).
+# skipped by run_stage (B1's ImageNet runs by b1_stage, which never rebuilds), the B1 gate record is reused, and the
+# Stage 1b / A4b / B1 instrument checks refuse an existing check dir (ATLAS_STAGE1B_CHECK_DIR, ATLAS_A4B_CHECK_DIR,
+# ATLAS_B1_CHECK_DIR).
 # ======================================================================================================
 
 # soft <cmd...>: run a step; a failure is logged (and fails the session at the end) but its block goes on
@@ -440,6 +475,299 @@ EOF
   fi
 }
 
+# --- A4b: depth-56 replication + matched rung (docs/plans/STAGE2B.md; predictions atlas_v1_resnet56_s1.yaml) -------
+# a4b_wait <file> <pid> [<soft-log text>]: block until <file> exists, the training lane <pid> has exited, or the soft
+# log records <text> (train_one's "FAILED: training <name> (" line); 0 iff the file exists
+a4b_wait() {
+  while [[ ! -f "$1" ]] && kill -0 "$2" 2>/dev/null && ! { [[ -n "${3:-}" ]] && grep -qF "$3" "$SOFT_LOG" 2>/dev/null; }; do
+    sleep 15
+  done
+  [[ -f "$1" ]]
+}
+
+# a4b_ladder <out.json>: the pre-registered matched-rung rule on the seed-11 train.json files that exist. matched_rung.py
+# writes <out.json> atomically, also on bad input (status "error", exit 2), so the CPU lane never reads a partial file
+# and never idles on a missing one.
+a4b_ladder() {
+  local tj=() E
+  for E in 40 50 60 70 90; do
+    if [[ -f "results/train_resnet56_e$E/train.json" ]]; then tj+=("results/train_resnet56_e$E/train.json"); fi
+  done
+  python scripts/matched_rung.py --out "$1" "${tj[@]}" || echo "error none"
+}
+
+# a4b_train_lane <workers> <check dir>: the GPU lane, one training at a time. resnet56 at 8 workers consumes about
+# 14.5k img/s (3.45-3.52 s per epoch) while 5 workers fed resnet20 at about 40k img/s, so resnet56 training is not
+# data-bound; it is GPU-bound, and a second concurrent training would only share the GPU. train_one never fails the
+# lane (a failed training is a soft failure), and every step below tolerates a missing run.
+a4b_train_lane() {
+  local M="$VOLUME/models" w="$1" I="$2" E s res
+  for E in 50 60 70; do
+    train_one "resnet56_e$E" "$M/resnet56_s11_e${E}_chenyaofo.pt" "results/train_resnet56_e${E}/train.json" \
+              --arch cifar10_resnet56 --seed 11 --epochs "$E" --workers "$w"
+  done
+  res=$(a4b_ladder "$I/ladder_first.json")
+  if [[ "$res" == below* ]]; then                 # every rung below 0.9209: one extension rung (STAGE2B.md)
+    train_one resnet56_e90 "$M/resnet56_s11_e90_chenyaofo.pt" results/train_resnet56_e90/train.json \
+              --arch cifar10_resnet56 --seed 11 --epochs 90 --workers "$w"
+  fi
+  res=$(a4b_ladder "$I/ladder.json")              # final; the CPU lane waits for this file
+  echo "[a4b] matched-rung rule: $res"
+  if [[ "$res" == matched* ]]; then               # seed-12 and seed-13 replicates at E* (review item 1): their length
+    for s in 12 13; do                            # is fixed by seed 11; each counts iff its own accuracy is in the window
+      train_one "resnet56_s${s}m" "$M/resnet56_s${s}m_chenyaofo.pt" "results/train_resnet56_s${s}m/train.json" \
+                --arch cifar10_resnet56 --seed "$s" --epochs "${res#matched }" --workers "$w"
+    done
+  fi
+  for s in 1 2; do                                # full recipe, last epoch (train_second_seed.py defaults)
+    train_one "resnet56_s$s" "$M/resnet56_s${s}_chenyaofo.pt" "results/train_resnet56_s${s}/train.json" \
+              --arch cifar10_resnet56 --seed "$s" --epochs 200 --workers "$w"
+  done
+}
+
+block_a4b() {
+  local M="$VOLUME/models" R20=results/atlas_v1_resnet20 R56=results/atlas_v1_resnet56 T=experiments/tolerances_default.yaml
+  local I="${ATLAS_A4B_CHECK_DIR:-results/instrument_check_a4b}" cpus w lane e a b i j res changed EM=""
+  local S=(s0hub s1 s2 s3 s4) R20S=() X=() OTH=() MG=()
+  # Stage A inputs (training included) and Stage B code; requirements.txt is judged by versions.json (integration D7)
+  local SA_CODE="atlas/extract_acts.py atlas/factors atlas/config.py atlas/context.py extract scripts/train_second_seed.py"
+  local SB="atlas/build.py atlas/registry.py atlas/invariants atlas/compare.py atlas/critic.py experiments/tolerances_default.yaml"
+  [[ ! -e "$I" ]] || { echo "ERROR: $I exists (committed A4b record); relaunch with ATLAS_A4B_CHECK_DIR=${I}_r2" >&2; return 1; }
+  [[ "${ATLAS_REBUILD:-0}" != 1 ]] || { echo "ERROR: ATLAS_REBUILD=1 would rewrite committed results; unset it (integration D18)" >&2; return 1; }
+  for e in s0hub s1 s2; do
+    [[ -f ${R20}_${e}_st2/dump/meta.json ]] || { echo "ERROR: ${R20}_${e}_st2/dump missing on the volume" >&2; return 1; }
+  done
+  for e in 1 2 3 4; do
+    [[ -f "$M/resnet20_s${e}_chenyaofo.pt" ]] || { echo "ERROR: $M/resnet20_s${e}_chenyaofo.pt missing" >&2; return 1; }
+  done
+  mkdir -p "$M" "$I" "$VOLUME/scratch"
+
+  echo "=== A4b G0d: torch and GPU equal the Stage 2 ladder; python, numpy, scipy, sklearn equal Stage 1b ==="
+  python - "$I" <<'EOF'
+import json, os, platform, sys
+import numpy, scipy, sklearn, torch, torchvision
+v = {"python": platform.python_version(), "numpy": numpy.__version__, "scipy": scipy.__version__,
+     "sklearn": sklearn.__version__, "torch": torch.__version__, "torchvision": torchvision.__version__,
+     "device": torch.cuda.get_device_name(0)}
+with open(os.path.join(sys.argv[1], "versions.json"), "w") as f:
+    json.dump(v, f, indent=1)
+r = json.load(open("results/train_resnet56_e40/train.json"))
+ref = json.load(open("results/instrument_check_stage1b/check.json"))["versions"]
+print(f"[a4b] {v}; Stage 2 ladder: torch {r['torch']} on {r['device']}; Stage 1b: {ref}")
+assert v["torch"] == r["torch"] and v["device"] == r["device"], ("torch/GPU differ from the Stage 2 ladder", v, r["torch"], r["device"])
+assert {k: v[k] for k in ref} == ref, ("python/numpy/scipy/sklearn differ from results/instrument_check_stage1b", v, ref)
+EOF
+  echo "=== A4b G0c/G0d: Stage A/B code diff since the Stage 2 run 664bd25 (allowlist: B1's margin.py, preflight-checked) ==="
+  { echo "HEAD $(git rev-parse --short HEAD)"; git diff --stat 664bd25 HEAD -- $SA_CODE $SB requirements.txt; } > "$I/code_diff.txt"
+  cat "$I/code_diff.txt"
+  changed=$(git diff --name-only 664bd25 HEAD -- $SA_CODE $SB | tr '\n' ' ')
+  if [[ -n "${changed// /}" && "$changed" != "atlas/invariants/margin.py " && "${ATLAS_A4B_ALLOW_DIFF:-0}" != 1 ]]; then
+    echo "ERROR: Stage A/B files changed since 664bd25 beyond B1's margin.py (preflight-checked): $changed" >&2; return 1
+  fi
+
+  cpus=$(cpu_quota); w=$(( cpus - 2 )); if (( w < 2 )); then w=2; fi; if (( w > 8 )); then w=8; fi
+  echo "=== A4b: GPU lane in the background ($cpus CPUs -> $w data workers; log $VOLUME/logs/a4b_train_lane.log) ==="
+  a4b_train_lane "$w" "$I" > "$VOLUME/logs/a4b_train_lane.log" 2>&1 &
+  lane=$!
+  # no training outlives this block (review item 17): an early exit of the run_block subshell kills the lane and its
+  # training. $lane is expanded now: the trap runs after block_a4b's locals are gone.
+  trap "pkill -TERM -P $lane 2>/dev/null; kill $lane 2>/dev/null; true" EXIT
+
+  echo "=== A4b G0c (recorded): Stage B replay of the st2 hub dump with the st3 manifest ==="
+  soft python scripts/check_rebuild.py rebuild --dump ${R20}_s0hub_st2/dump --committed ${R20}_s0hub_st2/atlas.json \
+       --manifest experiments/queue/atlas_v1_resnet20_s0hub_st3.yaml --work "$VOLUME/scratch/a4b_rebuild_st2_$STAMP" --out "$I"
+
+  echo "=== A4b: atlases that need no new checkpoint, while the lane trains (resnet20 band first: rule 6) ==="
+  for e in resnet20_s0hub_st3 resnet20_s1_st3 resnet20_s2_st3 resnet20_s3_st3 resnet20_s4_st3 resnet56_s0hub_st3 \
+           resnet56_s0hub_ref1; do
+    soft run_stage "atlas_v1_$e"
+  done
+  if [[ -f "$M/resnet56_s11_e40_chenyaofo.pt" ]]; then    # e40 enters only as this same-session re-measure (review item 7)
+    soft run_stage atlas_v1_resnet56_e40_st3
+  else
+    echo "[soft] FAILED: $M/resnet56_s11_e40_chenyaofo.pt missing: no atlas_v1_resnet56_e40_st3 (no interpolation through e40)" | tee -a "$SOFT_LOG"
+  fi
+  echo "=== A4b: atlases of the new checkpoints, each as soon as its train.json exists ==="
+  for e in e50 e60 e70; do
+    if a4b_wait "results/train_resnet56_$e/train.json" "$lane" "FAILED: training resnet56_$e ("; then soft run_stage "atlas_v1_resnet56_$e"; fi
+  done
+  a4b_wait "$I/ladder.json" "$lane" || true
+  res=$(python -c "import json, sys; d = json.load(open(sys.argv[1])); print(d['status'], d['e_star'])" "$I/ladder.json" \
+        2>/dev/null || echo "error None")
+  echo "[a4b] ladder: $res"
+  if [[ "$res" == matched* ]]; then EM="e${res#matched }"; fi
+  if [[ -f results/train_resnet56_e90/train.json ]]; then soft run_stage atlas_v1_resnet56_e90; fi
+  for e in s12m s13m s1 s2; do
+    if [[ ( "$e" == s12m || "$e" == s13m ) && -z "$EM" ]]; then continue; fi
+    if a4b_wait "results/train_resnet56_$e/train.json" "$lane" "FAILED: training resnet56_$e ("; then soft run_stage "atlas_v1_resnet56_$e"; fi
+  done
+  wait "$lane" || true
+  trap - EXIT
+  grep -h "saved" "$VOLUME"/logs/train_resnet56_{e50,e60,e70,e90,s12m,s13m,s1,s2}.log 2>/dev/null || true
+
+  echo "=== A4b: compare (needs the dumps; B is always an A4b run) ==="
+  for e in s0hub s1 s2; do soft compare_once ${R20}_${e}_st2 ${R20}_${e}_st3 --same-space; done       # G0c replay
+  for e in s3 s4; do soft compare_once ${R20}_$e ${R20}_${e}_st3 --same-space; done
+  soft compare_once ${R56}_s0hub ${R56}_s0hub_st3 --same-space
+  if [[ -f ${R56}_e40/dump/meta.json && -f ${R56}_e40_st3/atlas.json ]]; then
+    soft compare_once ${R56}_e40 ${R56}_e40_st3 --same-space
+  fi
+  for i in 0 1 2 3; do for j in 1 2 3 4; do                                                           # W20 -> P20
+    if (( j > i )); then soft compare_once ${R20}_${S[i]}_st3 ${R20}_${S[j]}_st3; fi
+  done; done
+  for a in "${S[@]}"; do                        # X (s1, s2) and XM (every rung and replicate: interpolation too)
+    for b in s1 s2 s12m s13m e40_st3 e50 e60 e70 e90; do
+      if [[ -f ${R56}_$b/atlas.json ]]; then soft compare_once ${R20}_${a}_st3 ${R56}_$b; fi
+    done
+  done
+  soft compare_once ${R56}_s1 ${R56}_s2                                                                # W56 decision pair
+  soft compare_once ${R56}_s0hub_st3 ${R56}_s1                                                         # corroboration
+  soft compare_once ${R56}_s0hub_st3 ${R56}_s2
+  soft compare_once ${R56}_s0hub_st3 ${R56}_s0hub_ref1                                                 # T56 twin
+  for b in s12m s13m; do                                                                               # INFO
+    if [[ -n "$EM" && -f ${R56}_$b/atlas.json ]]; then soft compare_once ${R56}_$EM ${R56}_$b; fi
+  done
+  if [[ -f ${R56}_s12m/atlas.json && -f ${R56}_s13m/atlas.json ]]; then soft compare_once ${R56}_s12m ${R56}_s13m; fi
+
+  echo "=== A4b: critic (resnet20 first in every --align position run: it is the name reference) ==="
+  for e in "${S[@]}"; do R20S+=("${R20}_${e}_st3"); done
+  soft critic_once results/critic_v1_resnet56_s1_s2 --results ${R56}_s1 ${R56}_s2 --tol $T
+  soft critic_once results/critic_v1_resnet56_s0_s1_s2 --results ${R56}_s0hub_st3 ${R56}_s1 ${R56}_s2 --tol $T
+  soft critic_once results/critic_v1_resnet56_hub_noise --results ${R56}_s0hub_st3 ${R56}_s0hub_ref1 --tol $T
+  soft critic_once results/critic_v1_resnet20_st3_band --results "${R20S[@]}" --tol $T
+  soft critic_once results/critic_v1_scale3_r20_r56seeds --results "${R20S[@]}" ${R56}_s1 ${R56}_s2 --tol $T --align position
+  X=(); for e in e40_st3 e50 e60 e70 e90 s12m s13m; do if [[ -f ${R56}_$e/atlas.json ]]; then X+=("${R56}_$e"); fi; done
+  if (( ${#X[@]} )); then
+    soft critic_once results/critic_v1_scale3_r20_r56matched --results "${R20S[@]}" "${X[@]}" --tol $T --align position
+  fi
+  echo "=== A4b G0b: s1, s2, s12m, s13m dump meta vs the hub_st3 dump; sha256 new, also against every rung ==="
+  X=(); for e in s1 s2 s12m s13m; do if [[ -f ${R56}_$e/atlas.json ]]; then X+=("${R56}_$e"); fi; done
+  OTH=(); for e in e40_st3 e50 e60 e70 e90; do if [[ -f ${R56}_$e/atlas.json ]]; then OTH+=("${R56}_$e"); fi; done
+  if (( ${#X[@]} )); then
+    soft python scripts/check_rebuild.py dump-meta --ref ${R56}_s0hub_st3 --others "${OTH[@]}" --new "${X[@]}" --out "$I"
+  fi
+
+  echo "=== A4b M56: margin_typeb Stage-B rebuilds (resnet20 band first: rule 6), critic, maxprob ties ==="
+  for e in resnet20_s0hub_st3 resnet20_s1_st3 resnet20_s2_st3 resnet20_s3_st3 resnet20_s4_st3 resnet56_s0hub_st3 \
+           resnet56_s1 resnet56_s2 resnet56_e50 resnet56_e60 resnet56_e70 resnet56_e90 resnet56_s12m resnet56_s13m; do
+    if [[ -f results/atlas_v1_$e/dump/meta.json ]]; then soft margin_rebuild "margin_v1_$e"; MG+=("results/atlas_v1_$e"); fi
+  done
+  soft critic_once results/critic_margin_v1_resnet56_s1_s2 --results results/margin_v1_resnet56_s1 results/margin_v1_resnet56_s2 --tol $T
+  if (( ${#MG[@]} )); then soft python scripts/maxprob_ties.py --out "$I/maxprob_ties.json" "${MG[@]}"; fi
+  echo "[a4b] D1, bands, levels and labels are computed on Windows after the pull:"
+  echo "      node scripts/a4b_eval.js --p <P> --p-run <P_run> --check-dir $(basename "$I") --json results/atlas_v1_resnet56_s1/a4b_eval.json"
+}
+
+# --- B1: the ViT margin test (docs/plans/B1_VIT_MARGIN.md; pre-registration experiments/queue/margin_b1_vitb16.yaml) --
+# b1_stage <exp>: ImageNet Stage A + B; never rebuilt (ATLAS_REBUILD ignored): an existing atlas.json is the one touch.
+# A killed or failed run leaves no atlas.json (integration D18 decides what a relaunch may do).
+b1_stage() {
+  local exp="$1" n
+  if [[ -f "results/$exp/atlas.json" ]]; then echo "[skip] results/$exp/atlas.json exists (never rebuilt)"; return 0; fi
+  n=$(cpu_quota)                                  # BLAS threads = cgroup quota, only for ImageNet runs (D19)
+  OMP_NUM_THREADS=$n OPENBLAS_NUM_THREADS=$n MKL_NUM_THREADS=$n \
+    timeout 1800 python -m atlas.run_imagenet --manifest "experiments/queue/$exp.yaml" --volume "$VOLUME"
+}
+b1_cifar() {   # E9: Stage B only (b1: true) on a dump A4b built in this session, through a dump symlink
+  local exp="$1" src="$2"
+  [[ -f "results/$src/dump/meta.json" ]] || { echo "[b1] $exp: no dump at results/$src/dump (A4b did not build it)"; return 1; }
+  mkdir -p "results/$exp" || return 1
+  [[ -e "results/$exp/dump" ]] || ln -s "../$src/dump" "results/$exp/dump" || return 1
+  run_stage "$exp" --skip-extract
+}
+b1_workers() { # DataLoader workers: 2 prefetched 224x224 float32 batches per worker in /dev/shm, x1.5 headroom
+  local b="$1" shm w
+  shm=$(df -B1 --output=size /dev/shm 2>/dev/null | tail -n 1 | tr -d ' ' || true)
+  w=$(( $(cpu_quota) - 2 )); if (( w > 8 )); then w=8; fi; if (( w < 0 )); then w=0; fi
+  while (( w > 0 && ${shm:-0} < w * 2 * b * 602112 * 3 / 2 )); do w=$(( w / 2 )); done
+  echo "$w"
+}
+b1_need_bytes() { # volume still to be written: float32 dumps + float16 logits of the runs without a dump (integration
+  local e b=774000000                             # section 3), plus the ViT/ResNet weights (0.77 GB, counted anyway)
+  for e in margin_b1_resnet50_legacy10k margin_b1_resnet50 margin_b1_resnet50_swap margin_b1_vitb16 \
+           margin_b1_vitb16_swap margin_b1_deitb margin_b1_deitb_swap; do
+    if [[ -f "results/$e/dump/meta.json" ]]; then continue; fi
+    case "$e" in *legacy10k) b=$(( b + 520000000 ));; *resnet50*) b=$(( b + 3540000000 ));; *) b=$(( b + 2250000000 ));; esac
+  done
+  echo "$b"
+}
+b1_dir() {     # results dir of a run, or of its P0 re-run when that exists (prereg review item 2)
+  if [[ -f "results/${1}_r2/atlas.json" ]]; then echo "results/${1}_r2"; else echo "results/$1"; fi
+}
+block_b1() {
+  local T=experiments/tolerances_default.yaml I="${ATLAS_B1_CHECK_DIR:-results/instrument_check_b1}" e x used need v d c
+  [[ ! -e "$I" ]] || { echo "ERROR: $I exists (committed B1 record); relaunch with ATLAS_B1_CHECK_DIR=${I}_r2" >&2; return 1; }
+  [[ "${ATLAS_REBUILD:-0}" != 1 ]] || { echo "ERROR: ATLAS_REBUILD=1 would rewrite committed results; unset it (integration D18)" >&2; return 1; }
+  mkdir -p "$I"
+  export HF_HUB_DOWNLOAD_TIMEOUT="${HF_HUB_DOWNLOAD_TIMEOUT:-60}"   # 330-346 MB weight files; the default is 10 s
+  echo "=== B1: imports (requirements.txt pins; integration D4) ==="
+  python -c "import pyarrow, huggingface_hub, timm, safetensors; print('[b1]', pyarrow.__version__, huggingface_hub.__version__, timm.__version__, safetensors.__version__)"
+  if command -v pgrep >/dev/null && pgrep -f scripts/train_second_seed.py >/dev/null; then
+    echo "ERROR: a training is still running; B1 never shares the GPU" >&2; return 1
+  fi
+  echo "=== B1: data (hard: both parquet files at the pinned sha256, 50,000 rows, 1000 x 50; ReaL recorded) ==="
+  python scripts/b1_data.py verify "$VOLUME" --out "$I/data.json"
+  used=$(du -sb "$VOLUME" 2>/dev/null | cut -f1 || true); need=$(b1_need_bytes)
+  echo "[b1] volume holds $(( ${used:-0} / 1000000 )) MB; B1 still adds ~$(( need / 1000000 )) MB (float32 dumps, float16 logits, weights)"
+  if (( ${used:-0} + need > 48000000000 )); then echo "ERROR: not enough of the 50 GB quota left for B1" >&2; return 1; fi
+  export ATLAS_EXTRACT_WORKERS; ATLAS_EXTRACT_WORKERS=$(b1_workers 256)
+  echo "[b1] /dev/shm -> $ATLAS_EXTRACT_WORKERS DataLoader workers (recorded in every dump meta)"
+  echo "=== B1: CPU tests (hooks, parquet, legacy replay, extractor meta contract, gate known answers) ==="
+  python -m pytest -q tests/test_b1_imagenet.py
+  echo "=== B1: ViT self-tests on random inputs (weights downloaded + hash-checked; no ImageNet image read) ==="
+  for e in margin_b1_vitb16 margin_b1_deitb; do   # timeout: torch.hub's weight download has no socket timeout (D19)
+    timeout 1200 python -m atlas.run_imagenet --manifest "experiments/queue/$e.yaml" --volume "$VOLUME" --selftest-random --out "$I/selftest_$e.json"
+  done
+  echo "=== B1 E9 (INFO): b1 keys on this session's A4b dumps; every A3 key must equal A4b's flag-off rebuild ==="
+  for x in resnet20_s0hub_st3 resnet56_s0hub_st3 resnet56_s1 resnet56_s2; do soft b1_cifar "margin_b1_$x" "atlas_v1_$x"; done
+  soft python - "$I" <<'EOF'
+import json, os, sys
+sys.path.insert(0, "scripts")
+from check_rebuild import _walk
+def keep(u, v):                      # v restricted to u's keys: b1 adds keys, every A3 key must be unchanged
+    if isinstance(u, dict) and isinstance(v, dict):
+        return {k: keep(u[k], v[k]) for k in u if k in v}
+    if isinstance(u, list) and isinstance(v, list) and len(u) == len(v):
+        return [keep(p, q) for p, q in zip(u, v)]
+    return v
+rep, bad = {}, []
+for x in ("resnet20_s0hub_st3", "resnet56_s0hub_st3", "resnet56_s1", "resnet56_s2"):
+    pa, pb = f"results/margin_v1_{x}/atlas.json", f"results/margin_b1_{x}/atlas.json"
+    if not (os.path.exists(pa) and os.path.exists(pb)):
+        rep[x] = "NOT_EVALUABLE (missing atlas)"; continue
+    a, b = json.load(open(pa))["per_layer"], json.load(open(pb))["per_layer"]
+    acc = {"n_leaves": 0, "n_exact": 0, "n_within_tol": 0, "max_abs_dev": {}, "mismatch": []}
+    _walk(a, keep(a, b), "", acc)
+    rep[x] = {"n_leaves": acc["n_leaves"], "n_exact": acc["n_exact"], "mismatch_first20": acc["mismatch"][:20]}
+    if acc["mismatch"] or acc["n_exact"] != acc["n_leaves"]:
+        bad.append(x)
+json.dump(rep, open(os.path.join(sys.argv[1], "e9_identity.json"), "w"), indent=1)
+print("[B1] E9 A3-key identity (exact)", "PASS" if not bad else f"FAIL {bad}")
+sys.exit(1 if bad else 0)
+EOF
+  echo "=== B1: ResNet50 (discovery: gate G source and CNN contrast; a failure stops the block, the ViTs stay untouched) ==="
+  for e in margin_b1_resnet50_legacy10k margin_b1_resnet50 margin_b1_resnet50_swap; do b1_stage "$e"; done
+  echo "volume usage: $(du -sh "$VOLUME" 2>/dev/null | cut -f1) of the 50 GB quota"
+  echo "=== B1: gate G (G0-G3 + self-tests); CLOSED leaves ViT-B/16 and DeiT-B untouched ==="
+  if python scripts/b1_gate.py --out results/b1_gate --check-dir "$I" --volume "$VOLUME"; then
+    for e in margin_b1_vitb16 margin_b1_vitb16_swap margin_b1_deitb margin_b1_deitb_swap; do
+      soft b1_stage "$e"
+      if [[ -f "experiments/queue/${e}_r2.yaml" ]]; then soft b1_stage "${e}_r2"; fi   # P0 re-run (committed amendment)
+    done
+    v=$(b1_dir margin_b1_vitb16); d=$(b1_dir margin_b1_deitb); c=results/critic_b1_vit_pair
+    if [[ "$v$d" == *_r2* ]]; then c="${c}_r2"; fi
+    soft critic_once "$c" --results "$v" "$d" --tol $T
+    for e in vitb16 deitb; do
+      soft critic_once "results/critic_b1_${e}_swap" --results "results/margin_b1_$e" "results/margin_b1_${e}_swap" --tol $T
+    done
+  else
+    echo "[B1] gate G CLOSED or not evaluable (results/b1_gate/gate.json): no ViT run, no A/B label"
+  fi
+  soft critic_once results/critic_b1_resnet50_swap --results results/margin_b1_resnet50 results/margin_b1_resnet50_swap --tol $T
+  echo "[b1] labels are computed on Windows after the pull (commit the results first):"
+  echo "      node scripts/b1_verdicts.js --p <P> --p-run <P_run> --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --json results/margin_b1_vitb16/verdicts.json"
+}
+
 # run_block <function>: isolated in a subshell with errexit; a failure is logged and later blocks still run
 FAILED=()
 run_block() {
@@ -451,7 +779,9 @@ run_block() {
 
 if has_mode --stage1b; then run_block block_stage1b; fi       # trains s3, s4 (concurrently) first
 if has_mode --stage2;  then run_block block_stage2;  fi       # then the resnet56 rungs, one at a time: never overlapping
-if has_mode --a3;      then run_block block_a3;      fi       # last: reads the s3, s4 and resnet56 dumps
+if has_mode --a3;      then run_block block_a3;      fi       # reads the s3, s4 and resnet56 dumps
+if has_mode --a4b;     then run_block block_a4b;     fi       # before B1: its _st3 dumps are B1's same-session CIFAR anchor
+if has_mode --b1;      then run_block block_b1;      fi       # last: never shares the GPU with a training
 
 echo "=== done. results (dumps stay on the volume, gitignored): $(pwd -P)/results ==="
 echo "Pull to Windows (Git Bash; IP/port from 'runpodctl ssh info <pod-id>'), then commit + push there:"

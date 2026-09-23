@@ -1,0 +1,49 @@
+# A4b (docs/plans/STAGE2B.md) matched-leg replicate M12: resnet56, hub recipe, seed 12, trained for E* epochs (last
+# epoch), where E* is the seed-11 rung chosen by the pre-registered rule (<check dir>/ladder.json). Its length is
+# fixed by seed 11; it counts as matched iff its own accuracy lands within 0.005 of 0.9259 (this inclusion rule is
+# pre-registered). Trained and built only if the rule found a seed-11 rung in the window. Seed 11 shares its
+# initialization with the discovery rungs e10/e20/e40, so seeds 12 and 13 are the matched leg's two confirmation
+# instances (review item 1).
+# Instrument frozen by name: invariants, cross_layer and the probe factors are the atlas_v1_resnet20_s3 lists (what
+# `all` resolved to at 6242a17 and, minus margin_typeb, at 664bd25), in registry order. Anything registered later
+# can neither enter this atlas nor shift its per-layer estimator draws (build.py sorts by cost, stably; one rng per
+# layer); B1 registers nothing (integration D2), and tests/test_atlas_smoke.py
+# test_a4b_manifests_freeze_the_instrument checks these lists before any pod block runs.
+exp_id: atlas_v1_resnet56_s12m
+stage: atlas
+backbone:
+  arch: cifar10_resnet56
+  weights: /workspace/models/resnet56_s12m_chenyaofo.pt
+  seed_tag: s12m
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 5, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: [pca_spectrum, twonn_id, class_centers, neural_collapse, hubness, class_adjacency, merge_order,
+             knn_density, linear_probes, corruption_displacement]
+cross_layer: [layer_cka, commit_layer]
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: [luminance_mean, contrast_rms, highfreq_ratio, spectral_slope, spectral_anisotropy, noise_sigma,
+              saturation_mean, hue_cos, hue_sin, colorfulness, edge_density, orientation_entropy, blockiness,
+              class, coarse_animal_vehicle, corruption_family, corruption_type, severity]
+  commit_layer:  {tau: 0.9}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [11]
+  confirmation_seeds: [1, 2, 12, 13]      # this run is seed 12: a confirmation replicate of the matched leg
+outputs: {root: results/atlas_v1_resnet56_s12m, plots: true}
+notes: >
+  A4b matched replicate. Predictions L3 and D are in atlas_v1_resnet56_s1.yaml notes.

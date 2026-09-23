@@ -9,6 +9,12 @@ tests/test_atlas_smoke.py -- CPU-only checks (no torch).
   5. A3 margin_typeb: ridge vs deep-valley known answers, the strict cut, empty groups (None, no error), no
      ctx.rng draws, DeLong = Mann-Whitney; critic per-key absolute tolerance
   6. A2b scripts/check_rebuild.py leaf comparison; A4 compare cross-depth guard and critic --align position
+  7. A4b (docs/plans/STAGE2B.md): matched-rung rule and its atomic error record, maxprob tie mass, and the instrument
+     freeze of every A4b manifest (explicit Stage 1 lists; margin manifests select margin_typeb and no cross-layer)
+  8. B1 (docs/plans/B1_VIT_MARGIN.md) margin_typeb opt-in keys: the Gram path equals the broadcast path, the flags off
+     give the A3 output and on only add keys, known answers (monotone confidence, ridge geometry, the legacy ImageNet
+     block by hand, ReaL restriction), zero errors on the synthetic dump. No torch, timm, pyarrow or huggingface_hub:
+     the ImageNet Stage A checks are in tests/test_b1_imagenet.py.
 
 Run: python -m pytest tests/test_atlas_smoke.py -v   (or: python tests/test_atlas_smoke.py)
 """
@@ -360,6 +366,245 @@ def test_critic_align_position():
     assert items["commit/class"]["status"] == "PASS", items                # layer3.5 -> layer3.1, resnet20's commit
     with pytest.raises(SystemExit):
         align_runs([copy.deepcopy(r20), run("r56_b1", R56_B1_TAPS, "layer3.5")], "position")
+
+
+# ---- A4b: scripts/matched_rung.py, scripts/maxprob_ties.py, the A4b manifests (docs/plans/STAGE2B.md) ------------
+def test_matched_rung_rule():
+    """Nearest rung within 0.005 of 0.9259; a tie goes to the longer E; the window edge is inside; the three
+    no-match statuses."""
+    _scripts_on_path()
+    from matched_rung import pick
+    assert pick([(40, 0.9192), (50, 0.9224), (60, 0.9250), (70, 0.9272)]) == ("matched", 60, [50, 60, 70])
+    assert pick([(50, 0.9249), (60, 0.9269)]) == ("matched", 60, [50, 60])       # |0.0010| tie -> longer E
+    assert pick([(40, 0.9192), (50, 0.9209)]) == ("matched", 50, [50])           # 0.0050 is inside
+    assert pick([(40, 0.9192), (50, 0.9208)]) == ("below", None, [])
+    assert pick([(40, 0.9192), (50, 0.9315)]) == ("interpolate", None, [])
+    assert pick([(50, 0.9310), (60, 0.9320)]) == ("above", None, [])
+
+
+def test_matched_rung_records():
+    """The pod's CPU lane polls for --out: a good ladder writes the rule's record, a bad train.json (a seed-12 run)
+    writes status "error" (no E*), exit 2 and nothing on stdout; no temporary file is left behind."""
+    import subprocess
+    d = tempfile.mkdtemp(dir=_TMP)
+    script = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts", "matched_rung.py")
+
+    def rung(name, seed, epochs, acc):
+        p = os.path.join(d, name + ".json")
+        with open(p, "w") as f:
+            json.dump({"recipe": {"arch": "cifar10_resnet56", "seed": seed, "norm": "chenyaofo", "epochs": epochs},
+                       "final_test_acc_10k": acc}, f)
+        return p
+    good = [rung("e40", 11, 40, 0.9192), rung("e50", 11, 50, 0.9224), rung("e60", 11, 60, 0.9250)]
+    out = os.path.join(d, "ladder.json")
+    r = subprocess.run([sys.executable, script, "--out", out] + good, capture_output=True, text=True)
+    assert r.returncode == 0 and r.stdout.strip() == "matched 60", (r.stdout, r.stderr)
+    rep = json.load(open(out))
+    assert rep["status"] == "matched" and rep["e_star"] == 60 and rep["in_window"] == [50, 60]
+    assert [x["E"] for x in rep["rungs"]] == [40, 50, 60] and not os.path.exists(out + ".tmp")
+    out = os.path.join(d, "ladder_bad.json")
+    r = subprocess.run([sys.executable, script, "--out", out, good[0], rung("s12m", 12, 60, 0.9262)],
+                       capture_output=True, text=True)
+    assert r.returncode == 2 and r.stdout.strip() == "", (r.stdout, r.stderr)
+    rep = json.load(open(out))
+    assert rep["status"] == "error" and rep["e_star"] is None and "seed-11" in rep["reason"]
+
+
+def test_maxprob_ties_known_answer():
+    """Share at the top value and 0.5 * P(tie) between type-b and correct; an empty type-b group gives None."""
+    _scripts_on_path()
+    from maxprob_ties import tie_stats
+    r = tie_stats([1.0, 1.0, 0.9, 0.8, 1.0, 0.75], [True, True, True, True, False, False], cut=0.7)
+    assert (r["n_correct"], r["n_typeb"], r["top_value"], r["n_distinct"]) == (4, 2, 1.0, 4)
+    assert r["top_share_correct"] == 0.5 and r["top_share_typeb"] == 0.5
+    assert abs(r["half_tie_typeb"] - 0.125) < 1e-12                           # P(tie) = 0.5 * 0.5 at 1.0
+    assert abs(r["half_tie_confmatched"] - 0.125) < 1e-12                     # every correct sample is > 0.7
+    r = tie_stats([0.9, 0.2], [True, False])
+    assert r["n_typeb"] == 0 and r["half_tie_typeb"] is None and r["top_share_typeb"] is None
+
+
+A4B_ATLAS = (["atlas_v1_resnet20_%s_st3" % s for s in ("s0hub", "s1", "s2", "s3", "s4")]
+             + ["atlas_v1_resnet56_%s" % s for s in ("s0hub_st3", "s0hub_ref1", "e40_st3", "e50", "e60", "e70", "e90",
+                                                     "s12m", "s13m", "s1", "s2")])
+A4B_MARGIN = (["margin_v1_resnet20_%s_st3" % s for s in ("s0hub", "s1", "s2", "s3", "s4")]
+              + ["margin_v1_resnet56_%s" % s for s in ("s0hub_st3", "s1", "s2", "e50", "e60", "e70", "e90", "s12m",
+                                                       "s13m")])
+# B1 (integration D9, D16): the four E9 manifests (Stage B only on this session's A4b dumps) and the seven ImageNet
+# manifests must select margin_typeb and no cross-layer invariant either (tests/test_b1_imagenet.py checks the rest).
+B1_E9 = ["margin_b1_%s" % s for s in ("resnet20_s0hub_st3", "resnet56_s0hub_st3", "resnet56_s1", "resnet56_s2")]
+B1_IMAGENET = ["margin_b1_%s" % s for s in ("resnet50_legacy10k", "resnet50", "resnet50_swap", "vitb16", "vitb16_swap",
+                                             "deitb", "deitb_swap")]
+
+
+def test_a4b_manifests_freeze_the_instrument():
+    """Every A4b atlas manifest selects exactly the Stage 1 instrument (the atlas_v1_resnet20_s3 lists, in registry
+    order), so nothing registered later can enter an A4b atlas or shift its estimator draws; every margin manifest
+    selects margin_typeb and no cross-layer invariant (an exclusion-only list selects the rest of the registry, so a
+    newly registered cross-layer invariant would enter). Every manifest is ASCII and names its own exp_id and root."""
+    from atlas.config import load_manifest
+    from atlas.registry import select
+    q = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "experiments", "queue")
+    ref = load_manifest(os.path.join(q, "atlas_v1_resnet20_s3.yaml"))
+    for n in A4B_ATLAS:
+        p = os.path.join(q, n + ".yaml")
+        with open(p, "rb") as f:
+            f.read().decode("ascii")                                         # ASCII only
+        m = load_manifest(p)
+        assert m["exp_id"] == n and m["outputs"]["root"] == "results/" + n, n
+        assert list(select(INVARIANTS, m["invariants"])) == list(select(INVARIANTS, ref["invariants"])), n
+        assert list(select(CROSS_LAYER, m["cross_layer"])) == ["layer_cka", "commit_layer"], n
+        assert m["invariant_cfg"] == ref["invariant_cfg"], n
+        assert m["hooks"]["block_stride"] == (1 if "resnet20" in n else 5), n
+        assert m["data"]["reference"]["seed"] == (1 if n.endswith("_ref1") else 0), n
+    for n in A4B_MARGIN + B1_E9 + B1_IMAGENET:
+        p = os.path.join(q, n + ".yaml")
+        with open(p, "rb") as f:
+            f.read().decode("ascii")
+        m = load_manifest(p)
+        assert m["exp_id"] == n and m["outputs"]["root"] == "results/" + n, n
+        assert list(select(INVARIANTS, m["invariants"])) == ["margin_typeb"], n
+        assert select(CROSS_LAYER, m["cross_layer"]) == {}, n
+
+
+# ---- B1: margin_typeb opt-in keys (b1, legacy_imagenet); docs/plans/B1_VIT_MARGIN.md --------------------------
+def test_center_dists_gram_matches_broadcast():
+    from atlas.invariants.margin import center_dists
+    rng = np.random.default_rng(5)
+    X, C = 3.0 * rng.normal(size=(300, 16)), rng.normal(size=(7, 16))
+    assert np.abs(center_dists(X, C) - center_dists(X, C, gram_min=0)).max() < 1e-9
+
+
+def test_margin_typeb_gram_path_matches():
+    """The whole invariant on the Gram path (forced) equals the broadcast path to 1e-9 on every float key.
+    No pytest fixture: the file's __main__ runner calls every test without arguments."""
+    import atlas.invariants.margin as mg
+    a = mg.margin_typeb(_margin_ctx("ridge"), {"b1": True, "legacy_imagenet": {"draws": 20}})
+    old, mg.GRAM_MIN = mg.GRAM_MIN, 0
+    try:
+        b = mg.margin_typeb(_margin_ctx("ridge"), {"b1": True, "legacy_imagenet": {"draws": 20}})
+    finally:
+        mg.GRAM_MIN = old
+    assert a.pop("b1")["gram_min"] == old and b.pop("b1")["gram_min"] == 0
+
+    def walk(x, y, path):
+        if isinstance(x, dict):
+            assert set(x) == set(y), path
+            for k in x:
+                walk(x[k], y[k], f"{path}/{k}")
+        elif isinstance(x, list):
+            assert len(x) == len(y), path
+            for i, (u, v) in enumerate(zip(x, y)):
+                walk(u, v, f"{path}[{i}]")
+        elif isinstance(x, float) and isinstance(y, float):
+            assert abs(x - y) < 1e-9, (path, x, y)
+        else:
+            assert x == y, (path, x, y)
+    walk(a, b, "")
+
+
+def test_margin_b1_off_is_a3_and_on_only_adds():
+    """Without the opt-in keys the output is the A3 output; with them every A3 key keeps its exact value."""
+    from atlas.invariants.margin import margin_typeb
+    a3 = margin_typeb(_margin_ctx("ridge"), {})
+    assert not any(k in a3 for k in ("b1", "legacy_imagenet", "strat_confmatched", "centers_geometry",
+                                     "margin_minus_maxprob_confmatched"))
+    assert not any("margin_minus_maxprob_typeb" in r for r in a3["sweep"])
+    b1 = margin_typeb(_margin_ctx("ridge"), {"b1": True, "legacy_imagenet": {"draws": 20}})
+    for k, v in a3.items():
+        if k == "sweep":
+            for ra, rb in zip(v, b1["sweep"]):
+                assert all(rb[kk] == vv for kk, vv in ra.items())
+        else:
+            assert b1[k] == v, k
+
+
+def test_margin_b1_monotone_confidence_known_answer():
+    """maxprob and logit_gap strictly increasing in margin = margin carries nothing beyond confidence: every paired
+    margin-vs-confidence difference is 0 and the confidence-stratified AUCs coincide."""
+    from atlas.invariants._util import class_stats
+    from atlas.invariants.margin import center_dists, margin_typeb, top2_margin
+    ctx = _margin_ctx("deep")                           # deep: type-b margins overlap the correct ones (bins mix)
+    C = class_stats(ctx.ref, ctx.ref_labels, 3)[0]
+    m = top2_margin(center_dists(np.asarray(ctx.test, dtype=np.float64), C))[0]
+    z = (m - m.min()) / (m.max() - m.min())
+    ctx.test_preds = {"argmax": ctx.test_preds["argmax"], "maxprob": 0.71 + 0.28 * z, "logit_gap": 5.0 * z}
+    r = margin_typeb(ctx, {"b1": True})
+    assert r["n_typeb"] == 150                                           # every wrong sample now has maxprob > 0.7
+    for k in ("margin_minus_maxprob_typeb", "margin_minus_maxprob_confmatched", "margin_minus_logitgap_confmatched"):
+        assert abs(r[k]) < 1e-12 and r[k + "_se"] < 1e-9 and (r[k + "_p"] is None or r[k + "_p"] > 0.99), k
+    assert r["spearman_margin_logitgap"] > 1 - 1e-12
+    s = r["strat_confmatched"]
+    assert s["n_bins_used"] >= 1
+    assert abs(s["auc_margin"] - s["auc_maxprob"]) < 1e-12 and abs(s["auc_margin"] - s["auc_logitgap"]) < 1e-12
+    row = [x for x in r["sweep"] if x["cut"] == 0.7][0]
+    assert abs(row["margin_minus_maxprob_confmatched"]) < 1e-12 and "margin_minus_dist_typeb_p" in row
+
+
+def test_margin_b1_ridge_geometry():
+    from atlas.invariants.margin import margin_typeb
+    r = margin_typeb(_margin_ctx("ridge"), {"b1": True})
+    assert 0.0 <= r["median_center_spacing_top2"] and r["auc_margin_norm_typeb"] > 0.95   # ridge: small normalized margin
+    assert 0.7 < r["nearest_center_agrees_with_model"] <= 1.0
+    g = r["centers_geometry"]
+    assert g["n_centers"] == 3 and g["sep_ratio_ref"] > 1.0 and g["sep_legacy_ref"] > 1.0
+    assert "auc_logitgap_typeb" not in r and "margin_minus_logitgap_typeb" not in r     # no logit_gap in the preds
+    assert r["b1"]["real_ok"] is False and not any("n_typeb_real_ok" in x for x in r["sweep"])
+
+
+def test_margin_b1_realwrong_restriction():
+    """E11: real_ok all 0 (ReaL calls every error wrong) makes the *_realwrong keys equal the type-b keys; all 1
+    (ReaL accepts every prediction) leaves no ReaL-wrong type-b sample."""
+    from atlas.invariants.margin import margin_typeb
+    ctx = _margin_ctx("ridge")
+    ctx.test_preds = dict(ctx.test_preds, real_ok=np.zeros(750, dtype=np.int8))
+    r = margin_typeb(ctx, {"b1": True})
+    assert r["b1"]["real_ok"] is True
+    for row in r["sweep"]:
+        assert row["n_pos_typeb_realwrong"] == row["n_typeb"] and row["n_typeb_real_ok"] == 0
+        for k in ("auc_margin_typeb", "auc_dist_typeb", "auc_maxprob_typeb", "margin_minus_dist_typeb",
+                  "margin_minus_dist_typeb_p"):
+            assert row[k + "_realwrong"] == row[k], (row["cut"], k)
+        assert row["median_margin_typeb_realwrong"] == row["median_margin_typeb"]
+    ctx.test_preds = dict(ctx.test_preds, real_ok=np.ones(750, dtype=np.int8))
+    r = margin_typeb(ctx, {"b1": True})
+    row = [x for x in r["sweep"] if x["cut"] == 0.7][0]
+    assert row["n_pos_typeb_realwrong"] == 0 and row["auc_margin_typeb_realwrong"] is None
+    assert row["n_typeb_real_ok"] == 100 and row["median_margin_typeb_realwrong"] is None
+
+
+def test_legacy_imagenet_known_answer():
+    from atlas.invariants.margin import _legacy_imagenet, margin_typeb
+    r = margin_typeb(_margin_ctx("ridge"), {"legacy_imagenet": {"cut": 0.5, "min_class_n": 3, "draws": 50,
+                                                                  "seed": 0}})["legacy_imagenet"]
+    assert (r["n"], r["n_wrong"], r["n_cw"], r["n_classes_centered"]) == (750, 150, 100, 3)   # strict > 0.5
+    assert r["dir_auc_margin_full"] > 0.95 and r["raw_auc_margin_full"] < 0.05
+    assert abs(r["dir_auc_margin_sub_mean"] - r["dir_auc_margin_full"]) < 0.02 and r["dir_auc_margin_sub_sd"] >= 0.0
+    assert r["dir_auc_margin_sub_q025"] <= r["dir_auc_margin_sub_mean"] <= r["dir_auc_margin_sub_q975"]
+    # valley separation by hand: centers (0, 2) and (6, 2), mean within-distance 4/3 -> 6 / (4/3) = 4.5;
+    # the single point of class 2 (< min_class_n) gets no center
+    X = np.array([[0, 0], [0, 2], [0, 4], [6, 0], [6, 2], [6, 4], [20, 20]], dtype=np.float64)
+    y = np.array([0, 0, 0, 1, 1, 1, 2])
+    q = _legacy_imagenet(X, y, y.copy(), np.full(7, 0.9), 2, {})
+    assert q["n_classes_centered"] == 2 and abs(q["valley_sep_legacy"] - 4.5) < 1e-6
+    assert q["n_cw"] == 0 and q["dir_auc_margin_full"] is None
+
+
+def test_margin_b1_on_synth():
+    """Rule 4: the B1 keys on the synthetic dump with zero errors (synth preds carry no logit_gap)."""
+    root = os.path.join(_TMP, "b1")
+    make_synth_dump(os.path.join(root, "dump"), n_ref=2000, n_test=800, n_corr=400, seed=0)
+    cfg = {"invariants": ["margin_typeb"], "cross_layer": ["-layer_cka", "-commit_layer"],
+           "invariant_cfg": {"margin_typeb": {"b1": True, "legacy_imagenet": {"cut": 0.5, "draws": 20}}}}
+    atlas = build_atlas(os.path.join(root, "dump"), root, cfg, verbose=False)
+    assert not atlas["skipped"]
+    for l in atlas["layers"]:
+        m = atlas["per_layer"][l]["margin_typeb"]
+        assert "error" not in m, m
+        for k in ("margin_minus_maxprob_confmatched_p", "median_margin_ratio_typeb_confmatched", "strat_confmatched",
+                  "centers_geometry", "legacy_imagenet", "nearest_center_agrees_with_model"):
+            assert k in m, k
+        assert "margin_minus_maxprob_confmatched" in m["sweep"][3] and "margin_minus_dist_typeb_p" in m["sweep"][3]
+        assert "auc_logitgap_typeb" not in m
 
 
 if __name__ == "__main__":

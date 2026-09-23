@@ -94,6 +94,16 @@ AUC 1.00) and confirm it would have flagged both. If it would not, add the check
    ladder decides whether a difference is attributable to depth. It shares one pod session with Stage 1b (seeds 3,
    4; STAGE1.md amendment 2) and A3 (margin/type-b, row 9; docs/plans/A3_MARGIN.md):
    `results/atlas_v1_resnet20_s3/RUN_REQUEST.md`.
+   Its follow-up, **Stage 2b (A4b)**, is docs/plans/STAGE2B.md (STAGE2.md amendment 1): resnet56 seeds 1-2, seed-11
+   matched rungs with seed-12/13 replicates, the `_ref1` twin and a same-session `_st3` resnet20 band; D-ID / D-COLL
+   become ATLAS_STATUS row 11, and the evaluation is frozen as `node scripts/a4b_eval.js`. It shares one pod session
+   with B1 (row 10): `results/atlas_v1_resnet56_s1/RUN_REQUEST.md`.
+   **B1 (the ViT margin test, MASTER P1)** is docs/plans/B1_VIT_MARGIN.md (pre-registration in the
+   `experiments/queue/margin_b1_vitb16.yaml` notes): margin_typeb on ImageNet val for torchvision ViT-B/16 and DeiT-B,
+   run once and only after a same-session ResNet50 gate passes (legacy 0.800 reproduction G0-G2, positive control G3;
+   `scripts/b1_gate.py`). Its Stage A is the separate entry point `python -m atlas.run_imagenet`; the decision is frozen
+   as `node scripts/b1_verdicts.js` (`--a4b` adds the joint reading beside A4b's depth-56 margin tag). Request:
+   `results/margin_b1_vitb16/RUN_REQUEST.md`.
 
 After these, the deformation ladder starts: `scripts/tta_deform.py` (rung 1, TENT, two
 manifests: standard dose and collapse positive control) writes `dump_step<k>/` checkpoints,

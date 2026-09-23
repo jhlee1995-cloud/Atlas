@@ -1,0 +1,44 @@
+# B1 control and gate G3: torchvision resnet50 IMAGENET1K_V2, official transform (resize 232 bilinear, crop 224),
+# reference = val part A, test = val part B. Discovery: every value may be read.
+# Pre-registration: experiments/queue/margin_b1_vitb16.yaml (same commit).
+exp_id: margin_b1_resnet50
+stage: atlas
+n_classes: 1000
+backbone:
+  arch: tv_resnet50                # torchvision.models.resnet50
+  weights: IMAGENET1K_V2           # acc@1 80.858
+  seed_tag: tv2
+  norm: imagenet
+  transform: official              # weights.transforms(): resize 232 bilinear, crop 224
+data:
+  imagenet_val:
+    repo: benjamin-paine/imagenet-1k-256x256
+    revision: 1bd0400450249a7fe90c0aece37d0d03e7ea956a
+    files:
+      - path: data/validation-00000-of-00002.parquet
+        sha256: 399ae54c309fa71f99b6f3c121ad4507ae3103f0205923e6695b6a6bac52c6eb
+      - path: data/validation-00001-of-00002.parquet
+        sha256: 3c665d47c5057e237be8c15348570466478e4a73b8d4ff913ed319cd8e3f16f7
+  reference:  {dataset: imagenet_val, part: A, split_seed: 0, per_class: 25, n: 25000, seed: 0}
+  clean_test: {dataset: imagenet_val, part: B, split_seed: 0, per_class: 25, n: 25000}
+  panel: null
+  cifar10c: null
+  ood: []
+hooks: {layers: blocks, block_stride: 1, pooling: gap}          # stem, layer1.0 .. layer4.2, penult (18 taps)
+extract: {batch: 256, dtype: float32, num_workers: 8, store_logits: true}          # workers: pod ATLAS_EXTRACT_WORKERS
+invariants: [margin_typeb]
+cross_layer: ["-layer_cka", "-commit_layer"]     # selects none (an empty list would mean "all")
+invariant_cfg:
+  margin_typeb: {cut: 0.7, cuts: [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99], min_n: 10, b1: true,
+                 strat_bins: 10, strat_min: 5, legacy_imagenet: {cut: 0.5, min_class_n: 3, draws: 200, seed: 0,
+                                                                  layers: [penult]}}
+holdout:
+  discovery_seeds: [resnet50_tv2, resnet20_hub, resnet56_hub]      # gate, contrast, CIFAR context: may be read
+  confirmation_seeds: [vit_b_16_tv1, deit_base_patch16_224_fb]     # first and only margin touch, after gate G
+  reserve_confirmation: [vit_base_patch16_224.augreg_in1k]         # for any redesign found on resnet50
+outputs: {root: results/margin_b1_resnet50, plots: false}
+notes: |
+  Pre-registration: experiments/queue/margin_b1_vitb16.yaml notes (same commit P); docs/plans/B1_VIT_MARGIN.md.
+  Role: G3 (atlas definition: row(c).margin_minus_dist_typeb >= 0.01, p < 0.05 at c in {0.7, 0.5} with
+  n_typeb >= 300), c* count, the CNN contrast for V1-V3 (same rules, reported beside the ViTs), E1, E3, E4, E5
+  (in-sample lg vs reference-A row(0.5) on the same images), E8, B1-acc. Discovery.

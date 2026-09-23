@@ -1,0 +1,292 @@
+{
+ "A": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "cstar": 0.7,
+  "margin_vs_maxprob": "MARGIN~CONFIDENCE",
+  "margin_vs_logitgap": "MARGIN~CONFIDENCE",
+  "V4_replication": "PASS",
+  "accuracy_control": "ACC-MATCHED",
+  "row10": "ok",
+  "joint": {
+   "reject_notdepth": 2,
+   "promote": 2
+  }
+ },
+ "LEGDEC": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "cstar": 0.7,
+  "row10": "ok"
+ },
+ "B": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "B (type-b still low-margin)",
+  "cstar": 0.7,
+  "row10": "x",
+  "b2_cancel": false,
+  "joint": {
+   "promote": 3,
+   "yellow": 3,
+   "reject_notdepth": 4,
+   "reject_depth": 5,
+   "reject_null": 5,
+   "noteval": null
+  }
+ },
+ "BREV": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "B (not low-margin)",
+  "cstar": 0.7,
+  "row10": "x",
+  "b2_cancel": true,
+  "joint": {
+   "promote": 3
+  }
+ },
+ "POW": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "cstar": 0.5,
+  "row10": "ok"
+ },
+ "NOPOW": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "UNDECIDED-POWER",
+  "cstar": null,
+  "row10": "open"
+ },
+ "FRAG": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "UNDECIDED",
+  "cstar": 0.7,
+  "row10": "y",
+  "states": {
+   "vitb16": {
+    "V1": "SPLIT-FRAGILE"
+   }
+  }
+ },
+ "UNTESTED": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "UNDECIDED",
+  "cstar": 0.7,
+  "states": {
+   "deitb": {
+    "V1": "SPLIT-UNTESTED"
+   }
+  }
+ },
+ "CTRL": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": false,
+   "open": false
+  },
+  "outcome": "INVALID-CONTROL",
+  "row10": "open",
+  "joint": {
+   "reject_notdepth": 1
+  },
+  "joint_cnn_sentence": true
+ },
+ "REPRO": {
+  "gate": {
+   "G0": true,
+   "G1": false,
+   "G2": true,
+   "G3": true,
+   "open": false
+  },
+  "outcome": "INVALID-REPRO"
+ },
+ "G0SELF": {
+  "gate": {
+   "G0": false,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": false
+  },
+  "outcome": "INVALID-PLUMBING (gate G0)"
+ },
+ "REALFRAC": {
+  "gate": {
+   "G0": false,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": false
+  },
+  "outcome": "INVALID-PLUMBING (gate G0)"
+ },
+ "PP": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "INVALID-PLUMBING (post-gate run)"
+ },
+ "R2": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "cstar": 0.7,
+  "rerun": {
+   "vitb16": "PASS"
+  }
+ },
+ "ACCONLY": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "INVALID-PLUMBING (post-gate run)",
+  "rerun": {
+   "vitb16": "REFUSED"
+  }
+ },
+ "BAND": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "cstar": 0.7,
+  "accuracy_control": "ACC-CONFOUNDED"
+ },
+ "ADDSONLY": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "margin_vs_maxprob": "ADDS-OVER-MAXPROB-ONLY",
+  "margin_vs_logitgap": "MARGIN~CONFIDENCE"
+ },
+ "MIXED": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "MIXED",
+  "cstar": 0.7,
+  "row10": "y",
+  "V4_replication": "FAIL"
+ },
+ "GATEREC": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "INVALID-PLUMBING (gate record)",
+  "pod_record_agrees": false
+ },
+ "R50SWAP": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "A",
+  "states": {
+   "resnet50": {
+    "V1": "SPLIT-UNTESTED"
+   }
+  },
+  "r50swap_info": true
+ },
+ "NULLWIDE": {
+  "gate": {
+   "G0": true,
+   "G1": true,
+   "G2": true,
+   "G3": true,
+   "open": true
+  },
+  "outcome": "UNDECIDED",
+  "states": {
+   "vitb16": {
+    "V1": "UNRESOLVED"
+   },
+   "deitb": {
+    "V1": "UNRESOLVED"
+   }
+  }
+ }
+}

@@ -163,3 +163,19 @@ Stage 2 is **VALID and promotes nothing** (`results/atlas_v1_resnet56_s0hub/SESS
   This is disclosed in the SESSION.md.
 - **Firming up the DEPTH labels** needs a new pre-registration first: a rung within 0.005, the full-recipe depth-56
   seeds 1-2, and the `_ref1` twin.
+
+## Amendment 1 (A4b, committed before its run)
+
+The follow-up that "Outcome" asks for is pre-registered in `docs/plans/STAGE2B.md`, with predictions in
+`experiments/queue/atlas_v1_resnet56_s1.yaml` and `margin_v1_resnet56_s1.yaml`, and its evaluation frozen as
+`scripts/a4b_eval.js`. For A4b only:
+- the band is B20+ (five `_st3` members) and pair metrics get the band P20;
+- the matched value never uses the hub: an in-window seed-11 rung with a built atlas, or interpolation between
+  adjacent seed-11 rungs (e40 only as the same-session `atlas_v1_resnet56_e40_st3`); seeds 12 and 13 replicate the
+  matched leg;
+- the depth-56 side of a label comes from the last-epoch seeds s1 and s2;
+- SCALE-VARIANT is replaced by separate SHAPE and LEVEL labels;
+- scale labels are computed over all resnet20 references.
+
+Stage 2's labels and its SESSION.md stay as recorded. A4b replaces the Stage 2 DEPTH entries in ATLAS_STATUS only
+through STAGE2B.md's outcome tables (row 11, D-ID and D-COLL).

@@ -1,0 +1,250 @@
+# B1 (MASTER_SUMMARY.md P1): margin_typeb on ImageNet val, torchvision vit_b_16 IMAGENET1K_V1 (primary confirmation).
+# Stage A = atlas/extract_imagenet.py through python -m atlas.run_imagenet (atlas/extract_acts.py and atlas/run.py
+# unchanged); Stage B = atlas/invariants/margin.py with the opt-in b1 and legacy_imagenet keys. This manifest holds the
+# B1 pre-registration for every margin_b1_* run (docs/plans/B1_VIT_MARGIN.md; decision code scripts/b1_verdicts.js,
+# pod gate scripts/b1_gate.py). ASCII only (atlas/config.py reads it with the platform codec).
+exp_id: margin_b1_vitb16
+stage: atlas
+n_classes: 1000
+backbone:
+  arch: tv_vit_b_16                # torchvision.models.vit_b_16
+  weights: IMAGENET1K_V1           # acc@1 81.072; weights.transforms() = resize 256 bilinear, crop 224
+  seed_tag: tv1
+  norm: imagenet                   # mean (0.485, 0.456, 0.406), std (0.229, 0.224, 0.225)
+  transform: official
+data:
+  imagenet_val:
+    repo: benjamin-paine/imagenet-1k-256x256
+    revision: 1bd0400450249a7fe90c0aece37d0d03e7ea956a
+    files:
+      - path: data/validation-00000-of-00002.parquet
+        sha256: 399ae54c309fa71f99b6f3c121ad4507ae3103f0205923e6695b6a6bac52c6eb
+      - path: data/validation-00001-of-00002.parquet
+        sha256: 3c665d47c5057e237be8c15348570466478e4a73b8d4ff913ed319cd8e3f16f7
+  reference:  {dataset: imagenet_val, part: A, split_seed: 0, per_class: 25, n: 25000, seed: 0}
+  clean_test: {dataset: imagenet_val, part: B, split_seed: 0, per_class: 25, n: 25000}
+  panel: null
+  cifar10c: null
+  ood: []
+hooks: {layers: vit_blocks, block_stride: 1, pooling: cls, extra: [penult_mean]}   # block.0 .. block.11, penult_mean,
+                                                                                   # penult (14 taps)
+extract: {batch: 256, dtype: float32, num_workers: 8, store_logits: true}          # workers: pod ATLAS_EXTRACT_WORKERS
+invariants: [margin_typeb]
+cross_layer: ["-layer_cka", "-commit_layer"]     # selects none (an empty list would mean "all")
+invariant_cfg:
+  margin_typeb: {cut: 0.7, cuts: [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99], min_n: 10, b1: true,
+                 strat_bins: 10, strat_min: 5, legacy_imagenet: {cut: 0.5, min_class_n: 3, draws: 200, seed: 0,
+                                                                  layers: [penult]}}
+holdout:
+  discovery_seeds: [resnet50_tv2, resnet20_hub, resnet56_hub]      # gate, contrast, CIFAR context: may be read
+  confirmation_seeds: [vit_b_16_tv1, deit_base_patch16_224_fb]     # first and only margin touch, after gate G
+  reserve_confirmation: [vit_base_patch16_224.augreg_in1k]         # for any redesign found on resnet50
+outputs: {root: results/margin_b1_vitb16, plots: false}
+notes: |
+  B1 pre-registration (MASTER_SUMMARY.md P1: the ViT margin test). Committed and pushed in commit P together with A4b
+  (docs/plans/STAGE2B.md), before any ImageNet activation of any model exists. Design, archaeology and band
+  derivations: docs/plans/B1_VIT_MARGIN.md. Decision code, frozen with this commit: scripts/b1_verdicts.js (local,
+  node) and scripts/b1_gate.py (pod). These notes hold the predictions for every margin_b1_* run.
+  Paths: pm = results/margin_b1_<m>/atlas.json per_layer.penult.margin_typeb; row(c) = the pm.sweep entry with
+  cut == c; lg = pm.legacy_imagenet; meta = atlas.json meta (the dump meta). <m> in resnet50_legacy10k, resnet50,
+  resnet50_swap, vitb16, vitb16_swap, deitb, deitb_swap; CIFAR context (E9) resnet20_s0hub_st3, resnet56_s0hub_st3,
+  resnet56_s1, resnet56_s2. <check dir> = results/instrument_check_b1 (a relaunch: results/instrument_check_b1_r2).
+
+  Definition: the A3 margin_typeb (atlas/invariants/margin.py; experiments/queue/margin_v1_resnet20_s1.yaml)
+  unchanged: type-b = argmax != label and maxprob > cut (strict); margin = d2 - d1, dist = d1, distances to the
+  class means of the reference split (true labels) in the full pooled layer, Euclidean, unnormalized; negatives =
+  all correct (secondary: confidence-matched = correct with maxprob > cut); oriented AUCs (errors positive) with
+  DeLong SEs; paired DeLong; cut sweep 0 .. 0.99; nothing drawn from ctx.rng. Above 2e8 elements (N x K x D) the
+  distances use a chunked float64 Gram form (GRAM_MIN; no CIFAR problem reaches it: 5000 x 10 x 64 = 3.2e6).
+  One change, fixed before data: the reference is the other half of ImageNet val, not a train subset. The mirror's
+  train split is class-sorted over 40 parquet shards (17.6 GB), so a per-class train subset needs all of it; the
+  legacy anchors (0.800, 1.14) also used val centers. Split: per class c = 0..999, the 50 val rows of class c (row
+  order of the two parquet files in name order; row i = ILSVRC2012_val_{i+1}) ascending are permuted with one numpy
+  default_rng(0) drawn in class order; the first 25 are part A, the other 25 part B; each part ascending.
+  Primary: reference A, test B (25,000 each). Swap twin (_swap): reference B, test A (disjoint test images).
+  Added keys (opt-in b1 and legacy_imagenet; every A3 key keeps its value): paired margin - maxprob,
+  margin - logitgap (logit_gap = top-1 minus top-2 logit, stored by Stage A) and margin_norm - dist, also in
+  every sweep row together with margin - dist; strat_confmatched; centers_geometry; with the ReaL labels (E11) per
+  sweep row the type-b keys restricted to the type-b samples that ReaL also calls wrong (*_realwrong); legacy_imagenet
+  (Upgraded-Mod session_experiments/imagenet_extract.py:66-83 on the scored split).
+  Models (ImageNet-1k supervised, eval mode, float32 forward and float32 dump, PyTorch TF32 defaults unchanged and
+  recorded in meta.tf32, logits stored as float16, each with its official eval transform): resnet50 = torchvision
+  ResNet50_Weights.IMAGENET1K_V2 (acc@1 80.858; resize 232 bilinear, crop 224); vitb16 = torchvision
+  ViT_B_16_Weights.IMAGENET1K_V1 (81.072; resize 256 bilinear, crop 224, which is also the legacy transform);
+  deitb = timm deit_base_patch16_224.fb_in1k at HF revision b78cc5532a69df6bcad9c3a8d76653fd20b31ac6, model.safetensors
+  sha256 cd2da27b74ed7f68b599f16c77af3e1e80f01c75f9ad96029d22ce747a247e8e (81.98 in timm results-imagenet.csv;
+  resize 248 bicubic, crop 224). penult = the input of the classification Linear (ViT: final-norm CLS token). ViT
+  taps (14, the same names in vitb16 and deitb): block.0 .. block.11 = CLS token of each block output (before the
+  final norm), penult_mean = final-norm mean of the 196 patch tokens, penult last. resnet50 taps: stem, every block
+  (stride 1), penult (18). Data: benjamin-paine/imagenet-1k-256x256 validation at revision
+  1bd0400450249a7fe90c0aece37d0d03e7ea956a, the two parquet files and sha256 in data.imagenet_val.
+
+  Holdout (rule 7). Discovery: resnet50 (gate and contrast; every value may be read), the CIFAR E9 rebuilds, the
+  legacy numbers. Confirmation: vitb16 (primary) and deitb (replication) with their swap twins. No ViT activation,
+  prediction or statistic on ImageNet val exists before this commit; before the gate the ViT code runs on random
+  tensors only (python -m atlas.run_imagenet --selftest-random: weights, taps, head check; no ImageNet image read).
+  The ViT manifests run once, after gate G passed in the same session (pod_atlas.sh --b1); a gate FAIL leaves them
+  untouched. Afterwards vitb16 and deitb are spent for margin_typeb: a redesign is searched on resnet50 only and
+  confirmed on the reserve ViT. The val halves are not a holdout (every model is scored on the same test half); the
+  model is the confirmation unit.
+
+  P0 plumbing (every run that ran; FAIL = INVALID-PLUMBING, nothing interpreted): meta.source real,
+     meta.n_classes 1000, meta.parquet_sha256_ok true, meta.head_check_max_abs <= 1e-3 (float32 penult x head weight
+     + bias reproduces the logits), no error in pm. Main and swap runs also: meta.decode_failures 0, meta.n_test 25000,
+     meta.ref_test_disjoint true, meta.per_class_counts ref and test == [25, 25], pm.acc in [official - 0.06,
+     official + 0.01] for resnet50 [0.7486, 0.8186] and in [official - 0.10, official + 0.01] for the ViTs: vitb16
+     [0.7107, 0.8207], deitb [0.7198, 0.8298] (integration D14: the legacy resnet50 lost 3.8 points on this mirror and
+     only about 0.2 of them come from its resize, H0; a ViT more sensitive to the mirror must not be spent for a
+     non-plumbing reason; label order is tested before the gate by the same loader in the resnet50 runs). The legacy
+     block records its decode failures (the legacy loop skipped undecodable rows).
+     Re-run rule: a run that fails P0 after the gate is never scored. One re-run goes to margin_b1_<m>_r2 (same
+     manifest; exp_id and outputs renamed; committed before the relaunch), only for a parquet/sha, decode, label-map,
+     split-bookkeeping, head-check or penult-assertion fault, decided from verdicts.json plumbing_post alone; the
+     failing run's atlas.json is not opened beyond meta; transform, taps, dtype, split rule and Stage B are frozen. An
+     acc-band failure alone is final: INVALID-PLUMBING, and that model is spent.
+  G  gate (resnet50 only; scripts/b1_gate.py on the pod before any ViT run; all four must hold; record
+     results/b1_gate/gate.json, reused on a relaunch when both resnet50 atlas.json files are unchanged):
+  G0 legacy dump: meta.n_test in [10048, 10111] (the imagenet_extract.py:41-60 loop stops after 157 flushes of 64
+     plus the rest of that parquet batch), lg.acc in [0.766, 0.776] (legacy 0.771), lg.valley_sep_legacy in
+     [1.12, 1.16] (legacy 1.14); P0 of both resnet50 runs; both ViT self-tests on random inputs PASS
+     (<check dir>/selftest_margin_b1_{vitb16,deitb}.json: 14 taps, penult last, penult == final-norm CLS to 1e-5, head
+     check <= 1e-3, logits == model(x)); <check dir>/data.json status PASS and, when the pinned ReaL labels verified,
+     real.label_in_real_frac >= 0.5 (dataset-level label order; a misaligned order gives about 0.001).
+  G1 lg.dir_auc_margin_full within w of 0.800, w = max(0.035, 2.58 * lg.dir_auc_margin_sub_sd + 0.005), and
+     lg.raw_auc_margin_full < 0.5. The legacy scored an unseeded random subsample of correct samples, so 0.800 is one
+     draw around the all-correct AUC of the same images. The 0.035 floor is a declared allowance for transform and
+     library drift, about 1.5 x the subsample width at n_cw = 500 (2.58 SD + 0.005 = 0.023 with Var(V01) = Q1 - A^2,
+     Q1 = A / (2 - A)); the measured SD widens the band when n_cw is small.
+  G2 lg.dir_auc_margin_full > lg.dir_auc_cluster_full > lg.dir_auc_energy_full (the legacy order), and
+     lg.dir_auc_cluster_full within max(0.04, 2.58 * lg.dir_auc_cluster_sub_sd + 0.005) of 0.636 (0.04: a declared
+     allowance, about 1.2 x the width 0.033 at A = 0.636, n_cw = 500).
+  G3 resnet50 atlas definition (test half, penult): at every cut c in {0.7, 0.5} with row(c).n_typeb >= 300,
+     row(c).margin_minus_dist_typeb >= 0.01 and row(c).margin_minus_dist_typeb_p < 0.05; at least one such c.
+  Gate record: scripts/b1_verdicts.js recomputes G0-G3 from the pulled files and requires them to equal gate.json.
+  c* (power, mechanical): 0.7 if row(0.7).n_typeb >= 300 in resnet50, vitb16 and deitb; else 0.5 if
+     row(0.5).n_typeb >= 300 in all three; else UNDECIDED-POWER. Every V item is read at c* in every run.
+  V1 (MASTER exit clause 1; each ViT, penult) d = row(c*).margin_minus_dist_typeb, se and p its _se and _p: PASS if
+     d >= 0.01 and p < 0.05; NULL if d < 0.01 and d + 1.96 se <= 0.02 (a null must be precise); NULL(REVERSED) if
+     d <= -0.01 and p < 0.05; UNRESOLVED otherwise.
+  V2 (exit clause 2, type-b is low-margin) PASS if row(c*).median_margin_typeb < pm.median_margin_correct and
+     their ratio <= 0.5, else FAIL. The ratio depends on the cut (A3: > 0.5 at cut 0.99); the sweep is reported.
+  V3 (margin beyond the model's own confidence; also on resnet50) d3 = row(c*).margin_minus_maxprob_confmatched
+     with _se and _p (paired DeLong): ADDS if d3 >= 0.01 and p < 0.05; BELOW if d3 <= -0.01 and p < 0.05;
+     EQUIVALENT (margin ~ maxprob) if |d3| < 0.01 and d3 +- 1.96 se inside [-0.02, 0.02]; UNRESOLVED otherwise.
+     V3b: the same rule on row(c*).margin_minus_logitgap_confmatched (margin vs the head's top-2 logit gap).
+  V4 (replication) deitb has the same V1, V2 and V3 states as vitb16.
+  Split robustness: twins are read at c* whatever their type-b count (c* is set by the primaries). A V state that
+     differs between a run and its swap twin becomes SPLIT-FRAGILE; a twin state that is missing or not evaluable
+     leaves the run's state SPLIT-UNTESTED; both read as UNRESOLVED. resnet50_swap is discovery material: its P0
+     failure is recorded as INFO (resnet50's states are then SPLIT-UNTESTED), never INVALID-PLUMBING.
+  AC (accuracy control) |pm.acc(vitb16) - pm.acc(resnet50)| <= 0.02 and |pm.acc(deitb) - pm.acc(resnet50)| <= 0.02:
+     ACC-MATCHED; otherwise every cross-architecture level comparison (E3, E8, AUC levels) is ACC-CONFOUNDED.
+     V1-V3 compare scores within one model and do not depend on it.
+  Decision (applied in order; scripts/b1_verdicts.js):
+     0 INVALID-PLUMBING (gate record) when the recomputed G0-G3 differ from results/b1_gate/gate.json or it is
+       missing.
+     1 INVALID-PLUMBING (G0, or P0 of a ViT run after the gate); 2 INVALID-REPRO (G1 or G2); 3 INVALID-CONTROL (G3).
+       No A/B label; after a gate FAIL the ViTs were not run.
+     4 UNDECIDED-POWER (no c*).
+     5 A (margin survives): V1 PASS and V2 PASS in vitb16 and in deitb (a SPLIT state is neither).
+     6 B (margin loses its advantage over distance on ViT; resnet50 G3 held): V1 NULL or NULL(REVERSED) in vitb16 and
+       in deitb. Sub-label "type-b still low-margin" if V2 PASS in both, "not low-margin" if FAIL in both, else
+       "ridge mixed".
+     7 UNDECIDED: any V1 state UNRESOLVED, SPLIT-FRAGILE, SPLIT-UNTESTED or not evaluable, or a V2 state SPLIT-*.
+     8 MIXED: anything else.
+     Separately: margin_vs_maxprob = ADDS, MARGIN~CONFIDENCE or BELOW when both ViTs have that V3 state, else
+     MIXED/UNRESOLVED; ADDS becomes ADDS-OVER-MAXPROB-ONLY unless margin_vs_logitgap is ADDS too (H2b);
+     margin_vs_logitgap the same from V3b; resnet50 V3 and V3b are reported beside them.
+  Predictions: G PASS; outcome A; margin_vs_maxprob MARGIN~CONFIDENCE and V3b EQUIVALENT in both ViTs (rule 8
+     H1 below); resnet50 V3: no direction predicted (A3 context, unpaired: confidence-matched margin - maxprob
+     -0.0013 in the resnet20 hub, +0.0196 in the resnet56 hub).
+  Roadmap (MASTER_SUMMARY.md:235-249). A: margin becomes a Gate-1 axis for supervised CNN and ViT alike and B2 opens
+     (DINO, then CLIP). B: "margin loses its advantage over distance on ViT"; B2 is cancelled and Phase 3 is scoped to
+     the CNN deployment model only if V1 is NULL(REVERSED) on both ViTs or V2 FAILs on both ViTs; otherwise the
+     decision goes to D-AB with row(c*).auc_margin_typeb of both ViTs beside resnet50's (a V1 NULL means only that
+     margin does not beat distance by 0.01). MIXED or UNDECIDED: no branch; a follow-up needs a new pre-registration
+     on the reserve ViT.
+  Joint reading of A4b M56-b and B1 (integration D13; the same table is in docs/plans/STAGE2B.md "M56"; the two labels
+     are computed independently; node scripts/b1_verdicts.js --a4b results/atlas_v1_resnet56_s1/a4b_eval.json prints
+     it from M56.b_row9_d56.tag and .m2_failure_attribution. In row 3 "on both ViTs" applies to both conditions. An
+     M56-b tag that is not PROMOTE, YELLOW or REJECT (not evaluable, no verdict) leaves B read alone with row 3's rule):
+  | A4b M56-b | B1 label | joint reading (roadmap consequence) |
+  |---|---|---|
+  | any | INVALID-* / UNDECIDED-POWER | no A/B label. With G3 FAIL and M56-b REJECT, it is recorded as "the atlas-definition margin > distance does not hold in fully fit CNNs"; MASTER exit clause 1 goes to D-AB |
+  | any | A | outcome A as pre-registered; M56-b reported beside it |
+  | PROMOTE or YELLOW | B | "margin loses its advantage over distance on ViT"; B2 is cancelled and Phase 3 is CNN-scoped only if V1 is NULL(REVERSED) or V2 FAILs on both ViTs (prereg review item 21) |
+  | REJECT, attribution NOT-DEPTH | B | not evidence for "CNN-specific": the clause also fails in a fully fit CNN. The decision goes to D-AB with V3 and `row(c*).auc_margin_typeb` of both ViTs and resnet50; B2 is not cancelled on this basis |
+  | REJECT, attribution DEPTH, SPLIT or null | B | recorded as "depth/architecture-dependent"; the B2 rule is as in row 3 |
+  | any | MIXED / UNDECIDED | as pre-registered; M56-b beside it |
+  Row 10 (ATLAS_STATUS): outcome A, every item of verdicts.json info.vit_pair_at_cstar PASS (row(c*) auc_margin_typeb,
+     auc_dist_typeb and auc_maxprob_typeb abs spread vitb16 - deitb <= 0.05; type-b / correct median ratio: the critic's
+     default rule), results/critic_b1_vit_pair penult/margin_typeb.auc_margin_wrong PASS, at c* = 0.7 every penult
+     margin_typeb item of that critic PASS (at c* = 0.5 its other items are INFO: the critic reads the manifest cut
+     0.7), synthetic_refusal and holdout_hygiene PASS and the provenance check PASS -> promote (vitb16, deitb) naming c*
+     and the V3 qualifier ("margin ~ maxprob (not an independent detector)" for MARGIN~CONFIDENCE, "margin adds over
+     maxprob (+d3)" for plain ADDS only). The replication unit declared here is an independently trained ImageNet-1k
+     supervised ViT-B/16 checkpoint (vitb16, deitb). Outcome A with a pair item FAIL -> yellow (states replicate,
+     levels do not). B -> x. MIXED or UNDECIDED -> yellow, naming the clause. INVALID or UNDECIDED-POWER -> row 10
+     stays proposed. Row 9's status and claim do not change.
+  Provenance (integration D17): every B1 dump's meta.git_commit and every B1 provenance.json stage_b_git_commit equal
+     P_run (P or a descendant of P; the commit the pod ran), git diff --quiet P P_run over the frozen list (every A4b
+     and B1 manifest, docs/plans/{STAGE2B,STAGE2,B1_VIT_MARGIN}.md, scripts/{a4b_eval.js,b1_verdicts.js,b1_gate.py},
+     experiments/tolerances_default.yaml, ATLAS_STATUS.md) holds, and meta.created (pod clock, UTC) is later than P's
+     commit time. node scripts/b1_verdicts.js --p P --p-run P_run checks it; a FAIL blocks every promotion.
+  Touch rules (integration D18): no git operation on the pod while pod_atlas.sh runs; ATLAS_REBUILD unset (B1 runs
+     are never rebuilt: an existing atlas.json is the one touch); a relaunch sets
+     ATLAS_B1_CHECK_DIR=results/instrument_check_b1_r2 and reuses the gate record; a ViT with a complete dump
+     (meta.json) but no atlas.json gets Stage B only; a ViT whose Stage A was interrupted (no meta.json) is extracted
+     again once, logged in SESSION.md; if code must change after any resnet50 atlas exists and no ViT atlas.json exists
+     yet, all seven ImageNet runs and the gate restart as _r2 under a committed amendment; once a ViT atlas.json
+     exists only the re-run rule of P0 applies.
+  E  exploratory, never promoted (penult and cut c* unless named; row_L(c) = row(c) of tap L):
+  E1 per-block profile: row(c*).auc_margin_typeb >= max over L in block.0 .. block.5 of row_L(c*).auc_margin_typeb
+     + 0.10 in both ViTs (resnet50: L in stem .. layer2.3); the first tap with V1 PASS is recorded.
+  E2 CLS vs mean token: row(c*).auc_margin_typeb >= row_penult_mean(c*).auc_margin_typeb in both ViTs.
+  E3 valley depth: pm.centers_geometry.sep_legacy_ref, .sep_ratio_ref and lg.valley_sep_legacy of resnet50, vitb16,
+     deitb; no direction predicted (the legacy 1.14 is resnet50, in-sample, first 10k).
+  E4 rule 8 H1: pm.spearman_margin_logitgap >= pm.spearman_margin_maxprob in every ImageNet run; d1_plus_d2_cv
+     lower in both ViTs than in resnet50; pm.nearest_center_agrees_with_model and meta.head_center_cos recorded.
+  E5 rule 8 H3 (in-sample leakage), in margin_b1_resnet50: 1 - lg.raw_auc_margin_full (in-sample centers on half B,
+     cut 0.5, all correct) >= row(0.5).auc_margin_typeb (reference-A centers): same images, transform and type-b set,
+     only the centers differ.
+  E6 rule 8 H5 (class density): row(c*).margin_norm_minus_dist_typeb > 0 with p < 0.05 in every run with V1 PASS.
+  E7 confidence strata: row(c*).strat_confmatched auc_margin - auc_maxprob recorded; |.| < 0.02 predicted (H1).
+  E8 rule 8 H4 (LayerNorm): |row(c*).auc_energy_typeb - 0.5| smaller in both ViTs than in resnet50.
+  E9 CIFAR context (rule 6), Stage B only with the b1 keys on this session's A4b dumps:
+     pm.margin_minus_maxprob_confmatched with its _se and _p in margin_b1_resnet20_s0hub_st3,
+     margin_b1_resnet56_s0hub_st3, margin_b1_resnet56_s1 and margin_b1_resnet56_s2; every A3 key must equal
+     results/margin_v1_<same>/atlas.json exactly (<check dir>/e9_identity.json); recorded, no direction predicted
+     (hubs, unpaired: -0.0013 resnet20, +0.0196 resnet56); read beside A4b M56-c as INFO.
+  E10 ridge beyond confidence: row(c*).median_margin_typeb / row(c*).median_margin_correct_confmatched recorded.
+  E11 rule 8 H9 (label noise): with the pinned ReaL labels (google-research/reassessed-imagenet@bcd006fe real.json,
+     sha256 d83e9bff374c631aae8439eb064c7019acc56e1b3bc3f56b8380c2a710b0220b; preds real_ok),
+     row(c*).auc_margin_typeb_realwrong, .median_margin_typeb_realwrong and .n_typeb_real_ok beside the headline.
+  B1-acc (INFO, integration D14): resnet50 official-232 minus legacy-256 accuracy on rows 0..L-1 (expected about
+     +0.002), mirror minus published acc@1 per model, and the legacy cache penult_10000.npz against the legacy dump's
+     penult (rows, max |dF|) when that file is on the volume.
+  Rule 8 artifact hypotheses (written before the run; docs/plans/B1_VIT_MARGIN.md):
+  H0 the mirror's square crop, Lanczos resize to 256 x 256 and JPEG re-encode depress every model's accuracy (legacy
+     resnet50 0.771 vs 80.858 published; the 232 -> 256 resize explains about 0.2 points). Test: B1-acc.
+  H1 margin restates the linear head: d_k^2 = |z|^2 - 2 g_k with g_k = c_k.z - |c_k|^2 / 2, so the nearest center is
+     argmax g and margin = 2 (g(1) - g(2)) / (d1 + d2). If the centers are an affine image of the head weights
+     (c_k = a w_k + v) and the biases align (b_k = -|c_k|^2 / (2a) + const), g(1) - g(2) = a x the logit gap and
+     margin = 2a x logit gap / (d1 + d2); with d1 + d2 nearly constant it is a monotone function of the logit gap,
+     and with top-2 dominance of the softmax, of maxprob.
+  H2 type-b is selected on maxprob, so auc_maxprob_typeb is biased; V3 uses the confidence-matched comparison.
+  H2b a V3 ADDS can come from maxprob resolution (saturated float32 maxprob ties; A3 resnet56): "margin adds over
+     maxprob" is claimed only when V3b is ADDS too (ADDS-OVER-MAXPROB-ONLY otherwise).
+  H3 the legacy in-sample centers (about 10 per class) pull each sample's own class center toward it (weight 1/n),
+     which enlarges correct margins and shrinks type-b margins: 0.800 may be inflated. Test: E5.
+  H4 LayerNorm fixes the norm of the normalized ViT penult, so dist and energy lose the norm component that
+     separates CNN errors (A3 E4); margin cancels |z|^2 by construction. Test: E8.
+  H5 dense class regions (MASTER_SUMMARY.md:59, 120 dog breeds) give every sample a small margin; margin_norm
+     divides by the top-2 center spacing. Test: E6.
+  H6 25 reference images per class give noisy centers; the swap twin measures the draw.
+  H7 all three models were trained with label smoothing (0.1 / 0.11 / 0.1) and mixup/cutmix, which compresses
+     maxprob; the c* rule protects power.
+  H8 any penult AUC >= 0.97 or margin - dist >= 0.15: read E11 first, then check ref/test disjointness, label order
+     and the head check (P0) before reading it.
+  H9 a large share of confident val errors are label or multi-object errors (ReaL); that bears on V2 (ridge) and may
+     differ between CNN and ViT. Test: E11.

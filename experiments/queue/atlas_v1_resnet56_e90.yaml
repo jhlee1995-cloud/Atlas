@@ -1,0 +1,48 @@
+# A4b (docs/plans/STAGE2B.md) ladder rung: resnet56 trained with the hub recipe (train_second_seed.py defaults: SGD
+# nesterov lr 0.1 wd 5e-4, batch 256, cosine T_max = epochs) for E = 90 epochs, last epoch, seed 11 (the Stage 2
+# ladder seed). CONDITIONAL: trained and built only if every one of e50, e60, e70 is below 0.9209 (STAGE2B.md
+# "Matched value"). The matched rung M11 is the in-window rung nearest 0.9259 whose atlas was built
+# (scripts/matched_rung.py on the pod; scripts/a4b_eval.js re-applies the rule).
+# Instrument frozen by name: invariants, cross_layer and the probe factors are the atlas_v1_resnet20_s3 lists (what
+# `all` resolved to at 6242a17 and, minus margin_typeb, at 664bd25), in registry order. Anything registered later
+# can neither enter this atlas nor shift its per-layer estimator draws (build.py sorts by cost, stably; one rng per
+# layer); B1 registers nothing (integration D2), and tests/test_atlas_smoke.py
+# test_a4b_manifests_freeze_the_instrument checks these lists before any pod block runs.
+exp_id: atlas_v1_resnet56_e90
+stage: atlas
+backbone:
+  arch: cifar10_resnet56
+  weights: /workspace/models/resnet56_s11_e90_chenyaofo.pt
+  seed_tag: s11e90
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 5, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: [pca_spectrum, twonn_id, class_centers, neural_collapse, hubness, class_adjacency, merge_order,
+             knn_density, linear_probes, corruption_displacement]
+cross_layer: [layer_cka, commit_layer]
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: [luminance_mean, contrast_rms, highfreq_ratio, spectral_slope, spectral_anisotropy, noise_sigma,
+              saturation_mean, hue_cos, hue_sin, colorfulness, edge_density, orientation_entropy, blockiness,
+              class, coarse_animal_vehicle, corruption_family, corruption_type, severity]
+  commit_layer:  {tau: 0.9}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [11]
+  confirmation_seeds: [1, 2, 12, 13]      # the rung's own seed 11 is discovery material
+outputs: {root: results/atlas_v1_resnet56_e90, plots: true}
+notes: >
+  A4b ladder. Predictions L1-L3 and D are in atlas_v1_resnet56_s1.yaml notes.

@@ -71,6 +71,14 @@ Stage 1b (seeds 3, 4; `docs/plans/STAGE1.md` amendment 2), Stage 2 (scale, `docs
 `norm: chenyaofo` (its training log uses the same std) at `block_stride: 5`, so its 11 taps pair with resnet20 by
 position in `compare --a <resnet20 _st2> --b <resnet56>`; the critic needs `--align position` (resnet20 first).
 
+Stage 2b (A4b, `docs/plans/STAGE2B.md`) and B1 (the ViT margin test on ImageNet val, `docs/plans/B1_VIT_MARGIN.md`) run
+in one session: `--a4b --b1` (exact sequence in `results/atlas_v1_resnet56_s1/RUN_REQUEST.md`). B1's ImageNet runs use
+their own entry point, `python -m atlas.run_imagenet --manifest experiments/queue/margin_b1_<m>.yaml --volume /workspace`
+(Stage A in `atlas/extract_imagenet.py`: the pinned HF mirror parquet via `scripts/b1_data.py`, torchvision / timm
+backbones, ViT class-token taps; `--selftest-random` checks the taps on random inputs), so `atlas/extract_acts.py` and
+`atlas/run.py` stay the CIFAR instrument. Its `margin_typeb` keys are opt-in (`b1`, `legacy_imagenet`); without them the
+invariant is the A3 one.
+
 ## What is measured (v0)
 
 | module | invariant | reads | records |

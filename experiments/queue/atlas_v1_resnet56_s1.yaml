@@ -1,0 +1,182 @@
+# A4b (docs/plans/STAGE2B.md) depth-56 confirmation seed 1: resnet56 trained locally with the hub recipe exactly
+# (train_second_seed.py defaults: 200 epochs, batch 256, SGD nesterov lr 0.1 wd 5e-4, cosine T_max 200, norm
+# chenyaofo), LAST epoch (no test-set selection). Seeds 1 and 2 were reserved in every Stage 2 resnet56 manifest and
+# never trained.
+# Instrument frozen by name: invariants, cross_layer and the probe factors are the atlas_v1_resnet20_s3 lists (what
+# `all` resolved to at 6242a17 and, minus margin_typeb, at 664bd25), in registry order. Anything registered later
+# can neither enter this atlas nor shift its per-layer estimator draws (build.py sorts by cost, stably; one rng per
+# layer); B1 registers nothing (integration D2), and tests/test_atlas_smoke.py
+# test_a4b_manifests_freeze_the_instrument checks these lists before any pod block runs.
+exp_id: atlas_v1_resnet56_s1
+stage: atlas
+backbone:
+  arch: cifar10_resnet56
+  weights: /workspace/models/resnet56_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 5, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: [pca_spectrum, twonn_id, class_centers, neural_collapse, hubness, class_adjacency, merge_order,
+             knn_density, linear_probes, corruption_displacement]
+cross_layer: [layer_cka, commit_layer]
+invariant_cfg:
+  twonn_id:      {n_ref: 5000, bootstrap: 3}
+  hubness:       {n_ref: 5000, k: 10}
+  knn_density:   {n_ref: 10000, k: 10, n_query: 3000}
+  linear_probes:
+    n_train: 4000
+    cv_folds: 5
+    factors: [luminance_mean, contrast_rms, highfreq_ratio, spectral_slope, spectral_anisotropy, noise_sigma,
+              saturation_mean, hue_cos, hue_sin, colorfulness, edge_density, orientation_entropy, blockiness,
+              class, coarse_animal_vehicle, corruption_family, corruption_type, severity]
+  commit_layer:  {tau: 0.9}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0, 11]
+  confirmation_seeds: [1, 2, 12, 13]      # 1, 2 declared as depth-56 confirmation seeds at 664bd25
+outputs: {root: results/atlas_v1_resnet56_s1, plots: true}
+notes: |
+  A4b pre-registration, committed and pushed before the run in one commit P together with B1 (integration decisions
+  D6, D7, D12, D13, D17). Design, bands, outcome tables and promotion rules: docs/plans/STAGE2B.md. The evaluation is
+  frozen as code: node scripts/a4b_eval.js --p <P> --p-run <P_run> (its --dry-run on the committed Stage 2 files
+  reproduces the Stage 2 numbers; bash scripts/a4b_eval_fixture.sh runs it on committed atlases under A4b names in
+  the matched, interp and below scenarios). An evaluator bug found after the run is fixed only by a committed
+  amendment listed in SESSION.md, and the outcomes are then reported under both versions.
+  Runs: resnet20 band atlas_v1_resnet20_{s0hub,s1,s2,s3,s4}_st3 (rule 6, this session); resnet56
+  atlas_v1_resnet56_s0hub_st3 (hub, this session), _s0hub_ref1 (twin), _e40_st3 (the Stage 2 e40 checkpoint
+  re-measured; it enters only through interpolation), the seed-11 rungs _e50, _e60, _e70 (_e90 only if all three are
+  below 0.9209), the matched replicates _s12m and _s13m (seeds 12 and 13 at E*), and the full-recipe confirmation
+  seeds _s1 (this run) and _s2.
+  Seeds: 0 = chenyaofo hub (discovery); 1, 2 = depth-56 confirmation (declared confirmation_seeds in every Stage 2
+  resnet56 manifest at 664bd25, never trained); 11 = ladder (discovery: every seed-11 rung shares its initial weights
+  and data order with e10/e20/e40, scripts/train_second_seed.py:73-74,85,90); 12, 13 = the confirmation replicates
+  of the matched leg (new); 99 = random-init null (Stage 2, not re-run).
+  Bands: B20+ = the five _st3 atlases; per field min, max, w = max - min; HIGH = above max + w, LOW = below min - w,
+  IN otherwise. B20 (the three Stage 2 members) is reported beside it (INFO, continuity with Stage 2).
+  P20 = the 10 pairs of B20+; e20(m) = min over P20 of pair metric m. X = the 10 pairs (resnet20 _st3 x {s1, s2});
+  W56 = s1-s2. M11 = the in-window seed-11 rung nearest 0.9259 whose atlas was built (a tie goes to the longer E); if
+  it is not the E* of scripts/matched_rung.py (the length the replicates were trained at), no Mc is evaluable. Mc =
+  M12 (s12m) or M13 (s13m) when its own accuracy is in the window, it was trained at M11's E and its atlas exists;
+  this inclusion rule is pre-registered. XM = resnet20 _st3 x {M11, Mc}; in the interpolation branch, per resnet20
+  reference, lo + t (hi - lo) of the two bracketing rungs. <check dir> = results/instrument_check_a4b (a relaunch:
+  ATLAS_A4B_CHECK_DIR, a4b_eval.js --check-dir). Numbers in parentheses are expected values (Stage 1/1b/2, derived
+  from committed files), never thresholds.
+
+  G  gates
+  G0a every A4b resnet56 atlas has the 11 stride-5 taps [stem, layer1.0, layer1.5, layer1.8, layer2.0, layer2.5,
+      layer2.8, layer3.0, layer3.5, layer3.8, penult] and every _st3 atlas the 11 stride-1 resnet20 taps; every
+      resnet20 -> resnet56 deformation.json pairs them index by index.
+  G0b skipped == {} and no error key in every A4b atlas; input_norm PASS in every A4b critic; penult cka_test in
+      every A4b deformation.json; <check dir>/i2.json PASS (s1, s2, s12m, s13m: own weights with a new sha256 that
+      also differs from every rung's, dump meta equal to the hub_st3 dump). A G0b failure voids only the items that
+      read the failed run (a D field that reads it is NOT_EVALUABLE).
+  G0c (recorded) replay: every _st3 atlas.json equals its committed original (st2 for s0hub/s1/s2, Stage 1b s3/s4,
+      Stage 2 resnet56 hub and e40), and every margin_v1_*_st3 its A3 original, in every leaf except built, dump,
+      timing_s, exp_id and meta git_commit/created/exp_id; same-space penult cka_test >= 0.999; <check dir>/check.json
+      (Stage B of the st2 hub dump at this commit) bitwise PASS. Expected IDENTICAL: <check dir>/code_diff.txt lists
+      no Stage A/B file except atlas/invariants/margin.py (B1's only instrument edit, B1 keys off, gated by the
+      session preflight results/instrument_check_a4b_b1) and requirements.txt (judged by versions.json, G0d). If a
+      replay differs, no Stage 1/1b/2 value is quoted beside an A4b value; the labels below are unaffected.
+      Instrument gate (all labels below): every d56 tag, row 11 (D-ID, D-COLL) and the M56-b tag need
+      <check dir>/check.json PASS (scripts/check_rebuild.py leaf rule) and C1-C5a holding in all five _st3 atlases
+      (resnet20 tap names); otherwise "no verdict (instrument changed)".
+  G0d torch and GPU equal results/train_resnet56_e40/train.json (2.8.0+cu128, NVIDIA GeForce RTX 4090); python,
+      numpy, scipy and sklearn equal results/instrument_check_stage1b/check.json versions (3.12.3, 2.1.2, 1.18.1,
+      1.9.1; <check dir>/versions.json); no Stage A/B file other than atlas/invariants/margin.py changed since
+      664bd25 (integration D7). Otherwise the block stops before any training.
+  G0e predictions before the dumps (docs/plans/STAGE1.md amendment 2 pattern; integration D17): every A4b dump's
+      meta.git_commit and every A4b provenance.json stage_b_git_commit equal P_run; P_run is P or a descendant;
+      git diff --quiet P P_run -- <every A4b and B1 manifest, docs/plans/{STAGE2B,STAGE2,B1_VIT_MARGIN}.md,
+      scripts/{a4b_eval.js,b1_verdicts.js,b1_gate.py}, experiments/tolerances_default.yaml, ATLAS_STATUS.md> holds;
+      meta.created (pod clock, UTC) is later than P's commit time in UTC. A G0e failure blocks every promotion.
+  R0  results/train_resnet56_s{1,2}/train.json final_test_acc_10k both >= 0.935 and |s1 - s2| <= 0.010, else every
+      item that reads s1 or s2 is NOT_EVALUABLE (hub log: best 94.37 at epoch 198, last 94.21).
+
+  L  ladder (results/train_resnet56_e<E>/train.json final_test_acc_10k, seed 11, T_max = E, last epoch;
+     target 0.9259 = results/norm_check_resnet20/norm_check.json chenyaofo.acc_10k; window 0.005)
+  L1  at least one of e50, e60, e70 lies within 0.005 of 0.9259 (step 1 applies; no interpolation).
+  L2  (forecast) e50 in [0.920, 0.927], e60 in [0.922, 0.930], e70 in [0.924, 0.933]; M11 = e60.
+  L3  s12m and s13m both lie within the window (two Mc, so CONFIRMED is reachable).
+
+  D  penult levels at depth 56 vs B20+ (outcome table in STAGE2B.md, first match wins: NOT_EVALUABLE, NOT-REPLICATED,
+     NOT-DEPTH, SEED-SENSITIVE, FIT-SENSITIVE, CONFIRMED-1, CONFIRMED; sides = the Stage 2 m* sides). NOT_EVALUABLE
+     also under KILL-56, a T56 core FAIL or missing twin, a G0b failure in a run the field reads, and the instrument
+     gate.
+  D-ID   twonn_id.id HIGH. Predicted CONFIRMED (Stage 2: hub 10.67, e10/e20/e40 11.98 / 11.74 / 10.88, all above
+         the band edge 10.31; B20+ adds s3 9.84, s4 9.90, edge unchanged).
+  D-COLL class_centers.sep_ratio HIGH, bridge ratio HIGH, neural_collapse.nc1 LOW; claim = the weakest field.
+         Predicted FIT-SENSITIVE: the ladder trend (e10/e20/e40 sep 1.45 / 2.04 / 2.85, bridge 2.07 / 2.59 / 3.19,
+         nc1 0.686 / 0.320 / 0.177) puts e50 inside the band for sep_ratio (edge 3.16) and bridge (edge 3.49) while
+         e60 and e70 are outside, so the label depends on training length inside the accuracy window. nc1 forecast
+         CONFIRMED (e50 ~0.15 vs edge 0.154). s1/s2 (full fit) forecast far outside (hub 5.33 / 5.59 / 0.049).
+  D-ACC  (Stage 2 rule with M11, INFO) class probe excess, nearest_center_acc_test, meta.accuracy.test: NOT-DEPTH
+         in s1 and s2 (Stage 2: NOT-DEPTH x3).
+
+  K  depth-56 seed stability, decision pair s1-s2 (results/critic_v1_resnet56_s1_s2); corroboration hub_st3-s1 and
+     hub_st3-s2 (results/critic_v1_resnet56_s0_s1_s2 items [0,1], [0,2])
+  K0  KILL-56 (a Stage 1 KILL condition, docs/plans/STAGE1.md, in s1-s2 AND in a hub pair; recomputed by
+      a4b_eval.js): predicted not triggered.
+  K1  core items PASS: S1 id_profile[0,1] (spearman >= 0.90, peak shift <= 1), S3 penult/class_centers.sep_ratio
+      (rel spread <= 0.15 or abs <= 0.05), S5 penult/adjacency_spearman[0,1] >= 0.70, S7 max decod mean_abs_delta
+      over the 10 sharp factors <= 0.10, S8 commit/class shift <= 1, S9 penult/cka_test[0,1] >= 0.80. Predicted 6/6
+      PASS. Non-core FAILs are INFO. The critic.json statuses decide (S7 from its decod/<factor>[0,1] details); any
+      mismatch with a4b_eval.js's recomputation is reported and blocks promotion until it is explained in SESSION.md.
+      Every d56 PROMOTE and every row-11 promotion also need synthetic_refusal and holdout_hygiene PASS in
+      results/critic_v1_resnet56_s1_s2 (AGENT_LOOP.md promotion rule) and G0e PASS.
+
+  C  the resnet20 claims at depth 56, per seed, on s1 AND s2 (resnet56 tap names)
+  C1  ID peak at layer3.0 or layer3.5 and penult >= 30% below it (hub drop 0.450, e40 0.442).
+  C2  washout luminance_mean > 0.30, highfreq_ratio < 0.20, spectral_anisotropy < 0.20 (hub 0.757 / 0.150 / 0.076;
+      the depth-56 null clears the luminance clause, 0.473, so only highfreq separates learned from random).
+  C3  class commit_layer in {layer3.0, layer3.5, layer3.8} at tau 0.9 (hub, e40: layer3.5; forecast layer3.5).
+  C4  defocus_blur s5, motion_blur s3, motion_blur s5 coherence below gaussian_noise and shot_noise at the same
+      severity, 6/6 (hub min margin 0.192, e40 0.125).
+  C5a sparse_frac s5 > s1 for the 8 non-noise discovery corruptions, 8/8 (hub min brightness 0.085, e40 0.053).
+  C7  penult adjacency seed-stable at depth 56: S5 PASS and D1 (distance-only rho, 45 penult center distances)
+      >= 0.80 on s1-s2. Predicted FAIL: D1(s1, s2) in [0.60, 0.80) (derived: cross-depth D1 0.771-0.803 and hub-e40
+      0.732 with penult center-distance CV 0.037 imply a depth-56 rank reliability of about 0.6-0.8).
+  Predicted: C1, C2, C3, C4, C5a hold in s1 and s2; C7 fails.
+  d56 tags (STAGE2B.md "Depth-56 scope"): row 1 = C1 + S1, row 3 = C2 + S7, row 4 = C3 + S8, row 5 = C4, row 6a =
+  C5a, row 7 = S5 and D1(s1, s2) >= 0.80 (else one-pair when D1 >= 0.80 in a hub pair, else not transferred). S9 at
+  depth 56 is recorded as INFO in row 8's evidence (ATLAS_STATUS has no cka row). Rows 2 and 8 stay yellow; row 9
+  gets its d56 tag from M56-b. No d56 verdict under R0 FAIL, KILL-56, a T56 core FAIL or missing twin, or the
+  instrument gate; a missing claim or core value makes that row NOT_EVALUABLE (missing). For row 9 (the M56-b tag)
+  the M56 notes apply: R0 FAIL and the instrument gate give no verdict; KILL-56 and a T56 core FAIL or missing twin
+  void only a PROMOTE.
+
+  T56 twin hub_st3 vs s0hub_ref1 (results/critic_v1_resnet56_hub_noise; Stage 1 T1 thresholds)
+      core items (K1 list) PASS: a failure, or a missing twin, voids every depth-56 promotion and makes D-ID and D-COLL
+      NOT_EVALUABLE (the instrument cannot reproduce itself). Forecasts: penult adjacency >= 0.95, id_profile
+      spearman >= 0.95, decod MAD <= 0.03 for every factor, cka_test >= 0.9995, D1 >= 0.95, |delta penult ID| <= 0.14
+      (r20 twin: 0.994, 1.000, 0.0295, 1.000, 0.993, 0.017).
+
+  P  pair-metric levels (m in D1, penult adjacency rho, cka_test, aligned layer3.1 rho [r56 layer3.5])
+     AGREE = median X >= e20; DEPTH-GAP = median X < e20 and W56 >= e20; DEPTH-56-UNSTABLE = median X < e20 and
+     W56 < e20, with (COLLAPSE) for D1 when both s1 and s2 penult CVs are below the B20+ CV low edge.
+     Matched reading: median XM >= e20 while X is not AGREE -> "NOT-DEPTH at matched accuracy".
+  P1  D1: DEPTH-56-UNSTABLE (COLLAPSE) (e20 ~0.867 from s1-s3; Stage 2 cross 0.771-0.803; CV edge ~0.056); matched
+      reading NOT-DEPTH at matched accuracy (Stage 2 resnet20 -> e40 D1 0.889 median over five references, hub 0.922).
+  P2  cka_test: DEPTH-GAP, with W56 in [0.883, 0.93] (e20 ~0.883; Stage 2 cross 0.863-0.866; the only same-depth
+      pair so far, hub-e40, is 0.866: a W56 below e20 would make it DEPTH-56-UNSTABLE instead).
+  P3  adjacency: DEPTH-56-UNSTABLE (e20 ~0.933; Stage 2 cross 0.858-0.912; hub-e40 0.900); matched reading
+      NOT-DEPTH at matched accuracy (resnet20 -> e40 median 0.952).
+  P4  aligned layer3.1: forecast median X in [0.84, 0.90] against e20 ~0.875 (no side predicted; recorded).
+
+  X  SCALE labels over the 10 X pairs (STAGE2B.md table; SHAPE and LEVEL are separate labels, neither overrides)
+     Predicted SCALE-ROBUST: rows 1, 3, 4, 5, 6a, 8 and the S9 cka item (INFO in row 8). Row 7: COLLAPSE-ARTIFACT
+     (median X D1 < 0.80, median X layer3.1 >= 0.80, both r56 CVs below the CV edge). COLLAPSE-ARTIFACT is a
+     diagnosis, not SCALE-ROBUST: row 7 gets no scale-robust statement, and it does not change the d56 tag.
+
+  Rule 8: W56 penult adjacency, cka_test or D1 above the P20 maximum (~0.975 / 0.892 / 0.964): write the artifact
+  hypothesis first (collapse-driven agreement; identical data order) and check T56 and the X pairs.
+  Holdout: decodability pools include the confirmation corruptions (atlas/invariants/decodability.py:30), so only
+  the seed/depth axis is a clean holdout for C2 and the decod items; confirmation-corruption values seed no claims.
+  No margin-like quantity is computed from the main atlases (margin: margin_v1_resnet56_s1.yaml notes).

@@ -1,0 +1,81 @@
+# A4b M56 (docs/plans/STAGE2B.md section M56): Stage B only (margin_typeb, frozen at 664bd25) on the existing
+# results/atlas_v1_resnet56_s1/dump; pod_atlas.sh --a4b symlinks results/margin_v1_resnet56_s1/dump ->
+# ../atlas_v1_resnet56_s1/dump and runs atlas.run --skip-extract. data / hooks / extract are copied from the source
+# manifest. Role: depth-56 confirmation, first margin touch of seed 1.
+exp_id: margin_v1_resnet56_s1
+stage: atlas
+backbone:
+  arch: cifar10_resnet56
+  weights: /workspace/models/resnet56_s1_chenyaofo.pt
+  seed_tag: s1
+  norm: chenyaofo
+data:
+  reference:  {dataset: cifar10_train, n: 10000, seed: 0}
+  clean_test: {dataset: cifar10, n: 5000}
+  panel:      {dataset: cifar10_train, n: 64, seed: 123}
+  cifar10c:   {corruptions: all, severities: [1, 3, 5], n_per_set: 2000}
+  ood:        [{dataset: cifar100, n: 2000}, {dataset: svhn, n: 2000}]
+hooks: {layers: blocks, block_stride: 5, pooling: gap}
+extract: {batch: 256, dtype: float16, num_workers: 4}
+invariants: [margin_typeb]
+cross_layer: ["-layer_cka", "-commit_layer"]     # selects none (an empty list would mean "all"); B1 registers no
+                                                 # cross-layer invariant (integration D2); the smoke test checks it
+invariant_cfg:
+  margin_typeb: {cut: 0.7, cuts: [0.0, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99], min_n: 10}
+holdout:
+  discovery_corruptions:    [gaussian_noise, shot_noise, defocus_blur, motion_blur, snow, fog,
+                             brightness, contrast, pixelate, jpeg_compression]
+  confirmation_corruptions: [impulse_noise, glass_blur, zoom_blur, frost, elastic_transform]
+  discovery_seeds: [0, 11]
+  confirmation_seeds: [1, 2, 12, 13]
+outputs: {root: results/margin_v1_resnet56_s1, plots: false}
+notes: |
+  A4b M56 pre-registration (docs/plans/STAGE2B.md section M56), committed before the run in commit P. margin_typeb is
+  the A3 definition frozen at 664bd25 (experiments/queue/margin_v1_resnet20_s1.yaml notes: cut 0.7, train-reference
+  centers, oriented AUC, DeLong, paired margin - dist test). These manifests set no B1 key: if B1 changes
+  atlas/invariants/margin.py, its keys stay off here, and the session preflight (results/instrument_check_a4b_b1,
+  integration D6) reproduces the committed A3 atlases with that file before any rebuild. Runs (Stage B only):
+  resnet20 band margin_v1_resnet20_{s0hub,s1,s2,s3,s4}_st3 (rule 6; the resnet20 seeds are spent for margin, so no
+  confirmation touch); resnet56 margin_v1_resnet56_{s0hub_st3, s1, s2, e50, e60, e70, e90 if trained, s12m, s13m}.
+  First margin touch of resnet56 seeds 1, 2, 12 and 13. B1 E9 applies the frozen b1 keys to s1/s2 in the same
+  session; this is part of their one margin touch. Paths: results/margin_*/atlas.json
+  per_layer.penult.margin_typeb.<key>. M11, Mc and the interpolation branch are those of atlas_v1_resnet56_s1.yaml
+  notes (same rule). Evaluated by node scripts/a4b_eval.js (M56 block). Band: per key, the five resnet20 _st3
+  values, min - w .. max + w (w = max - min).
+  Gates: R0 FAIL makes every M56 item that reads s1 or s2 NOT_EVALUABLE (M56-a's >= 0.80 and SCALE-ROBUST criteria,
+  the M56-b tag and its M2-failure attribution, M56-c E1 and the tie call; the M11/Mc "improves with scale" reading
+  reads neither seed); the instrument gate (atlas_v1_resnet56_s1.yaml G0c) applies to the M56-b tag; a d56 PROMOTE is
+  void under KILL-56 or a T56 core FAIL or missing twin (neither voids a REJECT or a YELLOW), and also needs G0e PASS
+  and synthetic_refusal and holdout_hygiene PASS in results/critic_margin_v1_resnet56_s1_s2.
+
+  M56-a auc_margin_typeb >= 0.80 in s1, s2, M11 and every Mc, and |mean(s1, s2) - median(resnet20 _st3)| <= 0.05 (the
+        E5 SCALE-ROBUST criterion on last-epoch seeds; hub 0.907, resnet20 0.882-0.899). "Improves with scale" is
+        claimed only if M11 and every Mc are above the band's high edge (DEPTH); forecast NOT-DEPTH. Interpolation
+        branch: this DEPTH reading is NOT_EVALUABLE.
+  M56-b row-9 clauses at depth 56, the A3 grammar on s1 and s2: M2 = margin_minus_dist_typeb > 0 and
+        margin_minus_dist_typeb_p < 0.05; M3 = median_margin_typeb < median_margin_correct and
+        median_margin_ratio_typeb <= 0.5 and median_margin_ratio_wrong <= 0.5; M4 = |auc_margin_typeb s1 - s2| <= 0.05
+        (results/critic_margin_v1_resnet56_s1_s2 penult/margin_typeb.auc_margin_typeb PASS; the critic status decides,
+        the recomputation is a cross-check).
+        d56 PROMOTE (M2, M3, M4) if M2 and M3 hold in s1 and s2 and M4 holds; d56 REJECT (x) if M2 fails in s1 and in
+        s2; d56 YELLOW otherwise. Row 9's d56 tag names the clauses it covers (M2, M3, M4) and carries M56-c beside it,
+        because row 9's claim includes the qualifier "margin ~ maxprob". Predicted REJECT (hub margin - dist -0.0008,
+        p 0.83; M3 holds, hub ratio 0.364).
+        Attribution of an M2 failure: M2 at M11 and at every Mc. M2 holding in all of them = NOT-DEPTH ("the distance
+        AUC catches up with margin as the penult collapses": resnet20 auc_dist 0.814-0.845, hub 0.908); failing in all
+        of them = DEPTH; mixed = SPLIT. Interpolation branch, or no matched margin atlas: NOT_EVALUABLE (the
+        a4b_eval.json field m2_failure_attribution is null, with the reason beside it). Forecast NOT-DEPTH.
+        The joint reading with B1's A/B label is the table in STAGE2B.md "M56" (integration D13), fixed before the run;
+        the two labels are computed independently.
+  M56-c (exploratory, never promoted) E1 at depth 56: spearman_margin_maxprob >= 0.7 and
+        |auc_margin_confmatched - auc_maxprob_confmatched| <= 0.05 in s1 and s2 (predicted holds; hub 0.886, +0.0196).
+        Margin beyond confidence: gap = auc_margin_confmatched - auc_maxprob_confmatched >= +0.010 in s1 and s2
+        (resnet20 -0.0018..+0.0017). margin_typeb has no paired test of margin - maxprob (margin.py:116-121 pairs only
+        margin - dist), so the lead is descriptive. Rule 8 first, the float32 maxprob tie artifact:
+        <check dir>/maxprob_ties.json half_tie_confmatched (0.5 x P(tie) between type-b and confidence-matched correct
+        samples = the most AUC ties can cost maxprob) must be < 0.5 x the gap in both seeds: TIES-EXCLUDED (one
+        artifact excluded, not a geometry claim); otherwise TIE-ARTIFACT-POSSIBLE; a gap below +0.010 is NO-LEAD.
+        INFO beside it: B1's results/margin_b1_resnet56_s{1,2} margin_minus_maxprob_confmatched and its _p, the first
+        paired test of that gap at depth 56 (integration D9). Forecast: the gap replicates (>= 0.010 in both) and is
+        TIE-ARTIFACT-POSSIBLE.
+  Row 9 gets a depth-56 status from M56-b only; its resnet20 status (s1-s4) is untouched.
