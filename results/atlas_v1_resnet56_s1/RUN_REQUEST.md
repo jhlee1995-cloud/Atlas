@@ -55,18 +55,18 @@ print(v, torch.__version__, torchvision.__version__, torch.cuda.get_device_name(
 assert v == ref, ("library versions differ from the committed sessions: stop and ask the owner", v, ref)
 assert torch.__version__ == t["torch"] and torch.cuda.get_device_name(0) == t["device"], "A4b G0d would refuse"
 EOF
-python -m pytest -q tests/                        # smoke (hard in-script at pod_atlas.sh after the install) + tests/test_b1_imagenet.py
+python -m pytest -q tests/ --ignore=tests/test_anomaly_probe.py   # smoke + tests/test_b1_imagenet.py; block_anomaly runs the probe tests itself (ANOMALY_H1, D23)
 bash -n pod_atlas.sh
 for x in resnet20 resnet56; do                    # the D6 preflight, into scratch
   python scripts/check_rebuild.py rebuild --dump results/atlas_v1_${x}_s0hub/dump --committed results/margin_v1_${x}_s0hub/atlas.json \
     --manifest experiments/queue/margin_v1_${x}_s0hub.yaml --work /workspace/scratch/prelaunch_$x --out /workspace/scratch/prelaunch_$x
 done
-ls results/atlas_v1_resnet20_{s0hub_st2,s1_st2,s2_st2,s3,s4,s0hub}/dump/meta.json results/atlas_v1_resnet56_{s0hub,e40}/dump/meta.json \
+ls results/atlas_v1_resnet20_{s0hub_st2,s1_st2,s2_st2,s3,s4,s0hub}/dump/meta.json results/atlas_v1_resnet56_{s0hub,e40}/dump/meta.json results/atlas_v1_resnet{20,56}_rand/dump/meta.json \
    /workspace/models/resnet20_s{1,2,3,4}_chenyaofo.pt /workspace/models/resnet56_s11_e40_chenyaofo.pt
 du -sb /workspace | awk '{ printf "%.1f GB of 50 used (limit 28)\n", $1 / 1e9; exit ($1 > 28e9) }'
 df -h /dev/shm
 env | grep -E '^ATLAS_' || true                  # first launch: must print nothing
-mkdir -p /workspace/logs && setsid bash /workspace/Atlas/pod_atlas.sh /workspace --a4b --b1 < /dev/null > /workspace/logs/launch.log 2>&1 &
+mkdir -p /workspace/logs && setsid bash /workspace/Atlas/pod_atlas.sh /workspace --a4b --b1 --anomaly < /dev/null > /workspace/logs/launch.log 2>&1 &
 ```
 
 Watch:
@@ -106,3 +106,12 @@ B1 imports from the check above.
    M11 / Mc, D-ID / D-COLL (row 11), K / C / T56, P, X and M56 (margin in the same SESSION.md), each prediction as
    `P<n>: predicted X, observed Y, verdict`. Then ATLAS_STATUS (row 11, the d56 tags of rows 1, 3, 4, 5, 6a, 7 and 9,
    S9 as INFO in row 8). A4b and B1 are evaluated independently; neither decision waits for the other.
+
+## ANOMALY_H1 (commit P_A, a child of P; docs/plans/ANOMALY_H1.md, integration amendment D23)
+
+- `--anomaly` adds `block_anomaly` after B1: CPU only (numpy), probe tests + synthetic self-test, then AX-1..AX-4 probes on
+  11 CIFAR dumps, about 8-20 min (hard cap about 80 min). It never reads a B1 dump.
+- A relaunch also sets `ATLAS_ANOM_CHECK_DIR=results/instrument_check_anomaly_r2 ATLAS_ANOM_TAG_SUFFIX=_r2`.
+- After the pull, after the A4b and B1 evaluators: `node scripts/anomaly_eval.js --p <P_A> --p-run <P_run> --a4b
+  results/atlas_v1_resnet56_s1/a4b_eval.json --b1 results/margin_b1_vitb16/verdicts.json --cache
+  results/anomaly_h1/idgauss_cache.json --json results/anomaly_h1/eval.json`, then `results/anomaly_h1/SESSION.md`.

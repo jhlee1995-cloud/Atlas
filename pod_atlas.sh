@@ -19,8 +19,10 @@
 #                                                              #   M56 margin rebuilds (docs/plans/STAGE2B.md)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --b1         # + ImageNet val (pinned HF revision), ResNet50 gate, ViT-B/16
 #                                                              #   + DeiT-B margin test, CIFAR E9 (docs/plans/B1_VIT_MARGIN.md)
+#   bash /workspace/Atlas/pod_atlas.sh /workspace --anomaly    # + ANOMALY_H1 CPU probes AX-1..AX-4 on CIFAR dumps (numpy only;
+#                                                              #   last, after B1; docs/plans/ANOMALY_H1.md)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --data-only  # datasets only (no GPU needed)
-# Flags combine (e.g. --a4b --b1); blocks always run in this order: stage1, stage1b, stage2, a3, a4b, b1; --a4b or
+# Flags combine (e.g. --a4b --b1); blocks always run in this order: stage1, stage1b, stage2, a3, a4b, b1, anomaly; --a4b or
 # --b1 adds the margin preflight (after the smoke tests). --stage1b, --stage2 and --a3 ran on 2026-09-23 and are
 # committed: never add them again.
 # stage1b / stage2 / a3 / a4b / b1 each run isolated (run_block): a failing block is logged and later blocks still run;
@@ -33,10 +35,10 @@
 # A stage whose results/<exp>/provenance.json (written last by atlas.run) exists is skipped
 # (ATLAS_REBUILD=1 forces it).
 set -euo pipefail
-VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 ...]}")"
+VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 | --anomaly ...]}")"
 shift
 for m in "$@"; do                                              # a typo must not silently skip a block
-  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
+  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1|--anomaly) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
 done
 MODES=" $* "
 has_mode() { [[ "$MODES" == *" $1 "* ]]; }
@@ -45,6 +47,9 @@ cd "$(dirname "$(readlink -f "$0")")"                        # repo root, whatev
 # flag would reach the dispatch only after every other block. Refuse it here instead.
 if has_mode --b1 && ! { [[ -f scripts/b1_data.py ]] && grep -q '^block_b1() *{' pod_atlas.sh; }; then
   echo "ERROR: --b1: B1 is not in this checkout (scripts/b1_data.py or block_b1 missing)" >&2; exit 1
+fi
+if has_mode --anomaly && ! { [[ -f scripts/anomaly_probe.py ]] && grep -q '^block_anomaly() *{' pod_atlas.sh; }; then
+  echo "ERROR: --anomaly: ANOMALY_H1 is not in this checkout (scripts/anomaly_probe.py or block_anomaly missing)" >&2; exit 1
 fi
 if has_mode --stage1 && [[ -f results/critic_v1_resnet20_s1_s2/critic.json && "${ATLAS_ALLOW_STAGE1_RERUN:-0}" != 1 ]]; then
   echo "ERROR: --stage1 already ran and is committed; its compare/critic steps would overwrite committed results." >&2
@@ -768,6 +773,64 @@ EOF
   echo "      node scripts/b1_verdicts.js --p <P> --p-run <P_run> --a4b results/atlas_v1_resnet56_s1/a4b_eval.json --json results/margin_b1_vitb16/verdicts.json"
 }
 
+# --- ANOMALY_H1: CPU Stage-B probes AX-1..AX-4 (docs/plans/ANOMALY_H1.md; scripts/anomaly_probe.py) ---------------------
+# anomaly_probe_one <run> [<fallback run>]: one CIFAR dump -> results/anomaly_probe_<tag>/probe.json (a NEW dir; the probe
+# refuses to write into an existing non-empty one). The fallback is the same weights measured in an earlier session (used
+# only for discovery instances, and recorded in probe.json by its dump name). A dump that already has a probe.json under
+# its own tag or any _r<k> tag is never probed again (review item C21: a relaunch never touches a confirmation dump twice).
+# BLAS threads = the cgroup quota, for this new script only (integration D19 keeps A4b's and E9's environment unchanged).
+anomaly_probe_one() {
+  local run="$1" fb="${2:-}" src="$1" base tag n
+  if [[ ! -f "results/$src/dump/meta.json" && -n "$fb" && -f "results/$fb/dump/meta.json" ]]; then
+    echo "[anomaly] results/$run/dump missing: using $fb (same weights, earlier session; discovery role, recorded)"
+    src="$fb"
+  fi
+  [[ -f "results/$src/dump/meta.json" ]] || { echo "[anomaly] no dump for $run${fb:+ or $fb}"; return 1; }
+  base="${src#atlas_v1_}"
+  if compgen -G "results/anomaly_probe_${base}/probe.json" >/dev/null || compgen -G "results/anomaly_probe_${base}_r[0-9]*/probe.json" >/dev/null; then
+    echo "[skip] results/anomaly_probe_${base}{,_r<k>}/probe.json exists (append-only: the first complete record counts)"
+    return 0
+  fi
+  tag="${base}${ATLAS_ANOM_TAG_SUFFIX:-}"
+  if (( SECONDS - ANOM_T0 > ${ATLAS_ANOM_BUDGET_S:-2700} )); then
+    echo "[anomaly] block budget ${ATLAS_ANOM_BUDGET_S:-2700} s spent: $run not probed"; return 1
+  fi
+  n=$(cpu_quota)
+  OMP_NUM_THREADS=$n OPENBLAS_NUM_THREADS=$n MKL_NUM_THREADS=$n \
+    timeout 900 python scripts/anomaly_probe.py --tag "$tag" --dumps "results/$src/dump"
+}
+
+block_anomaly() {
+  local I="${ATLAS_ANOM_CHECK_DIR:-results/instrument_check_anomaly}" x
+  ANOM_T0=$SECONDS
+  [[ ! -e "$I" ]] || { echo "ERROR: $I exists (committed record); relaunch with ATLAS_ANOM_CHECK_DIR=${I}_r2 ATLAS_ANOM_TAG_SUFFIX=_r2" >&2; return 1; }
+  [[ -f scripts/anomaly_probe.py && -f tests/test_anomaly_probe.py ]] || { echo "ERROR: ANOMALY_H1 code missing at this commit" >&2; return 1; }
+  mkdir -p "$I"
+  if command -v pgrep >/dev/null && pgrep -f scripts/train_second_seed.py >/dev/null; then
+    echo "[anomaly] WARNING: a training is still running; the probes are CPU-only and continue"
+  fi
+  echo "=== ANOMALY_H1: known-answer tests and synthetic self-test (numpy only; a failure stops this block, not the session) ==="
+  timeout 600 python -m pytest -q tests/test_anomaly_probe.py
+  timeout 600 python scripts/anomaly_probe.py --selftest --selftest-out "$I/selftest.json"
+  echo "=== ANOMALY_H1: gate instances (discovery; the resnet20 hub first: rule 6, same session) ==="
+  soft anomaly_probe_one atlas_v1_resnet20_s0hub_st3 atlas_v1_resnet20_s0hub_st2
+  soft anomaly_probe_one atlas_v1_resnet56_s0hub_st3 atlas_v1_resnet56_s0hub
+  soft anomaly_probe_one atlas_v1_resnet56_e40_st3 atlas_v1_resnet56_e40
+  echo "=== ANOMALY_H1: confirmation dumps (read once; definitions and thresholds frozen in P_A; holdout corruptions only here) ==="
+  for x in s1 s2; do soft anomaly_probe_one "atlas_v1_resnet56_$x"; done
+  echo "=== ANOMALY_H1: discovery context (spent resnet20 seeds) and random-init nulls (INFO) ==="
+  soft anomaly_probe_one atlas_v1_resnet20_s1_st3 atlas_v1_resnet20_s1_st2
+  soft anomaly_probe_one atlas_v1_resnet20_s2_st3 atlas_v1_resnet20_s2_st2
+  soft anomaly_probe_one atlas_v1_resnet20_s3_st3 atlas_v1_resnet20_s3
+  soft anomaly_probe_one atlas_v1_resnet20_s4_st3 atlas_v1_resnet20_s4
+  for x in resnet20_rand resnet56_rand; do soft anomaly_probe_one "atlas_v1_$x"; done
+  { ls -1 results/anomaly_probe_*/probe.json 2>/dev/null || true; } > "$I/probes.txt"
+  echo "[anomaly] block wall $(( SECONDS - ANOM_T0 )) s; $(wc -l < "$I/probes.txt") probe.json file(s) (listed in $I/probes.txt)"
+  echo "[anomaly] verdicts are computed on Windows after the pull, after the A4b and B1 evaluators (commit the results first):"
+  echo "      node scripts/anomaly_eval.js --p <P_A> --p-run <P_run> --a4b results/atlas_v1_resnet56_s1/a4b_eval.json \\"
+  echo "           --b1 results/margin_b1_vitb16/verdicts.json --cache results/anomaly_h1/idgauss_cache.json --json results/anomaly_h1/eval.json"
+}
+
 # run_block <function>: isolated in a subshell with errexit; a failure is logged and later blocks still run
 FAILED=()
 run_block() {
@@ -781,7 +844,8 @@ if has_mode --stage1b; then run_block block_stage1b; fi       # trains s3, s4 (c
 if has_mode --stage2;  then run_block block_stage2;  fi       # then the resnet56 rungs, one at a time: never overlapping
 if has_mode --a3;      then run_block block_a3;      fi       # reads the s3, s4 and resnet56 dumps
 if has_mode --a4b;     then run_block block_a4b;     fi       # before B1: its _st3 dumps are B1's same-session CIFAR anchor
-if has_mode --b1;      then run_block block_b1;      fi       # last: never shares the GPU with a training
+if has_mode --b1;      then run_block block_b1;      fi       # last GPU block: never shares the GPU with a training
+if has_mode --anomaly; then run_block block_anomaly; fi       # CPU only, after B1; reads A4b's dumps, never a B1 dump
 
 echo "=== done. results (dumps stay on the volume, gitignored): $(pwd -P)/results ==="
 echo "Pull to Windows (Git Bash; IP/port from 'runpodctl ssh info <pod-id>'), then commit + push there:"
