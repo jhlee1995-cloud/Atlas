@@ -1,0 +1,241 @@
+{
+ "schema": "b4_weights/1",
+ "hub_ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+ "registry": "experiments/b4/models.json",
+ "trained_only": true,
+ "created_utc": "2026-09-24T08:27:07Z",
+ "units": {
+  "resnet56_s31": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s31_chenyaofo.pt",
+   "bytes": 3560235,
+   "sha256": "cf97966bbe1c560b0b8251ca70db1099725451eef7878f67292f6b91619a3e1f",
+   "train_json": {
+    "path": "results/train_resnet56_s31/train.json",
+    "wall_s": 1399.1,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 31,
+     "out": "/workspace/models/resnet56_s31_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s31/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet56_s32": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s32_chenyaofo.pt",
+   "bytes": 3560235,
+   "sha256": "b0289cfe3bdfb03a0f93bef32e55b17cb9fd6bd48b70a230dff4c86de746ebd6",
+   "train_json": {
+    "path": "results/train_resnet56_s32/train.json",
+    "wall_s": 1323.9,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 32,
+     "out": "/workspace/models/resnet56_s32_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s32/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet20_s31": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet20_s31_chenyaofo.pt",
+   "bytes": 1141675,
+   "sha256": "28a425c02e00beefc0c7ac0818e3a107b2abbcf6626bd7eef0c53a3a73bf5ab8",
+   "train_json": {
+    "path": "results/train_resnet20_s31/train.json",
+    "wall_s": 710.1,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 31,
+     "out": "/workspace/models/resnet20_s31_chenyaofo.pt",
+     "train_json": "results/train_resnet20_s31/train.json",
+     "arch": "cifar10_resnet20",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet20_s32": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet20_s32_chenyaofo.pt",
+   "bytes": 1141675,
+   "sha256": "9b60b2af4c3960a823e0b08a6d62fe926b8b22db017b6b493898f58229461ea7",
+   "train_json": {
+    "path": "results/train_resnet20_s32/train.json",
+    "wall_s": 706.0,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 32,
+     "out": "/workspace/models/resnet20_s32_chenyaofo.pt",
+     "train_json": "results/train_resnet20_s32/train.json",
+     "arch": "cifar10_resnet20",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet56_s31_ls10": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s31_ls10_chenyaofo.pt",
+   "bytes": 3561985,
+   "sha256": "77d9612fb108738550ff72ca96699d46f11dd1ed9309c8169ee87a986c2b2dc3",
+   "train_json": {
+    "path": "results/train_resnet56_s31_ls10/train.json",
+    "wall_s": 1397.5,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 31,
+     "out": "/workspace/models/resnet56_s31_ls10_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s31_ls10/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "label_smoothing": 0.1,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet56_s31_wd5e5": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s31_wd5e5_chenyaofo.pt",
+   "bytes": 3562399,
+   "sha256": "b936d0a743e348a8c3bf41b192fb869c779e1fbcaccc2ba19442de8ea7acec5a",
+   "train_json": {
+    "path": "results/train_resnet56_s31_wd5e5/train.json",
+    "wall_s": 1403.3,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 31,
+     "out": "/workspace/models/resnet56_s31_wd5e5_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s31_wd5e5/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 5e-05,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet56_s32_ls10": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s32_ls10_chenyaofo.pt",
+   "bytes": 3561985,
+   "sha256": "c8b05efb8ec3d2dfbc21a4e731559e27305035aa56da66e9df2f44d7d7a01775",
+   "train_json": {
+    "path": "results/train_resnet56_s32_ls10/train.json",
+    "wall_s": 1325.5,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 32,
+     "out": "/workspace/models/resnet56_s32_ls10_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s32_ls10/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 0.0005,
+     "label_smoothing": 0.1,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  },
+  "resnet56_s32_wd5e5": {
+   "status": "PASS",
+   "file": "/workspace/models/resnet56_s32_wd5e5_chenyaofo.pt",
+   "bytes": 3562399,
+   "sha256": "509a7399ee751d270fc13dfb302a985fef4daca154e40c44aee1fb367909b225",
+   "train_json": {
+    "path": "results/train_resnet56_s32_wd5e5/train.json",
+    "wall_s": 1404.6,
+    "recipe": {
+     "volume": "/workspace",
+     "seed": 32,
+     "out": "/workspace/models/resnet56_s32_wd5e5_chenyaofo.pt",
+     "train_json": "results/train_resnet56_s32_wd5e5/train.json",
+     "arch": "cifar10_resnet56",
+     "norm": "chenyaofo",
+     "epochs": 200,
+     "batch": 256,
+     "lr": 0.1,
+     "wd": 5e-05,
+     "drop_last": false,
+     "bn_recal": 100,
+     "workers": 3,
+     "download": false
+    },
+    "device": "NVIDIA GeForce RTX 4090",
+    "torch": "2.8.0+cu128"
+   }
+  }
+ },
+ "counts": {
+  "PASS": 8,
+  "NOT_EVALUABLE": 0,
+  "FAIL": 0,
+  "ABSENT": 0
+ }
+}

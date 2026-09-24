@@ -1,0 +1,65 @@
+{
+ "bounds": {
+  "acc_abs_max": 0.0006,
+  "argmax_agree_min": 0.999,
+  "tap_rel_max": 0.004
+ },
+ "created_utc": "2026-09-24T06:51:55Z",
+ "status": "PASS",
+ "units": {
+  "resnet20_hub": {
+   "acc_abs_diff": 0.0,
+   "acc_committed": 0.9256,
+   "acc_new": 0.9256,
+   "anchor": "results/atlas_v1_resnet20_s0hub_st3",
+   "argmax_agree": 1.0,
+   "status": "PASS",
+   "tap_rel_max": 0.00027731558513588466,
+   "taps": {
+    "layer1.0": 0.0,
+    "layer1.1": 0.0,
+    "layer1.2": 0.0,
+    "layer2.0": 0.0,
+    "layer2.1": 0.0,
+    "layer2.2": 0.0,
+    "layer3.0": 0.0,
+    "layer3.1": 0.0,
+    "layer3.2": 0.0,
+    "penult": 0.00027731558513588466,
+    "stem": 0.0
+   },
+   "weights_prefix": {
+    "committed": null,
+    "new": "4118986f0df73003",
+    "ok": null
+   }
+  },
+  "resnet56_hub": {
+   "acc_abs_diff": 0.0,
+   "acc_committed": 0.9446,
+   "acc_new": 0.9446,
+   "anchor": "results/atlas_v1_resnet56_s0hub_st3",
+   "argmax_agree": 1.0,
+   "status": "PASS",
+   "tap_rel_max": 0.0002917987014172998,
+   "taps": {
+    "layer1.0": 0.0,
+    "layer1.5": 0.0,
+    "layer1.8": 0.0,
+    "layer2.0": 0.0,
+    "layer2.5": 0.0,
+    "layer2.8": 0.0,
+    "layer3.0": 0.0,
+    "layer3.5": 0.0,
+    "layer3.8": 0.0,
+    "penult": 0.0002917987014172998,
+    "stem": 0.0
+   },
+   "weights_prefix": {
+    "committed": null,
+    "new": "187c023aee0c9cf3",
+    "ok": null
+   }
+  }
+ }
+}

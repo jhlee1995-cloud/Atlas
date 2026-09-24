@@ -1,0 +1,16 @@
+{
+ "schema": "b4a_seal_diff/1",
+ "rule": "docs/plans/B4A_AMENDMENT.md: S1's sealed entries unchanged; only the B4a sealed fit dumps may be added",
+ "s1_manifest": "results/instrument_check_b4s1/sealed.json",
+ "s1_sha256": "f1d762cfab97ab29d85d6516c10c488d12665c34934c189e13051a22c35ac2a9",
+ "manifest": "results/instrument_check_b4s1_r2/sealed.json",
+ "sha256": "213c03a534826a362bee6494da90aa3fc153f52056351a99c57185ec305faef4",
+ "s1_sealed_unchanged": 34,
+ "added": [
+  "mobilenetv2_x0_75:fit",
+  "shufflenetv2_x1_0:fit"
+ ],
+ "b4a_absent": [],
+ "problems": [],
+ "status": "PASS"
+}

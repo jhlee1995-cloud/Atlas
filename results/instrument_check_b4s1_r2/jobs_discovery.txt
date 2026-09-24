@@ -1,0 +1,2 @@
+timeout 3600 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit shufflenetv2_x0_5 --phase discovery --out results/b4_t2/shufflenetv2_x0_5_r2 > /workspace/logs/b4a_20260924_085420/b4_t2_shufflenetv2_x0_5_fit_r2.log 2>&1
+timeout 7200 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit shufflenetv2_x0_5 --phase discovery --layout fit --out results/b4_t1/shufflenetv2_x0_5_fit_r2 > /workspace/logs/b4a_20260924_085420/b4_t1_shufflenetv2_x0_5_fit_r2.log 2>&1

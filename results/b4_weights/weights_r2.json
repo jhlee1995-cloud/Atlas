@@ -1,0 +1,216 @@
+{
+ "schema": "b4_weights/1",
+ "hub_ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+ "registry": "experiments/b4/models.json",
+ "trained_only": false,
+ "created_utc": "2026-09-24T08:56:32Z",
+ "amendment": "B4a",
+ "amendment_rule": {
+  "doc": "docs/plans/B4A_AMENDMENT.md",
+  "approved": "owner, 2026-09-24",
+  "tol": 0.003,
+  "b4": "FAIL when |acc_10k - readme_top1| > tol (scripts/b4_weights.py gate_unit)",
+  "b4a": "FAIL only when acc_10k - readme_top1 < -tol; above +tol PASS with INFO README-EXCEEDED",
+  "unchanged": "hub byte size (fatal), full sha256, 8-hex tag (NOT_EVALUABLE), head export, pinned hub ref"
+ },
+ "heads": "results/b4_weights/heads_r2",
+ "s1_record": {
+  "path": "results/b4_weights/weights.json",
+  "sha256": "b2c12b5293ba3360fff06ded69e02b543dfe69da584660b55dc9b90850ddd9cb",
+  "check": {
+   "mobilenetv2_x0_75": "B4a case: README-only FAIL above the README",
+   "shufflenetv2_x0_5": "B4a case: README-only FAIL above the README",
+   "shufflenetv2_x1_0": "B4a case: README-only FAIL above the README"
+  }
+ },
+ "units": {
+  "mobilenetv2_x0_75": {
+   "source": "hub",
+   "hub_ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+   "file": "/workspace/.cache/torch/hub/checkpoints/cifar10_mobilenetv2_x0_75-a53c314e.pt",
+   "asset": "cifar10_mobilenetv2_x0_75-a53c314e.pt",
+   "bytes": 5688121,
+   "bytes_expected": 5688121,
+   "tag": "a53c314e",
+   "sha256": "a53c314e0e48bbeaf8447553f656475caae11327f3132b32a181c2b1ff375fe2",
+   "tag_prefix_ok": true,
+   "status": "PASS",
+   "n_params": 1368234,
+   "head": {
+    "module": "classifier.1",
+    "shape": [
+     10,
+     1280
+    ],
+    "W_sha256_f32": "21118b3d426c5d19c0889fd8727b160161772c755fba48731de39a909ed5c82a",
+    "b_sha256_f32": "7fc10c67aaabd75c9b8a80a778fe194963768519438a98343316bb64c97beb72",
+    "svd": {
+     "singular_values": [
+      2.7750988081343526,
+      2.5426816575110247,
+      2.452986284882399,
+      2.36289162858098,
+      2.2634049283618647,
+      2.1935119250981576,
+      2.1064631694270224,
+      2.0536980775813456,
+      2.031469314078143,
+      2.595246263838993e-05
+     ],
+     "rank": 10,
+     "null_dim": 1270
+    }
+   },
+   "readme": {
+    "acc_10k": 0.9408,
+    "readme_top1": 0.9372,
+    "delta": 0.0035999999999999366,
+    "tol": 0.003,
+    "status": "PASS",
+    "info": "README-EXCEEDED",
+    "rule": "B4a one-sided: FAIL only when acc_10k < readme_top1 - tol",
+    "status_b4": "FAIL"
+   },
+   "wall_s": 3.5,
+   "amendment": "B4a",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "s1_crosscheck": {
+    "sha256_equal": true,
+    "acc_10k_equal": true,
+    "s1_status": "FAIL",
+    "s1_readme_status": "FAIL"
+   }
+  },
+  "shufflenetv2_x0_5": {
+   "source": "hub",
+   "hub_ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+   "file": "/workspace/.cache/torch/hub/checkpoints/cifar10_shufflenetv2_x0_5-1308b4e9.pt",
+   "asset": "cifar10_shufflenetv2_x0_5-1308b4e9.pt",
+   "bytes": 1554833,
+   "bytes_expected": 1554833,
+   "tag": "1308b4e9",
+   "sha256": "1308b4e9c4f88656a3b09775c273fc5ffe8fca9c84044123cf3d138c8dec10bd",
+   "tag_prefix_ok": true,
+   "status": "PASS",
+   "n_params": 352042,
+   "head": {
+    "module": "fc",
+    "shape": [
+     10,
+     1024
+    ],
+    "W_sha256_f32": "9b4c00453e3f0d10f91d5eeceffe290b1bb1ea802fc2320fdb5a231ce6c39798",
+    "b_sha256_f32": "1f42dbaa3183c289f04594882e1db4be5ea61e1cc32f77e7bed44fa51166bb9a",
+    "svd": {
+     "singular_values": [
+      3.45104337908514,
+      2.9723367208289115,
+      2.8146514130158367,
+      2.640810162662451,
+      2.559882540892488,
+      2.4906374352443743,
+      2.4010439410817987,
+      2.2923368556855173,
+      2.216032829428948,
+      3.546816425881026e-05
+     ],
+     "rank": 10,
+     "null_dim": 1014
+    }
+   },
+   "readme": {
+    "acc_10k": 0.9065,
+    "readme_top1": 0.9013,
+    "delta": 0.005199999999999982,
+    "tol": 0.003,
+    "status": "PASS",
+    "info": "README-EXCEEDED",
+    "rule": "B4a one-sided: FAIL only when acc_10k < readme_top1 - tol",
+    "status_b4": "FAIL"
+   },
+   "wall_s": 0.9,
+   "amendment": "B4a",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "s1_crosscheck": {
+    "sha256_equal": true,
+    "acc_10k_equal": true,
+    "s1_status": "FAIL",
+    "s1_readme_status": "FAIL"
+   }
+  },
+  "shufflenetv2_x1_0": {
+   "source": "hub",
+   "hub_ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+   "file": "/workspace/.cache/torch/hub/checkpoints/cifar10_shufflenetv2_x1_0-98807be3.pt",
+   "asset": "cifar10_shufflenetv2_x1_0-98807be3.pt",
+   "bytes": 5230673,
+   "bytes_expected": 5230673,
+   "tag": "98807be3",
+   "sha256": "98807be3dc892c61e7be9930e1bd2fbf801e58a21e0ec17efc79a24ff5047285",
+   "tag_prefix_ok": true,
+   "status": "PASS",
+   "n_params": 1263854,
+   "head": {
+    "module": "fc",
+    "shape": [
+     10,
+     1024
+    ],
+    "W_sha256_f32": "811a25215a5d2cb04a8169da7f09267af984117261b6401f507f1edd8eef84ab",
+    "b_sha256_f32": "cd3f1d1b9424295a66ee0f06faaba9add4c9764213a5c748a18b4162037426cc",
+    "svd": {
+     "singular_values": [
+      2.74071787364532,
+      2.6172238161020847,
+      2.5231580504176656,
+      2.4426425117555848,
+      2.4236911929467575,
+      2.306904837937764,
+      2.243925932515469,
+      2.182195496731128,
+      2.10971791587315,
+      3.5394133743481195e-05
+     ],
+     "rank": 10,
+     "null_dim": 1014
+    }
+   },
+   "readme": {
+    "acc_10k": 0.933,
+    "readme_top1": 0.9298000000000001,
+    "delta": 0.0031999999999999806,
+    "tol": 0.003,
+    "status": "PASS",
+    "info": "README-EXCEEDED",
+    "rule": "B4a one-sided: FAIL only when acc_10k < readme_top1 - tol",
+    "status_b4": "FAIL"
+   },
+   "wall_s": 1.1,
+   "amendment": "B4a",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "s1_crosscheck": {
+    "sha256_equal": true,
+    "acc_10k_equal": true,
+    "s1_status": "FAIL",
+    "s1_readme_status": "FAIL"
+   }
+  }
+ },
+ "torch": "2.8.0+cu128",
+ "device": "NVIDIA GeForce RTX 4090",
+ "counts": {
+  "PASS": 3,
+  "NOT_EVALUABLE": 0,
+  "FAIL": 0,
+  "ABSENT": 0
+ },
+ "info_counts": {
+  "README-EXCEEDED": 3
+ }
+}

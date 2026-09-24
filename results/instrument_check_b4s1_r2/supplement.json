@@ -1,0 +1,76 @@
+{
+ "schema": "b4a_supplement/1",
+ "amendment": "B4a",
+ "doc": "docs/plans/B4A_AMENDMENT.md",
+ "p1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "s1_head": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "head": "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a",
+ "tag": "_r2",
+ "s1_tag": "",
+ "weights_record": "results/b4_weights/weights_r2.json",
+ "created_utc": "2026-09-24T09:07:32Z",
+ "units": {
+  "mobilenetv2_x0_75": {
+   "roles": [
+    "C"
+   ],
+   "sealed": true,
+   "dump": "results/b4c_mobilenetv2_x0_75/dump",
+   "dump_state": "complete",
+   "weights_status": "PASS",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "record": "results/b4_extract/mobilenetv2_x0_75_fit_r2.json",
+   "record_written": true
+  },
+  "shufflenetv2_x0_5": {
+   "roles": [
+    "Dnew"
+   ],
+   "sealed": false,
+   "dump": "results/b4d_shufflenetv2_x0_5/dump",
+   "dump_state": "complete",
+   "weights_status": "PASS",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "record": "results/b4_extract/shufflenetv2_x0_5_fit_r2.json",
+   "record_written": true,
+   "discovery": {
+    "t2": {
+     "present": true,
+     "paths": [
+      "results/b4_t2/shufflenetv2_x0_5_r2/probe.json"
+     ]
+    },
+    "t1_fit": {
+     "present": true,
+     "paths": [
+      "results/b4_t1/shufflenetv2_x0_5_fit_r2/scoreboard.json"
+     ]
+    }
+   }
+  },
+  "shufflenetv2_x1_0": {
+   "roles": [
+    "C"
+   ],
+   "sealed": true,
+   "dump": "results/b4c_shufflenetv2_x1_0/dump",
+   "dump_state": "complete",
+   "weights_status": "PASS",
+   "info": [
+    "README-EXCEEDED"
+   ],
+   "record": "results/b4_extract/shufflenetv2_x1_0_fit_r2.json",
+   "record_written": true
+  }
+ },
+ "timing_condition": {
+  "discovery_jobs_run_here": 2,
+  "condition": "run alone on an otherwise idle pod (no GPU job, no other probe); every other family was timed in the loaded S1 lane",
+  "p2": "scripts/b4a_p2.js timing floors the ShuffleNet t_ref at the S1-lane REF units"
+ },
+ "soft_failures": []
+}

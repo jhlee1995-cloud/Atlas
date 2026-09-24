@@ -1,0 +1,211 @@
+{
+ "deep": false,
+ "entries": [
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s1",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s2",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s3",
+   "why": []
+  },
+  {
+   "layout": "maps",
+   "status": "PASS",
+   "unit": "resnet20_s3",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s4",
+   "why": []
+  },
+  {
+   "layout": "maps",
+   "status": "PASS",
+   "unit": "resnet20_s4",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s1",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s2",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s12m",
+   "why": []
+  },
+  {
+   "layout": "maps",
+   "status": "PASS",
+   "unit": "resnet56_s12m",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s13m",
+   "why": []
+  },
+  {
+   "layout": "maps",
+   "status": "PASS",
+   "unit": "resnet56_s13m",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet44",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "vgg13_bn",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "vgg16_bn",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "vgg19_bn",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "mobilenetv2_x1_0",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "mobilenetv2_x1_4",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "shufflenetv2_x1_5",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "shufflenetv2_x2_0",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "repvgg_a1",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "repvgg_a2",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s31",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s31",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet56_s32",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s32",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s31",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet20_s31",
+   "why": []
+  },
+  {
+   "layout": "eval",
+   "status": "PASS",
+   "unit": "resnet20_s32",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet20_s32",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s31_ls10",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s31_wd5e5",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s32_ls10",
+   "why": []
+  },
+  {
+   "layout": "fit",
+   "status": "PASS",
+   "unit": "resnet56_s32_wd5e5",
+   "why": []
+  }
+ ],
+ "manifest": "results/instrument_check_b4s1/sealed.json",
+ "status": "PASS"
+}

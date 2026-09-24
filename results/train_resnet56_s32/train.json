@@ -1,0 +1,139 @@
+{
+ "out": "/workspace/models/resnet56_s32_chenyaofo.pt",
+ "recipe": {
+  "volume": "/workspace",
+  "seed": 32,
+  "out": "/workspace/models/resnet56_s32_chenyaofo.pt",
+  "train_json": "results/train_resnet56_s32/train.json",
+  "arch": "cifar10_resnet56",
+  "norm": "chenyaofo",
+  "epochs": 200,
+  "batch": 256,
+  "lr": 0.1,
+  "wd": 0.0005,
+  "drop_last": false,
+  "bn_recal": 100,
+  "workers": 3,
+  "download": false
+ },
+ "final_test_acc_10k": 0.9398,
+ "wall_s": 1323.9,
+ "history": [
+  {
+   "epoch": 10,
+   "loss": 0.5591,
+   "test_acc_10k": 0.7364,
+   "elapsed_s": 68.4
+  },
+  {
+   "epoch": 20,
+   "loss": 0.3305,
+   "test_acc_10k": 0.7198,
+   "elapsed_s": 134.5
+  },
+  {
+   "epoch": 30,
+   "loss": 0.3071,
+   "test_acc_10k": 0.8337,
+   "elapsed_s": 200.5
+  },
+  {
+   "epoch": 40,
+   "loss": 0.2205,
+   "test_acc_10k": 0.8551,
+   "elapsed_s": 266.4
+  },
+  {
+   "epoch": 50,
+   "loss": 0.357,
+   "test_acc_10k": 0.844,
+   "elapsed_s": 332.5
+  },
+  {
+   "epoch": 60,
+   "loss": 0.3454,
+   "test_acc_10k": 0.8533,
+   "elapsed_s": 398.6
+  },
+  {
+   "epoch": 70,
+   "loss": 0.2285,
+   "test_acc_10k": 0.8628,
+   "elapsed_s": 464.7
+  },
+  {
+   "epoch": 80,
+   "loss": 0.228,
+   "test_acc_10k": 0.8321,
+   "elapsed_s": 530.7
+  },
+  {
+   "epoch": 90,
+   "loss": 0.1476,
+   "test_acc_10k": 0.8776,
+   "elapsed_s": 596.9
+  },
+  {
+   "epoch": 100,
+   "loss": 0.1286,
+   "test_acc_10k": 0.8745,
+   "elapsed_s": 663.1
+  },
+  {
+   "epoch": 110,
+   "loss": 0.1693,
+   "test_acc_10k": 0.8606,
+   "elapsed_s": 729.1
+  },
+  {
+   "epoch": 120,
+   "loss": 0.1608,
+   "test_acc_10k": 0.8729,
+   "elapsed_s": 795.2
+  },
+  {
+   "epoch": 130,
+   "loss": 0.1349,
+   "test_acc_10k": 0.9058,
+   "elapsed_s": 861.2
+  },
+  {
+   "epoch": 140,
+   "loss": 0.1192,
+   "test_acc_10k": 0.915,
+   "elapsed_s": 927.3
+  },
+  {
+   "epoch": 150,
+   "loss": 0.0826,
+   "test_acc_10k": 0.919,
+   "elapsed_s": 993.3
+  },
+  {
+   "epoch": 160,
+   "loss": 0.0314,
+   "test_acc_10k": 0.9233,
+   "elapsed_s": 1059.3
+  },
+  {
+   "epoch": 170,
+   "loss": 0.0041,
+   "test_acc_10k": 0.9364,
+   "elapsed_s": 1125.4
+  },
+  {
+   "epoch": 180,
+   "loss": 0.0031,
+   "test_acc_10k": 0.9417,
+   "elapsed_s": 1191.7
+  },
+  {
+   "epoch": 190,
+   "loss": 0.0012,
+   "test_acc_10k": 0.9393,
+   "elapsed_s": 1257.8
+  }
+ ],
+ "torch": "2.8.0+cu128",
+ "device": "NVIDIA GeForce RTX 4090"
+}

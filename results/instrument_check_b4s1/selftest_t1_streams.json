@@ -1,0 +1,103 @@
+{
+ "checks": [
+  {
+   "detail": "h 5.742 sim 2001 pred 1984",
+   "name": "CUSUM in-control ARL matches Siegmund within 15%",
+   "pass": true
+  },
+  {
+   "detail": "sim 11.6 pred 11.8",
+   "name": "CUSUM delay for a 1-SD shift matches Siegmund within 15%",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "segments are contiguous blocks (no alternation)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "builder deterministic",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "stuck segment repeats one frame",
+   "pass": true
+  },
+  {
+   "detail": "[[0. 0. 1. 2. 0. 1.]]",
+   "name": "repeat check: 3 identical frames reach the statistic 2 > h = 1",
+   "pass": true
+  },
+  {
+   "detail": "0.5025285500820134",
+   "name": "information rate of a unit mean shift = 0.5 nats (+-0.03)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "window counts equal a brute-force bincount",
+   "pass": true
+  },
+  {
+   "detail": "0.100 0.419",
+   "name": "binned KS: in-control small, shifted large",
+   "pass": true
+  },
+  {
+   "detail": "495.3128723185388",
+   "name": "a frozen frame freezes the EWMA: T^2 -> |x|^2 / (lam / (2 - lam)) (T1 review A3)",
+   "pass": true
+  },
+  {
+   "detail": "{'p_fa_pre': 0.23333333333333334, 'p_det_within': 1.0, 'ced': 4.5, 'delay_cens': 4.260869565217392, 'p_det_within_gated': 0.06666666666666667}",
+   "name": "stem-only step: mewma_stem detects within 50 frames in >= 95% of streams",
+   "pass": true
+  },
+  {
+   "detail": "{'p_fa_pre': 0.16666666666666666, 'p_det_within': 0.26666666666666666, 'ced': 545.3529411764706, 'delay_cens': 1013.6, 'p_det_within_gated': 0.0}",
+   "name": "stem-only step: the head CUSUM fires only at its false-alarm rate (<= 0.5)",
+   "pass": true
+  },
+  {
+   "detail": "(1.0, 1.0)",
+   "name": "stuck frame: repeat check 1.0; penult and stem MEWMA >= 0.9 (frozen EWMA)",
+   "pass": true
+  },
+  {
+   "detail": "{'h': 6.228827844917419, 'arl0_cal': 2059.1833333333334, 'censored_frac': 0.0, 'arl0_heldout': 2801.85, 'arl0_heldout_median': 1688.5, 'fa_per_1000_heldout': 0.3569070435605047}",
+   "name": "held-out ARL0 of cusum_msp within [1000, 4000]",
+   "pass": true
+  },
+  {
+   "detail": "({'I_nats': 5.0384428992228, 'ci': [4.927448196702807, 5.181455248087056], 'n': 2000}, {'I_nats': 0.01655932279340634, 'ci': [0.02527220731357082, 0.04240121364423613], 'n': 2000})",
+   "name": "information rate: stem CI above the penult CI (the change lives at the stem)",
+   "pass": true
+  },
+  {
+   "detail": "(0.005049798454863124, 3.786164179963767)",
+   "name": "head information rate in control: CAL-whitened ~0 (< 0.02 nats) where the merely standardised one is not (> 1 nat; T1 review E3)",
+   "pass": true
+  },
+  {
+   "detail": "({'p_fa_pre': 0.26666666666666666, 'p_det_within': 1.0, 'ced': 1.6333333333333333, 'delay_cens': 1.7272727272727273, 'p_det_within_gated': 0.1}, {'p_fa_pre': 0.2, 'p_det_within': 0.2, 'ced': 591.6153846153846, 'delay_cens': 1090.0, 'p_det_within_gated': 0.0})",
+   "name": "dumps -> frames: the planted stem-only shift is caught by mewma_stem (ced < 50), not by cusum_msp",
+   "pass": true
+  },
+  {
+   "detail": "['corrupt__brightness__s1', 'corrupt__brightness__s3', 'corrupt__brightness__s5']",
+   "name": "dumps -> frames: frames.npz written to --frames and no confirmation-only split read",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "dumps -> frames: per-tap and per-scenario timing recorded",
+   "pass": true
+  }
+ ],
+ "code_sha256": "ea471aab6715cdb8462d56df1a6db236925c2e6956d11b8dd5b9f8a6636a0dea",
+ "created_utc": "2026-09-24T06:46:39Z",
+ "failed": [],
+ "status": "PASS"
+}

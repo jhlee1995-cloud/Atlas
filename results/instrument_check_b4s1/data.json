@@ -1,0 +1,215 @@
+{
+ "cifar10c": {
+  "brightness": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "contrast": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "defocus_blur": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "elastic_transform": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "fog": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "frost": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "gaussian_blur": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "gaussian_noise": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "glass_blur": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "impulse_noise": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "jpeg_compression": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "motion_blur": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "pixelate": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "saturate": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "shot_noise": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "snow": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "spatter": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "speckle_noise": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  },
+  "zoom_blur": {
+   "dtype": "uint8",
+   "shape": [
+    50000,
+    32,
+    32,
+    3
+   ]
+  }
+ },
+ "cifar10c_labels": [
+  50000
+ ],
+ "datasets": {
+  "cifar10": {
+   "n": 10000,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "cifar100": {
+   "n": 10000,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "cifar10_train": {
+   "n": 50000,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  },
+  "svhn": {
+   "n": 26032,
+   "shape": [
+    32,
+    32,
+    3
+   ]
+  }
+ },
+ "extras_present": true,
+ "main15_present": true,
+ "volume": "/workspace"
+}

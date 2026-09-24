@@ -1,0 +1,328 @@
+{
+ "t1": {
+  "mobilenetv2_x0_5": {
+   "wall_s": 467.938,
+   "max_rss_mb": 993.5,
+   "layout": "fit",
+   "dir": "mobilenetv2_x0_5_fit"
+  },
+  "repvgg_a0": {
+   "wall_s": 470.442,
+   "max_rss_mb": 1028.0,
+   "layout": "fit",
+   "dir": "repvgg_a0_fit"
+  },
+  "resnet20_hub": {
+   "wall_s": 258.975,
+   "max_rss_mb": 546.9,
+   "layout": "fit",
+   "dir": "resnet20_hub_fit"
+  },
+  "resnet20_rand": {
+   "wall_s": 231.884,
+   "max_rss_mb": 542.5,
+   "layout": "fit",
+   "dir": "resnet20_rand_fit"
+  },
+  "resnet20_s1": {
+   "wall_s": 252.147,
+   "max_rss_mb": 546.9,
+   "layout": "fit",
+   "dir": "resnet20_s1_fit"
+  },
+  "resnet20_s2": {
+   "wall_s": 249.485,
+   "max_rss_mb": 544.3,
+   "layout": "fit",
+   "dir": "resnet20_s2_fit"
+  },
+  "resnet20_s3": {
+   "wall_s": 247.158,
+   "max_rss_mb": 548.3,
+   "layout": "fit",
+   "dir": "resnet20_s3_fit"
+  },
+  "resnet20_s4": {
+   "wall_s": 247.086,
+   "max_rss_mb": 547.8,
+   "layout": "fit",
+   "dir": "resnet20_s4_fit"
+  },
+  "resnet32": {
+   "wall_s": 323.219,
+   "max_rss_mb": 560.8,
+   "layout": "fit",
+   "dir": "resnet32_fit"
+  },
+  "resnet56_e10": {
+   "wall_s": 248.845,
+   "max_rss_mb": 548.5,
+   "layout": "fit",
+   "dir": "resnet56_e10_fit"
+  },
+  "resnet56_e20": {
+   "wall_s": 247.047,
+   "max_rss_mb": 547.0,
+   "layout": "fit",
+   "dir": "resnet56_e20_fit"
+  },
+  "resnet56_e40": {
+   "wall_s": 244.988,
+   "max_rss_mb": 545.8,
+   "layout": "fit",
+   "dir": "resnet56_e40_fit"
+  },
+  "resnet56_e50": {
+   "wall_s": 248.951,
+   "max_rss_mb": 547.7,
+   "layout": "fit",
+   "dir": "resnet56_e50_fit"
+  },
+  "resnet56_e60": {
+   "wall_s": 246.567,
+   "max_rss_mb": 544.4,
+   "layout": "fit",
+   "dir": "resnet56_e60_fit"
+  },
+  "resnet56_e70": {
+   "wall_s": 253.144,
+   "max_rss_mb": 545.5,
+   "layout": "fit",
+   "dir": "resnet56_e70_fit"
+  },
+  "resnet56_hub": {
+   "wall_s": 257.883,
+   "max_rss_mb": 545.8,
+   "layout": "fit",
+   "dir": "resnet56_hub_fit"
+  },
+  "resnet56_rand": {
+   "wall_s": 253.362,
+   "max_rss_mb": 542.8,
+   "layout": "fit",
+   "dir": "resnet56_rand_fit"
+  },
+  "resnet56_s12m": {
+   "wall_s": 270.666,
+   "max_rss_mb": 546.4,
+   "layout": "fit",
+   "dir": "resnet56_s12m_fit"
+  },
+  "resnet56_s13m": {
+   "wall_s": 275.403,
+   "max_rss_mb": 544.2,
+   "layout": "fit",
+   "dir": "resnet56_s13m_fit"
+  },
+  "resnet56_s1": {
+   "wall_s": 247.75,
+   "max_rss_mb": 547.5,
+   "layout": "fit",
+   "dir": "resnet56_s1_fit"
+  },
+  "resnet56_s2": {
+   "wall_s": 244.51,
+   "max_rss_mb": 546.8,
+   "layout": "fit",
+   "dir": "resnet56_s2_fit"
+  },
+  "shufflenetv2_x0_5": {
+   "wall_s": 306.756,
+   "max_rss_mb": 930.3,
+   "layout": "fit",
+   "dir": "shufflenetv2_x0_5_fit_r2"
+  },
+  "vgg11_bn": {
+   "wall_s": 415.651,
+   "max_rss_mb": 880.7,
+   "layout": "fit",
+   "dir": "vgg11_bn_fit"
+  }
+ },
+ "t1s": {
+  "resnet20_hub": {
+   "wall_s": 142.963,
+   "max_rss_mb": 759.2,
+   "layout": "fit",
+   "dir": "resnet20_hub"
+  },
+  "resnet56_e40": {
+   "wall_s": 135.227,
+   "max_rss_mb": 760.1,
+   "layout": "fit",
+   "dir": "resnet56_e40"
+  },
+  "resnet56_hub": {
+   "wall_s": 137.535,
+   "max_rss_mb": 760.5,
+   "layout": "fit",
+   "dir": "resnet56_hub"
+  }
+ },
+ "t2": {
+  "mobilenetv2_x0_5": {
+   "wall_s": 101.981,
+   "max_rss_mb": 590.2,
+   "layout": "fit",
+   "dir": "mobilenetv2_x0_5"
+  },
+  "repvgg_a0": {
+   "wall_s": 89.805,
+   "max_rss_mb": 592.6,
+   "layout": "fit",
+   "dir": "repvgg_a0"
+  },
+  "resnet20_hub": {
+   "wall_s": 70.223,
+   "max_rss_mb": 301.6,
+   "layout": "fit",
+   "dir": "resnet20_hub"
+  },
+  "resnet20_rand": {
+   "wall_s": 67.738,
+   "max_rss_mb": 303.3,
+   "layout": "fit",
+   "dir": "resnet20_rand"
+  },
+  "resnet20_s1": {
+   "wall_s": 63.977,
+   "max_rss_mb": 303.0,
+   "layout": "fit",
+   "dir": "resnet20_s1"
+  },
+  "resnet20_s2": {
+   "wall_s": 62.848,
+   "max_rss_mb": 302.1,
+   "layout": "fit",
+   "dir": "resnet20_s2"
+  },
+  "resnet20_s3": {
+   "wall_s": 63.93,
+   "max_rss_mb": 302.9,
+   "layout": "fit",
+   "dir": "resnet20_s3"
+  },
+  "resnet20_s4": {
+   "wall_s": 64.682,
+   "max_rss_mb": 303.1,
+   "layout": "fit",
+   "dir": "resnet20_s4"
+  },
+  "resnet32": {
+   "wall_s": 67.636,
+   "max_rss_mb": 303.4,
+   "layout": "fit",
+   "dir": "resnet32"
+  },
+  "resnet56_e10": {
+   "wall_s": 64.306,
+   "max_rss_mb": 302.7,
+   "layout": "fit",
+   "dir": "resnet56_e10"
+  },
+  "resnet56_e20": {
+   "wall_s": 64.64,
+   "max_rss_mb": 302.9,
+   "layout": "fit",
+   "dir": "resnet56_e20"
+  },
+  "resnet56_e40": {
+   "wall_s": 66.585,
+   "max_rss_mb": 303.9,
+   "layout": "fit",
+   "dir": "resnet56_e40"
+  },
+  "resnet56_e50": {
+   "wall_s": 65.168,
+   "max_rss_mb": 303.4,
+   "layout": "fit",
+   "dir": "resnet56_e50"
+  },
+  "resnet56_e60": {
+   "wall_s": 65.281,
+   "max_rss_mb": 303.1,
+   "layout": "fit",
+   "dir": "resnet56_e60"
+  },
+  "resnet56_e70": {
+   "wall_s": 65.169,
+   "max_rss_mb": 303.1,
+   "layout": "fit",
+   "dir": "resnet56_e70"
+  },
+  "resnet56_hub": {
+   "wall_s": 65.335,
+   "max_rss_mb": 303.8,
+   "layout": "fit",
+   "dir": "resnet56_hub"
+  },
+  "resnet56_rand": {
+   "wall_s": 64.578,
+   "max_rss_mb": 303.0,
+   "layout": "fit",
+   "dir": "resnet56_rand"
+  },
+  "resnet56_s1": {
+   "wall_s": 64.46,
+   "max_rss_mb": 302.1,
+   "layout": "fit",
+   "dir": "resnet56_s1"
+  },
+  "resnet56_s12m": {
+   "wall_s": 66.423,
+   "max_rss_mb": 303.2,
+   "layout": "fit",
+   "dir": "resnet56_s12m"
+  },
+  "resnet56_s13m": {
+   "wall_s": 65.271,
+   "max_rss_mb": 302.6,
+   "layout": "fit",
+   "dir": "resnet56_s13m"
+  },
+  "resnet56_s2": {
+   "wall_s": 63.935,
+   "max_rss_mb": 302.3,
+   "layout": "fit",
+   "dir": "resnet56_s2"
+  },
+  "shufflenetv2_x0_5": {
+   "wall_s": 71.527,
+   "max_rss_mb": 541.7,
+   "layout": "fit",
+   "dir": "shufflenetv2_x0_5_r2"
+  },
+  "vgg11_bn": {
+   "wall_s": 93.42,
+   "max_rss_mb": 467.3,
+   "layout": "fit",
+   "dir": "vgg11_bn"
+  }
+ },
+ "t3s": {
+  "resnet20_hub": {
+   "wall_s": 22.552,
+   "max_rss_mb": 439.5,
+   "layout": "maps",
+   "dir": "resnet20_hub"
+  },
+  "resnet20_rand": {
+   "wall_s": 17.96,
+   "max_rss_mb": 439.9,
+   "layout": "maps",
+   "dir": "resnet20_rand"
+  },
+  "resnet56_hub": {
+   "wall_s": 18.791,
+   "max_rss_mb": 440.1,
+   "layout": "maps",
+   "dir": "resnet56_hub"
+  },
+  "resnet56_rand": {
+   "wall_s": 16.968,
+   "max_rss_mb": 440.0,
+   "layout": "maps",
+   "dir": "resnet56_rand"
+  }
+ }
+}
