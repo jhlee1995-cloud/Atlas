@@ -1,0 +1,68 @@
+{
+ "schema": "b4a_seals/1",
+ "doc": "docs/plans/B4A_AMENDMENT.md",
+ "b4a_dir": "results/instrument_check_b4s1_r2",
+ "manifest": "results/instrument_check_b4s1_r2/sealed.json",
+ "manifest_sha256": "213c03a534826a362bee6494da90aa3fc153f52056351a99c57185ec305faef4",
+ "seal_diff": {
+  "status": "PASS",
+  "problems": []
+ },
+ "verify_files": [
+  "results/instrument_check_b4s2/verify_seals.json"
+ ],
+ "units": {
+  "mobilenetv2_x0_75": {
+   "dump": "results/b4c_mobilenetv2_x0_75/dump",
+   "meta_sha256": "e90559c1272cfb3324cd00278dc873d887877a2d18186abfc38d19a2420c992c",
+   "covered_by": [
+    {
+     "file": "results/instrument_check_b4s2/verify_seals.json",
+     "manifest": "results/instrument_check_b4s1_r2/sealed.json",
+     "s2_guard": true
+    }
+   ],
+   "records": [
+    {
+     "path": "results/b4_t1/mobilenetv2_x0_75_fit/scoreboard.json",
+     "phase": "confirmation",
+     "meta_sha256_equal": true
+    },
+    {
+     "path": "results/b4_t2/mobilenetv2_x0_75/probe.json",
+     "phase": "confirmation",
+     "meta_sha256_equal": true
+    }
+   ],
+   "problems": [],
+   "status": "PASS"
+  },
+  "shufflenetv2_x1_0": {
+   "dump": "results/b4c_shufflenetv2_x1_0/dump",
+   "meta_sha256": "1e7ec4b892df8e8e6f987983beb84344fe6acc143197811fd77952519efb1ce8",
+   "covered_by": [
+    {
+     "file": "results/instrument_check_b4s2/verify_seals.json",
+     "manifest": "results/instrument_check_b4s1_r2/sealed.json",
+     "s2_guard": true
+    }
+   ],
+   "records": [
+    {
+     "path": "results/b4_t1/shufflenetv2_x1_0_fit/scoreboard.json",
+     "phase": "confirmation",
+     "meta_sha256_equal": true
+    },
+    {
+     "path": "results/b4_t2/shufflenetv2_x1_0/probe.json",
+     "phase": "confirmation",
+     "meta_sha256_equal": true
+    }
+   ],
+   "problems": [],
+   "status": "PASS"
+  }
+ },
+ "status": "PASS",
+ "created_utc": "2026-09-24T18:49:38Z"
+}

@@ -1,0 +1,3219 @@
+{
+ "schema": "b4_t2_eval/1",
+ "created_utc": "2026-09-24T18:50:48.974Z",
+ "laws_file": "experiments/b4/laws_frozen.json",
+ "laws_sha256": "b959c38642cc61afbbebc5d6a15ffd1a2336f502d45a24a57877254435f91973",
+ "laws_applied": "frozen at P2",
+ "guard": null,
+ "provenance": {
+  "p1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+  "p2": "272bc41b9395145f50f4289e4eb1df02ce6de273",
+  "p_run": [
+   "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+   "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a",
+   "272bc41b9395145f50f4289e4eb1df02ce6de273"
+  ],
+  "official": true,
+  "confirmation_probe_code": [
+   "0b070212ac4cc7863b3a52786f21b1d0b91b3f829d76e1385718fa79e81a82d4"
+  ],
+  "code": {
+   "t2.sha256": {
+    "confirmation": [
+     "0b070212ac4cc7863b3a52786f21b1d0b91b3f829d76e1385718fa79e81a82d4"
+    ],
+    "fit": [
+     "0b070212ac4cc7863b3a52786f21b1d0b91b3f829d76e1385718fa79e81a82d4"
+    ],
+    "at_p2": "0b070212ac4cc7863b3a52786f21b1d0b91b3f829d76e1385718fa79e81a82d4"
+   },
+   "t2.core_sha256": {
+    "confirmation": [
+     "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+    ],
+    "fit": [
+     "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+    ],
+    "at_p2": "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+   },
+   "t2.collapse_sha256": {
+    "confirmation": [
+     "f17718b57b629a95e98561c02b0fdddcb612adc4c33a18354cda450e10244905"
+    ],
+    "fit": [
+     "f17718b57b629a95e98561c02b0fdddcb612adc4c33a18354cda450e10244905"
+    ],
+    "at_p2": "f17718b57b629a95e98561c02b0fdddcb612adc4c33a18354cda450e10244905"
+   },
+   "t1.sha256": {
+    "confirmation": [
+     "caff71e05e91d63de767dc1e3e494f2b05e8dc4cede0839ea5e03d3d8a13a17a"
+    ],
+    "fit": [
+     "caff71e05e91d63de767dc1e3e494f2b05e8dc4cede0839ea5e03d3d8a13a17a"
+    ],
+    "at_p2": "caff71e05e91d63de767dc1e3e494f2b05e8dc4cede0839ea5e03d3d8a13a17a"
+   },
+   "t1.core_sha256": {
+    "confirmation": [
+     "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+    ],
+    "fit": [
+     "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+    ],
+    "at_p2": "80958f91a29df05cdeb162cc0a3e636e8c01e7795ffd785cc832f5a4f4655505"
+   }
+  },
+  "touched_twice": [],
+  "fitted_files": {
+   "n": 21,
+   "bad": []
+  },
+  "probes_outside_p_run": [],
+  "laws_at_p2": "b959c38642cc61afbbebc5d6a15ffd1a2336f502d45a24a57877254435f91973",
+  "laws_read": "b959c38642cc61afbbebc5d6a15ffd1a2336f502d45a24a57877254435f91973",
+  "evaluator_at_p2": "ed19775bae3f028deeb85e1f26ef847585463457367a3bcf9ae641c111836e02",
+  "evaluator_now": "ed19775bae3f028deeb85e1f26ef847585463457367a3bcf9ae641c111836e02"
+ },
+ "p7_registration": "experiments/b4/prereg_p7.json@ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "replay": {
+  "status": "PASS"
+ },
+ "nc1_gate_at_fit": {
+  "rows": [
+   {
+    "id": "resnet20_hub",
+    "committed": 0.16994402609546508,
+    "probe": 0.16994391330653938,
+    "rel": 6.636827918349297e-7
+   },
+   {
+    "id": "resnet20_s1",
+    "committed": 0.1630172884843279,
+    "probe": 0.16301658440517014,
+    "rel": 0.000004319045938672161
+   },
+   {
+    "id": "resnet20_s2",
+    "committed": 0.16962042949013018,
+    "probe": 0.1696197290007336,
+    "rel": 0.000004129746627112851
+   },
+   {
+    "id": "resnet20_s3",
+    "committed": 0.17195123411379304,
+    "probe": 0.17195033201860363,
+    "rel": 0.000005246226897126505
+   },
+   {
+    "id": "resnet20_s4",
+    "committed": 0.16744636821286418,
+    "probe": 0.16744633105353238,
+    "rel": 2.2191781290370471e-7
+   },
+   {
+    "id": "resnet56_hub",
+    "committed": 0.04875519896668336,
+    "probe": 0.04875517930874451,
+    "rel": 4.0319677208078275e-7
+   },
+   {
+    "id": "resnet56_s1",
+    "committed": 0.0529189795145118,
+    "probe": 0.05291892872194102,
+    "rel": 9.59817654244688e-7
+   },
+   {
+    "id": "resnet56_s2",
+    "committed": 0.05024264138185156,
+    "probe": 0.05024258983673278,
+    "rel": 0.0000010259237446241798
+   },
+   {
+    "id": "resnet56_e10",
+    "committed": 0.6859270863943637,
+    "probe": 0.6859260040879538,
+    "rel": 0.0000015778738460259234
+   },
+   {
+    "id": "resnet56_e20",
+    "committed": 0.32015684294537816,
+    "probe": 0.32015785308283196,
+    "rel": 0.0000031551331045598374
+   },
+   {
+    "id": "resnet56_e40",
+    "committed": 0.17743633654790752,
+    "probe": 0.17743572135094862,
+    "rel": 0.0000034671419105736234
+   },
+   {
+    "id": "resnet56_e50",
+    "committed": 0.14489692288261952,
+    "probe": 0.14489647414293866,
+    "rel": 0.000003096957974846326
+   },
+   {
+    "id": "resnet56_e60",
+    "committed": 0.12860598686137398,
+    "probe": 0.1286064741210314,
+    "rel": 0.0000037887789621215973
+   },
+   {
+    "id": "resnet56_e70",
+    "committed": 0.11742392935269019,
+    "probe": 0.117423173575146,
+    "rel": 0.000006436316246194451
+   },
+   {
+    "id": "resnet56_s12m",
+    "committed": 0.1287596408342831,
+    "probe": 0.12876002872621717,
+    "rel": 0.0000030125273071668346
+   },
+   {
+    "id": "resnet56_s13m",
+    "committed": 0.12958886352335078,
+    "probe": 0.12958930823965362,
+    "rel": 0.0000034317478427858816
+   }
+  ],
+  "n": 16,
+  "status": "PASS",
+  "rule": "|nc1_probe / nc1_committed - 1| <= 0.01 (docs/plans/B4_INTEGRATION.md D15)"
+ },
+ "primary": {
+  "claim": "PRIMARY (owner hypothesis): a label-free collapse coordinate predicts model differences beyond accuracy, the head and the constant",
+  "law": "acc_coll",
+  "outcomes_evaluable": 5,
+  "wins": 0,
+  "losses": 5,
+  "verdict": "REFUTED",
+  "per_outcome": {
+   "O1": {
+    "n": 12,
+    "ids": [
+     "resnet44",
+     "vgg13_bn",
+     "vgg16_bn",
+     "vgg19_bn",
+     "mobilenetv2_x0_75",
+     "mobilenetv2_x1_0",
+     "mobilenetv2_x1_4",
+     "shufflenetv2_x1_0",
+     "shufflenetv2_x1_5",
+     "shufflenetv2_x2_0",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "mae": {
+     "acc_coll": 0.0023686199102862684,
+     "const": 0.0021577447142991247,
+     "acc": 0.00203433999710742,
+     "acc_head": 0.0018062600604120962
+    },
+    "best_rival": "acc_head",
+    "ratio": 1.3113393592647287,
+    "rho": 0,
+    "rho_family_demeaned": 0.20405156586753326,
+    "verdict": "LOSS",
+    "n_extrap": 0,
+    "rule8": {
+     "rho": 0,
+     "rho_family_demeaned": 0.20405156586753326,
+     "partial_log_dim": 0.04880324685396248,
+     "partial_accuracy": -0.25874005063671635,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "note": null,
+    "functional": {
+     "mae_acc_coll": 0.0023686199102862684,
+     "mae_best_rival": 0.0018062600604120962,
+     "units": "outcome units (see T2_COLLAPSE.md section 5)"
+    }
+   },
+   "O2": {
+    "n": 12,
+    "ids": [
+     "resnet44",
+     "vgg13_bn",
+     "vgg16_bn",
+     "vgg19_bn",
+     "mobilenetv2_x0_75",
+     "mobilenetv2_x1_0",
+     "mobilenetv2_x1_4",
+     "shufflenetv2_x1_0",
+     "shufflenetv2_x1_5",
+     "shufflenetv2_x2_0",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "mae": {
+     "acc_coll": 0.05778040332130793,
+     "const": 0.07779175389489328,
+     "acc": 0.03658117188738684,
+     "acc_head": 0.0619829669409562
+    },
+    "best_rival": "acc",
+    "ratio": 1.5795120916077205,
+    "rho": 0.38461538461538464,
+    "rho_family_demeaned": 0.39716926984949846,
+    "verdict": "LOSS",
+    "n_extrap": 0,
+    "rule8": {
+     "rho": 0.38461538461538464,
+     "rho_family_demeaned": 0.39716926984949846,
+     "partial_log_dim": 0.36081655023709464,
+     "partial_accuracy": 0.24076481947635947,
+     "flags": [
+      "DIMENSION"
+     ]
+    },
+    "note": null,
+    "functional": {
+     "mae_acc_coll": 0.05778040332130793,
+     "mae_best_rival": 0.03658117188738684,
+     "units": "outcome units (see T2_COLLAPSE.md section 5)"
+    }
+   },
+   "O3": {
+    "n": 12,
+    "ids": [
+     "resnet44",
+     "vgg13_bn",
+     "vgg16_bn",
+     "vgg19_bn",
+     "mobilenetv2_x0_75",
+     "mobilenetv2_x1_0",
+     "mobilenetv2_x1_4",
+     "shufflenetv2_x1_0",
+     "shufflenetv2_x1_5",
+     "shufflenetv2_x2_0",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "mae": {
+     "acc_coll": 0.009288525332127364,
+     "const": 0.01394052136752138,
+     "acc": 0.008763176276130978,
+     "acc_head": 0.01092904451258231
+    },
+    "best_rival": "acc",
+    "ratio": 1.0599496163768067,
+    "rho": 0.055944055944055944,
+    "rho_family_demeaned": 0.6132170738413709,
+    "verdict": "LOSS",
+    "n_extrap": 1,
+    "rule8": {
+     "rho": 0.055944055944055944,
+     "rho_family_demeaned": 0.6132170738413709,
+     "partial_log_dim": 0.07081895798016091,
+     "partial_accuracy": -0.2867344077650507,
+     "flags": [
+      "DIMENSION"
+     ]
+    },
+    "note": null,
+    "functional": {
+     "mae_acc_coll": 0.009288525332127364,
+     "mae_best_rival": 0.008763176276130978,
+     "units": "outcome units (see T2_COLLAPSE.md section 5)"
+    }
+   },
+   "O4": {
+    "n": 12,
+    "ids": [
+     "resnet44",
+     "vgg13_bn",
+     "vgg16_bn",
+     "vgg19_bn",
+     "mobilenetv2_x0_75",
+     "mobilenetv2_x1_0",
+     "mobilenetv2_x1_4",
+     "shufflenetv2_x1_0",
+     "shufflenetv2_x1_5",
+     "shufflenetv2_x2_0",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "mae": {
+     "acc_coll": 0.014031118456058818,
+     "const": 0.01073633940310311,
+     "acc": 0.011397035887343329,
+     "acc_head": 0.01367199189150572
+    },
+    "best_rival": "const",
+    "ratio": 1.3068810447631176,
+    "rho": 0.11888111888111888,
+    "rho_family_demeaned": -0.25741196705162733,
+    "verdict": "LOSS",
+    "n_extrap": 1,
+    "rule8": {
+     "rho": 0.11888111888111888,
+     "rho_family_demeaned": -0.25741196705162733,
+     "partial_log_dim": 0.2231272581168143,
+     "partial_accuracy": 0.1120079125454492,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "note": null,
+    "functional": {
+     "mae_acc_coll": 0.014031118456058818,
+     "mae_best_rival": 0.01073633940310311,
+     "units": "outcome units (see T2_COLLAPSE.md section 5)"
+    }
+   },
+   "O5": {
+    "n": 12,
+    "ids": [
+     "resnet44",
+     "vgg13_bn",
+     "vgg16_bn",
+     "vgg19_bn",
+     "mobilenetv2_x0_75",
+     "mobilenetv2_x1_0",
+     "mobilenetv2_x1_4",
+     "shufflenetv2_x1_0",
+     "shufflenetv2_x1_5",
+     "shufflenetv2_x2_0",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "mae": {
+     "acc_coll": 0.016470753525165156,
+     "const": 0.012466422542735037,
+     "acc": 0.010054028452701152,
+     "acc_head": 0.02430173874463634
+    },
+    "best_rival": "acc",
+    "ratio": 1.63822428021278,
+    "rho": 0.06293706293706294,
+    "rho_family_demeaned": -0.47057124838073605,
+    "verdict": "LOSS",
+    "n_extrap": 0,
+    "rule8": {
+     "rho": 0.06293706293706294,
+     "rho_family_demeaned": -0.47057124838073605,
+     "partial_log_dim": 0.0636788898191316,
+     "partial_accuracy": 0.18871270139843788,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "note": null,
+    "functional": {
+     "mae_acc_coll": 0.016470753525165156,
+     "mae_best_rival": 0.010054028452701152,
+     "units": "outcome units (see T2_COLLAPSE.md section 5)"
+    }
+   }
+  }
+ },
+ "secondary": {
+  "family": "T2 secondaries, Holm over the items with a p-value (alpha 0.05)",
+  "m": 22,
+  "counts": {
+   "REFUTED": 15,
+   "SUPPORTED": 7,
+   "RULE-MET, HOLM-NS": 3
+  },
+  "items": {
+   "S-PL": {
+    "id": "S-PL",
+    "what": "the PRIMARY rule with log10 nc1_train (labelled) as the collapse coordinate (T1 MP-9a)",
+    "claim": "PRIMARY (owner hypothesis): a label-free collapse coordinate predicts model differences beyond accuracy, the head and the constant",
+    "law": "acc_nc1",
+    "outcomes_evaluable": 5,
+    "wins": 0,
+    "losses": 5,
+    "per_outcome": {
+     "O1": {
+      "n": 12,
+      "ids": [
+       "resnet44",
+       "vgg13_bn",
+       "vgg16_bn",
+       "vgg19_bn",
+       "mobilenetv2_x0_75",
+       "mobilenetv2_x1_0",
+       "mobilenetv2_x1_4",
+       "shufflenetv2_x1_0",
+       "shufflenetv2_x1_5",
+       "shufflenetv2_x2_0",
+       "repvgg_a1",
+       "repvgg_a2"
+      ],
+      "mae": {
+       "acc_nc1": 0.0019358808730730646,
+       "const": 0.0021577447142991247,
+       "acc": 0.00203433999710742,
+       "acc_head": 0.0018062600604120962
+      },
+      "best_rival": "acc_head",
+      "ratio": 1.0717619879340052,
+      "rho": 0.3146853146853147,
+      "rho_family_demeaned": 0.33607112251188753,
+      "verdict": "LOSS",
+      "n_extrap": 0,
+      "rule8": {
+       "rho": 0.3146853146853147,
+       "rho_family_demeaned": 0.33607112251188753,
+       "partial_log_dim": 0.32021577976467647,
+       "partial_accuracy": 0.10934302142659724,
+       "flags": [
+        "DIMENSION"
+       ]
+      },
+      "note": null,
+      "functional": {
+       "mae_acc_coll": 0.0019358808730730646,
+       "mae_best_rival": 0.0018062600604120962,
+       "units": "outcome units (see T2_COLLAPSE.md section 5)"
+      }
+     },
+     "O2": {
+      "n": 12,
+      "ids": [
+       "resnet44",
+       "vgg13_bn",
+       "vgg16_bn",
+       "vgg19_bn",
+       "mobilenetv2_x0_75",
+       "mobilenetv2_x1_0",
+       "mobilenetv2_x1_4",
+       "shufflenetv2_x1_0",
+       "shufflenetv2_x1_5",
+       "shufflenetv2_x2_0",
+       "repvgg_a1",
+       "repvgg_a2"
+      ],
+      "mae": {
+       "acc_nc1": 0.04827237388000879,
+       "const": 0.07779175389489328,
+       "acc": 0.03658117188738684,
+       "acc_head": 0.0619829669409562
+      },
+      "best_rival": "acc",
+      "ratio": 1.3195961580622042,
+      "rho": 0.6293706293706294,
+      "rho_family_demeaned": 0.43205668437968414,
+      "verdict": "LOSS",
+      "n_extrap": 0,
+      "rule8": {
+       "rho": 0.6293706293706294,
+       "rho_family_demeaned": 0.43205668437968414,
+       "partial_log_dim": 0.7150929872998899,
+       "partial_accuracy": 0.451359316397854,
+       "flags": []
+      },
+      "note": null,
+      "functional": {
+       "mae_acc_coll": 0.04827237388000879,
+       "mae_best_rival": 0.03658117188738684,
+       "units": "outcome units (see T2_COLLAPSE.md section 5)"
+      }
+     },
+     "O3": {
+      "n": 12,
+      "ids": [
+       "resnet44",
+       "vgg13_bn",
+       "vgg16_bn",
+       "vgg19_bn",
+       "mobilenetv2_x0_75",
+       "mobilenetv2_x1_0",
+       "mobilenetv2_x1_4",
+       "shufflenetv2_x1_0",
+       "shufflenetv2_x1_5",
+       "shufflenetv2_x2_0",
+       "repvgg_a1",
+       "repvgg_a2"
+      ],
+      "mae": {
+       "acc_nc1": 0.009297745155133735,
+       "const": 0.01394052136752138,
+       "acc": 0.008763176276130978,
+       "acc_head": 0.01092904451258231
+      },
+      "best_rival": "acc",
+      "ratio": 1.061001726104587,
+      "rho": 0.02097902097902098,
+      "rho_family_demeaned": 0.4420052810682148,
+      "verdict": "LOSS",
+      "n_extrap": 1,
+      "rule8": {
+       "rho": 0.02097902097902098,
+       "rho_family_demeaned": 0.4420052810682148,
+       "partial_log_dim": 0.03540191210051245,
+       "partial_accuracy": -0.3911810525705766,
+       "flags": [
+        "DIMENSION"
+       ]
+      },
+      "note": null,
+      "functional": {
+       "mae_acc_coll": 0.009297745155133735,
+       "mae_best_rival": 0.008763176276130978,
+       "units": "outcome units (see T2_COLLAPSE.md section 5)"
+      }
+     },
+     "O4": {
+      "n": 12,
+      "ids": [
+       "resnet44",
+       "vgg13_bn",
+       "vgg16_bn",
+       "vgg19_bn",
+       "mobilenetv2_x0_75",
+       "mobilenetv2_x1_0",
+       "mobilenetv2_x1_4",
+       "shufflenetv2_x1_0",
+       "shufflenetv2_x1_5",
+       "shufflenetv2_x2_0",
+       "repvgg_a1",
+       "repvgg_a2"
+      ],
+      "mae": {
+       "acc_nc1": 0.01558231540333648,
+       "const": 0.01073633940310311,
+       "acc": 0.011397035887343329,
+       "acc_head": 0.01367199189150572
+      },
+      "best_rival": "const",
+      "ratio": 1.4513620348880498,
+      "rho": 0.21678321678321677,
+      "rho_family_demeaned": -0.3077248959815147,
+      "verdict": "LOSS",
+      "n_extrap": 1,
+      "rule8": {
+       "rho": 0.21678321678321677,
+       "rho_family_demeaned": -0.3077248959815147,
+       "partial_log_dim": 0.3562610471223667,
+       "partial_accuracy": 0.19630215425887027,
+       "flags": [
+        "FAMILY-DRIVEN",
+        "DIMENSION"
+       ]
+      },
+      "note": null,
+      "functional": {
+       "mae_acc_coll": 0.01558231540333648,
+       "mae_best_rival": 0.01073633940310311,
+       "units": "outcome units (see T2_COLLAPSE.md section 5)"
+      }
+     },
+     "O5": {
+      "n": 12,
+      "ids": [
+       "resnet44",
+       "vgg13_bn",
+       "vgg16_bn",
+       "vgg19_bn",
+       "mobilenetv2_x0_75",
+       "mobilenetv2_x1_0",
+       "mobilenetv2_x1_4",
+       "shufflenetv2_x1_0",
+       "shufflenetv2_x1_5",
+       "shufflenetv2_x2_0",
+       "repvgg_a1",
+       "repvgg_a2"
+      ],
+      "mae": {
+       "acc_nc1": 0.02727047486337544,
+       "const": 0.012466422542735037,
+       "acc": 0.010054028452701152,
+       "acc_head": 0.02430173874463634
+      },
+      "best_rival": "acc",
+      "ratio": 2.7123928474708916,
+      "rho": 0.3076923076923077,
+      "rho_family_demeaned": 0.3950309940567505,
+      "verdict": "LOSS",
+      "n_extrap": 0,
+      "rule8": {
+       "rho": 0.3076923076923077,
+       "rho_family_demeaned": 0.3950309940567505,
+       "partial_log_dim": 0.32724782683962855,
+       "partial_accuracy": -0.010246997112590748,
+       "flags": [
+        "DIMENSION"
+       ]
+      },
+      "note": null,
+      "functional": {
+       "mae_acc_coll": 0.02727047486337544,
+       "mae_best_rival": 0.010054028452701152,
+       "units": "outcome units (see T2_COLLAPSE.md section 5)"
+      }
+     }
+    },
+    "verdict_rule": "REFUTED",
+    "p": 0.024998750062496876,
+    "p_statistic": "-mean MAE ratio (acc_nc1 / best rival) over the evaluable outcomes",
+    "p_holm": 0.3249837508124594,
+    "verdict": "REFUTED"
+   },
+   "M-DO3": {
+    "id": "M-DO3",
+    "what": "mechanism: the committed AH-1 law |FPR - (0.0224 - 0.1080 log10 nc1_train)| <= 0.035 in >= 75% of C units (T1 X4-2M, T3 CZ-1, T2 P1 demoted)",
+    "n": 12,
+    "p": 0.0026998650067496625,
+    "inside": 10,
+    "need": 9,
+    "residuals": {
+     "resnet44": 0.01214853025956586,
+     "vgg13_bn": 0.010103659735586662,
+     "vgg16_bn": -0.05252006832365064,
+     "vgg19_bn": -0.050825595858838446,
+     "mobilenetv2_x0_75": 0.008787915409331631,
+     "mobilenetv2_x1_0": 0.010330269840433587,
+     "mobilenetv2_x1_4": -0.000918106633879312,
+     "shufflenetv2_x1_0": 0.030898306344052495,
+     "shufflenetv2_x1_5": 0.026232912163107996,
+     "shufflenetv2_x2_0": 0.012762391894974884,
+     "repvgg_a1": -0.011783201714067604,
+     "repvgg_a2": -0.020109604629887257
+    },
+    "curve_rule5": [
+     {
+      "band": 0.02,
+      "inside": 7
+     },
+     {
+      "band": 0.025,
+      "inside": 8
+     },
+     {
+      "band": 0.03,
+      "inside": 9
+     },
+     {
+      "band": 0.035,
+      "inside": 10
+     },
+     {
+      "band": 0.04,
+      "inside": 10
+     },
+     {
+      "band": 0.045,
+      "inside": 10
+     },
+     {
+      "band": 0.05,
+      "inside": 10
+     }
+    ],
+    "verdict_rule": "SUPPORTED",
+    "functional": {
+     "false_alarms_per_1000_frames_mae": 20.61838023394803
+    },
+    "info_CZ7c": {
+     "rho_te_tr_gap_vs_residual": -0.6993006993006993,
+     "note": "Hui et al.'s mechanism for DO-3 (INFO)"
+    },
+    "p_holm": 0.0431978401079946,
+    "verdict": "SUPPORTED"
+   },
+   "M-LF": {
+    "id": "M-LF",
+    "what": "mechanism: the label-free coordinate chosen on D21 ranks the C units' train-referenced false alarm (oriented rho >= 0.7) better than every head coordinate and accuracy (T3 CZ-2 / CZ-7a, T1 MP-2)",
+    "p": 0.0012999350032498376,
+    "n": 12,
+    "coord": "log10_plnc1",
+    "sign": -1,
+    "rho": -0.7972027972027972,
+    "rivals_rho": {
+     "sat999": 0.8391608391608392,
+     "log10_gap_mean": 0.6293706293706294,
+     "log10_msp_def": -0.8041958041958042,
+     "err": -0.3087738305619017
+    },
+    "best_rival_abs_rho": 0.8391608391608392,
+    "verdict_rule": "REFUTED",
+    "rule8": {
+     "rho": -0.7972027972027972,
+     "rho_family_demeaned": -0.3751172424602665,
+     "partial_log_dim": -0.8337821517798272,
+     "partial_accuracy": -0.8341464415960161,
+     "flags": []
+    },
+    "p_holm": 0.022098895055247238,
+    "verdict": "REFUTED"
+   },
+   "MP1": {
+    "id": "MP1",
+    "what": "rho(log10 nc1_train, train-referenced density false alarm) <= -0.6 (T1 MP-1)",
+    "n": 12,
+    "dir": -1,
+    "bar": 0.6,
+    "p": 0.00024998750062496874,
+    "rho": -0.8461538461538461,
+    "verdict_rule": "SUPPORTED",
+    "rule8": {
+     "rho": -0.8461538461538461,
+     "rho_family_demeaned": -0.4190666247677027,
+     "partial_log_dim": -0.8654213327473695,
+     "partial_accuracy": -0.9054981346075509,
+     "flags": []
+    },
+    "p_holm": 0.004499775011249437,
+    "verdict": "SUPPORTED"
+   },
+   "MP3": {
+    "id": "MP3",
+    "what": "rho(log10 nc1_train, margin - d1 lead) >= +0.6 (T1 MP-3 on the discovered coordinate, T1 review D1)",
+    "n": 12,
+    "dir": 1,
+    "bar": 0.6,
+    "p": 0.08219589020548973,
+    "rho": 0.42657342657342656,
+    "verdict_rule": "REFUTED",
+    "rule8": {
+     "rho": 0.42657342657342656,
+     "rho_family_demeaned": 0.7335648696350483,
+     "partial_log_dim": 0.42514986694762724,
+     "partial_accuracy": -0.05448156845731709,
+     "flags": [
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 0.7397630118494076,
+    "verdict": "REFUTED"
+   },
+   "MP5": {
+    "id": "MP5",
+    "what": "rho(log10 nc1_train, AUROC(logit gap) - AUROC(MSP) on clean errors) <= -0.5 (MSP saturation, T1 MP-5)",
+    "n": 12,
+    "dir": -1,
+    "bar": 0.5,
+    "p": 0.5915204239788011,
+    "rho": 0.06993006993006994,
+    "verdict_rule": "REFUTED",
+    "rule8": {
+     "rho": 0.06993006993006994,
+     "rho_family_demeaned": -0.4963287930105081,
+     "partial_log_dim": -0.010210068567472572,
+     "partial_accuracy": 0.6174126424712741,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "MP6": {
+    "id": "MP6",
+    "what": "rho(log10 nc1_train, SVHN AUROC of the penult L2 10-NN) <= -0.5 (T1 MP-6)",
+    "n": 12,
+    "dir": -1,
+    "bar": 0.5,
+    "p": 0.018599070046497676,
+    "rho": -0.6223776223776224,
+    "verdict_rule": "SUPPORTED",
+    "rule8": {
+     "rho": -0.6223776223776224,
+     "rho_family_demeaned": -0.5939672440945425,
+     "partial_log_dim": -0.6686696007786006,
+     "partial_accuracy": -0.398061548660304,
+     "flags": []
+    },
+    "p_holm": 0.26038698065096744,
+    "verdict": "RULE-MET, HOLM-NS"
+   },
+   "MP7": {
+    "id": "MP7",
+    "what": "rho(log10 nc1_test / nc1_train, clean ECE) >= +0.5 (T1 MP-7)",
+    "n": 12,
+    "dir": 1,
+    "bar": 0.5,
+    "p": 0.2536873156342183,
+    "rho": 0.21678321678321677,
+    "verdict_rule": "REFUTED",
+    "rule8": {
+     "rho": 0.21678321678321677,
+     "rho_family_demeaned": -0.17907627200566217,
+     "partial_log_dim": 0.10012880533127916,
+     "partial_accuracy": 0.7104305707688217,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "P2b": {
+    "id": "P2b",
+    "what": "the train-test collapse gap log10(nc1_tetr / nc1_train) orders the over-alarm (Hui et al. 2022)",
+    "n": 12,
+    "dir": 1,
+    "bar": 0.6,
+    "p": 0.00004999750012499375,
+    "rho": 0.9090909090909091,
+    "verdict_rule": "SUPPORTED",
+    "rule8": {
+     "rho": 0.9090909090909091,
+     "rho_family_demeaned": 0.5766967882001443,
+     "partial_log_dim": 0.9063452544156801,
+     "partial_accuracy": 0.9447566763783102,
+     "flags": []
+    },
+    "p_holm": 0.0010999450027498626,
+    "verdict": "SUPPORTED"
+   },
+   "M-NC4": {
+    "id": "M-NC4",
+    "what": "mechanism: rho(1 - held-out NC4 agreement, O1) >= 0.5 (T3 CZ-3 / CZ-7b)",
+    "n": 12,
+    "dir": 1,
+    "bar": 0.5,
+    "p": 0.7468126593670317,
+    "rho": -0.20665530815981215,
+    "verdict_rule": "REFUTED",
+    "rule8": {
+     "rho": -0.20665530815981215,
+     "rho_family_demeaned": -0.34790724779447785,
+     "partial_log_dim": -0.20986942482190618,
+     "partial_accuracy": -0.04442071371843782,
+     "flags": [
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "FE1": {
+    "id": "FE1",
+    "twin_of": "MP1",
+    "what": "family-demeaned twin of MP1 (T1 review D4): dir * rho_fam >= 0.6",
+    "n": 12,
+    "rho_family_demeaned": -0.4190666247677027,
+    "p": 0.17494125293735313,
+    "verdict_rule": "REFUTED",
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "FE3": {
+    "id": "FE3",
+    "twin_of": "MP3",
+    "what": "family-demeaned twin of MP3 (T1 review D4): dir * rho_fam >= 0.6",
+    "n": 12,
+    "rho_family_demeaned": 0.7335648696350483,
+    "p": 0.03534823258837058,
+    "verdict_rule": "SUPPORTED",
+    "p_holm": 0.424178791060447,
+    "verdict": "RULE-MET, HOLM-NS"
+   },
+   "FE9": {
+    "id": "FE9",
+    "what": "family-demeaned twin of the PRIMARY: rho_fam(pred acc_coll, y) >= 0.6 in >= 3 of the evaluable outcomes (T1 review D4)",
+    "p": 0.31818409079546023,
+    "per_outcome": {
+     "O1": 0.20405156586753326,
+     "O2": 0.39716926984949846,
+     "O3": 0.6132170738413709,
+     "O4": -0.25741196705162733,
+     "O5": -0.47057124838073605
+    },
+    "outcomes_pass": 1,
+    "verdict_rule": "REFUTED",
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "P3a": {
+    "id": "P3a",
+    "what": "margin - d1 lead (all-errors AUROC, train centres, clean rows 0-4999) falls as collapse deepens",
+    "dir": -1,
+    "p": 0.05719714014299285,
+    "n": 12,
+    "coord": "log10_g_cv",
+    "direction_as_registered": true,
+    "mae": {
+     "law": 0.03063406147931304,
+     "const": 0.021841137345289658,
+     "acc": 0.00900494550499368,
+     "head": 0.017175300499501753
+    },
+    "rho": 0.48951048951048953,
+    "rho_family_demeaned": 0.5242836788499049,
+    "beyond_accuracy_ratio": 3.401915254492652,
+    "beyond_head_ratio": 1.783611383113892,
+    "n_extrap": 0,
+    "verdict_rule": "REFUTED",
+    "noise": {
+     "median_split_half_se": 0.0015457542921501477,
+     "sd_between_units": 0.006764738497108689,
+     "noise_limited": false
+    },
+    "rule8": {
+     "rho": 0.48951048951048953,
+     "rho_family_demeaned": 0.5242836788499049,
+     "partial_log_dim": 0.7278101827323002,
+     "partial_accuracy": 0.10872320148452368,
+     "flags": []
+    },
+    "p_holm": 0.6011199440027999,
+    "verdict": "REFUTED"
+   },
+   "P4": {
+    "id": "P4",
+    "what": "SVHN: L2-normalised 10-NN AUROC - best head AUROC rises with collapse (Harun et al. 2025)",
+    "dir": 1,
+    "p": 0.05464726763661817,
+    "n": 12,
+    "coord": "log10_plnc1",
+    "direction_as_registered": false,
+    "mae": {
+     "law": 0.014161095631717488,
+     "const": 0.017241132478632487,
+     "acc": 0.01648292293196379,
+     "head": 0.014113370208679483
+    },
+    "rho": 0.48951048951048953,
+    "rho_family_demeaned": -0.103902270077747,
+    "beyond_accuracy_ratio": 0.8591374048261913,
+    "beyond_head_ratio": 1.0033815752249349,
+    "n_extrap": 1,
+    "verdict_rule": "REFUTED",
+    "noise": {
+     "median_split_half_se": null,
+     "sd_between_units": 0.021728729388519396,
+     "noise_limited": null
+    },
+    "rule8": {
+     "rho": 0.48951048951048953,
+     "rho_family_demeaned": -0.103902270077747,
+     "partial_log_dim": 0.5409328839163792,
+     "partial_accuracy": 0.43394635035513035,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 0.6011199440027999,
+    "verdict": "REFUTED"
+   },
+   "P5a": {
+    "id": "P5a",
+    "what": "harm slope (pt of paired accuracy loss per unit H) falls with collapse",
+    "dir": -1,
+    "p": 0.00014999250037498125,
+    "n": 12,
+    "coord": "log10_plnc1",
+    "direction_as_registered": true,
+    "mae": {
+     "law": 3.1928747164889053,
+     "const": 12.70240065328674,
+     "acc": 7.673221493151789,
+     "head": 12.673757378242621
+    },
+    "rho": 0.9020979020979021,
+    "rho_family_demeaned": 0.7851314044209154,
+    "beyond_accuracy_ratio": 0.41610615819424585,
+    "beyond_head_ratio": 0.2519280290129428,
+    "n_extrap": 1,
+    "verdict_rule": "SUPPORTED",
+    "noise": {
+     "median_split_half_se": 0.32982514221808756,
+     "sd_between_units": 7.186146942929393,
+     "noise_limited": false
+    },
+    "rule8": {
+     "rho": 0.9020979020979021,
+     "rho_family_demeaned": 0.7851314044209154,
+     "partial_log_dim": 0.9142561098477299,
+     "partial_accuracy": 0.8931759230973604,
+     "flags": []
+    },
+    "p_holm": 0.002999850007499625,
+    "verdict": "SUPPORTED"
+   },
+   "P5b": {
+    "id": "P5b",
+    "what": "H10 (the HOLD-band edge) rises with collapse",
+    "dir": 1,
+    "p": 0.005549722513874306,
+    "n": 12,
+    "coord": "log10_plnc1",
+    "direction_as_registered": true,
+    "mae": {
+     "law": 0.042118259795041434,
+     "const": 0.07779175389489328,
+     "acc": 0.03658117188738684,
+     "head": 0.04223725890278001
+    },
+    "rho": 0.7062937062937062,
+    "rho_family_demeaned": 0.6731912561438573,
+    "beyond_accuracy_ratio": 1.151364421148131,
+    "beyond_head_ratio": 0.9971826034446865,
+    "n_extrap": 1,
+    "verdict_rule": "SUPPORTED",
+    "noise": {
+     "median_split_half_se": 0.013035906275274178,
+     "sd_between_units": 0.044081178082566154,
+     "noise_limited": false
+    },
+    "rule8": {
+     "rho": 0.7062937062937062,
+     "rho_family_demeaned": 0.6731912561438573,
+     "partial_log_dim": 0.7689024662216276,
+     "partial_accuracy": 0.5721107083258781,
+     "flags": []
+    },
+    "p_holm": 0.08324583770811458,
+    "verdict": "RULE-MET, HOLM-NS"
+   },
+   "P6b": {
+    "id": "P6b",
+    "what": "best non-duplicate tap - best head statistic, per-sample corrupt vs clean (s1, s3), rises with collapse",
+    "dir": 1,
+    "p": 0.00014999250037498125,
+    "n": 12,
+    "coord": "cdepth_pl",
+    "direction_as_registered": true,
+    "mae": {
+     "law": 0.018527830096458076,
+     "const": 0.02233476196581192,
+     "acc": 0.028656870620829056,
+     "head": 0.029844366130582306
+    },
+    "rho": 0.8951048951048951,
+    "rho_family_demeaned": 0.48325245382898624,
+    "beyond_accuracy_ratio": 0.6465405920139531,
+    "beyond_head_ratio": 0.6208149978924203,
+    "n_extrap": 1,
+    "verdict_rule": "REFUTED",
+    "noise": {
+     "median_split_half_se": 0.005618266666666594,
+     "sd_between_units": 0.02582440481732786,
+     "noise_limited": false
+    },
+    "rule8": {
+     "rho": 0.8951048951048951,
+     "rho_family_demeaned": 0.48325245382898624,
+     "partial_log_dim": 0.8917262855045883,
+     "partial_accuracy": 0.9198843750930815,
+     "flags": []
+    },
+    "p_holm": 0.002999850007499625,
+    "verdict": "REFUTED"
+   },
+   "S7": {
+    "id": "S7",
+    "what": "overconfidence under shift (mean MSP - accuracy, 30 discovery splits) rises with collapse",
+    "dir": 1,
+    "p": 0.6540172991350433,
+    "n": 12,
+    "coord": "topk_frac",
+    "direction_as_registered": true,
+    "mae": {
+     "law": 0.016228536547503378,
+     "const": 0.01073633940310311,
+     "acc": 0.011397035887343329,
+     "head": 0.011421387119636793
+    },
+    "rho": -0.1258741258741259,
+    "rho_family_demeaned": 0.34074642921060594,
+    "beyond_accuracy_ratio": 1.4239260723505787,
+    "beyond_head_ratio": 1.420890157868973,
+    "n_extrap": 0,
+    "verdict_rule": "REFUTED",
+    "noise": {
+     "median_split_half_se": 0.0016476743335923222,
+     "sd_between_units": 0.013011721143508409,
+     "noise_limited": false
+    },
+    "rule8": {
+     "rho": -0.1258741258741259,
+     "rho_family_demeaned": 0.34074642921060594,
+     "partial_log_dim": -0.06375948605076451,
+     "partial_accuracy": -0.006347583849910231,
+     "flags": [
+      "FAMILY-DRIVEN",
+      "DIMENSION"
+     ]
+    },
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "P3b": {
+    "id": "P3b",
+    "what": "at a penult as collapsed as a full-fit resnet56 (plnc1 <= theta frozen on D), the centre margin adds nothing beyond the head statistic picked on rows A: every such C unit d <= +0.005; REFUTED if any has its 99% CI above 0 (a bound rule; no p-value)",
+    "n": 7,
+    "p": null,
+    "theta": 0.1094517871902196,
+    "n_collapsed": 7,
+    "collapsed": [
+     {
+      "id": "vgg13_bn",
+      "plnc1": 0.07426681053749498,
+      "d": 0.0012797285835454142,
+      "lo": -0.0028345598048143614,
+      "hi": 0.005068121454935737,
+      "head": "gap"
+     },
+     {
+      "id": "vgg16_bn",
+      "plnc1": 0.04446262438184534,
+      "d": 0.004127138050285084,
+      "lo": -0.006559425915432087,
+      "hi": 0.015592944517021291,
+      "head": "entropy"
+     },
+     {
+      "id": "vgg19_bn",
+      "plnc1": 0.06809543120339706,
+      "d": -0.0022313471263153417,
+      "lo": -0.011764523613613789,
+      "hi": 0.005191080066450956,
+      "head": "entropy"
+     },
+     {
+      "id": "mobilenetv2_x1_4",
+      "plnc1": 0.10938472633209972,
+      "d": 0.006400000000000072,
+      "lo": 0.000012326630204194341,
+      "hi": 0.015191356605216068,
+      "head": "gap"
+     },
+     {
+      "id": "shufflenetv2_x2_0",
+      "plnc1": 0.10238698339143237,
+      "d": 0.005465460452043103,
+      "lo": -0.0003420150866507246,
+      "hi": 0.01353744640820495,
+      "head": "gap"
+     },
+     {
+      "id": "repvgg_a1",
+      "plnc1": 0.07237182008792438,
+      "d": 0.0059198188201244895,
+      "lo": 0.0008967846682542979,
+      "hi": 0.012723300486406923,
+      "head": "gap"
+     },
+     {
+      "id": "repvgg_a2",
+      "plnc1": 0.05871286903581545,
+      "d": 0.021503393007400784,
+      "lo": 0.007024433821925602,
+      "hi": 0.039298592558865655,
+      "head": "msp"
+     }
+    ],
+    "above_ci": [
+     "mobilenetv2_x1_4",
+     "repvgg_a1",
+     "repvgg_a2"
+    ],
+    "within_d_max": 3,
+    "verdict_rule": "REFUTED",
+    "reading": "centre geometry adds beyond the picked head statistic at a collapsed penult on these units",
+    "p_holm": null,
+    "verdict": "REFUTED"
+   },
+   "P5c": {
+    "id": "P5c",
+    "what": "the committed HOLD band (AH-2(b): H <= 0.25 -> cost <= 8 pt) has no violation over the 30 discovery splits in >= n - 2 C units (a bound rule; no p-value)",
+    "n": 12,
+    "p": null,
+    "units_without_violation": 12,
+    "verdict_rule": "SUPPORTED",
+    "info_holdout": {
+     "resnet44": 0,
+     "vgg13_bn": 0,
+     "vgg16_bn": 0,
+     "vgg19_bn": 0,
+     "mobilenetv2_x0_75": 0,
+     "mobilenetv2_x1_0": 0,
+     "mobilenetv2_x1_4": 0,
+     "shufflenetv2_x1_0": 0,
+     "shufflenetv2_x1_5": 0,
+     "shufflenetv2_x2_0": 0,
+     "repvgg_a1": 0,
+     "repvgg_a2": 0
+    },
+    "p_holm": null,
+    "verdict": "SUPPORTED"
+   },
+   "IC-P2": {
+    "id": "IC-P2",
+    "what": "instrument check: the held-out-calibrated conformal false alarm (cal rows A, test rows B, alpha 0.05) is inside the exact 99% beta-binomial band in >= n - 1 C units (no p-value: an instrument check)",
+    "n": 12,
+    "p": null,
+    "rows": [
+     {
+      "id": "resnet44",
+      "fpr": 0.058,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "vgg13_bn",
+      "fpr": 0.05,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "vgg16_bn",
+      "fpr": 0.04733333333333333,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "vgg19_bn",
+      "fpr": 0.034,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "mobilenetv2_x0_75",
+      "fpr": 0.050666666666666665,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "mobilenetv2_x1_0",
+      "fpr": 0.054,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "mobilenetv2_x1_4",
+      "fpr": 0.05533333333333333,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "shufflenetv2_x1_0",
+      "fpr": 0.05266666666666667,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "shufflenetv2_x1_5",
+      "fpr": 0.05533333333333333,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "shufflenetv2_x2_0",
+      "fpr": 0.048666666666666664,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "repvgg_a1",
+      "fpr": 0.056,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     },
+     {
+      "id": "repvgg_a2",
+      "fpr": 0.059333333333333335,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "inside": true
+     }
+    ],
+    "inside": 12,
+    "verdict_rule": "SUPPORTED",
+    "curve_rule5": [
+     {
+      "alpha": 0.02,
+      "lo": 0.008666666666666666,
+      "hi": 0.034666666666666665,
+      "mean": 0.019986675549633577
+     },
+     {
+      "alpha": 0.03,
+      "lo": 0.016,
+      "hi": 0.048,
+      "mean": 0.029980013324450366
+     },
+     {
+      "alpha": 0.04,
+      "lo": 0.023333333333333334,
+      "hi": 0.06,
+      "mean": 0.039973351099267154
+     },
+     {
+      "alpha": 0.05,
+      "lo": 0.03133333333333333,
+      "hi": 0.072,
+      "mean": 0.049966688874083946
+     }
+    ],
+    "p_holm": null,
+    "verdict": "SUPPORTED"
+   },
+   "P7": {
+    "id": "P7",
+    "p": 0.0000999950002499875,
+    "what": "blind collapse ordering registered at P1 (experiments/b4/prereg_p7.json): Kendall tau(order, nc1_train) <= -0.66 in >= 4 families",
+    "families": {
+     "resnet": {
+      "n": 4,
+      "tau": -1,
+      "pass": true
+     },
+     "vgg": {
+      "n": 4,
+      "tau": -1,
+      "pass": true
+     },
+     "mobilenetv2": {
+      "n": 4,
+      "tau": -1,
+      "pass": true
+     },
+     "shufflenetv2": {
+      "n": 4,
+      "tau": -1,
+      "pass": true
+     },
+     "repvgg": {
+      "n": 3,
+      "tau": -1,
+      "pass": true
+     }
+    },
+    "families_evaluable": 5,
+    "families_pass": 5,
+    "points_INFO": {
+     "resnet32": {
+      "predicted": 0.11208416124464095,
+      "lo": 0.08194730373663066,
+      "hi": 0.1533041189773647,
+      "observed": 0.0870895296013131,
+      "inside": true
+     },
+     "resnet44": {
+      "predicted": 0.07392351170295068,
+      "lo": 0.0540471766887555,
+      "hi": 0.10110954757111693,
+      "observed": 0.06013856458662854,
+      "inside": true
+     }
+    },
+    "verdict_rule": "SUPPORTED",
+    "p_holm": 0.0020998950052497373,
+    "verdict": "SUPPORTED"
+   },
+   "P8": {
+    "id": "P8",
+    "what": "label-free tracks labelled: |log10(plnc1 / nc1_test)| <= 0.1 in >= 10/12 C units AND rho(log10 g_cv, log10 nc1_test) <= -0.8 (T1 review D5 form of MP-8; p = max of the two, intersection-union)",
+    "p": 1,
+    "n": 12,
+    "within_0_1_dex": 0,
+    "need": 10,
+    "rho_gcv_nc1te": -0.16783216783216784,
+    "p_a": 1,
+    "p_b": 0.3050847457627119,
+    "verdict_rule": "REFUTED",
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   },
+   "MP-K": {
+    "id": "MP-K",
+    "what": "knob pairs (label smoothing, weight decay) x 5 outcomes: the frozen acc + collapse law predicts the change of the outcome better than the accuracy-only law in >= 75% of the cells (15 of 20); a pair with |delta acc| > 0.5 pt is INFO",
+    "p": 0.37695312500000033,
+    "n_cells": 10,
+    "wins": 6,
+    "need": 8,
+    "cells": [
+     {
+      "knob": "resnet56_s31_ls10",
+      "base": "resnet56_s31",
+      "outcome": "O1",
+      "d_obs": 0.02238418004023679,
+      "err_coll": 0.02302424007384506,
+      "err_acc": 0.022357449605674973,
+      "win": false,
+      "dacc_pt": 0.060000000000004494
+     },
+     {
+      "knob": "resnet56_s31_ls10",
+      "base": "resnet56_s31",
+      "outcome": "O2",
+      "d_obs": -0.031380472045811625,
+      "err_coll": 0.19140885232419075,
+      "err_acc": 0.03411553553449942,
+      "win": false,
+      "dacc_pt": 0.060000000000004494
+     },
+     {
+      "knob": "resnet56_s31_ls10",
+      "base": "resnet56_s31",
+      "outcome": "O3",
+      "d_obs": 0.05477399999999999,
+      "err_coll": 0.03538453518873101,
+      "err_acc": 0.054395479258069195,
+      "win": true,
+      "dacc_pt": 0.060000000000004494
+     },
+     {
+      "knob": "resnet56_s31_ls10",
+      "base": "resnet56_s31",
+      "outcome": "O4",
+      "d_obs": -0.08996769789495301,
+      "err_coll": 0.05686881888334197,
+      "err_acc": 0.09036246602811687,
+      "win": true,
+      "dacc_pt": 0.060000000000004494
+     },
+     {
+      "knob": "resnet56_s31_ls10",
+      "base": "resnet56_s31",
+      "outcome": "O5",
+      "d_obs": 0.04409641666666675,
+      "err_coll": 0.02794389202608899,
+      "err_acc": 0.0438730737862214,
+      "win": true,
+      "dacc_pt": 0.060000000000004494
+     },
+     {
+      "knob": "resnet56_s32_ls10",
+      "base": "resnet56_s32",
+      "outcome": "O1",
+      "d_obs": 0.0079628131414885,
+      "err_coll": 0.008657409088674323,
+      "err_acc": 0.008155935090921338,
+      "win": false,
+      "dacc_pt": 0.45999999999999375
+     },
+     {
+      "knob": "resnet56_s32_ls10",
+      "base": "resnet56_s32",
+      "outcome": "O2",
+      "d_obs": -0.05806641567595733,
+      "err_coll": 0.12106147533468287,
+      "err_acc": 0.038306138620360475,
+      "win": false,
+      "dacc_pt": 0.45999999999999375
+     },
+     {
+      "knob": "resnet56_s32_ls10",
+      "base": "resnet56_s32",
+      "outcome": "O3",
+      "d_obs": 0.05619633333333329,
+      "err_coll": 0.0384619169384947,
+      "err_acc": 0.05893106865585088,
+      "win": true,
+      "dacc_pt": 0.45999999999999375
+     },
+     {
+      "knob": "resnet56_s32_ls10",
+      "base": "resnet56_s32",
+      "outcome": "O4",
+      "d_obs": -0.08164847137076307,
+      "err_coll": 0.043880254332523974,
+      "err_acc": 0.07862191568317385,
+      "win": true,
+      "dacc_pt": 0.45999999999999375
+     },
+     {
+      "knob": "resnet56_s32_ls10",
+      "base": "resnet56_s32",
+      "outcome": "O5",
+      "d_obs": 0.05185985000000004,
+      "err_coll": 0.01568903404037872,
+      "err_acc": 0.05347345685565392,
+      "win": true,
+      "dacc_pt": 0.45999999999999375
+     }
+    ],
+    "info_pairs": [
+     {
+      "knob": "resnet56_s31_wd5e5",
+      "base": "resnet56_s31",
+      "dacc_pt": 2.0199999999999996,
+      "why": "|delta acc| > 0.5 pt: INFO"
+     },
+     {
+      "knob": "resnet56_s32_wd5e5",
+      "base": "resnet56_s32",
+      "dacc_pt": 2.42,
+      "why": "|delta acc| > 0.5 pt: INFO"
+     }
+    ],
+    "p_note": "binomial tail under win probability 1/2 per cell (cells of one pair share its baseline)",
+    "verdict_rule": "REFUTED",
+    "p_holm": 1,
+    "verdict": "REFUTED"
+   }
+  }
+ },
+ "info": {
+  "MP4": {
+   "rho_log10_nc1_train_vs_O1": -0.2867132867132867,
+   "n": 12,
+   "note": "T1 MP-4 is noise-limited (T1 review D5): INFO"
+  },
+  "fresh_seeds_F_F20": [
+   {
+    "id": "resnet56_s31",
+    "y": {
+     "O1": 0.0018274984524382365,
+     "O5": -0.016431949999999973,
+     "O2": 0.38379036140872563,
+     "O3": 0.01991900000000002,
+     "O4": 0.20986614446200255
+    },
+    "pred": {
+     "O1": {
+      "acc_coll": 0.0011245447739782826,
+      "acc": 0.0008710895155756813
+     },
+     "O2": {
+      "acc_coll": 0.3677241636280057,
+      "acc": 0.37373102169422423
+     },
+     "O3": {
+      "acc_coll": 0.02106620824142464,
+      "acc": 0.018299527855324897
+     },
+     "O4": {
+      "acc_coll": 0.20064506199714424,
+      "acc": 0.20752493770123814
+     },
+     "O5": {
+      "acc_coll": -0.005573027936033768,
+      "acc": -0.002830417320493034
+     }
+    }
+   },
+   {
+    "id": "resnet56_s32",
+    "y": {
+     "O1": 0.0030132203353187004,
+     "O5": -0.006110050000000089,
+     "O2": 0.4204680915350715,
+     "O3": 0.02137733333333336,
+     "O4": 0.20096851266542506
+    },
+    "pred": {
+     "O1": {
+      "acc_coll": 0.0011030405340644147,
+      "acc": 0.0008183960548228447
+     },
+     "O2": {
+      "acc_coll": 0.3569926787804073,
+      "acc": 0.368339416097076
+     },
+     "O3": {
+      "acc_coll": 0.02149585422896183,
+      "acc": 0.01755335338468767
+     },
+     "O4": {
+      "acc_coll": 0.1981282052988242,
+      "acc": 0.20673540143491054
+     },
+     "O5": {
+      "acc_coll": -0.008451383208970487,
+      "acc": -0.0032706910944923792
+     }
+    }
+   },
+   {
+    "id": "resnet20_s31",
+    "y": {
+     "O1": 0.0009332445167692383,
+     "O5": -0.03236569999999994,
+     "O2": 0.2683207230856471,
+     "O3": 0.011539666666666615,
+     "O4": 0.19755538090579702
+    },
+    "pred": {
+     "O1": {
+      "acc_coll": 0.00014093583572824642,
+      "acc": 0.00025417738975283316
+     },
+     "O2": {
+      "acc_coll": 0.26389572486683144,
+      "acc": 0.31060844779199587
+     },
+     "O3": {
+      "acc_coll": 0.0066417524152852115,
+      "acc": 0.009563641611778676
+     },
+     "O4": {
+      "acc_coll": 0.20358347239601046,
+      "acc": 0.19726096623897896
+     },
+     "O5": {
+      "acc_coll": -0.029313041276028632,
+      "acc": -0.007984951222450923
+     }
+    }
+   },
+   {
+    "id": "resnet20_s32",
+    "y": {
+     "O1": 0.0010792185946226773,
+     "O5": -0.009066549999999896,
+     "O2": 0.2844700360849123,
+     "O3": 0.00334633333333334,
+     "O4": 0.19121026282099138
+    },
+    "pred": {
+     "O1": {
+      "acc_coll": 0.00009370253970923293,
+      "acc": 0.00036993167308258705
+     },
+     "O2": {
+      "acc_coll": 0.2927960641595288,
+      "acc": 0.3224524495519484
+     },
+     "O3": {
+      "acc_coll": 0.006747514684768856,
+      "acc": 0.01120279929574083
+     },
+     "O4": {
+      "acc_coll": 0.20788850100257855,
+      "acc": 0.19936639628251931
+     },
+     "O5": {
+      "acc_coll": -0.020558289730353764,
+      "acc": -0.007017780449264676
+     }
+    }
+   }
+  ],
+  "nulls_N": [
+   {
+    "id": "resnet20_rand",
+    "plnc1_te": 1.7691811116769298,
+    "g_cv_te": 1.10412568846917,
+    "nc1_tr": 72.47592888822473
+   },
+   {
+    "id": "resnet56_rand",
+    "plnc1_te": 0.011986887273366078,
+    "g_cv_te": 1.0544715296310567,
+    "nc1_tr": 151.3674772546723
+   }
+  ],
+  "units": [
+   {
+    "id": "resnet44",
+    "kind": "C",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0022487595694978824,
+     "O5": 0.007976050000000012,
+     "O2": 0.3613327319470339,
+     "O3": 0.029366666666666652,
+     "O4": 0.21579503508845205
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008446165209798361,
+      "acc_head": 0.0011235831008633748,
+      "acc_coll": 0.0009643424985205425,
+      "acc_nc1": 0.0008724187323700976,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3710222995150959,
+      "acc_head": 0.36565473055663256,
+      "acc_coll": 0.37803078744003854,
+      "acc_nc1": 0.38465427116871015,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.017924652634633047,
+      "acc_head": 0.017489387821733413,
+      "acc_coll": 0.01996147049096509,
+      "acc_nc1": 0.01890366148380459,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.2071301695680744,
+      "acc_head": 0.2060291592927106,
+      "acc_coll": 0.20169835285694163,
+      "acc_nc1": 0.20254831365206977,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0030516091927530013,
+      "acc_head": -0.004911769790970509,
+      "acc_coll": 0.00014832547690983317,
+      "acc_nc1": 0.0023780851943216753,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet44",
+     "t1": "b4_t1/resnet44_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.9210266248844107,
+     "log10_g_cv": 1.2076349605723828,
+     "topk_frac": 0.9761304137971826,
+     "sat999": 0.7766,
+     "log10_gap_mean": 0.9735081337652902,
+     "log10_msp_def": -1.639112557731272,
+     "err": 0.06259999999999999,
+     "log10_nc1_tr": -1.2208469420410568
+    }
+   },
+   {
+    "id": "vgg13_bn",
+    "kind": "C",
+    "family": "vgg",
+    "evaluable": true,
+    "y": {
+     "O1": 0.002722631201631631,
+     "O5": -0.01900371666666667,
+     "O2": 0.42017708176363316,
+     "O3": 0.007299666666666593,
+     "O4": 0.20010682771144422
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0007581704651179156,
+      "acc_head": 0.0008794892312559428,
+      "acc_coll": -0.0011879961485152446,
+      "acc_nc1": 0.0009619742125976312,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.36217712153707843,
+      "acc_head": 0.4426322123516546,
+      "acc_coll": 0.40460051274323583,
+      "acc_nc1": 0.46210611170068056,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01670051895561725,
+      "acc_head": 0.023224751866498118,
+      "acc_coll": 0.0266965847435666,
+      "acc_nc1": 0.023877130537919407,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20581427579086164,
+      "acc_head": 0.19789543802407705,
+      "acc_coll": 0.1869658161925875,
+      "acc_nc1": 0.18435762899762576,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0037738986517849185,
+      "acc_head": 0.02410825638290863,
+      "acc_coll": 0.01559576878277294,
+      "acc_nc1": 0.03602840513700693,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/vgg13_bn",
+     "t1": "b4_t1/vgg13_bn_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.1292052268950852,
+     "log10_g_cv": 0.14561556022577904,
+     "topk_frac": 0.9673652036898422,
+     "sat999": 0.7942,
+     "log10_gap_mean": 0.9787067422460612,
+     "log10_msp_def": -1.743618544822518,
+     "err": 0.06459999999999999,
+     "log10_nc1_tr": -1.643484632077901
+    }
+   },
+   {
+    "id": "vgg16_bn",
+    "kind": "C",
+    "family": "vgg",
+    "evaluable": true,
+    "y": {
+     "O1": 0.005496111197196729,
+     "O5": 0.009870716666666612,
+     "O2": 0.4368630112738597,
+     "O3": 0.0280353333333333,
+     "O4": 0.20722165674774182
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008358485453614734,
+      "acc_head": 0.0011706577526653052,
+      "acc_coll": -0.0011006157600111576,
+      "acc_nc1": 0.0012100893870812066,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3701251584705674,
+      "acc_head": 0.5469258688519026,
+      "acc_coll": 0.30737646594361034,
+      "acc_nc1": 0.5536228117448359,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.0178004922649758,
+      "acc_head": 0.0321375466596499,
+      "acc_coll": 0.03474041621890816,
+      "acc_nc1": 0.03097876397228903,
+      "extrap": true
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.2069985801903531,
+      "acc_head": 0.19040810975454006,
+      "acc_coll": 0.1755013173337142,
+      "acc_nc1": 0.1682017860412376,
+      "extrap": true
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.003124868941888439,
+      "acc_head": 0.05814639142443804,
+      "acc_coll": -0.031774660286812195,
+      "acc_nc1": 0.06996332426606298,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/vgg16_bn",
+     "t1": "b4_t1/vgg16_bn_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.3520049068885693,
+     "log10_g_cv": 0.1775509381590395,
+     "topk_frac": 0.9906357040253116,
+     "sat999": 0.8604,
+     "log10_gap_mean": 0.9677424472238801,
+     "log10_msp_def": -1.9127894266979844,
+     "err": 0.06279999999999997,
+     "log10_nc1_tr": -2.1233339659597283
+    }
+   },
+   {
+    "id": "vgg19_bn",
+    "kind": "C",
+    "family": "vgg",
+    "evaluable": true,
+    "y": {
+     "O1": 0.002031579363817926,
+     "O5": -0.006038266666666625,
+     "O2": 0.37688033901090834,
+     "O3": 0.006817333333333342,
+     "O4": 0.22465516196779728
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008978199501374961,
+      "acc_head": 0.0012169156664599506,
+      "acc_coll": 0.00009933789128016714,
+      "acc_nc1": 0.0012748173087097003,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.376466085182912,
+      "acc_head": 0.583790229275049,
+      "acc_coll": 0.28904584419947027,
+      "acc_nc1": 0.5613153129441206,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.018678048597255692,
+      "acc_head": 0.035490297398559245,
+      "acc_coll": 0.028678048725704147,
+      "acc_nc1": 0.0319533864822761,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.207919705834402,
+      "acc_head": 0.18834774768497478,
+      "acc_coll": 0.188188929866719,
+      "acc_nc1": 0.1684511078253935,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0026070744400476815,
+      "acc_head": 0.0692422500649073,
+      "acc_coll": -0.04252139874923687,
+      "acc_nc1": 0.07101945882552163,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/vgg19_bn",
+     "t1": "b4_t1/vgg19_bn_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.1668820256748242,
+     "log10_g_cv": 0.7675622782992431,
+     "topk_frac": 0.9967688908946425,
+     "sat999": 0.865,
+     "log10_gap_mean": 0.9752930464639501,
+     "log10_msp_def": -1.9774723688143725,
+     "err": 0.06140000000000001,
+     "log10_nc1_tr": -2.157644406100356
+    }
+   },
+   {
+    "id": "mobilenetv2_x0_75",
+    "kind": "C",
+    "family": "mobilenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": -0.0009320361614143513,
+     "O5": -0.013863949999999958,
+     "O2": 0.31770650096069564,
+     "O3": 0.02186066666666664,
+     "O4": 0.23053108269331887
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0007581704651179156,
+      "acc_head": 0.0013715000748062238,
+      "acc_coll": 0.0008970626061316641,
+      "acc_nc1": 0.0007408221171099416,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.36217712153707843,
+      "acc_head": 0.3586407740972215,
+      "acc_coll": 0.3538204990237456,
+      "acc_nc1": 0.3536708849301381,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01670051895561725,
+      "acc_head": 0.01641375084538545,
+      "acc_coll": 0.01664482037747142,
+      "acc_nc1": 0.016089625599692937,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20581427579086164,
+      "acc_head": 0.20506128672448007,
+      "acc_coll": 0.20458363297446008,
+      "acc_nc1": 0.2062345302473997,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0037738986517849185,
+      "acc_head": -0.0049994393425769595,
+      "acc_coll": -0.007589364468103296,
+      "acc_nc1": -0.00716198265998398,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/mobilenetv2_x0_75",
+     "t1": "b4_t1/mobilenetv2_x0_75_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.8369307195256837,
+     "log10_g_cv": 1.1870610894274882,
+     "topk_frac": 0.9780227659432391,
+     "sat999": 0.7024,
+     "log10_gap_mean": 0.9356035179832943,
+     "log10_msp_def": -1.6162360003326623,
+     "err": 0.06459999999999999,
+     "log10_nc1_tr": -1.0649267091728554
+    }
+   },
+   {
+    "id": "mobilenetv2_x1_0",
+    "kind": "C",
+    "family": "mobilenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": 0.004404380341880287,
+     "O5": 0.004641933333333292,
+     "O2": 0.3831433301261853,
+     "O3": 0.025256000000000056,
+     "O4": 0.20754272419328462
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0007838200262783743,
+      "acc_head": 0.0014719847968098524,
+      "acc_coll": 0.0009346668534843899,
+      "acc_nc1": 0.0007892872392014598,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3648015898400012,
+      "acc_head": 0.34503652832312764,
+      "acc_coll": 0.3530749841217569,
+      "acc_nc1": 0.3674822719823534,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01706373381088659,
+      "acc_head": 0.015460953135004129,
+      "acc_coll": 0.01792315974260407,
+      "acc_nc1": 0.017256252663321495,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.2062090439240255,
+      "acc_head": 0.20669409968624353,
+      "acc_coll": 0.2032189824828484,
+      "acc_nc1": 0.20421631566179402,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0035595868769991972,
+      "acc_head": -0.01040927785247544,
+      "acc_coll": -0.008913719265774594,
+      "acc_nc1": -0.002491855432736549,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/mobilenetv2_x1_0",
+     "t1": "b4_t1/mobilenetv2_x1_0_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.8704388599383053,
+     "log10_g_cv": 1.2019771846621188,
+     "topk_frac": 0.9791253967225584,
+     "sat999": 0.7076,
+     "log10_gap_mean": 0.9316028683898415,
+     "log10_msp_def": -1.599235102188903,
+     "err": 0.06399999999999995,
+     "log10_nc1_tr": -1.1358308348108004
+    }
+   },
+   {
+    "id": "mobilenetv2_x1_4",
+    "kind": "C",
+    "family": "mobilenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": 0.002915862290862381,
+     "O5": -0.0016752166666668122,
+     "O2": 0.39840120226853887,
+     "O3": 0.02960566666666664,
+     "O4": 0.20931022839051971
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0009981174390881566,
+      "acc_head": 0.002004911134292957,
+      "acc_coll": 0.0013231893924896768,
+      "acc_nc1": 0.00100899212882125,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3867285446053971,
+      "acc_head": 0.35712736466585676,
+      "acc_coll": 0.3683047051861822,
+      "acc_nc1": 0.392060619097691,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.020098327786642074,
+      "acc_head": 0.017697920423886765,
+      "acc_coll": 0.02209141968922073,
+      "acc_nc1": 0.02048126198317949,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20936718898933598,
+      "acc_head": 0.2093672474447506,
+      "acc_coll": 0.20299880977542556,
+      "acc_nc1": 0.20544095977872895,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0017690510240095216,
+      "acc_head": -0.012027503036527736,
+      "acc_coll": -0.010181005662046473,
+      "acc_nc1": 0.000354745568143482,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/mobilenetv2_x1_4",
+     "t1": "b4_t1/mobilenetv2_x1_4_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.9610433154137044,
+     "log10_g_cv": 1.363732747932992,
+     "topk_frac": 0.9838340571457931,
+     "sat999": 0.7172,
+     "log10_gap_mean": 0.9250387023930206,
+     "log10_msp_def": -1.6479126138582125,
+     "err": 0.05920000000000003,
+     "log10_nc1_tr": -1.2436861725359194
+    }
+   },
+   {
+    "id": "shufflenetv2_x1_0",
+    "kind": "C",
+    "family": "shufflenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0009912584300315608,
+     "O5": -0.024372750000000054,
+     "O2": 0.36576444983157697,
+     "O3": 0.028595000000000037,
+     "O4": 0.20277268093891926
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.00035519298883942847,
+      "acc_head": 0.0004259575070751897,
+      "acc_coll": 0.0007391449247248401,
+      "acc_nc1": 0.00039207023808406565,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3209443843893136,
+      "acc_head": 0.3408966451330754,
+      "acc_coll": 0.2934375317328549,
+      "acc_nc1": 0.3390260257850139,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.010994089718576912,
+      "acc_head": 0.012612050681307475,
+      "acc_coll": 0.012726909453621846,
+      "acc_nc1": 0.012292661002595365,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.1991032175270768,
+      "acc_head": 0.1982852971092734,
+      "acc_coll": 0.1968447442703407,
+      "acc_nc1": 0.1962648223126185,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.007140927724900216,
+      "acc_head": -0.00022636182586568878,
+      "acc_coll": -0.019700003578545292,
+      "acc_nc1": 0.00006109625886453751,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/shufflenetv2_x1_0",
+     "t1": "b4_t1/shufflenetv2_x1_0_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.7805439656947492,
+     "log10_g_cv": 1.1689302030611282,
+     "topk_frac": 0.9758306839551528,
+     "sat999": 0.7168,
+     "log10_gap_mean": 0.9429883416466263,
+     "log10_msp_def": -1.532271165680022,
+     "err": 0.07479999999999998,
+     "log10_nc1_tr": -1.0305712375550695
+    }
+   },
+   {
+    "id": "shufflenetv2_x1_5",
+    "kind": "C",
+    "family": "shufflenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": 0.002805311139074229,
+     "O5": -0.01937896666666672,
+     "O2": 0.406297014138253,
+     "O3": 0.025474333333333377,
+     "O4": 0.18305092579030055
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0007924233448062051,
+      "acc_head": 0.0015713482967307743,
+      "acc_coll": 0.0008862000534244946,
+      "acc_nc1": 0.0008059993347153581,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3656818831376132,
+      "acc_head": 0.32665538663640403,
+      "acc_coll": 0.3538742582347827,
+      "acc_nc1": 0.3723384582932195,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01718556252656612,
+      "acc_head": 0.014020841061564227,
+      "acc_coll": 0.01762964020490112,
+      "acc_nc1": 0.017663618536958876,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20634063330174676,
+      "acc_head": 0.2084192695183985,
+      "acc_coll": 0.20402586566924807,
+      "acc_nc1": 0.20349287708557884,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0034877029000682904,
+      "acc_head": -0.017012550301154047,
+      "acc_coll": -0.008878827019505382,
+      "acc_nc1": -0.0008363499132863963,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/shufflenetv2_x1_5",
+     "t1": "b4_t1/shufflenetv2_x1_5_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.860675894119971,
+     "log10_g_cv": 1.1764720920119769,
+     "topk_frac": 0.9792750076925868,
+     "sat999": 0.705,
+     "log10_gap_mean": 0.9245088285970824,
+     "log10_msp_def": -1.5725760798001756,
+     "err": 0.06379999999999997,
+     "log10_nc1_tr": -1.160806368860111
+    }
+   },
+   {
+    "id": "shufflenetv2_x2_0",
+    "kind": "C",
+    "family": "shufflenetv2",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0009121111891666756,
+     "O5": -0.01785055000000002,
+     "O2": 0.42622147852023373,
+     "O3": 0.025560000000000027,
+     "O4": 0.19598880727771098
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0007924233448062051,
+      "acc_head": 0.0015917085514540721,
+      "acc_coll": 0.0011987634458420153,
+      "acc_nc1": 0.0008798668912933801,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3656818831376132,
+      "acc_head": 0.38599908325507776,
+      "acc_coll": 0.32936477194228286,
+      "acc_nc1": 0.4085571756915791,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01718556252656612,
+      "acc_head": 0.018833117010953075,
+      "acc_coll": 0.022068875446924062,
+      "acc_nc1": 0.020264742258429967,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20634063330174676,
+      "acc_head": 0.20335627785960775,
+      "acc_coll": 0.1962451785881427,
+      "acc_nc1": 0.1961857193701801,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0034877029000682904,
+      "acc_head": 0.003553334749763175,
+      "acc_coll": -0.020069365658214468,
+      "acc_nc1": 0.013589777983831026,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/shufflenetv2_x2_0",
+     "t1": "b4_t1/shufflenetv2_x2_0_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.9897552523504081,
+     "log10_g_cv": 1.3325913125854378,
+     "topk_frac": 0.9844189877120494,
+     "sat999": 0.7286,
+     "log10_gap_mean": 0.9227251430606971,
+     "log10_msp_def": -1.6625775279456563,
+     "err": 0.06379999999999997,
+     "log10_nc1_tr": -1.3540519268983808
+    }
+   },
+   {
+    "id": "repvgg_a1",
+    "kind": "C",
+    "family": "repvgg",
+    "evaluable": true,
+    "y": {
+     "O1": 0.000744097252001974,
+     "O5": 0.0029713666666666416,
+     "O2": 0.4902298924033896,
+     "O3": 0.024844333333333357,
+     "O4": 0.1930491984392341
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0012918583680478607,
+      "acc_head": 0.0023362759713200375,
+      "acc_coll": 0.001503538023767728,
+      "acc_nc1": 0.0014095948193853037,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.41678417606447554,
+      "acc_head": 0.3903632304410752,
+      "acc_coll": 0.39130814199616115,
+      "acc_nc1": 0.4745126763157661,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.024257894819050257,
+      "acc_head": 0.022115377779699,
+      "acc_coll": 0.02970313330857507,
+      "acc_nc1": 0.028403789047082257,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.21331487032097415,
+      "acc_head": 0.21095651412240107,
+      "acc_coll": 0.19873729080455,
+      "acc_nc1": 0.19664164657171584,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": 0.0006852654229169671,
+      "acc_head": -0.008471058864040303,
+      "acc_coll": -0.010946579496239204,
+      "acc_nc1": 0.02367886618393148,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/repvgg_a1",
+     "t1": "b4_t1/repvgg_a1_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.140430505110544,
+     "log10_g_cv": 1.409534048675884,
+     "topk_frac": 0.9898417151310382,
+     "sat999": 0.7994,
+     "log10_gap_mean": 0.9510070177130827,
+     "log10_msp_def": -1.7399066334157052,
+     "err": 0.053200000000000025,
+     "log10_nc1_tr": -1.6516963121672925
+    }
+   },
+   {
+    "id": "repvgg_a2",
+    "kind": "C",
+    "family": "repvgg",
+    "evaluable": true,
+    "y": {
+     "O1": 0.006222451125560635,
+     "O5": 0.012380666666666706,
+     "O2": 0.45014082883133105,
+     "O3": 0.031968333333333376,
+     "O4": 0.1943287794951771
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0015179110005939566,
+      "acc_head": 0.0028736887662807915,
+      "acc_coll": 0.001631827826707445,
+      "acc_nc1": 0.0016627257448766368,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.43991392729874074,
+      "acc_head": 0.41500850454974686,
+      "acc_coll": 0.4231786257679318,
+      "acc_nc1": 0.5109194477365275,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.02745895052912057,
+      "acc_head": 0.025439329680852902,
+      "acc_coll": 0.03393708306114926,
+      "acc_nc1": 0.032558362016687284,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.21607824725312086,
+      "acc_head": 0.2117885020811945,
+      "acc_coll": 0.19784798543474705,
+      "acc_nc1": 0.19486531960037565,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": 0.002574020578331557,
+      "acc_head": -0.006057090905868293,
+      "acc_coll": -0.005066981610615753,
+      "acc_nc1": 0.030855936471998427,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/repvgg_a2",
+     "t1": "b4_t1/repvgg_a2_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.231266697071167,
+     "log10_g_cv": 1.439536505006505,
+     "topk_frac": 0.9914914884969706,
+     "sat999": 0.8042,
+     "log10_gap_mean": 0.9462507730732074,
+     "log10_msp_def": -1.8092886869232099,
+     "err": 0.049000000000000044,
+     "log10_nc1_tr": -1.8213852280545118
+    }
+   },
+   {
+    "id": "resnet56_s31",
+    "kind": "F",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0018274984524382365,
+     "O5": -0.016431949999999973,
+     "O2": 0.38379036140872563,
+     "O3": 0.01991900000000002,
+     "O4": 0.20986614446200255
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008710895155756813,
+      "acc_head": 0.0012385169282966354,
+      "acc_coll": 0.0011245447739782826,
+      "acc_nc1": 0.0009167854524804116,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.37373102169422423,
+      "acc_head": 0.3876140732365644,
+      "acc_coll": 0.3677241636280057,
+      "acc_nc1": 0.39613663928437115,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.018299527855324897,
+      "acc_head": 0.019425326867655156,
+      "acc_coll": 0.02106620824142464,
+      "acc_nc1": 0.019908634626471366,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20752493770123814,
+      "acc_head": 0.20462125597026246,
+      "acc_coll": 0.20064506199714424,
+      "acc_nc1": 0.20100336353960643,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.002830417320493034,
+      "acc_head": 0.0019808306880424228,
+      "acc_coll": -0.005573027936033768,
+      "acc_nc1": 0.006093871781583266,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s31",
+     "t1": "b4_t1/resnet56_s31_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.9493693986610867,
+     "log10_g_cv": 1.2836622148873187,
+     "topk_frac": 0.9792700773489205,
+     "sat999": 0.7812,
+     "log10_gap_mean": 0.968395826022797,
+     "log10_msp_def": -1.6761644582926836,
+     "err": 0.062000000000000055,
+     "log10_nc1_tr": -1.2792350852992345
+    }
+   },
+   {
+    "id": "resnet56_s32",
+    "kind": "F",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0030132203353187004,
+     "O5": -0.006110050000000089,
+     "O2": 0.4204680915350715,
+     "O3": 0.02137733333333336,
+     "O4": 0.20096851266542506
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008183960548228447,
+      "acc_head": 0.0010545869943462466,
+      "acc_coll": 0.0011030405340644147,
+      "acc_nc1": 0.0008802208174907703,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.368339416097076,
+      "acc_head": 0.4121529156355509,
+      "acc_coll": 0.3569926787804073,
+      "acc_nc1": 0.39865331452588226,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01755335338468767,
+      "acc_head": 0.021106260636866096,
+      "acc_coll": 0.02149585422896183,
+      "acc_nc1": 0.019730410054756398,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20673540143491054,
+      "acc_head": 0.20159450024584064,
+      "acc_coll": 0.1981282052988242,
+      "acc_nc1": 0.1989534043045718,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0032706910944923792,
+      "acc_head": 0.011913118585862964,
+      "acc_coll": -0.008451383208970487,
+      "acc_nc1": 0.008803512720742425,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s32",
+     "t1": "b4_t1/resnet56_s32_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.9693853631440714,
+     "log10_g_cv": 1.2808644216298475,
+     "topk_frac": 0.9795786072436716,
+     "sat999": 0.7896,
+     "log10_gap_mean": 0.974643291724555,
+     "log10_msp_def": -1.7059200173183022,
+     "err": 0.06320000000000003,
+     "log10_nc1_tr": -1.2983878492104253
+    }
+   },
+   {
+    "id": "resnet20_s31",
+    "kind": "F20",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0009332445167692383,
+     "O5": -0.03236569999999994,
+     "O2": 0.2683207230856471,
+     "O3": 0.011539666666666615,
+     "O4": 0.19755538090579702
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.00025417738975283316,
+      "acc_head": -0.00038903165346491144,
+      "acc_coll": 0.00014093583572824642,
+      "acc_nc1": 0.00021230459302886583,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.31060844779199587,
+      "acc_head": 0.3016914216420149,
+      "acc_coll": 0.26389572486683144,
+      "acc_nc1": 0.2900773911078282,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.009563641611778676,
+      "acc_head": 0.00884054559776795,
+      "acc_coll": 0.0066417524152852115,
+      "acc_nc1": 0.008089160393112586,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.19726096623897896,
+      "acc_head": 0.19927799490862957,
+      "acc_coll": 0.20358347239601046,
+      "acc_nc1": 0.20263186166323136,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.007984951222450923,
+      "acc_head": -0.011075195768134054,
+      "acc_coll": -0.029313041276028632,
+      "acc_nc1": -0.016162591704059585,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet20_s31",
+     "t1": "b4_t1/resnet20_s31_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.6180284918696444,
+     "log10_g_cv": 0.8853639700091327,
+     "topk_frac": 0.9783045565956467,
+     "sat999": 0.6858,
+     "log10_gap_mean": 0.9954730480774128,
+     "log10_msp_def": -1.458510133161367,
+     "err": 0.0776,
+     "log10_nc1_tr": -0.7803800698027391
+    }
+   },
+   {
+    "id": "resnet20_s32",
+    "kind": "F20",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0010792185946226773,
+     "O5": -0.009066549999999896,
+     "O2": 0.2844700360849123,
+     "O3": 0.00334633333333334,
+     "O4": 0.19121026282099138
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.00036993167308258705,
+      "acc_head": -0.0001183002609706463,
+      "acc_coll": 0.00009370253970923293,
+      "acc_nc1": 0.00030316853962503664,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.3224524495519484,
+      "acc_head": 0.28529980553150325,
+      "acc_coll": 0.2927960641595288,
+      "acc_nc1": 0.2897171706914122,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01120279929574083,
+      "acc_head": 0.008190031546797899,
+      "acc_coll": 0.006747514684768856,
+      "acc_nc1": 0.00885184607349977,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.19936639628251931,
+      "acc_head": 0.20336218981911414,
+      "acc_coll": 0.20788850100257855,
+      "acc_nc1": 0.206715390160317,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.007017780449264676,
+      "acc_head": -0.019893233948089856,
+      "acc_coll": -0.020558289730353764,
+      "acc_nc1": -0.020056434314221473,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet20_s32",
+     "t1": "b4_t1/resnet20_s32_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.6045772093561824,
+     "log10_g_cv": 0.8443227748608298,
+     "topk_frac": 0.9765089957687083,
+     "sat999": 0.6746,
+     "log10_gap_mean": 0.9934282885348262,
+     "log10_msp_def": -1.4500389651130683,
+     "err": 0.07440000000000002,
+     "log10_nc1_tr": -0.7658817179140223
+    }
+   },
+   {
+    "id": "resnet56_s31_ls10",
+    "kind": "K",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.024211678492675026,
+     "O5": 0.027664466666666776,
+     "O2": 0.352409889362914,
+     "O3": 0.07469300000000001,
+     "O4": 0.11989844656704954
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0008978199501374961,
+      "acc_head": 0.00529309017437869,
+      "acc_coll": 0.00048448474037001083,
+      "acc_nc1": 0.0013475612047251892,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.376466085182912,
+      "acc_head": -0.08175528893107059,
+      "acc_coll": 0.5277525439063848,
+      "acc_nc1": 0.5969830774444636,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.018678048597255692,
+      "acc_head": -0.01847986073073773,
+      "acc_coll": 0.04045567305269362,
+      "acc_nc1": 0.034514942357191984,
+      "extrap": true
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.207919705834402,
+      "acc_head": 0.2451297076777203,
+      "acc_coll": 0.1675461829855332,
+      "acc_nc1": 0.16125510533604223,
+      "extrap": true
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0026070744400476815,
+      "acc_head": -0.16140621646950004,
+      "acc_coll": 0.06646728075672197,
+      "acc_nc1": 0.08522613894693076,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s31_ls10",
+     "t1": "b4_t1/resnet56_s31_ls10_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.5093392523646656,
+     "log10_g_cv": 0.9599354971242773,
+     "topk_frac": 0.9466698199002423,
+     "sat999": 0,
+     "log10_gap_mean": 0.6181946892789836,
+     "log10_msp_def": -0.9680970878947075,
+     "err": 0.06140000000000001,
+     "log10_nc1_tr": -2.347950345955601
+    }
+   },
+   {
+    "id": "resnet56_s31_wd5e5",
+    "kind": "K",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.000006892606301156512,
+     "O5": -0.015602683333333367,
+     "O2": 0.3736154518476157,
+     "O3": 0.006651666666666722,
+     "O4": 0.22878358327765788
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.00009588225651353149,
+      "acc_head": -0.0027875249505425383,
+      "acc_coll": -0.00023662033571313735,
+      "acc_nc1": 0.00006539557352843432,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.2944116576366177,
+      "acc_head": 0.46464568783289095,
+      "acc_coll": 0.44339051538768937,
+      "acc_nc1": 0.2794634367044102,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.007322077183066785,
+      "acc_head": 0.021126628903952976,
+      "acc_coll": 0.0033907241776785536,
+      "acc_nc1": 0.006248539110668981,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.19423441055138968,
+      "acc_head": 0.18145007060758178,
+      "acc_coll": 0.20289635330310007,
+      "acc_nc1": 0.19904091765224577,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.009307566870033809,
+      "acc_head": 0.04968797429531482,
+      "acc_coll": 0.05871318412074809,
+      "acc_nc1": -0.015261531076733201,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s31_wd5e5",
+     "t1": "b4_t1/resnet56_s31_wd5e5_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.5460987400099458,
+     "log10_g_cv": 0.7206439616826874,
+     "topk_frac": 0.9347934986795094,
+     "sat999": 0.821,
+     "log10_gap_mean": 1.1759580021999518,
+     "log10_msp_def": -1.6832372217053682,
+     "err": 0.08220000000000005,
+     "log10_nc1_tr": -0.7409474811056833
+    }
+   },
+   {
+    "id": "resnet56_s32_ls10",
+    "kind": "K",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.010976033476807201,
+     "O5": 0.04574979999999995,
+     "O2": 0.36240167585911415,
+     "O3": 0.07757366666666665,
+     "O4": 0.11932004129466199
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": 0.0006252741053900074,
+      "acc_head": 0.0047057587481300935,
+      "acc_coll": 0.00040844458687859335,
+      "acc_nc1": 0.0011139543581610801,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.34857913904147914,
+      "acc_head": -0.05102412224294545,
+      "acc_coll": 0.41998773843913284,
+      "acc_nc1": 0.588188688798004,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.01481861806217009,
+      "acc_head": -0.01758585407466125,
+      "acc_coll": 0.039230270623800426,
+      "acc_nc1": 0.032026684181897754,
+      "extrap": true
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.20370884574732132,
+      "acc_head": 0.2374632366851804,
+      "acc_coll": 0.1603599882605851,
+      "acc_nc1": 0.15483908166469815,
+      "extrap": true
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.0048842979501462595,
+      "acc_head": -0.14336900998881444,
+      "acc_coll": 0.02771943275065084,
+      "acc_nc1": 0.09055359324129875,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s32_ls10",
+     "t1": "b4_t1/resnet56_s32_ls10_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -1.5126203487130678,
+     "log10_g_cv": 0.9630392122336676,
+     "topk_frac": 0.9592334795134506,
+     "sat999": 0,
+     "log10_gap_mean": 0.6186190622143273,
+     "log10_msp_def": -0.9761171455333345,
+     "err": 0.06779999999999997,
+     "log10_nc1_tr": -2.330639111025175
+    }
+   },
+   {
+    "id": "resnet56_s32_wd5e5",
+    "kind": "K",
+    "family": "resnet",
+    "evaluable": true,
+    "y": {
+     "O1": 0.0005862496621166224,
+     "O5": -0.023127316666666786,
+     "O2": 0.2954919453936234,
+     "O3": 0.0013583333333332392,
+     "O4": 0.22952670842418005
+    },
+    "pred": {
+     "O1": {
+      "const": 0.0006533652690546757,
+      "acc": -0.00007272650745441904,
+      "acc_head": -0.003203829700199398,
+      "acc_coll": -0.0003298835111860071,
+      "acc_nc1": -0.00008114851499570593,
+      "extrap": false
+     },
+     "O2": {
+      "const": 0.3264243812415529,
+      "acc": 0.2771595746921716,
+      "acc_head": 0.45315250387633116,
+      "acc_coll": 0.40569402068396726,
+      "acc_nc1": 0.27303009857037075,
+      "extrap": false
+     },
+     "O3": {
+      "const": 0.011145384615384621,
+      "acc": 0.0049344648797354,
+      "acc_head": 0.01920601499595992,
+      "acc_coll": 0.0017414487851055895,
+      "acc_nc1": 0.004637897826310385,
+      "extrap": false
+     },
+     "O4": {
+      "const": 0.20123397923446468,
+      "acc": 0.1908130867306366,
+      "acc_head": 0.17791108657322613,
+      "acc_coll": 0.1986579037973858,
+      "acc_nc1": 0.19390128990313027,
+      "extrap": false
+     },
+     "O5": {
+      "const": -0.012499943589743592,
+      "acc": -0.010716356799200457,
+      "acc_head": 0.050274962542316656,
+      "acc_coll": 0.047969886849913206,
+      "acc_nc1": -0.012361151396037575,
+      "extrap": false
+     }
+    },
+    "sources": {
+     "t2": "b4_t2/resnet56_s32_wd5e5",
+     "t1": "b4_t1/resnet56_s32_wd5e5_fit",
+     "t2_dup": null,
+     "t1_dup": null,
+     "t2_off_phase": null,
+     "t1_off_phase": null
+    },
+    "not_evaluable_why": null,
+    "t1_not_evaluable_why": null,
+    "coords": {
+     "log10_plnc1": -0.5222155553875459,
+     "log10_g_cv": 0.6994773744736037,
+     "topk_frac": 0.9364854683405276,
+     "sat999": 0.8096,
+     "log10_gap_mean": 1.1808598034347282,
+     "log10_msp_def": -1.6419347504843311,
+     "err": 0.08740000000000003,
+     "log10_nc1_tr": -0.7249411868714436
+    }
+   }
+  ]
+ }
+}
