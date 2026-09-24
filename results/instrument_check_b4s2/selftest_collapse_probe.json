@@ -1,0 +1,239 @@
+{
+ "checks": [
+  {
+   "check": "discovery probe runs and writes probe.json",
+   "status": "PASS",
+   "value": 0
+  },
+  {
+   "check": "probe.json is strictly finite JSON (allow_nan=False)",
+   "status": "PASS",
+   "value": null
+  },
+  {
+   "check": "nc1_tr = sigma^2 (K-1)^2 / (K m^2) within 5% (simplex ETF, isotropic classes)",
+   "status": "PASS",
+   "value": [
+    0.5069826086821149,
+    0.50625
+   ]
+  },
+  {
+   "check": "trimmed nc1 = verbatim landmarks.py:71 nc1 when the pinv is stable (1e-6)",
+   "status": "PASS",
+   "value": 1.1102230246251565e-15
+  },
+  {
+   "check": "g_cv_te = (a + sigma^2) / sigma^2 within 10% (label-free spectral gap)",
+   "status": "PASS",
+   "value": [
+    2.7690234205138657,
+    2.7777777777777777
+   ]
+  },
+  {
+   "check": "khat_te = K - 1 (the class spike)",
+   "status": "PASS",
+   "value": 9
+  },
+  {
+   "check": "label-free candidates equal atlas.b4_collapse.label_free_coords (g_cv, topk_frac; plnc1 verbatim)",
+   "status": "PASS",
+   "value": [
+    2.7690234205138657,
+    2.7690234205138657,
+    0.5013033585907879,
+    0.5013033585907879
+   ]
+  },
+  {
+   "check": "plnc1_te <= 1.02 nc1_te (argmax labels are the nearest-mean labels here)",
+   "status": "PASS",
+   "value": [
+    0.5013033585907878,
+    0.5039048979014968
+   ]
+  },
+  {
+   "check": "NC4: nearest train centre agrees with the head (> 0.97)",
+   "status": "PASS",
+   "value": 0.9968
+  },
+  {
+   "check": "DO-3: train-referenced FPR ~ 0.05 when train and test are exchangeable (+-0.03)",
+   "status": "PASS",
+   "value": 0.0502
+  },
+  {
+   "check": "IC-P2: conformal FPR at alpha 0.05 (cal rows A, test rows B) ~ 0.05 (+-0.03)",
+   "status": "PASS",
+   "value": {
+    "alpha": 0.05,
+    "curve": {
+     "0.02": 0.014,
+     "0.03": 0.026,
+     "0.04": 0.03333333333333333,
+     "0.05": 0.046
+    },
+    "fpr": 0.046,
+    "n_cal": 1500,
+    "n_test": 1500,
+    "rows": {
+     "cal": [
+      2000,
+      3500
+     ],
+     "test": [
+      3500,
+      5000
+     ]
+    }
+   }
+  },
+  {
+   "check": "harm: 30 discovery splits, slope > 0, Spearman(H, cost) > 0.5, H10 finite",
+   "status": "PASS",
+   "value": [
+    30,
+    5.550823077863862,
+    0.9113360830672755,
+    2.616102484308982
+   ]
+  },
+  {
+   "check": "O4 = mean over the 30 splits of mean MSP - accuracy (direct recomputation, 1e-12)",
+   "status": "PASS",
+   "value": [
+    0.15565681556098668,
+    0.15565681556098662
+   ]
+  },
+  {
+   "check": "O2 = harm.H10 and O3 = ood.cifar100.knn_l2_minus_besthead",
+   "status": "PASS",
+   "value": null
+  },
+  {
+   "check": "OOD: raw 10-NN AUROC far (SVHN) >= near (CIFAR-100) > 0.6; L2-kNN and best-head AUROCs defined",
+   "status": "PASS",
+   "value": [
+    0.7247083333333333,
+    0.9996376666666666,
+    0.907873
+   ]
+  },
+  {
+   "check": "P3b: head picked on rows A; the 99% bootstrap CI brackets d",
+   "status": "PASS",
+   "value": [
+    "gap",
+    -0.00548883818581559,
+    -0.00220546597919713,
+    0.0010827190553497324
+   ]
+  },
+  {
+   "check": "taps: the duplicate tap is excluded; P6b finite; the corruption is visible at every tap (AUROC > 0.6)",
+   "status": "PASS",
+   "value": [
+    [
+     "stem",
+     "mid",
+     "penult"
+    ],
+    0.3619437999999999
+   ]
+  },
+  {
+   "check": "pre tap = 'mid' = the D2 rule; cdepth_pl > 0 (mid is noisier than the penult)",
+   "status": "PASS",
+   "value": [
+    "mid",
+    0.6840303007036058
+   ]
+  },
+  {
+   "check": "discovery never read the confirmation-only split corrupt__frost__s3",
+   "status": "PASS",
+   "value": [
+    "ood__svhn",
+    "ref",
+    "test"
+   ]
+  },
+  {
+   "check": "contract: timing_s per tap and target + total; max_rss_mb; code.sha256 / core_sha256 / collapse_sha256; repo_commit key",
+   "status": "PASS",
+   "value": [
+    "block:penult",
+    "tap:dupl",
+    "tap:mid",
+    "tap:penult",
+    "tap:stem",
+    "target:do3"
+   ]
+  },
+  {
+   "check": "append-only: a second run into the same --out is refused",
+   "status": "PASS",
+   "value": "refused: [b4] /tmp/t2_selftest_aggmilyz/out/st_disc exists and is not empty: results are append-only (relaunch with a new tag)"
+  },
+  {
+   "check": "deterministic: a second discovery run equals the first (replay keys ignored)",
+   "status": "PASS",
+   "value": 0
+  },
+  {
+   "check": "confirmation reads the holdout split (HOLD band on holdout splits reported)",
+   "status": "PASS",
+   "value": [
+    0,
+    1
+   ]
+  },
+  {
+   "check": "the D7 seal: a SEALED dump is refused in discovery",
+   "status": "PASS",
+   "value": "refused: [b4] ../../tmp/t2_selftest_aggmilyz/b4d_synthetic_sealed/dump is SEALED: opened only in the confirmation phase, after P2"
+  },
+  {
+   "check": "role guard: a confirmation unit is refused in the discovery phase",
+   "status": "PASS",
+   "value": "refused: [t2] st_conf (roles ['C']) is not a T2 unit of the discovery phase (allowed roles: ('D', 'N', 'Dnew', 'ANCHOR'); docs/plans/B4_INTEGRATION.md D9)"
+  },
+  {
+   "check": "harm_fit known answer: cost = 2 + 20 H -> slope 20, H10 0.4",
+   "status": "PASS",
+   "value": {
+    "H10": 0.4,
+    "intercept": 2.0,
+    "n": 5,
+    "slope": 20.0,
+    "spearman": 1.0
+   }
+  },
+  {
+   "check": "hold_band known answer: 3 splits in band, 1 violation, max 9",
+   "status": "PASS",
+   "value": {
+    "hold_n": 3,
+    "hold_viol": 1,
+    "max_cost_in_band": 9.0
+   }
+  }
+ ],
+ "code_sha256": "0b070212ac4cc7863b3a52786f21b1d0b91b3f829d76e1385718fa79e81a82d4",
+ "created_utc": "2026-09-24T17:07:56Z",
+ "n_fail": 0,
+ "n_pass": 27,
+ "status": "PASS",
+ "synthetic": {
+  "K": 10,
+  "dim": 64,
+  "m": 4.0,
+  "n_ref": 6000,
+  "noise_per_sev": 0.25,
+  "null_shift": 0.3,
+  "sigma": 1.0
+ }
+}

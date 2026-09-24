@@ -1,0 +1,123 @@
+{
+ "checks": [
+  {
+   "detail": "",
+   "name": "vectorised preprocessing is bitwise the PIL path",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "T1 faults deterministic, salt changes the defect",
+   "pass": true
+  },
+  {
+   "detail": "['ref', 'test', 'corrupt__gaussian_noise__s1']",
+   "name": "fit layout written",
+   "pass": true
+  },
+  {
+   "detail": "{'all': ['stem', 'layer1.0', 'layer2.0', 'layer3.0', 'layer3.1', 'penult'], 'spatial': {'stem': True, 'layer1.0': True, 'layer2.0': True, 'layer3.0': True, 'layer3.1': True}, 'depth_frac': {'stem': 0.08333333333333333, 'layer1.0': 0.25, 'layer2.0': 0.5, 'layer3.0': 0.75, 'layer3.1': 0.91666666666666",
+   "name": "dup_of_penult = [layer3.1]; pre = layer3.0 (D2)",
+   "pass": true
+  },
+  {
+   "detail": "{'stem': 'stem', 's1end': 'layer1.0', 's2end': 'layer2.0', 'pre': 'layer3.0', 'penult': 'penult'}",
+   "name": "functional taps",
+   "pass": true
+  },
+  {
+   "detail": "['stem', 'layer3.0', 'penult']",
+   "name": "holdout split holds the X4 taps only",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "penult float32 on ref/test/ood, float16 elsewhere",
+   "pass": true
+  },
+  {
+   "detail": "['corrupt__saturate__s3', 'corrupt__saturate__s5']",
+   "name": "a missing extra is recorded",
+   "pass": true
+  },
+  {
+   "detail": "{'corrupt__frost__s3': 'CONFIRMATION_ONLY', 'fault__exposure_global__l1': 'CONFIRMATION_ONLY', 'test': 0.11}",
+   "name": "open dump: no accuracy of a confirmation-only split (D4)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "head gate PASS on every split",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "meta.json written last",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a complete dump is skipped",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a partial dump is refused",
+   "pass": true
+  },
+  {
+   "detail": "['dump_step_partial_20260924_170254']",
+   "name": "--move-partial renames a partial dump to dump_step_partial_<stamp> (covered by the pull's dump_step* exclude and the .gitignore) and extracts afresh",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "discovery refuses a confirmation-only split",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "discovery read of exposure_global raises",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "sealed eval dump carries SEALED.json",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a sealed dump never opens in discovery",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "the committed record of a sealed dump has no accuracy",
+   "pass": true
+  },
+  {
+   "detail": "(40, 8, 8, 8)",
+   "name": "maps layout: soiling on a confirmation unit, maps (n, 8, 8, 8)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "maps layout: masks and pixels stored",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "seal manifest verifies",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a changed sealed file fails verification",
+   "pass": true
+  }
+ ],
+ "code_sha256": "2fbf219ccb64c3101a0d1308938645c773124a02c75a8297fda0f193c4444fc6",
+ "created_utc": "2026-09-24T17:02:57Z",
+ "failed": [],
+ "status": "PASS"
+}

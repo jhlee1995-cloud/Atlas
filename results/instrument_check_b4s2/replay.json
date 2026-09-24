@@ -1,0 +1,40 @@
+{
+ "rule": "rel 1e-6, abs 1e-9; keys ignored: code, created, created_utc, env, host, max_rss_mb, out, tag, timing_s, unseal, versions",
+ "units": {
+  "t1:resnet20_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  },
+  "t2:resnet20_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  },
+  "t3s:resnet20_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  },
+  "t1:resnet56_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  },
+  "t2:resnet56_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  },
+  "t3s:resnet56_hub": {
+   "status": "PASS",
+   "n_diff": 0,
+   "first20": []
+  }
+ },
+ "tags": {
+  "s1": "",
+  "s2": ""
+ },
+ "status": "PASS"
+}
