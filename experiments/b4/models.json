@@ -1,0 +1,1899 @@
+{
+ "schema": "b4_models/1",
+ "generator": "scripts/b4_make_registry.js",
+ "pinned_at": "P1",
+ "hub": {
+  "repo": "chenyaofo/pytorch-cifar-models",
+  "ref": "786c16252c0fc58ee9adac063f8337cc4a7a497a",
+  "recipe": "every chenyaofo CIFAR-10 model: SGD nesterov lr 0.1 momentum 0.9 wd 5e-4 batch 256, cosine T_max 200, 200 epochs, cross-entropy, mean (0.4914, 0.4822, 0.4465) std (0.2023, 0.1994, 0.201) (logs branch, logs/cifar10/<model>/default.log, read 2026-09-23). The released weights are the best-val checkpoint (epoch 183-200), selected upstream on the full CIFAR-10 test set."
+ },
+ "rows": {
+  "fit": {
+   "n_ref": 10000,
+   "test": [
+    0,
+    5000
+   ],
+   "c10c": [
+    0,
+    2000
+   ],
+   "ood": [
+    0,
+    2000
+   ],
+   "faults": [
+    3500,
+    5000
+   ],
+   "fault_salt": 0
+  },
+  "eval": {
+   "test": [
+    5000,
+    10000
+   ],
+   "c10c": [
+    5000,
+    10000
+   ],
+   "ood": [
+    2000,
+    7000
+   ],
+   "faults": [
+    8500,
+    10000
+   ],
+   "fault_salt": 1
+  },
+  "maps": {
+   "n_ref": 10000,
+   "ref_stride": 2,
+   "cal": [
+    7500,
+    8500
+   ],
+   "eval": [
+    8500,
+    9500
+   ],
+   "faults": [
+    8500,
+    9500
+   ],
+   "c10c": [
+    8500,
+    9500
+   ]
+  },
+  "roles": {
+   "H": [
+    0,
+    2000
+   ],
+   "A": [
+    2000,
+    3500
+   ],
+   "B": [
+    3500,
+    5000
+   ],
+   "EVAL": [
+    5000,
+    10000
+   ],
+   "MAPS": [
+    7500,
+    9500
+   ],
+   "RESERVE_test": [
+    9500,
+    10000
+   ],
+   "c10c_reserve": [
+    2000,
+    5000
+   ]
+  }
+ },
+ "confirmation_only": [
+  "impulse_noise",
+  "glass_blur",
+  "zoom_blur",
+  "frost",
+  "elastic_transform",
+  "speckle_noise",
+  "gaussian_blur",
+  "spatter",
+  "saturate",
+  "exposure_global",
+  "soiling"
+ ],
+ "models": [
+  {
+   "id": "resnet20_hub",
+   "roles": [
+    "D",
+    "Sdisc",
+    "STdisc",
+    "ANCHOR"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20hub",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 183 (upstream log)",
+   "readme_top1": 92.6,
+   "hub_asset": {
+    "file": "cifar10_resnet20-4118986f.pt",
+    "bytes": 1139055,
+    "tag": "4118986f"
+   },
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_s0hub_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_hub/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "maps": {
+     "dump": "results/b4d_resnet20_hub_maps/dump",
+     "sealed": false,
+     "maps": [
+      "headmap",
+      "stage2map"
+     ],
+     "holdout_faults": false,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.939
+    }
+   },
+   "est_gpu_s": 71
+  },
+  {
+   "id": "resnet20_s1",
+   "roles": [
+    "D",
+    "R2",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s1",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s1_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_s1_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_s1/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s1_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    }
+   },
+   "est_gpu_s": 167
+  },
+  {
+   "id": "resnet20_s2",
+   "roles": [
+    "D",
+    "R2"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s2",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s2_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_s2_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_s2/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s2_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    }
+   },
+   "est_gpu_s": 167
+  },
+  {
+   "id": "resnet20_s3",
+   "roles": [
+    "D",
+    "R2",
+    "Sconf",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s3",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s3_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_s3_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_s3/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s3_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    },
+    "maps": {
+     "dump": "results/b4c_resnet20_s3_maps/dump",
+     "sealed": true,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": true,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.423
+    }
+   },
+   "est_gpu_s": 181
+  },
+  {
+   "id": "resnet20_s4",
+   "roles": [
+    "D",
+    "R2",
+    "Sconf",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s4",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s4_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_s4_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_s4/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s4_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    },
+    "maps": {
+     "dump": "results/b4c_resnet20_s4_maps/dump",
+     "sealed": true,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": true,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.423
+    }
+   },
+   "est_gpu_s": 181
+  },
+  {
+   "id": "resnet20_rand",
+   "roles": [
+    "N",
+    "Sdisc"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20rand",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_rand99_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": false,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": "results/atlas_v1_resnet20_rand",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet20_rand/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "maps": {
+     "dump": "results/b4d_resnet20_rand_maps/dump",
+     "sealed": false,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": false,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.399
+    }
+   },
+   "est_gpu_s": 71
+  },
+  {
+   "id": "resnet56_hub",
+   "roles": [
+    "D",
+    "Sdisc",
+    "STdisc",
+    "ANCHOR"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56hub",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 198 (upstream log)",
+   "readme_top1": 94.37,
+   "hub_asset": {
+    "file": "cifar10_resnet56-187c023a.pt",
+    "bytes": 3555463,
+    "tag": "187c023a"
+   },
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_s0hub_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_hub/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "maps": {
+     "dump": "results/b4d_resnet56_hub_maps/dump",
+     "sealed": false,
+     "maps": [
+      "headmap",
+      "stage2map"
+     ],
+     "holdout_faults": false,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.939
+    }
+   },
+   "est_gpu_s": 73
+  },
+  {
+   "id": "resnet56_s1",
+   "roles": [
+    "D",
+    "R2",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s1",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s1_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_s1",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_s1/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s1_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    }
+   },
+   "est_gpu_s": 171
+  },
+  {
+   "id": "resnet56_s2",
+   "roles": [
+    "D",
+    "R2"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s2",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s2_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_s2",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_s2/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s2_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    }
+   },
+   "est_gpu_s": 171
+  },
+  {
+   "id": "resnet56_e10",
+   "roles": [
+    "D"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e10_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e10",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e10/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_e20",
+   "roles": [
+    "D"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e20_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e20",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e20/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_e40",
+   "roles": [
+    "D",
+    "STdisc"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e40_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e40_st3",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e40/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_e50",
+   "roles": [
+    "D"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e50_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e50",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e50/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_e60",
+   "roles": [
+    "D"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e60_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e60",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e60/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_e70",
+   "roles": [
+    "D"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s11",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s11_e70_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_e70",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_e70/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_s12m",
+   "roles": [
+    "D",
+    "R2",
+    "Sconf",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s12",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s12m_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_s12m",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_s12m/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s12m_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    },
+    "maps": {
+     "dump": "results/b4c_resnet56_s12m_maps/dump",
+     "sealed": true,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": true,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.423
+    }
+   },
+   "est_gpu_s": 186
+  },
+  {
+   "id": "resnet56_s13m",
+   "roles": [
+    "D",
+    "R2",
+    "Sconf",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s13",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s13m_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_s13m",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_s13m/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s13m_eval/dump",
+     "sealed": true,
+     "extras": false,
+     "gb": 0.192
+    },
+    "maps": {
+     "dump": "results/b4c_resnet56_s13m_maps/dump",
+     "sealed": true,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": true,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.423
+    }
+   },
+   "est_gpu_s": 186
+  },
+  {
+   "id": "resnet56_rand",
+   "roles": [
+    "N",
+    "Sdisc"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56rand",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_rand99_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": false,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": "results/atlas_v1_resnet56_rand",
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet56_rand/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    },
+    "maps": {
+     "dump": "results/b4d_resnet56_rand_maps/dump",
+     "sealed": false,
+     "maps": [
+      "headmap"
+     ],
+     "holdout_faults": false,
+     "pixels": true,
+     "rows": [
+      7500,
+      9500
+     ],
+     "gb": 0.399
+    }
+   },
+   "est_gpu_s": 73
+  },
+  {
+   "id": "resnet32",
+   "roles": [
+    "Dnew"
+   ],
+   "arch": "cifar10_resnet32",
+   "family": "resnet",
+   "depth_family": "resnet32",
+   "run_group": "resnet32",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 186 (upstream log)",
+   "readme_top1": 93.53,
+   "hub_asset": {
+    "file": "cifar10_resnet32-ef93fc4d.pt",
+    "bytes": 1944567,
+    "tag": "ef93fc4d"
+   },
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 69.12,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_resnet32/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.103
+    }
+   },
+   "est_gpu_s": 57
+  },
+  {
+   "id": "resnet44",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_resnet44",
+   "family": "resnet",
+   "depth_family": "resnet44",
+   "run_group": "resnet44",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 187 (upstream log)",
+   "readme_top1": 94.01,
+   "hub_asset": {
+    "file": "cifar10_resnet44-2a3cabcb.pt",
+    "bytes": 2750015,
+    "tag": "2a3cabcb"
+   },
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 97.44,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet44/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "vgg11_bn",
+   "roles": [
+    "Dnew"
+   ],
+   "arch": "cifar10_vgg11_bn",
+   "family": "vgg",
+   "depth_family": "vgg11_bn",
+   "run_group": "vgg11_bn",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 200 (upstream log)",
+   "readme_top1": 92.79,
+   "hub_asset": {
+    "file": "cifar10_vgg11_bn-eaeebf42.pt",
+    "bytes": 39068509,
+    "tag": "eaeebf42"
+   },
+   "f16dims": 2048,
+   "penult": 512,
+   "x4dims": 1088,
+   "madds": 153.29,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_vgg11_bn/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.573
+    }
+   },
+   "est_gpu_s": 60
+  },
+  {
+   "id": "vgg13_bn",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_vgg13_bn",
+   "family": "vgg",
+   "depth_family": "vgg13_bn",
+   "run_group": "vgg13_bn",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 197 (upstream log)",
+   "readme_top1": 94,
+   "hub_asset": {
+    "file": "cifar10_vgg13_bn-c01e4a43.pt",
+    "bytes": 39814235,
+    "tag": "c01e4a43"
+   },
+   "f16dims": 2048,
+   "penult": 512,
+   "x4dims": 1088,
+   "madds": 228.79,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_vgg13_bn/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.61
+    }
+   },
+   "est_gpu_s": 61
+  },
+  {
+   "id": "vgg16_bn",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_vgg16_bn",
+   "family": "vgg",
+   "depth_family": "vgg16_bn",
+   "run_group": "vgg16_bn",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 195 (upstream log)",
+   "readme_top1": 94.16,
+   "hub_asset": {
+    "file": "cifar10_vgg16_bn-6ee7ea24.pt",
+    "bytes": 61080472,
+    "tag": "6ee7ea24"
+   },
+   "f16dims": 2048,
+   "penult": 512,
+   "x4dims": 1088,
+   "madds": 313.73,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_vgg16_bn/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.61
+    }
+   },
+   "est_gpu_s": 64
+  },
+  {
+   "id": "vgg19_bn",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_vgg19_bn",
+   "family": "vgg",
+   "depth_family": "vgg19_bn",
+   "run_group": "vgg19_bn",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 193 (upstream log)",
+   "readme_top1": 93.91,
+   "hub_asset": {
+    "file": "cifar10_vgg19_bn-57191229.pt",
+    "bytes": 82346709,
+    "tag": "57191229"
+   },
+   "f16dims": 2048,
+   "penult": 512,
+   "x4dims": 1088,
+   "madds": 398.66,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_vgg19_bn/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.61
+    }
+   },
+   "est_gpu_s": 65
+  },
+  {
+   "id": "mobilenetv2_x0_5",
+   "roles": [
+    "Dnew"
+   ],
+   "arch": "cifar10_mobilenetv2_x0_5",
+   "family": "mobilenetv2",
+   "depth_family": "mobilenetv2_x0_5",
+   "run_group": "mobilenetv2_x0_5",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 193 (upstream log)",
+   "readme_top1": 92.88,
+   "hub_asset": {
+    "file": "cifar10_mobilenetv2_x0_5-ca14ced9.pt",
+    "bytes": 2986233,
+    "tag": "ca14ced9"
+   },
+   "f16dims": 376,
+   "penult": 1280,
+   "x4dims": 1456,
+   "madds": 27.97,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_mobilenetv2_x0_5/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.457
+    }
+   },
+   "est_gpu_s": 57
+  },
+  {
+   "id": "mobilenetv2_x0_75",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_mobilenetv2_x0_75",
+   "family": "mobilenetv2",
+   "depth_family": "mobilenetv2_x0_75",
+   "run_group": "mobilenetv2_x0_75",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 192 (upstream log)",
+   "readme_top1": 93.72,
+   "hub_asset": {
+    "file": "cifar10_mobilenetv2_x0_75-a53c314e.pt",
+    "bytes": 5688121,
+    "tag": "a53c314e"
+   },
+   "f16dims": 568,
+   "penult": 1280,
+   "x4dims": 1544,
+   "madds": 59.31,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_mobilenetv2_x0_75/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.549
+    }
+   },
+   "est_gpu_s": 57
+  },
+  {
+   "id": "mobilenetv2_x1_0",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_mobilenetv2_x1_0",
+   "family": "mobilenetv2",
+   "depth_family": "mobilenetv2_x1_0",
+   "run_group": "mobilenetv2_x1_0",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 190 (upstream log)",
+   "readme_top1": 93.79,
+   "hub_asset": {
+    "file": "cifar10_mobilenetv2_x1_0-fe6a5b48.pt",
+    "bytes": 9193273,
+    "tag": "fe6a5b48"
+   },
+   "f16dims": 744,
+   "penult": 1280,
+   "x4dims": 1632,
+   "madds": 87.98,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_mobilenetv2_x1_0/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.59
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "mobilenetv2_x1_4",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_mobilenetv2_x1_4",
+   "family": "mobilenetv2",
+   "depth_family": "mobilenetv2_x1_4",
+   "run_group": "mobilenetv2_x1_4",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 183 (upstream log)",
+   "readme_top1": 94.22,
+   "hub_asset": {
+    "file": "cifar10_mobilenetv2_x1_4-3bbbd6e2.pt",
+    "bytes": 17635961,
+    "tag": "3bbbd6e2"
+   },
+   "f16dims": 1048,
+   "penult": 1792,
+   "x4dims": 2288,
+   "madds": 170.07,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_mobilenetv2_x1_4/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.821
+    }
+   },
+   "est_gpu_s": 60
+  },
+  {
+   "id": "shufflenetv2_x0_5",
+   "roles": [
+    "Dnew"
+   ],
+   "arch": "cifar10_shufflenetv2_x0_5",
+   "family": "shufflenetv2",
+   "depth_family": "shufflenetv2_x0_5",
+   "run_group": "shufflenetv2_x0_5",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 193 (upstream log)",
+   "readme_top1": 90.13,
+   "hub_asset": {
+    "file": "cifar10_shufflenetv2_x0_5-1308b4e9.pt",
+    "bytes": 1554833,
+    "tag": "1308b4e9"
+   },
+   "f16dims": 456,
+   "penult": 1024,
+   "x4dims": 1240,
+   "madds": 10.9,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_shufflenetv2_x0_5/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.402
+    }
+   },
+   "est_gpu_s": 55
+  },
+  {
+   "id": "shufflenetv2_x1_0",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_shufflenetv2_x1_0",
+   "family": "shufflenetv2",
+   "depth_family": "shufflenetv2_x1_0",
+   "run_group": "shufflenetv2_x1_0",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 187 (upstream log)",
+   "readme_top1": 92.98,
+   "hub_asset": {
+    "file": "cifar10_shufflenetv2_x1_0-98807be3.pt",
+    "bytes": 5230673,
+    "tag": "98807be3"
+   },
+   "f16dims": 1068,
+   "penult": 1024,
+   "x4dims": 1512,
+   "madds": 45,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_shufflenetv2_x1_0/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.582
+    }
+   },
+   "est_gpu_s": 57
+  },
+  {
+   "id": "shufflenetv2_x1_5",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_shufflenetv2_x1_5",
+   "family": "shufflenetv2",
+   "depth_family": "shufflenetv2_x1_5",
+   "run_group": "shufflenetv2_x1_5",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 197 (upstream log)",
+   "readme_top1": 93.55,
+   "hub_asset": {
+    "file": "cifar10_shufflenetv2_x1_5-296694dd.pt",
+    "bytes": 10164241,
+    "tag": "296694dd"
+   },
+   "f16dims": 1608,
+   "penult": 1024,
+   "x4dims": 1752,
+   "madds": 94.26,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_shufflenetv2_x1_5/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.704
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "shufflenetv2_x2_0",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_shufflenetv2_x2_0",
+   "family": "shufflenetv2",
+   "depth_family": "shufflenetv2_x2_0",
+   "run_group": "shufflenetv2_x2_0",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 197 (upstream log)",
+   "readme_top1": 93.81,
+   "hub_asset": {
+    "file": "cifar10_shufflenetv2_x2_0-ec31611c.pt",
+    "bytes": 21707473,
+    "tag": "ec31611c"
+   },
+   "f16dims": 2220,
+   "penult": 2048,
+   "x4dims": 3048,
+   "madds": 187.81,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_shufflenetv2_x2_0/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 1.164
+    }
+   },
+   "est_gpu_s": 60
+  },
+  {
+   "id": "repvgg_a0",
+   "roles": [
+    "Dnew"
+   ],
+   "arch": "cifar10_repvgg_a0",
+   "family": "repvgg",
+   "depth_family": "repvgg_a0",
+   "run_group": "repvgg_a0",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 193 (upstream log)",
+   "readme_top1": 94.39,
+   "hub_asset": {
+    "file": "cifar10_repvgg_a0-ef08a50e.pt",
+    "bytes": 31582451,
+    "tag": "ef08a50e"
+   },
+   "f16dims": 576,
+   "penult": 1280,
+   "x4dims": 1520,
+   "madds": 489.08,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4d_repvgg_a0/dump",
+     "sealed": false,
+     "extras": false,
+     "gb": 0.498
+    }
+   },
+   "est_gpu_s": 68
+  },
+  {
+   "id": "repvgg_a1",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_repvgg_a1",
+   "family": "repvgg",
+   "depth_family": "repvgg_a1",
+   "run_group": "repvgg_a1",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 196 (upstream log)",
+   "readme_top1": 94.89,
+   "hub_asset": {
+    "file": "cifar10_repvgg_a1-38d2431b.pt",
+    "bytes": 51541043,
+    "tag": "38d2431b"
+   },
+   "f16dims": 768,
+   "penult": 1280,
+   "x4dims": 1600,
+   "madds": 851.33,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_repvgg_a1/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.591
+    }
+   },
+   "est_gpu_s": 78
+  },
+  {
+   "id": "repvgg_a2",
+   "roles": [
+    "C"
+   ],
+   "arch": "cifar10_repvgg_a2",
+   "family": "repvgg",
+   "depth_family": "repvgg_a2",
+   "run_group": "repvgg_a2",
+   "source": "hub",
+   "weights": null,
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "best-val epoch 193 (upstream log)",
+   "readme_top1": 94.98,
+   "hub_asset": {
+    "file": "cifar10_repvgg_a2-09488915.pt",
+    "bytes": 107555782,
+    "tag": "09488915"
+   },
+   "f16dims": 1120,
+   "penult": 1408,
+   "x4dims": 1856,
+   "madds": 1850.1,
+   "anchor": null,
+   "knob": null,
+   "train": null,
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_repvgg_a2/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.709
+    }
+   },
+   "est_gpu_s": 102
+  },
+  {
+   "id": "resnet56_s31",
+   "roles": [
+    "F",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s31",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s31_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": null,
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 31 --norm chenyaofo --arch cifar10_resnet56"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s31/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s31_eval/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.209
+    }
+   },
+   "est_gpu_s": 171
+  },
+  {
+   "id": "resnet56_s32",
+   "roles": [
+    "F",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s32",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s32_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": null,
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 32 --norm chenyaofo --arch cifar10_resnet56"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s32/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    },
+    "eval": {
+     "dump": "results/b4c_resnet56_s32_eval/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.209
+    }
+   },
+   "est_gpu_s": 171
+  },
+  {
+   "id": "resnet20_s31",
+   "roles": [
+    "F20",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s31",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s31_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": null,
+   "knob": null,
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 31 --norm chenyaofo --arch cifar10_resnet20"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet20_s31/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s31_eval/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.209
+    }
+   },
+   "est_gpu_s": 167
+  },
+  {
+   "id": "resnet20_s32",
+   "roles": [
+    "F20",
+    "STconf"
+   ],
+   "arch": "cifar10_resnet20",
+   "family": "resnet",
+   "depth_family": "resnet20",
+   "run_group": "r20s32",
+   "source": "file",
+   "weights": "/workspace/models/resnet20_s32_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": true,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 40.81,
+   "anchor": null,
+   "knob": null,
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 32 --norm chenyaofo --arch cifar10_resnet20"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet20_s32/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    },
+    "eval": {
+     "dump": "results/b4c_resnet20_s32_eval/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.209
+    }
+   },
+   "est_gpu_s": 167
+  },
+  {
+   "id": "resnet56_s31_ls10",
+   "roles": [
+    "K",
+    "Kls"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s31ls",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s31_ls10_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": "label_smoothing 0.1",
+   "train": {
+    "script": "scripts/b4_train_knob.py",
+    "args": "--seed 31 --norm chenyaofo --arch cifar10_resnet56 --label-smoothing 0.1"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s31_ls10/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_s31_wd5e5",
+   "roles": [
+    "K",
+    "Kwd"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s31wd",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s31_wd5e5_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": "weight_decay 5e-5",
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 31 --norm chenyaofo --arch cifar10_resnet56 --wd 5e-5"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s31_wd5e5/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_s32_ls10",
+   "roles": [
+    "K",
+    "Kls"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s32ls",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s32_ls10_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": "label_smoothing 0.1",
+   "train": {
+    "script": "scripts/b4_train_knob.py",
+    "args": "--seed 32 --norm chenyaofo --arch cifar10_resnet56 --label-smoothing 0.1"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s32_ls10/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    }
+   },
+   "est_gpu_s": 58
+  },
+  {
+   "id": "resnet56_s32_wd5e5",
+   "roles": [
+    "K",
+    "Kwd"
+   ],
+   "arch": "cifar10_resnet56",
+   "family": "resnet",
+   "depth_family": "resnet56",
+   "run_group": "r56s32wd",
+   "source": "file",
+   "weights": "/workspace/models/resnet56_s32_wd5e5_chenyaofo.pt",
+   "norm": "chenyaofo",
+   "full_recipe": false,
+   "trained": true,
+   "selected": "last epoch",
+   "readme_top1": null,
+   "hub_asset": null,
+   "f16dims": 352,
+   "penult": 64,
+   "x4dims": 144,
+   "madds": 125.75,
+   "anchor": null,
+   "knob": "weight_decay 5e-5",
+   "train": {
+    "script": "scripts/train_second_seed.py",
+    "args": "--seed 32 --norm chenyaofo --arch cifar10_resnet56 --wd 5e-5"
+   },
+   "layouts": {
+    "fit": {
+     "dump": "results/b4c_resnet56_s32_wd5e5/dump",
+     "sealed": true,
+     "extras": true,
+     "gb": 0.109
+    }
+   },
+   "est_gpu_s": 58
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "schema": "b4_t2_prereg_p7/1",
+ "registered_at": "P1 (batch 4 pre-registration), before any Dnew or C unit is extracted or read",
+ "source": "node scripts/collapse_laws.js --dry-run --emit-p7 on the committed atlas.json of the two chenyaofo hubs (train-reference nc1, landmarks.py:71): resnet20 0.16994402609546508 (results/atlas_v1_resnet20_s0hub_st3), resnet56 0.04875519896668336 (results/atlas_v1_resnet56_s0hub_st3)",
+ "coordinate": "probe.coords.penult.nc1_tr of scripts/collapse_probe.py (trimmed inverse; equals the landmarks.py:71 value whenever that pinv is stable; the D15 gate checks the committed nc1 within 1%)",
+ "rule_points": "log10 nc1_tr linear in network depth between the two hubs (same recipe, same best-val selection); half-width = 2 x the larger seed SD of log10 nc1 within depth 20 or 56 (full-recipe D nets) + 0.10 dex",
+ "families_monotone": {
+  "resnet": [
+   "resnet20_hub",
+   "resnet32",
+   "resnet44",
+   "resnet56_hub"
+  ],
+  "vgg": [
+   "vgg11_bn",
+   "vgg13_bn",
+   "vgg16_bn",
+   "vgg19_bn"
+  ],
+  "mobilenetv2": [
+   "mobilenetv2_x0_5",
+   "mobilenetv2_x0_75",
+   "mobilenetv2_x1_0",
+   "mobilenetv2_x1_4"
+  ],
+  "shufflenetv2": [
+   "shufflenetv2_x0_5",
+   "shufflenetv2_x1_0",
+   "shufflenetv2_x1_5",
+   "shufflenetv2_x2_0"
+  ],
+  "repvgg": [
+   "repvgg_a0",
+   "repvgg_a1",
+   "repvgg_a2"
+  ]
+ },
+ "ordering_claim": "within each family nc1_tr at the penult decreases along the listed order (deeper or wider = more collapsed)",
+ "verdict_rule": "SUPPORTED if Kendall tau(order index, nc1_tr) <= -0.66 in >= 4 families with >= 3 evaluable members (and >= 4 such families); REFUTED if >= 4 families are evaluable and < 4 pass; NOT_EVALUABLE otherwise. The two resnet points are INFO clauses (inside / outside their interval). Holm p: within-family permutation of nc1_tr.",
+ "thresholds": {
+  "tau_pass": -0.66,
+  "min_members": 3,
+  "min_families": 4,
+  "pass_families": 4
+ },
+ "points": {
+  "resnet32": {
+   "nc1_tr": 0.11208416124464095,
+   "lo": 0.08194730373663066,
+   "hi": 0.1533041189773647,
+   "log10": -0.9504557537747642,
+   "halfwidth_dex": 0.1360095774165428
+  },
+  "resnet44": {
+   "nc1_tr": 0.07392351170295068,
+   "lo": 0.0540471766887555,
+   "hi": 0.10110954757111693,
+   "log10": -1.1312174103351889,
+   "halfwidth_dex": 0.1360095774165428
+  }
+ }
+}

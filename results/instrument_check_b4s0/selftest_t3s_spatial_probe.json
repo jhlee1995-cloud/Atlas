@@ -1,0 +1,124 @@
+{
+ "checks": [
+  {
+   "detail": "",
+   "name": "gini: uniform 0, one position (P-1)/P",
+   "pass": true
+  },
+  {
+   "detail": "5.9997",
+   "name": "Gaussian: mean squared Mahalanobis of N(0, I) = C",
+   "pass": true
+  },
+  {
+   "detail": "(np.int64(9), np.int64(16))",
+   "name": "cell mask of an 11-px corner square: 3 x 3 cells; dilated 4 x 4",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "pointing: hit on a fault cell, chance = cell fraction",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "pixel cells of a flat image: mean 77/255, std 0, log(1e-6)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "condition sets are frozen lane-S conditions",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "discovery never reads soiling (confirmation-only, D7)",
+   "pass": true
+  },
+  {
+   "detail": "{'map_gap_identity': True, 'mask_area': True, 'pairing': True, 'pixel_hash': True}",
+   "name": "known answers pass on the planted dump (identity, pairing, masks, hashes)",
+   "pass": true
+  },
+  {
+   "detail": "[]",
+   "name": "every condition valid",
+   "pass": true
+  },
+  {
+   "detail": "[1.0, 1.0, 1.0, 1.0, 1.0]",
+   "name": "planted local faults: map_max AUROC >= 0.99 on F5",
+   "pass": true
+  },
+  {
+   "detail": "[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]",
+   "name": "planted local faults: every pooled and head AUROC is exactly 0.5",
+   "pass": true
+  },
+  {
+   "detail": "[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]",
+   "name": "invisible fault (glare planted as nothing): every network AUROC exactly 0.5",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "global shift: the pooled d1 sees it (AUROC >= 0.99)",
+   "pass": true
+  },
+  {
+   "detail": "(np.float64(1.0), np.float64(0.185546875))",
+   "name": "pointing: the map max lies on the planted cells",
+   "pass": true
+  },
+  {
+   "detail": "ADDS",
+   "name": "SP2 map over head + pooled: ADDS",
+   "pass": true
+  },
+  {
+   "detail": "ADDS",
+   "name": "SP7 spatial std over head + pooled: ADDS",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "SP3 and SP8 computed; soiling increment skipped in discovery",
+   "pass": true
+  },
+  {
+   "detail": "0.075",
+   "name": "clean false-alarm rate at the cal-calibrated 5% is plausible (exchangeable cal / eval)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "record carries timing per tap and target, max_rss_mb, code sha and commit",
+   "pass": true
+  },
+  {
+   "detail": "[]",
+   "name": "a second run is identical under the replay tolerance",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a sealed dump is refused in discovery",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "confirmation after a (fake) P2 reads soiling; the soiling increment runs",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "a confirmation unit is probed once (touched-once)",
+   "pass": true
+  }
+ ],
+ "code_sha256": "9ac8f8560397d580b8dd1831e65da5b0ab85a08a0cf0a5bb59c5f21ec9b92c3a",
+ "created_utc": "2026-09-24T06:28:31Z",
+ "failed": [],
+ "program": "t3s_spatial_probe",
+ "status": "PASS"
+}

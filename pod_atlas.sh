@@ -24,6 +24,13 @@
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --b1b        # B1b: ViT runs after the gate-anchor correction
 #                                                              #   (docs/plans/B1B_AMENDMENT.md; reuses B1's ResNet50 runs)
 #   bash /workspace/Atlas/pod_atlas.sh /workspace --data-only  # datasets only (no GPU needed)
+#   ATLAS_B4_P1=<P1> bash /workspace/Atlas/pod_atlas.sh /workspace --b4s1
+#                                                              # batch 4 session 1 (GPU): every extraction and training,
+#                                                              #   discovery probes, sealed confirmation dumps
+#                                                              #   (docs/plans/B4_INTEGRATION.md; scripts/pod_b4.sh)
+#   ATLAS_B4_P1=<P1> ATLAS_B4_P2=<P2> bash /workspace/Atlas/pod_atlas.sh /workspace --b4s2 [--b4cpu]
+#                                                              # batch 4 session 2 (numpy only): confirmation probes;
+#                                                              #   --b4cpu skips the GPU preflight (CPU pod)
 # Flags combine (e.g. --a4b --b1); blocks always run in this order: stage1, stage1b, stage2, a3, a4b, b1, anomaly; --a4b or
 # --b1 adds the margin preflight (after the smoke tests). --stage1b, --stage2 and --a3 ran on 2026-09-23 and are
 # committed: never add them again.
@@ -40,7 +47,7 @@ set -euo pipefail
 VOLUME="$(realpath -m "${1:?usage: bash pod_atlas.sh <volume> [--data-only | --stage1 | --stage1b | --stage2 | --a3 | --a4b | --b1 | --anomaly | --b1b ...]}")"
 shift
 for m in "$@"; do                                              # a typo must not silently skip a block
-  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1|--anomaly|--b1b) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
+  case "$m" in --data-only|--stage1|--stage1b|--stage2|--a3|--a4b|--b1|--anomaly|--b1b|--b4s1|--b4s2|--b4cpu) ;; *) echo "ERROR: unknown flag '$m'" >&2; exit 1;; esac
 done
 MODES=" $* "
 has_mode() { [[ "$MODES" == *" $1 "* ]]; }
@@ -52,6 +59,13 @@ if has_mode --b1 && ! { [[ -f scripts/b1_data.py ]] && grep -q '^block_b1() *{' 
 fi
 if has_mode --anomaly && ! { [[ -f scripts/anomaly_probe.py ]] && grep -q '^block_anomaly() *{' pod_atlas.sh; }; then
   echo "ERROR: --anomaly: ANOMALY_H1 is not in this checkout (scripts/anomaly_probe.py or block_anomaly missing)" >&2; exit 1
+fi
+if { has_mode --b4s1 || has_mode --b4s2; } && ! { [[ -f scripts/pod_b4.sh ]] && grep -q '^block_b4s1() *{' scripts/pod_b4.sh; }; then
+  echo "ERROR: --b4s1/--b4s2: batch 4 is not in this checkout (scripts/pod_b4.sh missing)" >&2; exit 1
+fi
+if has_mode --b4cpu && { ! has_mode --b4s2 || has_mode --b4s1 || has_mode --stage1 || has_mode --stage1b || has_mode --stage2 \
+                         || has_mode --a3 || has_mode --a4b || has_mode --b1 || has_mode --b1b; }; then
+  echo "ERROR: --b4cpu goes only with --b4s2 (session 2 has no GPU step; every other block needs the GPU)" >&2; exit 1
 fi
 if has_mode --stage1 && [[ -f results/critic_v1_resnet20_s1_s2/critic.json && "${ATLAS_ALLOW_STAGE1_RERUN:-0}" != 1 ]]; then
   echo "ERROR: --stage1 already ran and is committed; its compare/critic steps would overwrite committed results." >&2
@@ -122,6 +136,7 @@ fi
 echo "volume usage: $(du -sh "$VOLUME" 2>/dev/null | cut -f1) of the 50 GB quota (df shows the whole cluster, not the quota)"
 has_mode --data-only && { echo "=== data only: done ==="; exit 0; }
 
+if ! has_mode --b4cpu; then                                    # --b4cpu (batch 4 session 2 only): numpy probes, no GPU step
 echo "=== GPU preflight ==="
 python - <<'EOF'
 import torch, torch.nn.functional as F
@@ -129,6 +144,7 @@ assert torch.cuda.is_available(), f"torch {torch.__version__}: CUDA unavailable 
 print(torch.__version__, torch.version.cuda, torch.cuda.get_device_name(0), torch.cuda.get_device_capability())
 F.conv2d(torch.randn(1, 3, 8, 8, device="cuda"), torch.randn(4, 3, 3, 3, device="cuda")); torch.cuda.synchronize()
 EOF
+fi
 
 echo "=== tests (CPU) ==="
 python -m pytest -q tests/test_atlas_smoke.py
@@ -871,6 +887,9 @@ block_anomaly() {
   echo "           --b1 results/margin_b1_vitb16/verdicts.json --cache results/anomaly_h1/idgauss_cache.json --json results/anomaly_h1/eval.json"
 }
 
+# --- batch 4 (docs/plans/B4_INTEGRATION.md): block_b4s1 / block_b4s2 live in scripts/pod_b4.sh ---------------------------
+if has_mode --b4s1 || has_mode --b4s2; then source scripts/pod_b4.sh; fi
+
 # run_block <function>: isolated in a subshell with errexit; a failure is logged and later blocks still run
 FAILED=()
 run_block() {
@@ -887,6 +906,8 @@ if has_mode --a4b;     then run_block block_a4b;     fi       # before B1: its _
 if has_mode --b1;      then run_block block_b1;      fi       # last GPU block: never shares the GPU with a training
 if has_mode --b1b;     then run_block block_b1b;     fi       # B1b: ViTs after the gate-anchor correction
 if has_mode --anomaly; then run_block block_anomaly; fi       # CPU only, after B1; reads A4b's dumps, never a B1 dump
+if has_mode --b4s1;    then run_block block_b4s1;    fi       # batch 4 session 1 (GPU); no other GPU block in the launch
+if has_mode --b4s2;    then run_block block_b4s2;    fi       # batch 4 session 2 (numpy only; after the P2 freeze)
 
 echo "=== done. results (dumps stay on the volume, gitignored): $(pwd -P)/results ==="
 echo "Pull to Windows (Git Bash; IP/port from 'runpodctl ssh info <pod-id>'), then commit + push there:"

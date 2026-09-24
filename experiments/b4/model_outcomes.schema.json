@@ -1,0 +1,65 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "experiments/b4/model_outcomes.schema.json",
+ "title": "batch-4 per-model outcomes that T1 writes for T2 (fixed at P1)",
+ "description": "docs/plans/B4_INTEGRATION.md D5, D12. scripts/t1_scoreboard.py writes this object under the key 'model_outcomes' of every FIT-layout scoreboard.json (results/b4_t1/<id>_fit<tag>/scoreboard.json), for the D, N, Dnew units in discovery and the C, K, F, F20 units in confirmation. scripts/collapse_laws.js reads O1 and O5 from it for the PRIMARY (the owner's hypothesis) and never recomputes them. T2 alone computes the accuracy and head coordinates of the laws. Every number is a value from the stored float32 logits and the batch-4 dumps (atlas/b4_core.open_dump); a non-finite value is written as null.",
+ "type": "object",
+ "required": ["schema", "unit", "layout", "phase", "O1", "O5"],
+ "additionalProperties": true,
+ "properties": {
+  "schema": {"const": "b4_model_outcomes/1"},
+  "unit": {"type": "string"},
+  "layout": {"const": "fit"},
+  "phase": {"enum": ["discovery", "confirmation"]},
+  "O1": {"$ref": "#/$defs/O1"},
+  "O5": {"$ref": "#/$defs/O5"}
+ },
+ "$defs": {
+  "num": {"type": ["number", "null"]},
+  "ci95": {"type": "array", "items": {"type": ["number", "null"]}, "minItems": 2, "maxItems": 2},
+  "O1": {
+   "description": "dAUC_joint on clean errors: AUROC(head summary + penult bundle) - AUROC(head summary), cross-fitted on the same folds by atlas/b4_core.head_increment (ridge-logistic on restricted cubic splines, 5 group folds by image row), target = argmax != label on fit-layout clean test rows 0-4999, groups = image rows. Head summary = T1's full head summary (sorted logits linear; gap, max logit, energy, entropy as splines). CI = the 95% group-bootstrap percentile interval (B = 200 discovery, 1000 confirmation). 'call' = atlas/b4_core.head_additive_call.",
+   "type": "object",
+   "required": ["value", "ci95", "dI_bits", "dI_ci95", "call", "bundle", "bundle_members", "target", "rows", "n_pos", "n_neg", "nboot"],
+   "properties": {
+    "value": {"$ref": "#/$defs/num"},
+    "ci95": {"$ref": "#/$defs/ci95"},
+    "dI_bits": {"$ref": "#/$defs/num"},
+    "dI_ci95": {"$ref": "#/$defs/ci95"},
+    "call": {"enum": ["ADDS", "BOUNDED", "INCONCLUSIVE"]},
+    "bundle": {"const": "penult"},
+    "bundle_members": {"const": ["margin_penult", "d1_penult", "knnL2_penult", "trust_penult", "relmaha_penult",
+                                 "purity10_penult", "purity50_penult", "lid_penult"]},
+    "target": {"const": "err_clean"},
+    "rows": {"const": [0, 5000]},
+    "n_pos": {"type": "integer", "minimum": 0},
+    "n_neg": {"type": "integer", "minimum": 0},
+    "nboot": {"type": "integer", "minimum": 1}
+   }
+  },
+  "O5": {
+   "description": "X4 flag AUROC - best head AUROC at severity 3: positives corrupt__<c>__s3 (CIFAR-10-C rows 0-1999, paired with clean rows 0-1999) for each of the 10 discovery corruptions, negatives the clean test rows 3500-4999 (B); X4 = the fused conformal p-value of the calibrated multi-tap flag (conformal p per tap from atlas/b4_core.conformal_p calibrated on A1 = rows 2000-2749, fusion calibrated on A2 = rows 2750-3499), scored as -p; head statistics msp, maxlogit, gap, energy, entropy oriented by atlas/b4_core.ERR_SIGN. value = mean over the 10 corruptions of AUROC(X4) - mean AUROC of the best head statistic, the best being the head statistic with the largest mean AUROC over the same 10 corruptions (a choice that favours the head).",
+   "type": "object",
+   "required": ["value", "x4_auroc_mean", "best_head", "best_head_auroc_mean", "severity", "corruptions", "negatives", "per_corruption"],
+   "properties": {
+    "value": {"$ref": "#/$defs/num"},
+    "x4_auroc_mean": {"$ref": "#/$defs/num"},
+    "best_head": {"enum": ["msp", "maxlogit", "gap", "energy", "entropy"]},
+    "best_head_auroc_mean": {"$ref": "#/$defs/num"},
+    "severity": {"const": 3},
+    "corruptions": {"const": ["gaussian_noise", "shot_noise", "defocus_blur", "motion_blur", "snow", "fog", "brightness",
+                              "contrast", "pixelate", "jpeg_compression"]},
+    "negatives": {"const": [3500, 5000]},
+    "per_corruption": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "object",
+      "required": ["x4_auroc", "head_auroc"],
+      "properties": {"x4_auroc": {"$ref": "#/$defs/num"},
+                     "head_auroc": {"type": "object", "additionalProperties": {"$ref": "#/$defs/num"}}}
+     }
+    }
+   }
+  }
+ }
+}

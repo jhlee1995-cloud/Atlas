@@ -1,0 +1,128 @@
+{
+ "checks": [
+  {
+   "detail": "['test', 'corrupt__gaussian_noise__s1', 'corrupt__gaussian_noise__s3', 'corrupt__gaussian_noise__s5']",
+   "name": "discovery plan holds no confirmation-only split (holdout, extras, exposure_global)",
+   "pass": true
+  },
+  {
+   "detail": "-0.00035709977200359955",
+   "name": "margin adds ~0 over the Bayes head on clean errors (|dAUC| <= 0.015)",
+   "pass": true
+  },
+  {
+   "detail": "{'bundle': 'penult', 'bundle_members': ['margin_penult', 'd1_penult', 'knnL2_penult', 'trust_penult', 'relmaha_penult', 'purity10_penult', 'purity50_penult', 'lid_penult'], 'target': 'err_clean', 'rows': [0, 5000], 'n_pos': 982, 'n_neg': 4018, 'nboot': 50, 'value': -0.002754154167752265, 'ci95': [-0",
+   "name": "O1: the penult bundle does not ADD over the Bayes head (value <= 0.01, call != ADDS)",
+   "pass": true
+  },
+  {
+   "detail": "(-0.002754154167752265, -0.002754154167752265)",
+   "name": "O1 equals atlas/b4_core.head_increment exactly (value, CIs, call)",
+   "pass": true
+  },
+  {
+   "detail": "0.49502111111111113",
+   "name": "stem-only shift: the early bundle adds >= 0.3 AUROC over the head",
+   "pass": true
+  },
+  {
+   "detail": "-0.004452222222222191",
+   "name": "stem-only shift: the penult margin adds ~0 (|dAUC| <= 0.03)",
+   "pass": true
+  },
+  {
+   "detail": "0.9994386759908552",
+   "name": "pixel twin: the early bundle adds beyond uninformative pixel factors (dI_pix > 0.2 bits, ADDS)",
+   "pass": true
+  },
+  {
+   "detail": "(0.5049788888888889, 0.16586166666666669)",
+   "name": "head-null shift (fog s3 along e13): head blind (AUC <= 0.6), null residual adds >= 0.1",
+   "pass": true
+  },
+  {
+   "detail": "0.2326838888888889",
+   "name": "X4 transfers to an unseen family (impulse_noise shifts the stem): dAUC >= 0.1",
+   "pass": true
+  },
+  {
+   "detail": "0.04666666666666667",
+   "name": "X4 clean FPR at alpha 0.05 on B (n_cal 750) within [0.02, 0.09]",
+   "pass": true
+  },
+  {
+   "detail": "{'severity': 3, 'corruptions': ['gaussian_noise', 'shot_noise', 'defocus_blur', 'motion_blur', 'snow', 'fog', 'brightness', 'contrast', 'pixelate', 'jpeg_compression'], 'negatives': [3500, 5000], 'per_corruption': {'gaussian_noise': {'x4_auroc': 0.9986511111111112, 'head_auroc': {'msp': 0.5026388888",
+   "name": "O5: X4 sees the stem-only noise shift (gaussian x4 AUROC >= 0.9, head <= 0.6), value > 0",
+   "pass": true
+  },
+  {
+   "detail": "[]",
+   "name": "model_outcomes validates against experiments/b4/model_outcomes.schema.json",
+   "pass": true
+  },
+  {
+   "detail": "mspT",
+   "name": "head best statistic chosen",
+   "pass": true
+  },
+  {
+   "detail": "['by_split', 'clean_fpr', 'estimators', 'partial_H_given_ATC_frac_ge_0.3', 'partial_H_given_ATC_mean', 'skew']",
+   "name": "batch arm ran (estimators, skew, typing, by_split)",
+   "pass": true
+  },
+  {
+   "detail": "{'H': 0.0, 'sparse': 0.025, 'T2_penult': 0.025, 'T2_pre': 0.025, 'T2_s2end': 0.075, 'R_pre': 0.15, 'R_s2end': 0.025, 'R_penult': 0.1, 'bbse_l1': 0.025, 'bbsdh_chi2': 0.05, 'bbsds': 0.075, 'T2_pix': 0.1, 'disp_penult': 0.025}",
+   "name": "batch arm: every detector has a CAL-calibrated flag rate on a corrupt split",
+   "pass": true
+  },
+  {
+   "detail": "{'tau_q95': 4.917815525124378, 'sparse_frac_test': 0.0454, 'fpr_B': 0.04066666666666666, 'n_test': 5000, 'nc1_train': 2.4329977166186323, 'head_center_cos_train': 0.9948278992424328, 'law': {'a': 0.0224, 'b': -0.108, 'source': 'results/anomaly_h1/SESSION.md:149 (AH-1)'}}",
+   "name": "DO-3 record: nc1 and sparse fraction are numbers",
+   "pass": true
+  },
+  {
+   "detail": "{}",
+   "name": "no target or block failed",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "refuses an existing output (append-only)",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "confirmation: a unit is scored once under any tag",
+   "pass": true
+  },
+  {
+   "detail": "0.03866666666666667",
+   "name": "eval layout: X4 calibrated on fit rows 0-2499 / 2500-4999, FPR on B_eval within [0.02, 0.09]",
+   "pass": true
+  },
+  {
+   "detail": "('mspT', 'mspT')",
+   "name": "eval layout reproduces the fit run's best head statistic",
+   "pass": true
+  },
+  {
+   "detail": "",
+   "name": "eval layout writes no model_outcomes",
+   "pass": true
+  },
+  {
+   "detail": "0.5004866666666667",
+   "name": "eval layout: stem-only shift still read by the early bundle (dAUC >= 0.3)",
+   "pass": true
+  }
+ ],
+ "code_sha256": "caff71e05e91d63de767dc1e3e494f2b05e8dc4cede0839ea5e03d3d8a13a17a",
+ "created_utc": "2026-09-24T06:27:13Z",
+ "failed": [],
+ "fast": true,
+ "layouts": [
+  "fit",
+  "eval"
+ ],
+ "status": "PASS"
+}

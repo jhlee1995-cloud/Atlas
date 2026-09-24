@@ -1,0 +1,53 @@
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_hub --phase discovery --layout fit --out results/b4_t1/resnet20_hub_fit_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_hub --phase discovery --out results/b4_t2/resnet20_hub_p2
+timeout 3600 python scripts/t3s_spatial_probe.py --registry experiments/b4/models.json --unit resnet20_hub --phase discovery --out results/b4_t3s/resnet20_hub_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_hub --phase discovery --layout fit --out results/b4_t1/resnet56_hub_fit_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_hub --phase discovery --out results/b4_t2/resnet56_hub_p2
+timeout 3600 python scripts/t3s_spatial_probe.py --registry experiments/b4/models.json --unit resnet56_hub --phase discovery --out results/b4_t3s/resnet56_hub_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_s1 --phase discovery --out results/b4_t2/resnet20_s1_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_s2 --phase discovery --out results/b4_t2/resnet20_s2_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_s3 --phase discovery --out results/b4_t2/resnet20_s3_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_s4 --phase discovery --out results/b4_t2/resnet20_s4_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet20_rand --phase discovery --out results/b4_t2/resnet20_rand_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_s1 --phase discovery --out results/b4_t2/resnet56_s1_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_s2 --phase discovery --out results/b4_t2/resnet56_s2_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e10 --phase discovery --out results/b4_t2/resnet56_e10_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e20 --phase discovery --out results/b4_t2/resnet56_e20_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e40 --phase discovery --out results/b4_t2/resnet56_e40_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e50 --phase discovery --out results/b4_t2/resnet56_e50_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e60 --phase discovery --out results/b4_t2/resnet56_e60_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_e70 --phase discovery --out results/b4_t2/resnet56_e70_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_s12m --phase discovery --out results/b4_t2/resnet56_s12m_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_s13m --phase discovery --out results/b4_t2/resnet56_s13m_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet56_rand --phase discovery --out results/b4_t2/resnet56_rand_p2
+timeout 1800 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit resnet32 --phase discovery --out results/b4_t2/resnet32_p2
+timeout 3600 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit vgg11_bn --phase discovery --out results/b4_t2/vgg11_bn_p2
+timeout 3600 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit mobilenetv2_x0_5 --phase discovery --out results/b4_t2/mobilenetv2_x0_5_p2
+timeout 3600 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit shufflenetv2_x0_5 --phase discovery --out results/b4_t2/shufflenetv2_x0_5_p2
+timeout 3600 python scripts/collapse_probe.py --registry experiments/b4/models.json --unit repvgg_a0 --phase discovery --out results/b4_t2/repvgg_a0_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_s1 --phase discovery --layout fit --out results/b4_t1/resnet20_s1_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_s2 --phase discovery --layout fit --out results/b4_t1/resnet20_s2_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_s3 --phase discovery --layout fit --out results/b4_t1/resnet20_s3_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_s4 --phase discovery --layout fit --out results/b4_t1/resnet20_s4_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet20_rand --phase discovery --layout fit --out results/b4_t1/resnet20_rand_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_s1 --phase discovery --layout fit --out results/b4_t1/resnet56_s1_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_s2 --phase discovery --layout fit --out results/b4_t1/resnet56_s2_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e10 --phase discovery --layout fit --out results/b4_t1/resnet56_e10_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e20 --phase discovery --layout fit --out results/b4_t1/resnet56_e20_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e40 --phase discovery --layout fit --out results/b4_t1/resnet56_e40_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e50 --phase discovery --layout fit --out results/b4_t1/resnet56_e50_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e60 --phase discovery --layout fit --out results/b4_t1/resnet56_e60_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_e70 --phase discovery --layout fit --out results/b4_t1/resnet56_e70_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_s12m --phase discovery --layout fit --out results/b4_t1/resnet56_s12m_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_s13m --phase discovery --layout fit --out results/b4_t1/resnet56_s13m_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet56_rand --phase discovery --layout fit --out results/b4_t1/resnet56_rand_fit_p2
+timeout 5400 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit resnet32 --phase discovery --layout fit --out results/b4_t1/resnet32_fit_p2
+timeout 7200 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit vgg11_bn --phase discovery --layout fit --out results/b4_t1/vgg11_bn_fit_p2
+timeout 7200 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit mobilenetv2_x0_5 --phase discovery --layout fit --out results/b4_t1/mobilenetv2_x0_5_fit_p2
+timeout 7200 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit shufflenetv2_x0_5 --phase discovery --layout fit --out results/b4_t1/shufflenetv2_x0_5_fit_p2
+timeout 7200 python scripts/t1_scoreboard.py --registry experiments/b4/models.json --unit repvgg_a0 --phase discovery --layout fit --out results/b4_t1/repvgg_a0_fit_p2
+timeout 3600 python scripts/t1_streams.py --registry experiments/b4/models.json --unit resnet20_hub --phase discovery --frames /root/b4_frames/resnet20_hub_p2 --out results/b4_t1s/resnet20_hub_p2
+timeout 3600 python scripts/t1_streams.py --registry experiments/b4/models.json --unit resnet56_hub --phase discovery --frames /root/b4_frames/resnet56_hub_p2 --out results/b4_t1s/resnet56_hub_p2
+timeout 3600 python scripts/t1_streams.py --registry experiments/b4/models.json --unit resnet56_e40 --phase discovery --frames /root/b4_frames/resnet56_e40_p2 --out results/b4_t1s/resnet56_e40_p2
+timeout 3600 python scripts/t3s_spatial_probe.py --registry experiments/b4/models.json --unit resnet20_rand --phase discovery --out results/b4_t3s/resnet20_rand_p2
+timeout 3600 python scripts/t3s_spatial_probe.py --registry experiments/b4/models.json --unit resnet56_rand --phase discovery --out results/b4_t3s/resnet56_rand_p2
