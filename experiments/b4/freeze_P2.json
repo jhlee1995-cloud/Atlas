@@ -1,0 +1,275 @@
+{
+ "schema": "b4_freeze_P2/1",
+ "created_utc": "2026-09-24T16:42:20Z",
+ "doc": "docs/plans/B4_INTEGRATION.md D8 step 4; docs/plans/B4A_AMENDMENT.md (Provenance, 'How S2 must be launched'); docs/plans/B4B_AMENDMENT.md (the S2 time limits)",
+ "p1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "s1_head": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "s1_head_source": "results/instrument_check_b4s1/head.txt",
+ "p_a": "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a",
+ "r1": "cb617c3cf814b5080f4d11e6cbc38453da0831f4",
+ "p_run_discovery": [
+  "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+  "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a"
+ ],
+ "p_run_confirmation": [
+  "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+  "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a",
+  "<S2 HEAD = results/instrument_check_b4s2[_r<k>]/head.txt, normally P2>"
+ ],
+ "sha256_convention": "sha256 of the committed bytes; every file below is LF-only, so this equals scripts/b4_stats.js fileSha256 (CRLF-normalised) and atlas/b4_core.code_sha256",
+ "files": {
+  "results/b4/eval_discovery.json": {
+   "sha256": "4908507ba139299f2c0194c7a777fabb66187c67579ce02e024ae4fba154d592",
+   "emitted_by": "node scripts/t1_eval.js --phase discovery --p1 ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166 --p-run ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166,14caf51b7ca241a2dd95dacc531cc63a5bda6a6a --json results/b4/eval_discovery.json --emit-rules experiments/b4/t1_rules.json",
+   "d8": "(a)",
+   "owner": "T1",
+   "note": "emitted in the same run as experiments/b4/t1_rules.json, without --amend; equal to the earlier emission (sha256 ab652747edd9fd29b986d42a6b0fb243a8044566d2a08d5fefd78414c0cfa02f) except its 'created' field"
+  },
+  "experiments/b4/t1_rules.json": {
+   "sha256": "1645540b3915c48a0ad9626efaffaa4b9eda3f93b95692d1ab02e813f94c056c",
+   "emitted_by": "node scripts/t1_eval.js --phase discovery --p1 ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166 --p-run ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166,14caf51b7ca241a2dd95dacc531cc63a5bda6a6a --json results/b4/eval_discovery.json --emit-rules experiments/b4/t1_rules.json",
+   "d8": "(a)",
+   "owner": "T1",
+   "note": "emitted without --amend: every claim ACTIVE (31), X3-3 included; the lead kept X3-3 ACTIVE after review and discloses its harm-reference concern instead (see disclosed). Equal to the earlier unamended emission (sha256 b59f3a4d27c39ab215bbaf6382dd6cf737dee069b66c81a0135f9fa1e722109f) except 'created'. The emissions that withdrew X3-3 (sha256 0316be0a0e3d7096e6802d6d0e17acb9bef306fe3b44971b12db4b159272914c and 693b9aba6f3078ccf1c31f0e5477438ba19dbacafda25afe13cd840949203d68) are superseded and not committed."
+  },
+  "experiments/b4/laws_frozen.json": {
+   "sha256": "b959c38642cc61afbbebc5d6a15ffd1a2336f502d45a24a57877254435f91973",
+   "emitted_by": "node scripts/collapse_laws.js --fit --p1 ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166 --out experiments/b4/laws_frozen.json",
+   "d8": "(a)",
+   "owner": "T2",
+   "note": "a second --fit into a scratch file was identical apart from created_utc"
+  },
+  "experiments/b4/timing_b4a.json": {
+   "sha256": "99d5fe188ee9eb3fc7e14b076d77c11aec8486b7854c6fba2469d3a2f022faf6",
+   "emitted_by": "node scripts/b4a_p2.js timing --timing results/instrument_check_b4s1_r2/timing.json --out experiments/b4/timing_b4a.json",
+   "d8": "B4a (docs/plans/B4A_AMENDMENT.md, 'b4_timeouts.js at P2')",
+   "owner": "integration lead"
+  },
+  "experiments/b4/timeouts_b4_emitted.json": {
+   "sha256": "9ca331204f42c969c2d3f9809630f8f0fed9aeb9c398b3ee06a3214d4f89fba8",
+   "emitted_by": "node scripts/b4_timeouts.js --registry experiments/b4/models.json --timing experiments/b4/timing_b4a.json --out experiments/b4/timeouts.json",
+   "d8": "(a)",
+   "owner": "integration lead",
+   "note": "the frozen scripts/b4_timeouts.js emission, written as experiments/b4/timeouts.json and renamed unchanged under B4b; a second emission into a scratch file was byte-identical. S2 does not read it: it is the source of experiments/b4/timeouts.json"
+  },
+  "experiments/b4/timeouts.json": {
+   "sha256": "6695791559fe44a5659dd4338b8fc59df7575e50e7930050cc81801f7be28138",
+   "emitted_by": "node scripts/b4b_timeouts.js --in experiments/b4/timeouts_b4_emitted.json --out experiments/b4/timeouts.json",
+   "d8": "B4b (owner-approved amendment)",
+   "owner": "integration lead",
+   "note": "B4b (docs/plans/B4B_AMENDMENT.md): every limit = min(14400, 2 x the emitted limit), never lower; 72 limits, each exactly 2x (none reaches the cap), 3600-8324 s; 'rule' states the B4b rule and quotes the emitted one; peak_gb, split and unmeasured copied unchanged; its 'amendment' key records the source path and its CRLF-normalised sha256 (scripts/b4_reg.py reads only the per-job keys and peak_gb). A second run into a scratch file was byte-identical, and so was a run in a fresh Windows checkout (core.autocrlf=true, a CRLF input). Rewritten after the P2 review from the same emission: only 'rule' differs from the superseded file (sha256 bc1ad86291ca3a949da0742320cd2f1b092bbff5429bb9349d043be108ffc803), which is not committed."
+  },
+  "results/b4/eval_t3s_discovery.json": {
+   "sha256": "3fbc0d91da2797e85a1f61651dce0e497ff6e2bf3ec81239942fb7d0302c56c2",
+   "emitted_by": "node scripts/t3s_eval.js --phase discovery --p1 ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166 --p-run ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166,14caf51b7ca241a2dd95dacc531cc63a5bda6a6a --json results/b4/eval_t3s_discovery.json",
+   "d8": "(a), optional T3S discovery evaluation",
+   "owner": "T3S",
+   "note": "a second run into a scratch file was identical apart from its timestamp"
+  }
+ },
+ "p2_files_guarded_by_pod_b4": [
+  "experiments/b4/freeze_P2.json",
+  "experiments/b4/t1_rules.json",
+  "experiments/b4/laws_frozen.json",
+  "experiments/b4/timeouts.json",
+  "results/b4/eval_discovery.json"
+ ],
+ "cuts": [],
+ "cuts_basis": "No cut. scripts/b4_timeouts.js flagged no job SPLIT (split: [], unmeasured: []); the D10 per-target split and the section-2 cut list are not needed. C stays 12 (10 from S1 + 2 from B4a).",
+ "split": {
+  "flagged": [],
+  "cap_s": 14400,
+  "largest_raw_limit": "t1 shufflenetv2_x2_0 fit: ceil(3 x 306.756 s x (2048/1024)^2 x 138500/122500) = 4162 s, 29% of the cap; a SPLIT would need a ShuffleNet t_ref above 1061 s (3.5x the measured 306.8 s)",
+  "next": "t1 mobilenetv2_x1_4 fit 3111 s",
+  "decision": "none needed: no cap and no cut is applied",
+  "after_b4b": "B4b doubles every limit: t1 shufflenetv2_x2_0 fit 8324 s (58% of the cap), next t1 mobilenetv2_x1_4 fit 6222 s; no B4b limit reaches the 14400 s cap"
+ },
+ "amendments": [
+  {
+   "track": "T2",
+   "claim": "P4",
+   "action": "withdraw",
+   "reason": "D8 (b); docs/plans/T2_COLLAPSE.md section 5 ('a direction contradicted on D21 is on record at P2, before any C read; D8 (b) then allows withdrawing that item to INFO with a reason'). The frozen single-coordinate law for P4 (SVHN L2-normalised 10-NN AUROC - best head AUROC, registered to rise with collapse) chose log10_plnc1 on D21 with slope 0.0489 and rho_D 0.448: the gain falls as collapse deepens (collapse sign of plnc1 is -1). laws_frozen.json law_items.P4.direction_as_registered = false, so P4 cannot be SUPPORTED at E whatever C shows; a REFUTED would only restate discovery. P1 predicted REFUTED (the SVHN ceiling).",
+   "applied_in": "reporting only: collapse_laws.js reads no amendments, so its --evaluate output still carries a P4 label and its Holm still runs over 22 items (at least as strict as 21 for every other item). results/b4/SESSION.md reports P4 as 'INFO (withdrawn at P2)' with the evaluator's label beside it."
+  }
+ ],
+ "reprobe": false,
+ "reprobe_basis": "git diff P1 P2 -- $B4_PROBE_CODE (atlas/b4_core.py atlas/b4_collapse.py scripts/t1_scoreboard.py scripts/t1_streams.py scripts/collapse_probe.py scripts/t3s_spatial_probe.py scripts/b4_reg.py) is empty; b4_guard_p2 leaves B4_REPROBE=0",
+ "d8_changes": {
+  "a_emitted_by_frozen_code": [
+   "results/b4/eval_discovery.json",
+   "experiments/b4/t1_rules.json",
+   "experiments/b4/laws_frozen.json",
+   "experiments/b4/timeouts_b4_emitted.json",
+   "results/b4/eval_t3s_discovery.json"
+  ],
+  "b_withdrawn_to_info": [
+   "T2 P4"
+  ],
+  "c_stricter_thresholds": [],
+  "d_probe_bug_fixes": [],
+  "e_evaluator_bug_fixes": [],
+  "f_pod_b4_limits_and_cuts": [],
+  "amendment": [
+   "B4a (docs/plans/B4A_AMENDMENT.md, owner-approved, committed at P_A 14caf51b7ca241a2dd95dacc531cc63a5bda6a6a): experiments/b4/timing_b4a.json, written at P2 by scripts/b4a_p2.js timing (a P_A file, not in experiments/b4/frozen_files.txt) as the --timing input of the frozen b4_timeouts.js emission; outside D8, as B4A_AMENDMENT.md states ('D8's list of P1 -> P2 changes'); B4a stays out of 'amendments'",
+   "B4b (docs/plans/B4B_AMENDMENT.md, owner-approved 2026-09-24): experiments/b4/timeouts.json = min(14400, 2 x experiments/b4/timeouts_b4_emitted.json), written by scripts/b4b_timeouts.js; outside D8, not a D8 (f) change (scripts/pod_b4.sh is unchanged)"
+  ],
+  "frozen_files": "every path in experiments/b4/frozen_files.txt is identical to P1 (git diff --quiet P1 -- $(cat experiments/b4/frozen_files.txt)); pod_atlas.sh and scripts/pod_b4.sh are identical to P1; the D6 committed instruments are identical to 2b561a9",
+  "other_files_since_p1": [
+   "P_A (B4a): docs/plans/B4A_AMENDMENT.md, scripts/b4_weights_amend.py, scripts/b4a_supplement.sh, scripts/b4a_p2.js, tests/test_b4a_amendment.py, results/b4/RUN_REQUEST_S1_SUPPLEMENT.md",
+   "R1: results/ only (the S1 and supplement pull)",
+   "P2: the files above, this file, results/b4/RUN_REQUEST_S2.md and the B4b files docs/plans/B4B_AMENDMENT.md and scripts/b4b_timeouts.js"
+  ]
+ },
+ "b4a": {
+  "p_a": "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a",
+  "doc": "docs/plans/B4A_AMENDMENT.md",
+  "doc_sha256": "ef5534a95fa7aabf0309b9de494ea1eb5825fe41cc5455d51f89cc6913d5d936",
+  "check_dir": "results/instrument_check_b4s1_r2",
+  "tag": "_r2",
+  "s2_check_dir": "results/instrument_check_b4s1_r2",
+  "timing": "experiments/b4/timing_b4a.json",
+  "timing_source": {
+   "path": "results/instrument_check_b4s1_r2/timing.json",
+   "sha256": "a6874ee714d6c92a98bd730cde676e769986da4cedde5c53779f45cf8141ca3d"
+  },
+  "timing_raised": [],
+  "timing_values": {
+   "t1": {
+    "measured_s": 306.756,
+    "floor_s": 301.083,
+    "used_s": 306.756
+   },
+   "t2": {
+    "measured_s": 71.527,
+    "floor_s": 65.268,
+    "used_s": 71.527
+   }
+  },
+  "weights_record": {
+   "path": "results/b4_weights/weights_r2.json",
+   "sha256": "55f965b373d58f0af89add62620e2413d065736605366bdb8070a79422d7b0a9"
+  },
+  "seal_manifest": {
+   "path": "results/instrument_check_b4s1_r2/sealed.json",
+   "sha256": "213c03a534826a362bee6494da90aa3fc153f52056351a99c57185ec305faef4",
+   "entries": 36,
+   "sealed": 36,
+   "b4a_entries": [
+    "mobilenetv2_x0_75:fit SEALED",
+    "shufflenetv2_x1_0:fit SEALED"
+   ]
+  },
+  "seal_diff": {
+   "path": "results/instrument_check_b4s1_r2/seal_diff.json",
+   "sha256": "6e51e17f122abe0e77e77fd8958064064a9d549917e6ca68f8e47ed1404eec6f",
+   "status": "PASS"
+  },
+  "s1_seal_manifest": {
+   "path": "results/instrument_check_b4s1/sealed.json",
+   "sha256": "f1d762cfab97ab29d85d6516c10c488d12665c34934c189e13051a22c35ac2a9",
+   "note": "written before the supplement; lists the two B4a dumps ABSENT, so S2 must not use it"
+  },
+  "c_count": 12,
+  "c_count_under_frozen_gate_only": {
+   "n": 10,
+   "missing": [
+    "mobilenetv2_x0_75",
+    "shufflenetv2_x1_0"
+   ]
+  },
+  "step_e": "node scripts/b4a_p2.js seals --json results/b4/b4a_seals.json (reads check_dir above; must PASS before any result of the two B4a C units is reported)"
+ },
+ "b4b": {
+  "doc": "docs/plans/B4B_AMENDMENT.md",
+  "doc_sha256": "c253aecb42816be5902cd20c1a15e351d5e573da0410fec447cdaad2d1f07f90",
+  "script": "scripts/b4b_timeouts.js",
+  "script_sha256": "7c0f2f26a8d2bc8f98677f28d0ae0c70de9f78dd538454c85cfe6a8d0d35af03",
+  "selftest": "node scripts/b4b_timeouts.js --selftest: PASS (10/10)",
+  "approved": "by the owner on 2026-09-24",
+  "rule": "min(14400, 2 x the limit the frozen scripts/b4_timeouts.js emitted), never lower",
+  "factor": 2,
+  "cap_s": 14400,
+  "limits": 72,
+  "limits_at_cap": 0,
+  "range_s": [
+   3600,
+   8324
+  ],
+  "source": {
+   "path": "experiments/b4/timeouts_b4_emitted.json",
+   "sha256": "9ca331204f42c969c2d3f9809630f8f0fed9aeb9c398b3ee06a3214d4f89fba8"
+  },
+  "output": {
+   "path": "experiments/b4/timeouts.json",
+   "sha256": "6695791559fe44a5659dd4338b8fc59df7575e50e7930050cc81801f7be28138"
+  },
+  "emitted_by": "node scripts/b4b_timeouts.js --in experiments/b4/timeouts_b4_emitted.json --out experiments/b4/timeouts.json",
+  "rerun": "a second run into a scratch file is byte-identical to timeouts.json; so is a run in a fresh Windows checkout (core.autocrlf=true, 91 CRs in the input): b4b_timeouts.js hashes its input CRLF-normalised (the batch-4 convention, scripts/b4_stats.js fileSha256) and writes LF",
+  "s2_reads": "experiments/b4/timeouts.json only: scripts/b4_reg.py timeout() reads the per-job keys and peak reads peak_gb; nothing reads 'rule' or 'amendment'; b4_guard_p2 requires the file at P2 (B4_P2_FILES) and refuses if it differs between P2 and HEAD. peak_gb, and so P, is unchanged.",
+  "not_result_driven": "a limit decides whether a job may finish, never what it computes; decided before S2 ran and before any confirmation data was read, from S1's timings and the cost models only; one factor for all 72 limits, no unit, program or claim selected",
+  "d8": "outside D8's list of P1 -> P2 changes, as B4a: an owner-approved amendment. It changes one file D8 governs (timeouts.json is no longer the direct output of b4_timeouts.js), so the direct output is committed beside it. Not a D8 (f) change: scripts/pod_b4.sh is unchanged. Not in 'amendments', which holds the D8 (b)/(c) claim amendments the evaluators apply per track."
+ },
+ "timeouts": {
+  "file": "experiments/b4/timeouts.json",
+  "emitted_file": "experiments/b4/timeouts_b4_emitted.json",
+  "jobs_keyed": 72,
+  "jobs_keyed_basis": "every line of results/instrument_check_b4s0/jobs_replay.txt (6) and jobs_confirmation.txt (66) has a key, so no S2 job falls back to B4_LIMITS; checked again after B4b: each of the 72 job lines maps to a key of timeouts.json equal to 2x its emitted limit",
+  "peak_gb": {
+   "t1": 2.1,
+   "t2": 1.2,
+   "t3s": 0.5,
+   "t1s": 1.7
+  },
+  "decision": "B4b (owner-approved amendment, docs/plans/B4B_AMENDMENT.md, 2026-09-24): every limit = min(14400, 2 x the limit scripts/b4_timeouts.js emitted), never lower. No limit reaches the cap, so each is exactly 2x (3600-8324 s). The emission itself was accepted as D8 (a) with no D10 split, cap or cut; peak_gb (so P), split and unmeasured are unchanged.",
+  "decision_superseded": "SUPERSEDED by B4b: accepted as emitted (D8 (a)); no D10 split, cap or cut",
+  "eval_layout_margin": {
+   "jobs": "the 12 T1 eval-layout jobs: F/F20 (resnet56_s31/s32, resnet20_s31/s32) limit 4252 s (emitted 2126 s); R2 (8 units) limit 3618 s (emitted 1809 s)",
+   "why_thin": "Why the emitted margins were thin: b4_timeouts.js scales S1's fit-layout time by penult width and rows only. It leaves out confirmation's B = 1000 bootstrap draws (B = 200 in S1) and its 3-5 confirmation-only T1 targets, and no eval layout was timed in S1. Its row factor also divides by the reference dump's 122,500 rows, although S1's discovery run read 88,000 of them (discovery refuses the 34,500 CONFIRMATION_ONLY rows): the rows read grow 1.57x (C/K/F fits), 2.77x (R2 eval) and 3.22x (F/F20 eval), against the rule's 1.13x, 1.87x and 2.19x. The estimates below model that growth per component.",
+   "estimate": "S1 reference resnet32 fit 323 s = build/taps 102 s + batch 20 s + 26 targets 200 s (7.7 s per target); resnet32 is the t_ref of every F/F20 and R2 eval limit. The bootstrap share of target time is not measured. An operation count (about 21 b4_core.boot_ci calls per target, each draw 25-30 full-length numpy passes) gives about 0.2-0.33 at B = 200; a first count of 0.13 was wrong, so the central share 0.25 is central, not conservative. Estimates from three cost models (the P2 lead's and two reviews'): F/F20 eval about 1310-1370 s at share 0.25 and 1830-1860 s at 0.5; at share 1.0 (all target time bootstrap) about 2750-2960 s. Against the B4b limits: F/F20 eval margin 3.10-3.25x at share 0.25, 2.29-2.32x at 0.5 and 1.44-1.55x at 1.0; R2 eval 3.12-3.73x at 0.25, 2.26-2.75x at 0.5 and 1.46-1.80x at 1.0. No limit is reached at any share up to 1.0. The share-1.0 values: the P2 lead's model re-run (F/F20 2877 s, R2 2306 s) and the first review's (F/F20 by the resnet32 proxy 2834 s, R2 2008-2217 s); the second review's, extrapolated linearly from its 0.25 and 0.5 values (the bootstrap time is linear in B), gives R2 about 2480 s (1.46x) and F/F20 within 2750-2960 s.",
+   "estimate_emitted": "SUPERSEDED by B4b (against the emitted limits): F/F20 eval margin 1.55-1.62x at share 0.25 and 1.14-1.16x at 0.5; R2 eval 1.56-1.86x at 0.25 and 1.13-1.37x at 0.5. The limit was reached from a share of about 0.6-0.7 for F/F20 (about 0.64 in the P2 lead's model and in the first review's) and about 0.6-0.85 for R2 (about 0.62 in the second review's model, 0.70 in the P2 lead's and 0.74-0.86 across the first review's three units).",
+   "wide_c_fits": "Next tightest: the six wide C T1 fits (mobilenetv2_x0_75, mobilenetv2_x1_0, repvgg_a1, repvgg_a2, shufflenetv2_x1_0, shufflenetv2_x1_5; limits 3600-3862 s, emitted 1800-1931 s). The width rule scales by penult width only, but their earlier taps are 2.4-3.7x wider than the reference's. Against the B4b limits: margin 3.72-4.28x at share 0.25, 2.96-3.30x at 0.5 and 2.10-2.24x at 1.0 (emitted: 1.86-2.14x, 1.48-1.65x and 1.05-1.12x). Every other job has at least about 4.6x at share 0.25 in the P2 lead's model (emitted: about 2.3x).",
+   "load": "S1's t_ref values come from a lane of 4 probes at once (P = 4: no timeouts.json existed at P1, so b4_P used the default 4 GB peak), niced beside the GPU chain and the trainings. Within S1 the same probe's per-target time varied with load: median 5.8 s per target for the 18 T1 fits started 07:03-07:26, 7.6-7.7 s for the four started 07:28-07:30 (resnet32 among them); the supplement's ShuffleNet fit on an idle pod took 5.1 s. S2 runs P = min(quota - 1, free memory / 2.1 GB) probes, up to 16 on a 2x4090, without trainings, so S2's per-job speed is not established to be better than S1's. Under B4b the smallest margin at share 0.5 (about 2.26x) exceeds this 1.3-1.5x load effect combined with a host about 13% slower per core (about 1.7x).",
+   "risk_accepted": "SUPERSEDED by B4b (written for the emitted limits; kept for the record): A limit cannot be raised after S2 has unsealed (a P2 change outside D8). Two things protect the thin margins. (1) The host: RUN_REQUEST_S2.md section 2 keeps only an EPYC-Genoa-class CPU, S1's class, because a host about 13% slower per core can cross the tightest eval-layout margin at a share of 0.5. (2) D10's relaunch: a job killed by its limit (exit 124) is rerun once under the next S2 tag with unchanged code and timeouts.json; every job that already wrote its output refuses (touched-once) before opening a dump, so the killed job runs almost alone, and the 1.3-1.5x load effect seen in S1 exceeds these margins. Only a job killed in that relaunch too leaves its unit NOT_EVALUABLE for the claims that need the output (R needs 3 of 4 F/F20 units).",
+   "risk_after_b4b": "A limit still cannot be raised after S2 has unsealed (a P2 change outside D8); B4b raised them at P2, before anything sealed was opened. What protects the margins now: (1) the doubled limits above; (2) the host: RUN_REQUEST_S2.md section 2 keeps only an EPYC-Genoa-class CPU, S1's class, on which the t_ref values were measured (under B4b a host about 13% slower per core crosses no modelled margin); (3) D10's relaunch: a job killed by its limit (exit 124) is rerun once under the next S2 tag with unchanged code and timeouts.json, and every job that already wrote its output refuses (touched-once) before opening a dump, so the killed job runs almost alone. Only a job killed in that relaunch too leaves its unit NOT_EVALUABLE for the claims that need the output (R needs 3 of 4 F/F20 units)."
+  }
+ },
+ "s2": {
+  "run_request": "results/b4/RUN_REQUEST_S2.md",
+  "env": {
+   "ATLAS_B4_P1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+   "ATLAS_B4_P2": "<P2>",
+   "ATLAS_B4S1_CHECK_DIR": "results/instrument_check_b4s1_r2",
+   "ATLAS_B4_S1_TAG": "unset (S1 anchors ran under '')",
+   "ATLAS_B4_TAG": "unset on the first launch",
+   "ATLAS_B4_CUT": "unset"
+  },
+  "launch": "setsid -f bash /workspace/Atlas/pod_atlas.sh /workspace --b4s2 --b4cpu",
+  "pod": {
+   "d17": "D17 (docs/plans/B4_INTEGRATION.md) ranks first a CPU pod in EU-RO-1 with kxfir1tryb, >= 16 vCPU and >= 2 GB per vCPU, created in the web console; otherwise 'the 4090 or the EU-RO-1 pod with the most vCPU per dollar'.",
+   "chosen": "2x RTX 4090 in EU-RO-1, fallback 1x RTX 4090 (RUN_REQUEST_S2.md section 1). This departs from D17's order: the CPU pod is not tried.",
+   "reason": "The tightest S2 limits are scaled from t_ref values measured on S1's host class, AMD EPYC-Genoa RTX 4090 hosts in EU-RO-1 (versions.json of S1 and of the supplement). Under B4b their margins are 2.26-2.75x (eval layouts) and 2.96-3.30x (wide C fits) at a bootstrap share of 0.5 and 1.44-1.80x (eval layouts) at 1.0 (emitted limits: 1.13-1.37x and 1.48-1.65x at 0.5); these margins rest on S1's host class, and no limit can be raised after S2 has unsealed. Neither pod type guarantees a CPU model, but the EU-RO-1 4090 hosts gave EPYC-Genoa in S1 and in the supplement, while no CPU pod's model has been observed in this project. The 2x pod is the same host class; it is chosen for its CPU quota and memory (a larger P, a shorter wall time), not for vCPU per dollar, which equals a 1x4090's.",
+   "host_rule": "keep a pod only if its CPU is EPYC-Genoa class (RUN_REQUEST_S2.md section 2)",
+   "effect_on_results": "none: S2 runs numpy only, one BLAS thread per job, on S1's pinned stack, and the rule-6 replay bounds numerical drift"
+  }
+ },
+ "kept_after_review": [
+  "T1 X3-3 stays ACTIVE (lead decision after review). A withdrawal to INFO was drafted after its discovery label came out REFUTED. Its first reason (impossibility) was shown false in review; the corrected reason (a harm reference dominated by sampling noise) is a real validity concern, but no P1 rule anticipated it, so it is disclosed (see disclosed), not used to withdraw the claim. T2 P4 stays withdrawn because T2_COLLAPSE.md section 5 anticipated that case at P1.",
+  "T1 X6-4 stays ACTIVE: both typing rules check covariate shift first and T2_s2end / BBSDs fire on Dirichlet-0.1 label skew (discovery macro accuracy 0.33-0.42 vs 0.85). This is a property of the geometry, not of the protocol, and the eval layout calibrates on about 500 rows per class (about 150 in the fit layout), so confirmation is a real test. X6-3 likewise.",
+  "T1 X3-4 and X3-6 stay ACTIVE (discovery 1/3 each); ARL transport is what X3-4 tests, and the confirmation layout calibrates on 5000 fit rows.",
+  "T2 MP6 and M-NC4 stay as registered: their D21 previews are null or contradicted (rho +0.013; -0.498) but their C verdicts are not predetermined.",
+  "T3S SP-3 stays as registered; see disclosed."
+ ],
+ "disclosed": [
+  "T1 X3-3 (ACTIVE; disclosed, not withdrawn), a validity concern about the harm reference: t_harm is the first frame at or after onset where the trailing 64-frame error exceeds the CAL clean error by 5 pt (scripts/t1_streams.py, loss_pt 5, win 64), and the first alarm is never before onset, so on every stream the lead is at most t_harm - onset: a unit's median lead is capped by median(t_harm - onset), which only an alarm at onset reaches. On discovery this cap, read from the stuck detector (it raises no alarm on these two ramps, so the cap is its lead_median + 1800), is 93.5 / 132.5 / 108.5 frames on motion_blur and 115 / 215.5 / 165.5 on defocus_blur for resnet20_hub / resnet56_hub / resnet56_e40. So resnet20_hub cannot reach 100 on motion_blur with any detector, and the other two would need a median alarm within about 32 and 8 frames of onset, when the ramp's corrupted-frame probability is about 11% and 3%. The cap is mostly sampling noise: over 64 frames the 5-pt line is an integer error count (7, 8 or 9 at the units' CAL errors of 4.9-8.9%), and i.i.d. clean frames alone cross it at a median of 113-172 frames after onset at the three STdisc CAL errors and 117-373 frames at those of the six STconf units readable in discovery (Monte Carlo with a 32-bit generator, 20,000 streams per unit). A confirmation SUPPORTED is therefore not impossible, but the label can turn more on each unit's clean error and on that integer threshold than on the detector, which is not what X3-3 was registered to test. History: a withdrawal to INFO was drafted at P2 after X3-3's discovery label came out REFUTED (0/3 STdisc units; best early-tap lead +21 frames on motion_blur, mewma_s1end on resnet56_hub; on defocus_blur every detector's lead is negative on all three units, best -21.5). Its first reason, that a median lead of 100 frames is out of reach whatever the detector does, rested on a Monte Carlo whose generator repeated after about 10,000 draws and was shown false in review. The corrected reason above is a real concern, but no P1 rule anticipated it, so the lead kept X3-3 ACTIVE and discloses it here, before any confirmation read. results/b4/SESSION.md must carry this caveat beside the X3-3 label.",
+  "T1 X3-8: t1_eval.js (P1) takes the best early-tap AUROC over knnL2/wnorm at stem and s1end plus x4tap_stem; the 'early' bundle of T1_SCOREBOARD 3.4 also has s2end. The frozen list is kept (not a D8 (e) fix): it is the narrower, stricter reading for a claim that early taps win, and the discovery label is REFUTED either way (occlusion disc: best early minus best head -0.05 to -0.30 on every D unit).",
+  "T1 X4-3: the comparator is the per-split maximum TPR over the 9 head statistics, stricter than head.best_stat (it favours the head, as O5 does). Discovery label unchanged under either (6/16 vs 9/16 D units, both below 0.75; Dnew 0/5).",
+  "T1 do3.nc1_train (verbatim numpy pinv) is invalid at 1280-d (mobilenetv2_x0_5: -4.65e9) and will recur on wide C units. No T1 claim reads it for a wide unit (X4-2 is scoped to the 64-d R/R2 ResNets); T2's laws read T2's trimmed nc1_tr (mobilenetv2_x0_5 0.1306).",
+  "T2 P3b on D (emitted at --fit): REFUTED against the P1 prediction SUPPORTED; theta 0.10945; 3 of 5 collapsed D units have a 99% CI lower bound above 0 (resnet56_hub, resnet56_s2, repvgg_a0). On record before any C read.",
+  "T2 discovery (INFO): only O2 (H10) beats every rival by the 0.8 ratio on D21 (topk_frac law LORO MAE 0.0233 vs 0.0304 head, 0.0414 accuracy, 0.0655 constant); O3 0.90, O4 0.85, O5 0.89, O1 1.04. The coordinate was chosen on the same 21 nets, so these are optimistic.",
+  "T3S SP-3: PIXELS-SUFFICE would mean only that the map adds nothing over head + pooled + pixels; the pixel check does not see the paste families either (pix_padim AUROC at a12: noise 0.47, blur 0.61, pixelate 0.49, jpeg 0.49). SESSION.md must carry this caveat beside any SP-3 label.",
+  "T3S SP-9 (INFO) reads ARCHITECTURAL-OR-MIXED because trained and random-init maps are both blind on its conditions (about 0.49); on glare the trained head map is 0.44-0.51 against 0.92-0.96 random (learned minus random -0.40 to -0.52).",
+  "T3S batch-5 notes (no P2 change allowed): map_max is one-sided (global corruptions push it below clean; this drives SP-8's ADDS), and pix_padim's log(Laplacian var + 1e-6) makes flat cells the clean maximum."
+ ],
+ "decided_by": "the integration lead at P2. T2 P4: withdrawn to INFO on the T2 lead's recommendation (T2_COLLAPSE.md section 5 anticipated the case at P1). T1 X3-3: kept ACTIVE by the lead after review, with its harm-reference concern disclosed before any confirmation read (see kept_after_review and disclosed); t1_rules.json carries no amendment. B4b (the doubled S2 limits): approved by the owner on 2026-09-24 (docs/plans/B4B_AMENDMENT.md). The set is uncommitted until P2; to revert the P4 withdrawal before the commit, drop its entry here."
+}

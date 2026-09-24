@@ -1,0 +1,3060 @@
+{
+ "schema": "b4_t1_eval/1",
+ "phase": "discovery",
+ "dry_run": false,
+ "created": "2026-09-24T16:03:35.097Z",
+ "repo_head": "cb617c3cf814b5080f4d11e6cbc38453da0831f4",
+ "p1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "p2": null,
+ "p_run": [
+  "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+  "14caf51b7ca241a2dd95dacc531cc63a5bda6a6a"
+ ],
+ "cuts": [],
+ "constants": {
+  "ADD": 0.01,
+  "EQ": 0.02,
+  "ADD_PIX": 0.005,
+  "MIN_EVALUABLE": 0.75,
+  "ALPHA": 0.05,
+  "BAND_LEVEL": 0.99,
+  "MSP_SHARE_MAX": 0.25,
+  "DO3": {
+   "a": 0.0224,
+   "b": -0.108,
+   "tol": 0.035
+  },
+  "ANCHOR_TOL": {
+   "margin_auc": 0.002,
+   "sparse_frac": 0.035,
+   "nc1_rel": 0.01
+  },
+  "bands": {
+   "R": {
+    "l": 125,
+    "a": 125,
+    "b": 2376,
+    "mean": 0.04998000799680128,
+    "lo": 0.03266666666666666,
+    "hi": 0.06933333333333333,
+    "level": 0.99
+   },
+   "M": {
+    "l": 37,
+    "a": 37,
+    "b": 714,
+    "mean": 0.0492676431424767,
+    "lo": 0.027333333333333334,
+    "hi": 0.07666666666666666,
+    "level": 0.99
+   }
+  }
+ },
+ "units": {
+  "R": [
+   "resnet20_hub",
+   "resnet20_s1",
+   "resnet20_s2",
+   "resnet20_s3",
+   "resnet20_s4",
+   "resnet56_hub",
+   "resnet56_s1",
+   "resnet56_s2",
+   "resnet56_e10",
+   "resnet56_e20",
+   "resnet56_e40",
+   "resnet56_e50",
+   "resnet56_e60",
+   "resnet56_e70",
+   "resnet56_s12m",
+   "resnet56_s13m"
+  ],
+  "R2": [],
+  "M": [
+   "resnet32",
+   "vgg11_bn",
+   "mobilenetv2_x0_5",
+   "shufflenetv2_x0_5",
+   "repvgg_a0"
+  ],
+  "S": [
+   "resnet20_hub",
+   "resnet56_hub",
+   "resnet56_e40"
+  ]
+ },
+ "planned": {
+  "R": 16,
+  "R2": 0,
+  "M": 5,
+  "S": 3
+ },
+ "duplicates": {
+  "boards": [],
+  "streams": []
+ },
+ "gates": {
+  "selftests": {
+   "status": "PASS",
+   "need": [
+    "selftest_t1_scoreboard.json",
+    "selftest_t1_streams.json"
+   ],
+   "records": [
+    {
+     "dir": "instrument_check_b4s1",
+     "file": "selftest_b4_extract.json",
+     "status": "PASS"
+    },
+    {
+     "dir": "instrument_check_b4s1",
+     "file": "selftest_collapse_probe.json",
+     "status": "PASS"
+    },
+    {
+     "dir": "instrument_check_b4s1",
+     "file": "selftest_t1_scoreboard.json",
+     "status": "PASS"
+    },
+    {
+     "dir": "instrument_check_b4s1",
+     "file": "selftest_t1_streams.json",
+     "status": "PASS"
+    },
+    {
+     "dir": "instrument_check_b4s1",
+     "file": "selftest_t3s_spatial_probe.json",
+     "status": "PASS"
+    }
+   ]
+  },
+  "provenance": {
+   "status": "PASS",
+   "rev": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+   "checks": {
+    "head": "cb617c3cf814b5080f4d11e6cbc38453da0831f4",
+    "p1_ancestor_of_head": true,
+    "files": {}
+   },
+   "failures": [],
+   "n_failures": 0
+  },
+  "read_guard": {
+   "status": "PASS",
+   "discovery_read_confirmation": [],
+   "scored_twice": []
+  },
+  "replay": {
+   "status": "SKIPPED",
+   "drift": 0
+  },
+  "anchors": {
+   "tol": {
+    "margin_auc": 0.002,
+    "sparse_frac": 0.035,
+    "nc1_rel": 0.01
+   },
+   "units": {
+    "resnet20_hub": {
+     "do3": {
+      "committed_sparse": 0.10833333333333334,
+      "t1_sparse": 0.1136,
+      "committed_nc1": 0.16994402609546508,
+      "t1_nc1": 0.16994391330653938,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9171301846637113,
+      "t1_auc": 0.9171307655133316,
+      "pass": true
+     }
+    },
+    "resnet20_s1": {
+     "do3": {
+      "committed_sparse": 0.10566666666666667,
+      "t1_sparse": 0.1106,
+      "committed_nc1": 0.1630172884843279,
+      "t1_nc1": 0.16301658440517014,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9121222967784001,
+      "t1_auc": 0.9121256576879967,
+      "pass": true
+     }
+    },
+    "resnet20_s2": {
+     "do3": {
+      "committed_sparse": 0.11533333333333333,
+      "t1_sparse": 0.1104,
+      "committed_nc1": 0.16962042949013018,
+      "t1_nc1": 0.1696197290007336,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9193542342342342,
+      "t1_auc": 0.9193582702702703,
+      "pass": true
+     }
+    },
+    "resnet20_s3": {
+     "do3": {
+      "committed_sparse": 0.10466666666666667,
+      "t1_sparse": 0.105,
+      "committed_nc1": 0.17195123411379304,
+      "t1_nc1": 0.17195033201860363,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9228368063627884,
+      "t1_auc": 0.9228362488494318,
+      "pass": true
+     }
+    },
+    "resnet20_s4": {
+     "do3": {
+      "committed_sparse": 0.091,
+      "t1_sparse": 0.101,
+      "committed_nc1": 0.16744636821286418,
+      "t1_nc1": 0.16744633105353238,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9248590239455678,
+      "t1_auc": 0.9248590239455678,
+      "pass": true
+     }
+    },
+    "resnet56_hub": {
+     "do3": {
+      "committed_sparse": 0.16733333333333333,
+      "t1_sparse": 0.1744,
+      "committed_nc1": 0.04875519896668336,
+      "t1_nc1": 0.04875517930874451,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9261154607875586,
+      "t1_auc": 0.926116989522813,
+      "pass": true
+     }
+    },
+    "resnet56_s1": {
+     "do3": {
+      "committed_sparse": 0.163,
+      "t1_sparse": 0.176,
+      "committed_nc1": 0.0529189795145118,
+      "t1_nc1": 0.05291892872194102,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.928223076395189,
+      "t1_auc": 0.928223076395189,
+      "pass": true
+     }
+    },
+    "resnet56_s2": {
+     "do3": {
+      "committed_sparse": 0.184,
+      "t1_sparse": 0.174,
+      "committed_nc1": 0.05024264138185156,
+      "t1_nc1": 0.05024258983673278,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9245958452636176,
+      "t1_auc": 0.9245972726156797,
+      "pass": true
+     }
+    },
+    "resnet56_e10": {
+     "do3": {
+      "committed_sparse": 0.049,
+      "t1_sparse": 0.0474,
+      "committed_nc1": 0.6859270863943637,
+      "t1_nc1": 0.6859260040879538,
+      "pass": true
+     }
+    },
+    "resnet56_e20": {
+     "do3": {
+      "committed_sparse": 0.06266666666666666,
+      "t1_sparse": 0.0614,
+      "committed_nc1": 0.32015684294537816,
+      "t1_nc1": 0.32015785308283196,
+      "pass": true
+     }
+    },
+    "resnet56_e40": {
+     "do3": {
+      "committed_sparse": 0.10166666666666667,
+      "t1_sparse": 0.099,
+      "committed_nc1": 0.17743633654790752,
+      "t1_nc1": 0.17743572135094862,
+      "pass": true
+     }
+    },
+    "resnet56_e50": {
+     "do3": {
+      "committed_sparse": 0.12666666666666668,
+      "t1_sparse": 0.123,
+      "committed_nc1": 0.14489692288261952,
+      "t1_nc1": 0.14489647414293866,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.921231399699124,
+      "t1_auc": 0.9212319394836744,
+      "pass": true
+     }
+    },
+    "resnet56_e60": {
+     "do3": {
+      "committed_sparse": 0.131,
+      "t1_sparse": 0.1348,
+      "committed_nc1": 0.12860598686137398,
+      "t1_nc1": 0.1286064741210314,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9167868647531131,
+      "t1_auc": 0.9167834305220718,
+      "pass": true
+     }
+    },
+    "resnet56_e70": {
+     "do3": {
+      "committed_sparse": 0.13633333333333333,
+      "t1_sparse": 0.1326,
+      "committed_nc1": 0.11742392935269019,
+      "t1_nc1": 0.117423173575146,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9163994055068836,
+      "t1_auc": 0.9163999806743723,
+      "pass": true
+     }
+    },
+    "resnet56_s12m": {
+     "do3": {
+      "committed_sparse": 0.12066666666666667,
+      "t1_sparse": 0.1334,
+      "committed_nc1": 0.1287596408342831,
+      "t1_nc1": 0.12876002872621717,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9200096527836925,
+      "t1_auc": 0.9200036470924811,
+      "pass": true
+     }
+    },
+    "resnet56_s13m": {
+     "do3": {
+      "committed_sparse": 0.131,
+      "t1_sparse": 0.1326,
+      "committed_nc1": 0.12958886352335078,
+      "t1_nc1": 0.12958930823965362,
+      "pass": true
+     },
+     "margin": {
+      "committed_auc": 0.9223985487841156,
+      "t1_auc": 0.9223985487841156,
+      "pass": true
+     }
+    }
+   },
+   "margin": "PASS",
+   "do3": "PASS",
+   "status": "PASS"
+  },
+  "model_outcomes": {
+   "status": "PASS",
+   "units": {
+    "mobilenetv2_x0_5": {
+     "valid": true
+    },
+    "repvgg_a0": {
+     "valid": true
+    },
+    "resnet20_hub": {
+     "valid": true
+    },
+    "resnet20_rand": {
+     "valid": true
+    },
+    "resnet20_s1": {
+     "valid": true
+    },
+    "resnet20_s2": {
+     "valid": true
+    },
+    "resnet20_s3": {
+     "valid": true
+    },
+    "resnet20_s4": {
+     "valid": true
+    },
+    "resnet32": {
+     "valid": true
+    },
+    "resnet56_e10": {
+     "valid": true
+    },
+    "resnet56_e20": {
+     "valid": true
+    },
+    "resnet56_e40": {
+     "valid": true
+    },
+    "resnet56_e50": {
+     "valid": true
+    },
+    "resnet56_e60": {
+     "valid": true
+    },
+    "resnet56_e70": {
+     "valid": true
+    },
+    "resnet56_hub": {
+     "valid": true
+    },
+    "resnet56_rand": {
+     "valid": true
+    },
+    "resnet56_s12m": {
+     "valid": true
+    },
+    "resnet56_s13m": {
+     "valid": true
+    },
+    "resnet56_s1": {
+     "valid": true
+    },
+    "resnet56_s2": {
+     "valid": true
+    },
+    "shufflenetv2_x0_5": {
+     "valid": true
+    },
+    "vgg11_bn": {
+     "valid": true
+    }
+   },
+   "note": "INFO for T1: T2's collapse_laws.js reads O1 / O5 from these records (D5)"
+  },
+  "rules": {
+   "status": "SKIPPED"
+  }
+ },
+ "claims": [
+  {
+   "id": "X1-1",
+   "inventory_rows": [
+    "CM-4"
+   ],
+   "text": "the best head statistic, chosen on fit rows 2000-3499 by AURC and frozen, keeps AUROC >= MSP - 0.002 on the clean errors of never-read rows",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 14,
+     "frac_needed": 0.9,
+     "per_unit": {
+      "resnet20_hub": null,
+      "resnet20_s1": true,
+      "resnet20_s2": true,
+      "resnet20_s3": true,
+      "resnet20_s4": true,
+      "resnet56_hub": true,
+      "resnet56_s1": true,
+      "resnet56_s2": true,
+      "resnet56_e10": true,
+      "resnet56_e20": true,
+      "resnet56_e40": true,
+      "resnet56_e50": false,
+      "resnet56_e60": true,
+      "resnet56_e70": true,
+      "resnet56_s12m": true,
+      "resnet56_s13m": null
+     },
+     "k": 13,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.9,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X1-2",
+   "inventory_rows": [
+    "CM-1",
+    "CM-2"
+   ],
+   "text": "the penult centre margin is NOT head-additive on clean errors: BOUNDED against the full head (upper 95% bound of dAUC_joint < +0.02)",
+   "predicted": "SUPPORTED",
+   "type": "bounded",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.875,
+     "per_unit": {
+      "resnet20_hub": "BOUNDED",
+      "resnet20_s1": "BOUNDED",
+      "resnet20_s2": "BOUNDED",
+      "resnet20_s3": "BOUNDED",
+      "resnet20_s4": "BOUNDED",
+      "resnet56_hub": "BOUNDED",
+      "resnet56_s1": "BOUNDED",
+      "resnet56_s2": "BOUNDED",
+      "resnet56_e10": "BOUNDED",
+      "resnet56_e20": "BOUNDED",
+      "resnet56_e40": "BOUNDED",
+      "resnet56_e50": "BOUNDED",
+      "resnet56_e60": "BOUNDED",
+      "resnet56_e70": "BOUNDED",
+      "resnet56_s12m": "BOUNDED",
+      "resnet56_s13m": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 16,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.875,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": "BOUNDED",
+      "vgg11_bn": "BOUNDED",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "BOUNDED",
+      "repvgg_a0": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 5,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X1-3",
+   "inventory_rows": [
+    "CM-1",
+    "CM-11"
+   ],
+   "text": "no geometric bundle (all_geom, 19 signals at five taps) is head-additive on clean errors: BOUNDED",
+   "predicted": "SUPPORTED",
+   "type": "bounded",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": "BOUNDED",
+      "resnet20_s1": "BOUNDED",
+      "resnet20_s2": "BOUNDED",
+      "resnet20_s3": "BOUNDED",
+      "resnet20_s4": "BOUNDED",
+      "resnet56_hub": "BOUNDED",
+      "resnet56_s1": "BOUNDED",
+      "resnet56_s2": "BOUNDED",
+      "resnet56_e10": "BOUNDED",
+      "resnet56_e20": "BOUNDED",
+      "resnet56_e40": "BOUNDED",
+      "resnet56_e50": "BOUNDED",
+      "resnet56_e60": "BOUNDED",
+      "resnet56_e70": "BOUNDED",
+      "resnet56_s12m": "BOUNDED",
+      "resnet56_s13m": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 16,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": "BOUNDED",
+      "vgg11_bn": "BOUNDED",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "BOUNDED",
+      "repvgg_a0": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 5,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X1-4",
+   "inventory_rows": [
+    "CM-11"
+   ],
+   "text": "the pre-collapse bundle (margin, relative d1, NCC-vs-head disagreement, L2-kNN, kNN purity at the pre tap) IS head-additive on corrupt-split errors (s3, 10 discovery corruptions pooled)",
+   "predicted": "SUPPORTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 16,
+     "k_bounded": 0,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.5,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet32": "ADDS",
+      "vgg11_bn": "BOUNDED",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "BOUNDED",
+      "repvgg_a0": "ADDS"
+     },
+     "k_adds": 2,
+     "k_bounded": 3,
+     "k_inconclusive": 0,
+     "label": "REFUTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X1-5",
+   "inventory_rows": [
+    "CM-9"
+   ],
+   "text": "the early-tap bundle adds on corrupt-split errors (s3) beyond the head AND the pixel statistics",
+   "predicted": "REFUTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "BOUNDED",
+      "resnet56_e20": "BOUNDED",
+      "resnet56_e40": "BOUNDED",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 13,
+     "k_bounded": 3,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.5,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "PC-2a",
+   "inventory_rows": [
+    "PC-2",
+    "ST-1"
+   ],
+   "text": "per-sample corruption-family identification (one-vs-rest among corrupt rows, s3): the early-tap bundle is head-additive for >= 3 of the 4 families",
+   "predicted": "SUPPORTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 16,
+     "k_bounded": 0,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "PC-2b",
+   "inventory_rows": [
+    "PC-2"
+   ],
+   "text": "... and still adds beyond the head AND the pixel statistics for >= 3 of the 4 families",
+   "predicted": "REFUTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 16,
+     "k_bounded": 0,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X8-1",
+   "inventory_rows": [
+    "CM-11"
+   ],
+   "text": "Trust Score, kNN purity (k 10, 50) and LID at the penult are NOT head-additive on clean errors: BOUNDED",
+   "predicted": "SUPPORTED",
+   "type": "bounded",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.875,
+     "per_unit": {
+      "resnet20_hub": "BOUNDED",
+      "resnet20_s1": "BOUNDED",
+      "resnet20_s2": "BOUNDED",
+      "resnet20_s3": "BOUNDED",
+      "resnet20_s4": "BOUNDED",
+      "resnet56_hub": "BOUNDED",
+      "resnet56_s1": "BOUNDED",
+      "resnet56_s2": "BOUNDED",
+      "resnet56_e10": "BOUNDED",
+      "resnet56_e20": "BOUNDED",
+      "resnet56_e40": "BOUNDED",
+      "resnet56_e50": "BOUNDED",
+      "resnet56_e60": "BOUNDED",
+      "resnet56_e70": "BOUNDED",
+      "resnet56_s12m": "BOUNDED",
+      "resnet56_s13m": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 16,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.875,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": "BOUNDED",
+      "vgg11_bn": "BOUNDED",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "BOUNDED",
+      "repvgg_a0": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 5,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X7-1",
+   "inventory_rows": [
+    "CM-9"
+   ],
+   "text": "prediction depth / cross-tap agreement is head-additive on corrupt-split errors (s3) with dAUC >= 2 x its clean dAUC",
+   "predicted": "REFUTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 16,
+     "k_bounded": 0,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.5,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X2-1",
+   "inventory_rows": [
+    "ST-4"
+   ],
+   "text": "the whitened head-null residual adds >= +0.03 AUROC over the head (HEAD-ADDITIVE at +0.03) for corruption presence (s3) in >= 2 of the 4 families",
+   "predicted": "REFUTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet20_hub": "BOUNDED",
+      "resnet20_s1": "BOUNDED",
+      "resnet20_s2": "BOUNDED",
+      "resnet20_s3": "BOUNDED",
+      "resnet20_s4": "BOUNDED",
+      "resnet56_hub": "BOUNDED",
+      "resnet56_s1": "BOUNDED",
+      "resnet56_s2": "BOUNDED",
+      "resnet56_e10": "BOUNDED",
+      "resnet56_e20": "INCONCLUSIVE",
+      "resnet56_e40": "BOUNDED",
+      "resnet56_e50": "BOUNDED",
+      "resnet56_e60": "BOUNDED",
+      "resnet56_e70": "BOUNDED",
+      "resnet56_s12m": "BOUNDED",
+      "resnet56_s13m": "BOUNDED"
+     },
+     "k_adds": 0,
+     "k_bounded": 15,
+     "k_inconclusive": 1,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.5,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-1R",
+   "inventory_rows": [
+    "DO-6",
+    "DO-3"
+   ],
+   "text": "the fused X4 flag calibrated on the fit rows keeps its clean false-alarm rate on never-read rows inside the exact 99% beta-binomial band at alpha 0.05 (n_cal 2500, n_test 1500: [0.0327, 0.0693])",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.875,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet20_s1": true,
+      "resnet20_s2": true,
+      "resnet20_s3": true,
+      "resnet20_s4": true,
+      "resnet56_hub": true,
+      "resnet56_s1": true,
+      "resnet56_s2": true,
+      "resnet56_e10": true,
+      "resnet56_e20": true,
+      "resnet56_e40": true,
+      "resnet56_e50": true,
+      "resnet56_e60": true,
+      "resnet56_e70": true,
+      "resnet56_s12m": true,
+      "resnet56_s13m": true
+     },
+     "k": 16,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.875,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-1M",
+   "inventory_rows": [
+    "DO-6"
+   ],
+   "text": "the same code with zero retuning on the 12 never-measured architectures: clean false-alarm rate inside the band (n_cal 750, n_test 1500: [0.0273, 0.0767])",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "M",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.8,
+     "per_unit": {
+      "resnet32": true,
+      "vgg11_bn": true,
+      "mobilenetv2_x0_5": true,
+      "shufflenetv2_x0_5": true,
+      "repvgg_a0": true
+     },
+     "k": 5,
+     "label": "SUPPORTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X4-2",
+   "inventory_rows": [
+    "DO-3"
+   ],
+   "text": "REPLICATION (AH-1a on never-read rows): |train-referenced 10-NN clean sparse fraction - (0.0224 - 0.108 log10 nc1_train)| <= 0.035",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet20_s1": true,
+      "resnet20_s2": true,
+      "resnet20_s3": true,
+      "resnet20_s4": true,
+      "resnet56_hub": true,
+      "resnet56_s1": true,
+      "resnet56_s2": true,
+      "resnet56_e10": true,
+      "resnet56_e20": true,
+      "resnet56_e40": true,
+      "resnet56_e50": true,
+      "resnet56_e60": true,
+      "resnet56_e70": true,
+      "resnet56_s12m": true,
+      "resnet56_s13m": true
+     },
+     "k": 16,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-3",
+   "inventory_rows": [
+    "DO-1"
+   ],
+   "text": "at matched 5% clean false alarms, the X4 flag's TPR beats the best head statistic's TPR by >= 0.05 on >= 60% of the noise / blur / pixelate splits at s3 and s5 (10 splits)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": true,
+      "resnet56_e10": true,
+      "resnet56_e20": true,
+      "resnet56_e40": false,
+      "resnet56_e50": true,
+      "resnet56_e60": true,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": true
+     },
+     "k": 6,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": false,
+      "vgg11_bn": false,
+      "mobilenetv2_x0_5": false,
+      "shufflenetv2_x0_5": false,
+      "repvgg_a0": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-4",
+   "inventory_rows": [
+    "DO-1"
+   ],
+   "text": "X4 is head-additive for corruption presence of the noise AND the blur families (s3)",
+   "predicted": "SUPPORTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "BOUNDED",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "BOUNDED",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "BOUNDED",
+      "resnet56_s13m": "BOUNDED"
+     },
+     "k_adds": 12,
+     "k_bounded": 4,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": "BOUNDED",
+      "vgg11_bn": "ADDS",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "BOUNDED",
+      "repvgg_a0": "BOUNDED"
+     },
+     "k_adds": 1,
+     "k_bounded": 4,
+     "k_inconclusive": 0,
+     "label": "REFUTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-5",
+   "inventory_rows": [
+    "DO-1"
+   ],
+   "text": "trained on the discovery families only, head + X4 beats the head by >= 0.02 AUROC on the 5 unseen holdout corruption families (s3)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) NOT_EVALUABLE",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": null,
+      "resnet20_s1": null,
+      "resnet20_s2": null,
+      "resnet20_s3": null,
+      "resnet20_s4": null,
+      "resnet56_hub": null,
+      "resnet56_s1": null,
+      "resnet56_s2": null,
+      "resnet56_e10": null,
+      "resnet56_e20": null,
+      "resnet56_e40": null,
+      "resnet56_e50": null,
+      "resnet56_e60": null,
+      "resnet56_e70": null,
+      "resnet56_s12m": null,
+      "resnet56_s13m": null
+     },
+     "label": "NOT_EVALUABLE",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": null,
+      "vgg11_bn": null,
+      "mobilenetv2_x0_5": null,
+      "shufflenetv2_x0_5": null,
+      "repvgg_a0": null
+     },
+     "label": "NOT_EVALUABLE",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-5x",
+   "inventory_rows": [
+    "DO-1"
+   ],
+   "text": "... and on the 4 CIFAR-10-C extras never used anywhere (s3; NOT_EVALUABLE when the volume lacks them)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) NOT_EVALUABLE",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": null,
+      "resnet20_s1": null,
+      "resnet20_s2": null,
+      "resnet20_s3": null,
+      "resnet20_s4": null,
+      "resnet56_hub": null,
+      "resnet56_s1": null,
+      "resnet56_s2": null,
+      "resnet56_e10": null,
+      "resnet56_e20": null,
+      "resnet56_e40": null,
+      "resnet56_e50": null,
+      "resnet56_e60": null,
+      "resnet56_e70": null,
+      "resnet56_s12m": null,
+      "resnet56_s13m": null
+     },
+     "label": "NOT_EVALUABLE",
+     "secondary": false
+    },
+    "M": {
+     "planned": 5,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": null,
+      "vgg11_bn": null,
+      "mobilenetv2_x0_5": null,
+      "shufflenetv2_x0_5": null,
+      "repvgg_a0": null
+     },
+     "label": "NOT_EVALUABLE",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X4-6",
+   "inventory_rows": [
+    "DO-4"
+   ],
+   "text": "X4 is head-additive for far-OOD detection (SVHN against clean rows)",
+   "predicted": "SUPPORTED",
+   "type": "adds",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": "ADDS",
+      "resnet20_s1": "ADDS",
+      "resnet20_s2": "ADDS",
+      "resnet20_s3": "ADDS",
+      "resnet20_s4": "ADDS",
+      "resnet56_hub": "ADDS",
+      "resnet56_s1": "ADDS",
+      "resnet56_s2": "ADDS",
+      "resnet56_e10": "ADDS",
+      "resnet56_e20": "ADDS",
+      "resnet56_e40": "ADDS",
+      "resnet56_e50": "ADDS",
+      "resnet56_e60": "ADDS",
+      "resnet56_e70": "ADDS",
+      "resnet56_s12m": "ADDS",
+      "resnet56_s13m": "ADDS"
+     },
+     "k_adds": 16,
+     "k_bounded": 0,
+     "k_inconclusive": 0,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": "ADDS",
+      "vgg11_bn": "ADDS",
+      "mobilenetv2_x0_5": "BOUNDED",
+      "shufflenetv2_x0_5": "ADDS",
+      "repvgg_a0": "BOUNDED"
+     },
+     "k_adds": 3,
+     "k_bounded": 2,
+     "k_inconclusive": 0,
+     "label": "REFUTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X6-1",
+   "inventory_rows": [
+    "LH-1",
+    "LH-2"
+   ],
+   "text": "ATC (max confidence) estimates batch-64 accuracy at least as well as the geometric harm grade H (the same isotonic footing, leave-one-split-out MAE)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": false,
+      "resnet56_e10": true,
+      "resnet56_e20": false,
+      "resnet56_e40": false,
+      "resnet56_e50": false,
+      "resnet56_e60": false,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": false
+     },
+     "k": 1,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X6-2",
+   "inventory_rows": [
+    "LH-1"
+   ],
+   "text": "H adds to ATC within splits: mean within-split partial Spearman(H, loss | ATC) >= 0.3 (batch 64)",
+   "predicted": "REFUTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.5,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": false,
+      "resnet56_e10": false,
+      "resnet56_e20": false,
+      "resnet56_e40": false,
+      "resnet56_e50": false,
+      "resnet56_e60": false,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.5,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X6-3",
+   "inventory_rows": [
+    "ST-3"
+   ],
+   "text": "label skew: the BBSE-explained residual R_pre and H stay quiet (single-class FPR max <= 0.15, mean <= 0.10; H mean <= 0.10) while the plain penult T2 (single-class mean >= 0.5) and BBSDh (Dirichlet 0.1, >= 0.5) fire",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": false,
+      "resnet56_e10": false,
+      "resnet56_e20": false,
+      "resnet56_e40": false,
+      "resnet56_e50": false,
+      "resnet56_e60": false,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X6-4",
+   "inventory_rows": [
+    "ST-1",
+    "ST-5"
+   ],
+   "text": "covariate / prior / novelty typing of batch-64 windows: geometry-rule macro accuracy >= 0.85 and >= the head-only rule + 0.05",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": false,
+      "resnet56_e10": false,
+      "resnet56_e20": false,
+      "resnet56_e40": false,
+      "resnet56_e50": false,
+      "resnet56_e60": false,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X6-5",
+   "inventory_rows": [
+    "LH-2"
+   ],
+   "text": "mild covariate shift at batch 64: R_pre flags >= 80% of the motion / pixelate / snow s1 batches at its clean 5% threshold",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet20_s1": true,
+      "resnet20_s2": true,
+      "resnet20_s3": true,
+      "resnet20_s4": true,
+      "resnet56_hub": true,
+      "resnet56_s1": true,
+      "resnet56_s2": true,
+      "resnet56_e10": true,
+      "resnet56_e20": true,
+      "resnet56_e40": true,
+      "resnet56_e50": true,
+      "resnet56_e60": true,
+      "resnet56_e70": true,
+      "resnet56_s12m": true,
+      "resnet56_s13m": true
+     },
+     "k": 16,
+     "label": "SUPPORTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X3-8",
+   "inventory_rows": [
+    "PC-7"
+   ],
+   "text": "injected sensor faults (dead pixels, occlusion disc, holdout exposure): the best early-tap per-frame AUROC beats the best head statistic by >= 0.10 for every fault kind",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "R",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "R": {
+     "planned": 16,
+     "n": 16,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet20_s1": false,
+      "resnet20_s2": false,
+      "resnet20_s3": false,
+      "resnet20_s4": false,
+      "resnet56_hub": false,
+      "resnet56_s1": false,
+      "resnet56_s2": false,
+      "resnet56_e10": false,
+      "resnet56_e20": false,
+      "resnet56_e40": false,
+      "resnet56_e50": false,
+      "resnet56_e60": false,
+      "resnet56_e70": false,
+      "resnet56_s12m": false,
+      "resnet56_s13m": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": false
+    },
+    "R2": {
+     "planned": 0,
+     "n": 0,
+     "frac_needed": 0.75,
+     "per_unit": {},
+     "label": "NOT_PLANNED",
+     "secondary": true
+    },
+    "M": {
+     "planned": 5,
+     "n": 5,
+     "frac_needed": 0.75,
+     "per_unit": {
+      "resnet32": false,
+      "vgg11_bn": false,
+      "mobilenetv2_x0_5": false,
+      "shufflenetv2_x0_5": false,
+      "repvgg_a0": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": true
+    }
+   }
+  },
+  {
+   "id": "X3-1",
+   "inventory_rows": [
+    "ST-9"
+   ],
+   "text": "change-information rate: I(end of stage 1) > I(penult) with disjoint 95% CIs on >= 8 of the 10 discovery corruptions at s1",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.6666666666666666,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet56_hub": true,
+      "resnet56_e40": true
+     },
+     "k": 3,
+     "label": "SUPPORTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-2",
+   "inventory_rows": [
+    "ST-9"
+   ],
+   "text": "step onset at s1 (motion, pixelate, snow): the best early-tap censored delay <= 0.25 x the best head-only censored delay, at ARL0 2000",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.6666666666666666,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet56_hub": true,
+      "resnet56_e40": true
+     },
+     "k": 3,
+     "label": "SUPPORTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-3",
+   "inventory_rows": [
+    "ST-9"
+   ],
+   "text": "ramps s1 -> s3 -> s5 (motion, defocus): the best early-tap detector alarms >= 100 frames (median) before the rolling 64-frame loss reaches 5 pt",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.6666666666666666,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet56_hub": false,
+      "resnet56_e40": false
+     },
+     "k": 0,
+     "label": "REFUTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-4",
+   "inventory_rows": [
+    "ST-9"
+   ],
+   "text": "ARL transport: the realised in-control ARL0 on held-out clean rows lies in [1000, 4000] for >= 90% of the calibrated detectors",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.8333333333333334,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet56_hub": true,
+      "resnet56_e40": false
+     },
+     "k": 1,
+     "label": "REFUTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-5",
+   "inventory_rows": [
+    "PC-7"
+   ],
+   "text": "a stuck (frozen) frame freezes the EWMA: the penult and stem MEWMA alarm within 500 frames in >= 90% of streams without pixel access (the pixel repeat check >= 0.99 is a sanity clause; T1 review A3)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.8333333333333334,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet56_hub": true,
+      "resnet56_e40": true
+     },
+     "k": 3,
+     "label": "SUPPORTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-6",
+   "inventory_rows": [
+    "LH-4"
+   ],
+   "text": "benign brightness ramp: the harm-gated early-tap alarms fire in <= 20% of streams while the ungated early-tap detector fires in >= 80%",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) REFUTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.6666666666666666,
+     "per_unit": {
+      "resnet20_hub": false,
+      "resnet56_hub": false,
+      "resnet56_e40": true
+     },
+     "k": 1,
+     "label": "REFUTED",
+     "secondary": false
+    }
+   }
+  },
+  {
+   "id": "X3-7",
+   "inventory_rows": [
+    "ST-5"
+   ],
+   "text": "label-skew burst: BBSDh and the penult MEWMA alarm (>= 0.9) while the per-frame conformal flag alarms no more than in its own in-control null run with the same timing (skew minus null p_det_within <= 0.10; a calibrated ARL0-2000 flag alarms within 500 frames in about 20% of clean streams)",
+   "predicted": "SUPPORTED",
+   "type": "bool",
+   "primary": "S",
+   "label": "INFO (discovery) SUPPORTED",
+   "note": null,
+   "scopes": {
+    "S": {
+     "planned": 3,
+     "n": 3,
+     "frac_needed": 0.6666666666666666,
+     "per_unit": {
+      "resnet20_hub": true,
+      "resnet56_hub": true,
+      "resnet56_e40": true
+     },
+     "k": 3,
+     "label": "SUPPORTED",
+     "secondary": false
+    }
+   }
+  }
+ ],
+ "functional": {
+  "R": {
+   "increments": {
+    "err_clean|margin_pen": {
+     "dauc": {
+      "median": 0.0002927590646257805,
+      "min": -0.0006798479717293748,
+      "max": 0.0016264676747578255,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.003978835681805459,
+      "min": -0.010335917312661536,
+      "max": 0.014234875444839923,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.00001337528262396236,
+      "min": -0.00031701951251003526,
+      "max": 0.00019972094407682758,
+      "n": 16
+     }
+    },
+    "err_clean|penult": {
+     "dauc": {
+      "median": 0.00016599490458846233,
+      "min": -0.0014741542737245483,
+      "max": 0.0023229132190502044,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": -0.0026147409868340354,
+      "min": -0.01361386138613857,
+      "max": 0.013539651837524147,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.00005220647621579635,
+      "min": -0.0006566112498381377,
+      "max": 0.00022969747812228748,
+      "n": 16
+     }
+    },
+    "err_clean|all_geom": {
+     "dauc": {
+      "median": -0.00016254924002767623,
+      "min": -0.0034548468468468263,
+      "max": 0.006577383432025963,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": -0.00003740427904952437,
+      "min": -0.04761904761904767,
+      "max": 0.032490974729241895,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.0000616301958122384,
+      "min": -0.0009880552882598898,
+      "max": 0.0002916200554896539,
+      "n": 16
+     }
+    },
+    "err_clean|local_pen": {
+     "dauc": {
+      "median": 0.0006930722426667368,
+      "min": -0.0008288163513214819,
+      "max": 0.0015686599162428871,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0,
+      "min": -0.016129032258064557,
+      "max": 0.016778523489932917,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.0001473202306818168,
+      "min": -0.0007199559829460626,
+      "max": 0.00014486011073144844,
+      "n": 16
+     }
+    },
+    "err_shift_s3|pre": {
+     "dauc": {
+      "median": 0.026288562883504063,
+      "min": 0.011497022023028824,
+      "max": 0.04288140081113212,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.07942248809472516,
+      "min": 0.03259707873174206,
+      "max": 0.14811687214997465,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.008939296669608292,
+      "min": -0.01723906436734919,
+      "max": -0.003644463822342056,
+      "n": 16
+     }
+    },
+    "err_shift_s3|early": {
+     "dauc": {
+      "median": 0.027129979857912268,
+      "min": 0.007025070674924527,
+      "max": 0.04851325684896235,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.0436372407481536,
+      "min": 0.006706408345752618,
+      "max": 0.14625907785846987,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.010236184452359895,
+      "min": -0.02039128040892295,
+      "max": -0.0027931227226827005,
+      "n": 16
+     }
+    },
+    "err_shift_s3|all_geom": {
+     "dauc": {
+      "median": 0.042847229258613395,
+      "min": 0.02030817756821346,
+      "max": 0.0675456956924465,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.13316534608317193,
+      "min": 0.0676602086438152,
+      "max": 0.20114845465293024,
+      "n": 16
+     },
+     "daurc": {
+      "median": -0.014300447091753855,
+      "min": -0.026102848375515325,
+      "max": -0.0068612793802778765,
+      "n": 16
+     }
+    },
+    "corrupt_N_s3|x4": {
+     "dauc": {
+      "median": 0.01924391666666675,
+      "min": 0.0014848333333332686,
+      "max": 0.07721566666666668,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.09237500000000003,
+      "min": -0.004750000000000032,
+      "max": 0.27325,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "corrupt_B_s3|x4": {
+     "dauc": {
+      "median": 0.026281583333333358,
+      "min": 0.010254500000000055,
+      "max": 0.05529483333333329,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.05387499999999999,
+      "min": 0.0025000000000000022,
+      "max": 0.09225,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "corrupt_N_s3|early": {
+     "dauc": {
+      "median": 0.15272741666666667,
+      "min": 0.11539699999999997,
+      "max": 0.18852883333333337,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.665875,
+      "min": 0.41600000000000004,
+      "max": 0.7465,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "ood_svhn|x4": {
+     "dauc": {
+      "median": 0.04020666666666667,
+      "min": 0.02384799999999998,
+      "max": 0.08267133333333332,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.24000000000000002,
+      "min": 0.131,
+      "max": 0.617,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "ood_cifar100|x4": {
+     "dauc": {
+      "median": 0.00514199999999998,
+      "min": 0.0037159999999999416,
+      "max": 0.0108206666666667,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.026749999999999968,
+      "min": -0.020500000000000018,
+      "max": 0.0675,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "fault_deadpix|early": {
+     "dauc": {
+      "median": 0.1163198518518519,
+      "min": 0.058155111111111046,
+      "max": 0.18050622222222223,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.3636666666666667,
+      "min": 0.16133333333333333,
+      "max": 0.492,
+      "n": 16
+     },
+     "daurc": null
+    },
+    "fault_occlusion_disc|early": {
+     "dauc": {
+      "median": 0.03317029629629631,
+      "min": 0.017149185185185156,
+      "max": 0.1038054814814815,
+      "n": 16
+     },
+     "dtpr5": {
+      "median": 0.11655555555555558,
+      "min": 0.054444444444444406,
+      "max": 0.3793333333333333,
+      "n": 16
+     },
+     "daurc": null
+    }
+   },
+   "cpu_ms_per_1000_queries": {
+    "centres_penult": {
+     "median": 0.174,
+     "min": 0.161,
+     "max": 0.279,
+     "n": 16
+    },
+    "centres_pre": {
+     "median": 0.181,
+     "min": 0.158,
+     "max": 0.363,
+     "n": 16
+    },
+    "centres_s1end": {
+     "median": 0.129,
+     "min": 0.119,
+     "max": 0.213,
+     "n": 16
+    },
+    "centres_s2end": {
+     "median": 0.146,
+     "min": 0.135,
+     "max": 0.238,
+     "n": 16
+    },
+    "centres_stem": {
+     "median": 0.129,
+     "min": 0.119,
+     "max": 0.161,
+     "n": 16
+    },
+    "head_stats": {
+     "median": 0.4905,
+     "min": 0.428,
+     "max": 0.665,
+     "n": 16
+    },
+    "knnL2_penult": {
+     "median": 127.5635,
+     "min": 123.387,
+     "max": 195.39,
+     "n": 16
+    },
+    "knnL2_pre": {
+     "median": 124.515,
+     "min": 117.079,
+     "max": 186.57,
+     "n": 16
+    },
+    "knnL2_s1end": {
+     "median": 120.0445,
+     "min": 114.871,
+     "max": 170.245,
+     "n": 16
+    },
+    "knnL2_s2end": {
+     "median": 119.462,
+     "min": 112.662,
+     "max": 181.595,
+     "n": 16
+    },
+    "knnL2_stem": {
+     "median": 120.3575,
+     "min": 117.352,
+     "max": 297.739,
+     "n": 16
+    },
+    "maha_penult": {
+     "median": 0.7695000000000001,
+     "min": 0.686,
+     "max": 1.059,
+     "n": 16
+    },
+    "trust_penult": {
+     "median": 47.352000000000004,
+     "min": 44.355,
+     "max": 72.123,
+     "n": 16
+    },
+    "x4": {
+     "median": 372.0775,
+     "min": 359.678,
+     "max": 512.057,
+     "n": 16
+    }
+   },
+   "reference_bytes": {
+    "centres_penult": {
+     "median": 2560,
+     "min": 2560,
+     "max": 2560,
+     "n": 16
+    },
+    "centres_pre": {
+     "median": 2560,
+     "min": 2560,
+     "max": 2560,
+     "n": 16
+    },
+    "centres_s1end": {
+     "median": 640,
+     "min": 640,
+     "max": 640,
+     "n": 16
+    },
+    "centres_s2end": {
+     "median": 1280,
+     "min": 1280,
+     "max": 1280,
+     "n": 16
+    },
+    "centres_stem": {
+     "median": 640,
+     "min": 640,
+     "max": 640,
+     "n": 16
+    },
+    "head": {
+     "median": 2600,
+     "min": 2600,
+     "max": 2600,
+     "n": 16
+    },
+    "knn_bank_penult": {
+     "median": 2560000,
+     "min": 2560000,
+     "max": 2560000,
+     "n": 16
+    },
+    "knn_bank_pre": {
+     "median": 2560000,
+     "min": 2560000,
+     "max": 2560000,
+     "n": 16
+    },
+    "knn_bank_s1end": {
+     "median": 640000,
+     "min": 640000,
+     "max": 640000,
+     "n": 16
+    },
+    "knn_bank_s2end": {
+     "median": 1280000,
+     "min": 1280000,
+     "max": 1280000,
+     "n": 16
+    },
+    "knn_bank_stem": {
+     "median": 640000,
+     "min": 640000,
+     "max": 640000,
+     "n": 16
+    },
+    "maha_penult": {
+     "median": 35328,
+     "min": 35328,
+     "max": 35328,
+     "n": 16
+    },
+    "maha_pre": {
+     "median": 35328,
+     "min": 35328,
+     "max": 35328,
+     "n": 16
+    },
+    "trust_bank_penult": {
+     "median": 2303232,
+     "min": 2303232,
+     "max": 2303232,
+     "n": 16
+    },
+    "trust_bank_pre": {
+     "median": 2303232,
+     "min": 2303232,
+     "max": 2303488,
+     "n": 16
+    },
+    "x4": {
+     "median": 5784000,
+     "min": 5784000,
+     "max": 5784000,
+     "n": 16
+    }
+   },
+   "x4_fpr_B": {
+    "median": 0.03966666666666667,
+    "min": 0.029333333333333333,
+    "max": 0.054,
+    "n": 16
+   },
+   "x4_fpr_curve": [
+    {
+     "alpha": 0.02,
+     "fpr": {
+      "median": 0.015666666666666666,
+      "min": 0.009333333333333334,
+      "max": 0.02666666666666667,
+      "n": 16
+     },
+     "band99": [
+      0.006666666666666667,
+      0.03933333333333333
+     ]
+    },
+    {
+     "alpha": 0.03,
+     "fpr": {
+      "median": 0.025333333333333333,
+      "min": 0.014666666666666666,
+      "max": 0.03333333333333333,
+      "n": 16
+     },
+     "band99": [
+      0.012666666666666666,
+      0.051333333333333335
+     ]
+    },
+    {
+     "alpha": 0.04,
+     "fpr": {
+      "median": 0.033,
+      "min": 0.024,
+      "max": 0.04133333333333333,
+      "n": 16
+     },
+     "band99": [
+      0.02,
+      0.06533333333333333
+     ]
+    },
+    {
+     "alpha": 0.05,
+     "fpr": {
+      "median": 0.03966666666666667,
+      "min": 0.029333333333333333,
+      "max": 0.054,
+      "n": 16
+     },
+     "band99": [
+      0.027333333333333334,
+      0.07666666666666666
+     ]
+    }
+   ]
+  },
+  "M": {
+   "increments": {
+    "err_clean|margin_pen": {
+     "dauc": {
+      "median": 0.0008031497798570708,
+      "min": -0.0005405293661274735,
+      "max": 0.002617282082324479,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.0071428571428571175,
+      "min": -0.005376344086021501,
+      "max": 0.01659751037344398,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.0001827060516648646,
+      "min": -0.0010637999715346095,
+      "max": 0.00013583935482685584,
+      "n": 5
+     }
+    },
+    "err_clean|penult": {
+     "dauc": {
+      "median": 0.00013592471974710474,
+      "min": -0.002368236086689013,
+      "max": 0.00430311743341405,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": -0.0029850746268655914,
+      "min": -0.024193548387096753,
+      "max": 0.01867219917012447,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.00008479209207698513,
+      "min": -0.0013931687862735898,
+      "max": 0.0003369964225123298,
+      "n": 5
+     }
+    },
+    "err_clean|all_geom": {
+     "dauc": {
+      "median": 0.00042168578330215034,
+      "min": -0.0003483951932408136,
+      "max": 0.001621453329145317,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0,
+      "min": -0.019774011299435068,
+      "max": 0.024896265560165998,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.0002582435342826251,
+      "min": -0.0011211411892460693,
+      "max": -0.0001418025262442963,
+      "n": 5
+     }
+    },
+    "err_clean|local_pen": {
+     "dauc": {
+      "median": 0.00003673641074242173,
+      "min": -0.0013619637571715693,
+      "max": 0.0036357445520580622,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.011940298507462699,
+      "min": -0.010752688172043001,
+      "max": 0.02259887005649719,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.00003033082139638002,
+      "min": -0.001298286806781332,
+      "max": 0.0002345847213374684,
+      "n": 5
+     }
+    },
+    "err_shift_s3|pre": {
+     "dauc": {
+      "median": 0.005990545461963204,
+      "min": 0.0013754683739051199,
+      "max": 0.02948669529242154,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.012381505126716985,
+      "min": -0.001980198019801982,
+      "max": 0.11763565891472871,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.0018519016561373003,
+      "min": -0.015632287702922174,
+      "max": -0.00043213605636883284,
+      "n": 5
+     }
+    },
+    "err_shift_s3|early": {
+     "dauc": {
+      "median": 0.018591885723821866,
+      "min": 0.005441837886796197,
+      "max": 0.07359285285526662,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.04804955633684915,
+      "min": 0.010643564356435653,
+      "max": 0.187657187076804,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.006748402870188852,
+      "min": -0.029573543858599796,
+      "max": -0.0015223787628318372,
+      "n": 5
+     }
+    },
+    "err_shift_s3|all_geom": {
+     "dauc": {
+      "median": 0.028483848523889743,
+      "min": 0.01710143241767792,
+      "max": 0.0857334676433611,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.0820358278921815,
+      "min": 0.061386138613861385,
+      "max": 0.25807699748500673,
+      "n": 5
+     },
+     "daurc": {
+      "median": -0.01065259416964319,
+      "min": -0.0340011211400692,
+      "max": -0.004174391013983154,
+      "n": 5
+     }
+    },
+    "corrupt_N_s3|x4": {
+     "dauc": {
+      "median": 0.00846799999999992,
+      "min": -0.0002174999999999816,
+      "max": 0.043141666666666745,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.007750000000000007,
+      "min": -0.0017500000000000293,
+      "max": 0.043999999999999984,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "corrupt_B_s3|x4": {
+     "dauc": {
+      "median": 0.0027118333333333577,
+      "min": 0.00017000000000000348,
+      "max": 0.06318083333333335,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.004250000000000004,
+      "min": -0.012500000000000011,
+      "max": 0.11400000000000002,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "corrupt_N_s3|early": {
+     "dauc": {
+      "median": 0.14499050000000002,
+      "min": 0.08385016666666667,
+      "max": 0.2210943333333334,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.61525,
+      "min": 0.40825,
+      "max": 0.7245,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "ood_svhn|x4": {
+     "dauc": {
+      "median": 0.024321999999999955,
+      "min": 0.00847500000000001,
+      "max": 0.054047666666666716,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.1885,
+      "min": 0.02749999999999997,
+      "max": 0.4055,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "ood_cifar100|x4": {
+     "dauc": {
+      "median": 0.006367999999999929,
+      "min": 0.003669666666666682,
+      "max": 0.012200333333333369,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.014500000000000013,
+      "min": 0.007000000000000006,
+      "max": 0.0655,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "fault_deadpix|early": {
+     "dauc": {
+      "median": 0.13629229629629624,
+      "min": 0.062206370370370356,
+      "max": 0.18826148148148147,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.38733333333333336,
+      "min": 0.17355555555555557,
+      "max": 0.47444444444444445,
+      "n": 5
+     },
+     "daurc": null
+    },
+    "fault_occlusion_disc|early": {
+     "dauc": {
+      "median": 0.03971911111111104,
+      "min": 0.010510962962963055,
+      "max": 0.05510548148148153,
+      "n": 5
+     },
+     "dtpr5": {
+      "median": 0.1357777777777778,
+      "min": 0.03822222222222221,
+      "max": 0.2211111111111111,
+      "n": 5
+     },
+     "daurc": null
+    }
+   },
+   "cpu_ms_per_1000_queries": {
+    "centres_penult": {
+     "median": 1.49,
+     "min": 0.18,
+     "max": 1.781,
+     "n": 5
+    },
+    "centres_pre": {
+     "median": 0.351,
+     "min": 0.187,
+     "max": 0.719,
+     "n": 5
+    },
+    "centres_s1end": {
+     "median": 0.155,
+     "min": 0.113,
+     "max": 0.242,
+     "n": 5
+    },
+    "centres_s2end": {
+     "median": 0.231,
+     "min": 0.135,
+     "max": 0.52,
+     "n": 5
+    },
+    "centres_stem": {
+     "median": 0.172,
+     "min": 0.141,
+     "max": 0.234,
+     "n": 5
+    },
+    "head_stats": {
+     "median": 0.488,
+     "min": 0.443,
+     "max": 0.582,
+     "n": 5
+    },
+    "knnL2_penult": {
+     "median": 425.671,
+     "min": 155.936,
+     "max": 737.997,
+     "n": 5
+    },
+    "knnL2_pre": {
+     "median": 211.066,
+     "min": 171.188,
+     "max": 363.407,
+     "n": 5
+    },
+    "knnL2_s1end": {
+     "median": 181.631,
+     "min": 135.136,
+     "max": 202.45,
+     "n": 5
+    },
+    "knnL2_s2end": {
+     "median": 170.681,
+     "min": 138.438,
+     "max": 272.076,
+     "n": 5
+    },
+    "knnL2_stem": {
+     "median": 174.147,
+     "min": 152.132,
+     "max": 196.964,
+     "n": 5
+    },
+    "maha_penult": {
+     "median": 49.562,
+     "min": 0.826,
+     "max": 65.713,
+     "n": 5
+    },
+    "trust_penult": {
+     "median": 315.491,
+     "min": 82.343,
+     "max": 534.657,
+     "n": 5
+    },
+    "x4": {
+     "median": 911.341,
+     "min": 502.673,
+     "max": 1030.109,
+     "n": 5
+    }
+   },
+   "reference_bytes": {
+    "centres_penult": {
+     "median": 40960,
+     "min": 2560,
+     "max": 51200,
+     "n": 5
+    },
+    "centres_pre": {
+     "median": 7680,
+     "min": 2560,
+     "max": 20480,
+     "n": 5
+    },
+    "centres_s1end": {
+     "median": 1920,
+     "min": 640,
+     "max": 5120,
+     "n": 5
+    },
+    "centres_s2end": {
+     "median": 3840,
+     "min": 640,
+     "max": 10240,
+     "n": 5
+    },
+    "centres_stem": {
+     "median": 960,
+     "min": 640,
+     "max": 2560,
+     "n": 5
+    },
+    "head": {
+     "median": 41000,
+     "min": 2600,
+     "max": 51240,
+     "n": 5
+    },
+    "knn_bank_penult": {
+     "median": 40960000,
+     "min": 2560000,
+     "max": 51200000,
+     "n": 5
+    },
+    "knn_bank_pre": {
+     "median": 7680000,
+     "min": 2560000,
+     "max": 20480000,
+     "n": 5
+    },
+    "knn_bank_s1end": {
+     "median": 1920000,
+     "min": 640000,
+     "max": 5120000,
+     "n": 5
+    },
+    "knn_bank_s2end": {
+     "median": 3840000,
+     "min": 640000,
+     "max": 10240000,
+     "n": 5
+    },
+    "knn_bank_stem": {
+     "median": 960000,
+     "min": 640000,
+     "max": 2560000,
+     "n": 5
+    },
+    "maha_penult": {
+     "median": 5816320,
+     "min": 35328,
+     "max": 7326720,
+     "n": 5
+    },
+    "maha_pre": {
+     "median": 301056,
+     "min": 35328,
+     "max": 2066432,
+     "n": 5
+    },
+    "trust_bank_penult": {
+     "median": 36851712,
+     "min": 2303232,
+     "max": 46064640,
+     "n": 5
+    },
+    "trust_bank_pre": {
+     "median": 6909696,
+     "min": 2303232,
+     "max": 18425856,
+     "n": 5
+    },
+    "x4": {
+     "median": 49624000,
+     "min": 5784000,
+     "max": 60824000,
+     "n": 5
+    }
+   },
+   "x4_fpr_B": {
+    "median": 0.034,
+    "min": 0.03,
+    "max": 0.050666666666666665,
+    "n": 5
+   },
+   "x4_fpr_curve": [
+    {
+     "alpha": 0.02,
+     "fpr": {
+      "median": 0.014,
+      "min": 0.006,
+      "max": 0.018,
+      "n": 5
+     },
+     "band99": [
+      0.006666666666666667,
+      0.03933333333333333
+     ]
+    },
+    {
+     "alpha": 0.03,
+     "fpr": {
+      "median": 0.024,
+      "min": 0.010666666666666666,
+      "max": 0.029333333333333333,
+      "n": 5
+     },
+     "band99": [
+      0.012666666666666666,
+      0.051333333333333335
+     ]
+    },
+    {
+     "alpha": 0.04,
+     "fpr": {
+      "median": 0.02666666666666667,
+      "min": 0.016,
+      "max": 0.03933333333333333,
+      "n": 5
+     },
+     "band99": [
+      0.02,
+      0.06533333333333333
+     ]
+    },
+    {
+     "alpha": 0.05,
+     "fpr": {
+      "median": 0.034,
+      "min": 0.03,
+      "max": 0.050666666666666665,
+      "n": 5
+     },
+     "band99": [
+      0.027333333333333334,
+      0.07666666666666666
+     ]
+    }
+   ]
+  },
+  "S": {
+   "false_alarms_per_1000_frames": {
+    "bbsdh": {
+     "median": 0.7237880169655911,
+     "min": 0.6981680071492404,
+     "max": 0.7789193273252689,
+     "n": 3
+    },
+    "cusum_d1_penult": {
+     "median": 0.4781257470714798,
+     "min": 0.22945805449399334,
+     "max": 0.804861362630287,
+     "n": 3
+    },
+    "cusum_energy": {
+     "median": 0.3647837744177139,
+     "min": 0.306912278332607,
+     "max": 0.41610492501789254,
+     "n": 3
+    },
+    "cusum_entropy": {
+     "median": 0.4469992937411159,
+     "min": 0.32721335292250603,
+     "max": 1.057378652582383,
+     "n": 3
+    },
+    "cusum_gap": {
+     "median": 0.39372636411420425,
+     "min": 0.2749980062644546,
+     "max": 0.6671937497289525,
+     "n": 3
+    },
+    "cusum_knnL2_penult": {
+     "median": 0.4641922127114395,
+     "min": 0.3604077653457121,
+     "max": 0.6808835144483482,
+     "n": 3
+    },
+    "cusum_knnL2_pre": {
+     "median": 0.3589143558564056,
+     "min": 0.31462469992669245,
+     "max": 0.5221141445942912,
+     "n": 3
+    },
+    "cusum_knnL2_s1end": {
+     "median": 0.3973425728726279,
+     "min": 0.30289308328499664,
+     "max": 0.7297325894925805,
+     "n": 3
+    },
+    "cusum_knnL2_s2end": {
+     "median": 0.6829248304639108,
+     "min": 0.6476054787423501,
+     "max": 0.9119843868272975,
+     "n": 3
+    },
+    "cusum_knnL2_stem": {
+     "median": 0.8440813019110001,
+     "min": 0.5472869617090678,
+     "max": 0.9050756643255375,
+     "n": 3
+    },
+    "cusum_msp": {
+     "median": 0.31592681871171363,
+     "min": 0.25424170504657073,
+     "max": 1.2151480354094137,
+     "n": 3
+    },
+    "ks_msp": {
+     "median": 0.6739793425331514,
+     "min": 0.5572955561252354,
+     "max": 0.7019809903547812,
+     "n": 3
+    },
+    "mewma_penult": {
+     "median": 0.7712746470454396,
+     "min": 0.7190778545593131,
+     "max": 0.8500184879021119,
+     "n": 3
+    },
+    "mewma_pix": {
+     "median": 0.6135082240777437,
+     "min": 0.6135082240777437,
+     "max": 0.6135082240777437,
+     "n": 3
+    },
+    "mewma_pre": {
+     "median": 0.8223548954786928,
+     "min": 0.8075685322845709,
+     "max": 0.9685136221440954,
+     "n": 3
+    },
+    "mewma_s1end": {
+     "median": 0.4980352509350612,
+     "min": 0.47399879604305806,
+     "max": 0.6252227355995573,
+     "n": 3
+    },
+    "mewma_s2end": {
+     "median": 0.6771672738599889,
+     "min": 0.632237139506286,
+     "max": 0.8751777704846296,
+     "n": 3
+    },
+    "mewma_stem": {
+     "median": 1.1382261883081406,
+     "min": 1.0817710756049805,
+     "max": 1.2733743784341314,
+     "n": 3
+    },
+    "x4": {
+     "median": 0.3659036356185235,
+     "min": 0.1724062131751104,
+     "max": 0.6114394201108541,
+     "n": 3
+    }
+   }
+  }
+ },
+ "rules_applied": {}
+}

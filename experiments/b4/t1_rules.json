@@ -1,0 +1,327 @@
+{
+ "schema": "b4_t1_rules/1",
+ "created": "2026-09-24T16:03:35.148Z",
+ "p1": "ad97d0a659dd9f6f60b24e0b8cc1681f1bd8a166",
+ "head": "cb617c3cf814b5080f4d11e6cbc38453da0831f4",
+ "evaluator_sha256": "24e7c8980a16e4a5e2850e126e687f0f7738c8891bb1c0fab036369826703131",
+ "rule": "D8: only withdrawals to INFO (b) and stricter fractions (c) differ from P1",
+ "claims": {
+  "X1-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.9,
+    "R2": 0.9
+   }
+  },
+  "X1-2": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.875,
+    "R2": 0.875,
+    "M": 0.75
+   }
+  },
+  "X1-3": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X1-4": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.5,
+    "R2": 0.5,
+    "M": 0.5
+   }
+  },
+  "X1-5": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "REFUTED",
+   "frac": {
+    "R": 0.5,
+    "R2": 0.5
+   }
+  },
+  "PC-2a": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "PC-2b": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "REFUTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X8-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.875,
+    "R2": 0.875,
+    "M": 0.75
+   }
+  },
+  "X7-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "REFUTED",
+   "frac": {
+    "R": 0.5,
+    "R2": 0.5
+   }
+  },
+  "X2-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "REFUTED",
+   "frac": {
+    "R": 0.5,
+    "R2": 0.5
+   }
+  },
+  "X4-1R": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.875,
+    "R2": 0.875
+   }
+  },
+  "X4-1M": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "M": 0.8
+   }
+  },
+  "X4-2": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X4-3": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X4-4": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X4-5": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X4-5x": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "M": 0.75
+   }
+  },
+  "X4-6": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X6-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X6-2": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "REFUTED",
+   "frac": {
+    "R": 0.5,
+    "R2": 0.5
+   }
+  },
+  "X6-3": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X6-4": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X6-5": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75
+   }
+  },
+  "X3-8": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "R": 0.75,
+    "R2": 0.75,
+    "M": 0.75
+   }
+  },
+  "X3-1": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.6666666666666666
+   }
+  },
+  "X3-2": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.6666666666666666
+   }
+  },
+  "X3-3": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.6666666666666666
+   }
+  },
+  "X3-4": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.8333333333333334
+   }
+  },
+  "X3-5": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.8333333333333334
+   }
+  },
+  "X3-6": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.6666666666666666
+   }
+  },
+  "X3-7": {
+   "status": "ACTIVE",
+   "reason": null,
+   "predicted": "SUPPORTED",
+   "frac": {
+    "S": 0.6666666666666666
+   }
+  }
+ },
+ "discovery_labels": {
+  "X1-1": "INFO (discovery) SUPPORTED",
+  "X1-2": "INFO (discovery) SUPPORTED",
+  "X1-3": "INFO (discovery) SUPPORTED",
+  "X1-4": "INFO (discovery) SUPPORTED",
+  "X1-5": "INFO (discovery) SUPPORTED",
+  "PC-2a": "INFO (discovery) SUPPORTED",
+  "PC-2b": "INFO (discovery) SUPPORTED",
+  "X8-1": "INFO (discovery) SUPPORTED",
+  "X7-1": "INFO (discovery) SUPPORTED",
+  "X2-1": "INFO (discovery) REFUTED",
+  "X4-1R": "INFO (discovery) SUPPORTED",
+  "X4-1M": "INFO (discovery) SUPPORTED",
+  "X4-2": "INFO (discovery) SUPPORTED",
+  "X4-3": "INFO (discovery) REFUTED",
+  "X4-4": "INFO (discovery) SUPPORTED",
+  "X4-5": "INFO (discovery) NOT_EVALUABLE",
+  "X4-5x": "INFO (discovery) NOT_EVALUABLE",
+  "X4-6": "INFO (discovery) SUPPORTED",
+  "X6-1": "INFO (discovery) REFUTED",
+  "X6-2": "INFO (discovery) REFUTED",
+  "X6-3": "INFO (discovery) REFUTED",
+  "X6-4": "INFO (discovery) REFUTED",
+  "X6-5": "INFO (discovery) SUPPORTED",
+  "X3-8": "INFO (discovery) REFUTED",
+  "X3-1": "INFO (discovery) SUPPORTED",
+  "X3-2": "INFO (discovery) SUPPORTED",
+  "X3-3": "INFO (discovery) REFUTED",
+  "X3-4": "INFO (discovery) REFUTED",
+  "X3-5": "INFO (discovery) SUPPORTED",
+  "X3-6": "INFO (discovery) REFUTED",
+  "X3-7": "INFO (discovery) SUPPORTED"
+ },
+ "amendments": {
+  "withdraw": {},
+  "frac": {}
+ }
+}
